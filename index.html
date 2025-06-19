@@ -96,8 +96,8 @@
         <section id="skills" class="py-10 section-fade-in">
             <h2 class="text-3xl font-bold text-white mb-6">My Skills</h2>
             <div class="flex flex-wrap gap-3">
-                <span class="bg-slate-800 text-orange-400 text-sm font-bold px-4 py-2 rounded-full">Broadcasts</span>
-                <span class="bg-slate-800 text-orange-400 text-sm font-bold px-4 py-2 rounded-full">Last Minute</span>
+                <span class="bg-slate-800 text-orange-400 text-sm font-bold px-4 py-2 rounded-full">HTML5 & CSS3</span>
+                <span class="bg-slate-800 text-orange-400 text-sm font-bold px-4 py-2 rounded-full">JavaScript (ES6+)</span>
                 <span class="bg-slate-800 text-orange-400 text-sm font-bold px-4 py-2 rounded-full">React</span>
                 <span class="bg-slate-800 text-orange-400 text-sm font-bold px-4 py-2 rounded-full">Tailwind CSS</span>
                 <span class="bg-slate-800 text-orange-400 text-sm font-bold px-4 py-2 rounded-full">Node.js</span>
@@ -134,6 +134,22 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Music Section -->
+        <section id="music" class="py-10 section-fade-in">
+            <h2 class="text-3xl font-bold text-white mb-6 text-center">My Favorite Tune</h2>
+            <div class="text-center max-w-lg mx-auto">
+                <p class="text-slate-400 mb-6">
+                    Here's a little something I like to listen to while I code. Press play to listen.
+                </p>
+                <!-- This div will be replaced by the YouTube player -->
+                <div id="player" class="hidden"></div>
+                <!-- Custom play/pause button -->
+                <button id="play-pause-button" class="bg-orange-500 text-white font-bold w-16 h-16 rounded-full shadow-lg flex items-center justify-center mx-auto hover:bg-orange-600 transition-all duration-300 focus:outline-none">
+                    <i id="play-pause-icon" class="fas fa-play text-2xl"></i>
+                </button>
             </div>
         </section>
 
@@ -199,12 +215,68 @@
             
             // --- Scale Calculation (from 1 to 1.1) ---
             const maxScale = 1.1; // How much to zoom in (10%)
-            // The zoom happens over a larger scroll distance to feel more subtle
             const scale = 1 + Math.min(1, scrollY / (scrollRange * 1.5)) * (maxScale - 1);
 
             // Apply styles
             bgContainer.style.opacity = opacity;
             bgContainer.style.transform = `scale(${scale})`;
+        });
+
+        // ---------------------------------------------------
+        // YouTube IFrame API Player Code
+        // ---------------------------------------------------
+
+        // 1. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var videoId = '5qap5aO4i9A'; // Default Lo-fi video. You can change this ID.
+
+        // 2. This function creates an <iframe> (and YouTube player) after the API code downloads.
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                videoId: videoId,
+                playerVars: {
+                    'playsinline': 1,
+                    'loop': 1,
+                    'playlist': videoId, // Required for loop to work
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // 3. The API will call this function when the video player is ready.
+        function onPlayerReady(event) {
+            // Player is ready
+        }
+
+        // 4. The API calls this function when the player's state changes.
+        function onPlayerStateChange(event) {
+            const playPauseIcon = document.getElementById('play-pause-icon');
+            if (event.data == YT.PlayerState.PLAYING) {
+                playPauseIcon.classList.remove('fa-play');
+                playPauseIcon.classList.add('fa-pause');
+            } else {
+                playPauseIcon.classList.remove('fa-pause');
+                playPauseIcon.classList.add('fa-play');
+            }
+        }
+
+        // 5. Custom function to play/pause the video
+        document.getElementById('play-pause-button').addEventListener('click', function() {
+            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
         });
     </script>
 
