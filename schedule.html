@@ -69,7 +69,7 @@
             { round: 3, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'April 4-6' },
             { round: 4, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'April 11-13' },
             { round: 5, name: 'Saudi Arabian Grand Prix', venue: 'Jeddah', date: 'April 18-20' },
-            { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4' },
+            { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', country: 'USA' },
             { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18' },
             { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25' },
             { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1' },
@@ -82,11 +82,11 @@
             { round: 16, name: 'Italian Grand Prix', venue: 'Monza', date: 'September 5-7' },
             { round: 17, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'September 19-21' },
             { round: 18, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5' },
-            { pos: 19, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19' },
+            { pos: 19, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19', country: 'USA' },
             { pos: 20, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26' },
             { pos: 21, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'November 7-9' },
-            { pos: 22, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22' },
-            { pos: 23, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30' },
+            { pos: 22, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22', country: 'USA', imageUrl: 'https://www.hollywoodreporter.com/wp-content/uploads/2024/11/F1-Grand-Prix-Las-Vegas-Race-Charles-LeClerc-GettyImages-1801966267-MAIN-2024.jpg?w=1296&h=729&crop=1' },
+            { pos: 23, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30', country: 'QAT', imageUrl: 'https://www.alongtheracingline.com/wp-content/uploads/2023/10/lusail-2.jpeg' },
             { pos: 24, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7' }
         ];
         
@@ -98,11 +98,34 @@
                     const card = document.createElement('div');
                     card.className = 'bg-white rounded-lg shadow-lg p-8 flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300';
                     
+                    let flagHtml = '';
+                    if (race.country === 'USA') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    } else if (race.country === 'QAT') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197618.png" alt="Qatar Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    }
+                    
+                    let circuitImageHtml = '';
+                    if (race.imageUrl) {
+                        let objectPositionClass = 'object-center'; // Default position
+                        if (race.name === 'Las Vegas Grand Prix') {
+                            objectPositionClass = 'object-bottom'; // Specific position for Las Vegas
+                        }
+                        
+                        circuitImageHtml = `
+                        <div class="h-48 overflow-hidden rounded-lg my-4">
+                            <img src="${race.imageUrl}" alt="${race.venue} Circuit" class="w-full h-full object-cover ${objectPositionClass}">
+                        </div>
+                        `;
+                    }
+
                     card.innerHTML = `
                         <div>
                             <p class="text-base font-bold text-red-600">ROUND ${race.round || race.pos}</p>
+                            ${flagHtml}
                             <h3 class="text-2xl font-bold text-gray-900 mt-2">${race.name.toUpperCase()}</h3>
                             <p class="text-lg text-gray-600 mt-2">${race.venue.toUpperCase()}</p>
+                            ${circuitImageHtml}
                         </div>
                         <div class="mt-6 pt-6 border-t border-gray-200">
                              <p class="text-base font-semibold text-gray-800">${race.date.toUpperCase()}</p>
