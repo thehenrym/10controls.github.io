@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,6 +28,9 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            /* Added transform and transition for the zoom/fade effect */
+            transform: scale(1.0);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
         }
         /* Add a subtle animation for section fade-in */
         .section-fade-in {
@@ -45,7 +48,7 @@
 
     <!-- This div holds the fixed background image. 
          It sits behind all other content using a negative z-index. -->
-    <div id="background-image-container" class="fixed top-0 left-0 w-full h-full -z-10 opacity-0 transition-opacity duration-1000"></div>
+    <div id="background-image-container" class="fixed top-0 left-0 w-full h-full -z-10 opacity-0"></div>
 
     <!-- Main Container -->
     <div class="relative z-10 max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
@@ -183,23 +186,25 @@
             });
         });
 
-        // JavaScript to fade the background image in and out on scroll
+        // JavaScript to fade and zoom the background image in on scroll
         document.addEventListener('scroll', function() {
             const bgContainer = document.getElementById('background-image-container');
             if (!bgContainer) return;
 
-            // Determines how far to scroll before the image is fully visible
-            const fadePoint = 400; 
             const scrollY = window.scrollY;
+            const scrollRange = 600; // How many pixels to scroll for full effect
 
-            let opacity = scrollY / fadePoint;
+            // --- Opacity Calculation (from 0 to 1) ---
+            const opacity = Math.min(1, scrollY / scrollRange);
             
-            // Clamp the opacity value between 0 and 1
-            if (opacity > 1) {
-                opacity = 1;
-            }
+            // --- Scale Calculation (from 1 to 1.1) ---
+            const maxScale = 1.1; // How much to zoom in (10%)
+            // The zoom happens over a larger scroll distance to feel more subtle
+            const scale = 1 + Math.min(1, scrollY / (scrollRange * 1.5)) * (maxScale - 1);
 
+            // Apply styles
             bgContainer.style.opacity = opacity;
+            bgContainer.style.transform = `scale(${scale})`;
         });
     </script>
 
