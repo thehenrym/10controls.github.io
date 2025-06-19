@@ -55,7 +55,7 @@
 
         <!-- Back Link -->
         <div class="text-center mt-12">
-            <a href="index.html" class="text-red-800 hover:underline font-semibold text-lg">
+            <a href="index.html" class="text-red-700 hover:underline font-semibold text-lg">
                 <i class="fas fa-arrow-left mr-2"></i>Back to About Me
             </a>
         </div>
@@ -64,16 +64,16 @@
     
     <script>
         const scheduleData = [
-            { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16' },
-            { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23' },
-            { round: 3, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'April 4-6' },
-            { round: 4, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'April 11-13' },
-            { round: 5, name: 'Saudi Arabian Grand Prix', venue: 'Jeddah', date: 'April 18-20' },
-            { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', country: 'USA' },
-            { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18' },
-            { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25' },
-            { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1' },
-            { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15' },
+            { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris' },
+            { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23', winner: 'Oscar Piastri' },
+            { round: 3, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'April 4-6', winner: 'Max Verstappen' },
+            { round: 4, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'April 11-13', winner: 'Oscar Piastri' },
+            { round: 5, name: 'Saudi Arabian Grand Prix', venue: 'Jeddah', date: 'April 18-20', winner: 'Oscar Piastri' },
+            { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', country: 'USA', winner: 'Oscar Piastri' },
+            { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen' },
+            { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris' },
+            { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri' },
+            { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell' },
             { round: 11, name: 'Austrian Grand Prix', venue: 'Spielberg', date: 'June 27-29' },
             { round: 12, name: 'British Grand Prix', venue: 'Silverstone', date: 'July 4-6' },
             { round: 13, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 25-27' },
@@ -119,6 +119,13 @@
                         `;
                     }
 
+                    let footerContent = '';
+                    if (race.winner) {
+                        footerContent = `<p class="text-base font-semibold text-gray-800 uppercase"><span class="font-bold text-red-600">WINNER:</span> ${race.winner}</p>`;
+                    } else {
+                        footerContent = `<p class="text-base font-semibold text-gray-800">${race.date.toUpperCase()}</p>`;
+                    }
+
                     card.innerHTML = `
                         <div>
                             <p class="text-base font-bold text-red-600">ROUND ${race.round || race.pos}</p>
@@ -128,7 +135,7 @@
                             ${circuitImageHtml}
                         </div>
                         <div class="mt-6 pt-6 border-t border-gray-200">
-                             <p class="text-base font-semibold text-gray-800">${race.date.toUpperCase()}</p>
+                             ${footerContent}
                         </div>
                     `;
                     scheduleGrid.appendChild(card);
