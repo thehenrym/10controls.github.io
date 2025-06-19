@@ -30,6 +30,11 @@
             visibility: hidden;
             position: absolute; /* Take out of layout flow when hidden */
         }
+        /* Added transition for the page title fade effect */
+        #page-title {
+            /* Slower, smoother transition */
+            transition: opacity 0.7s ease-in-out;
+        }
     </style>
 </head>
 <body class="font-medium">
@@ -45,7 +50,7 @@
         
         <!-- Toggle Switch -->
         <div class="flex justify-center mb-6">
-            <div class="relative w-56 h-10 flex bg-gray-200 rounded-full">
+            <div class="relative w-48 h-10 flex bg-gray-200 rounded-full">
                 <!-- The sliding element is now a padded container to ensure correct width -->
                 <div id="slider" class="absolute top-0 left-0 h-full w-1/2 p-1 transition-transform duration-300 ease-in-out">
                     <div class="w-full h-full bg-red-600 rounded-full"></div>
@@ -53,7 +58,7 @@
                 
                 <!-- The buttons now have fixed height and center their content -->
                 <button id="show-drivers-btn" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-semibold text-white transition-colors duration-300">Drivers</button>
-                <button id="show-constructors-btn" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-semibold text-gray-700 transition-colors duration-300">Constructors</button>
+                <button id="show-teams-btn" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-semibold text-gray-700 transition-colors duration-300">Teams</button>
             </div>
         </div>
 
@@ -77,19 +82,19 @@
             </div>
         </div>
         
-        <!-- Constructor Standings Table -->
-        <div id="constructor-standings-container" class="standings-container hidden">
+        <!-- Team Standings Table -->
+        <div id="team-standings-container" class="standings-container hidden">
              <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pos</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Constructor</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Team</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pts</th>
                         </tr>
                     </thead>
-                    <tbody id="constructor-standings-body" class="divide-y divide-gray-200 text-gray-900">
-                        <!-- Constructor data will be injected here by JavaScript -->
+                    <tbody id="team-standings-body" class="divide-y divide-gray-200 text-gray-900">
+                        <!-- Team data will be injected here by JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -99,7 +104,15 @@
         <div class="text-center mt-8">
             <a href="index.html" class="text-red-700 hover:underline font-semibold">
                 <i class="fas fa-arrow-left mr-2"></i>Back to About Me
-            </a>Franco Colapintoando Norris', nationality: 'British', car: 'McLaren', points: 176 },
+            </a>
+        </div>
+
+    </div>
+    
+    <script>
+        const driverStandingsData = [
+            { pos: 1, name: 'Oscar Piastri', nationality: 'Australian', car: 'McLaren', points: 198 },
+            { pos: 2, name: 'Lando Norris', nationality: 'British', car: 'McLaren', points: 176 },
             { pos: 3, name: 'Max Verstappen', nationality: 'Dutch', car: 'Red Bull Racing', points: 155 },
             { pos: 4, name: 'George Russell', nationality: 'British', car: 'Mercedes', points: 136 },
             { pos: 5, name: 'Charles Leclerc', nationality: 'Monégasque', car: 'Ferrari', points: 104 },
@@ -121,24 +134,24 @@
             { pos: 21, name: 'Jack Doohan', nationality: 'Australian', car: 'Alpine', points: 0 },
         ];
         
-        const constructorStandingsData = [
-            { pos: 1, constructor: 'McLaren', points: 374 },
-            { pos: 2, constructor: 'Mercedes', points: 199 },
-            { pos: 3, constructor: 'Ferrari', points: 183 },
-            { pos: 4, constructor: 'Red Bull Racing', points: 165 },
-            { pos: 5, constructor: 'Williams', points: 55 },
-            { pos: 6, constructor: 'Haas', points: 28 },
-            { pos: 7, constructor: 'Racing Bulls', points: 25 },
-            { pos: 8, constructor: 'Aston Martin', points: 22 },
-            { pos: 9, constructor: 'Kick Sauber', points: 20 },
-            { pos: 10, constructor: 'Alpine', points: 11 },
+        const teamStandingsData = [
+            { pos: 1, team: 'McLaren', points: 374 },
+            { pos: 2, team: 'Mercedes', points: 199 },
+            { pos: 3, team: 'Ferrari', points: 183 },
+            { pos: 4, team: 'Red Bull Racing', points: 165 },
+            { pos: 5, team: 'Williams', points: 55 },
+            { pos: 6, team: 'Haas', points: 28 },
+            { pos: 7, team: 'Racing Bulls', points: 25 },
+            { pos: 8, team: 'Aston Martin', points: 22 },
+            { pos: 9, team: 'Kick Sauber', points: 20 },
+            { pos: 10, team: 'Alpine', points: 11 },
         ];
         
         // This function runs after the entire page is loaded.
         window.onload = function() {
             // Get table bodies
             const driverStandingsBody = document.getElementById('driver-standings-body');
-            const constructorStandingsBody = document.getElementById('constructor-standings-body');
+            const teamStandingsBody = document.getElementById('team-standings-body');
             
             // Populate Driver Table
             if (driverStandingsBody) {
@@ -156,50 +169,73 @@
                 });
             }
             
-            // Populate Constructor Table
-            if (constructorStandingsBody) {
-                constructorStandingsData.forEach((item, index) => {
+            // Populate Team Table
+            if (teamStandingsBody) {
+                teamStandingsData.forEach((item, index) => {
                     const row = document.createElement('tr');
                     if (index % 2 !== 0) row.className = 'bg-gray-50';
                     row.innerHTML = `
                         <td class="px-6 py-4 whitespace-nowrap font-bold text-red-600">${item.pos}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">${item.constructor}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${item.team}</td>
                         <td class="px-6 py-4 whitespace-nowrap font-bold">${item.points}</td>
                     `;
-                    constructorStandingsBody.appendChild(row);
+                    teamStandingsBody.appendChild(row);
                 });
             }
 
             // Toggle Logic
             const showDriversBtn = document.getElementById('show-drivers-btn');
-            const showConstructorsBtn = document.getElementById('show-constructors-btn');
+            const showTeamsBtn = document.getElementById('show-teams-btn');
             const slider = document.getElementById('slider');
             const driverContainer = document.getElementById('driver-standings-container');
-            const constructorContainer = document.getElementById('constructor-standings-container');
+            const teamContainer = document.getElementById('team-standings-container');
             const pageTitle = document.getElementById('page-title');
+
+            const FADE_OUT_DURATION = 700; // Must match CSS transition duration
+            const BLANK_DURATION = 200; // 0.2 seconds
 
             showDriversBtn.addEventListener('click', () => {
                 slider.style.transform = 'translateX(0%)';
                 showDriversBtn.classList.add('text-white');
                 showDriversBtn.classList.remove('text-gray-700');
-                showConstructorsBtn.classList.add('text-gray-700');
-                showConstructorsBtn.classList.remove('text-white');
+                showTeamsBtn.classList.add('text-gray-700');
+                showTeamsBtn.classList.remove('text-white');
                 
                 driverContainer.classList.remove('hidden');
-                constructorContainer.classList.add('hidden');
-                pageTitle.textContent = 'F1 Driver Standings';
+                teamContainer.classList.add('hidden');
+
+                // Animate title change
+                if (pageTitle.textContent !== 'F1 Driver Standings') {
+                    pageTitle.style.opacity = 0;
+                    setTimeout(() => {
+                        pageTitle.textContent = 'F1 Driver Standings';
+                        setTimeout(() => {
+                           pageTitle.style.opacity = 1;
+                        }, BLANK_DURATION);
+                    }, FADE_OUT_DURATION);
+                }
             });
 
-            showConstructorsBtn.addEventListener('click', () => {
+            showTeamsBtn.addEventListener('click', () => {
                 slider.style.transform = 'translateX(100%)';
-                showConstructorsBtn.classList.add('text-white');
-                showConstructorsBtn.classList.remove('text-gray-700');
+                showTeamsBtn.classList.add('text-white');
+                showTeamsBtn.classList.remove('text-gray-700');
                 showDriversBtn.classList.add('text-gray-700');
                 showDriversBtn.classList.remove('text-white');
 
-                constructorContainer.classList.remove('hidden');
+                teamContainer.classList.remove('hidden');
                 driverContainer.classList.add('hidden');
-                pageTitle.textContent = 'F1 Constructor Standings';
+
+                // Animate title change
+                if (pageTitle.textContent !== 'F1 Team Standings') {
+                    pageTitle.style.opacity = 0;
+                    setTimeout(() => {
+                        pageTitle.textContent = 'F1 Team Standings';
+                         setTimeout(() => {
+                           pageTitle.style.opacity = 1;
+                        }, BLANK_DURATION);
+                    }, FADE_OUT_DURATION);
+                }
             });
         };
     </script>
