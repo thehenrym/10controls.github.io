@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,17 +35,18 @@
         </header>
 
         <!-- Standings Table -->
-        <div class="bg-slate-800/80 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden">
-            <table class="min-w-full divide-y divide-slate-700">
-                <thead class="bg-slate-900/50">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Pos</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Driver</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Car</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Pts</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pos</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Driver</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Nationality</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Car</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pts</th>
                     </tr>
                 </thead>
-                <tbody id="standings-body" class="divide-y divide-slate-700 text-slate-300">
+                <tbody id="standings-body" class="divide-y divide-gray-200 text-gray-900">
                     <!-- Driver data will be injected here by JavaScript -->
                 </tbody>
             </table>
@@ -62,27 +63,27 @@
     
     <script>
         const standingsData = [
-            { pos: 1, name: 'Oscar Piastri', nationality: 'AU', car: 'McLaren', points: 198 },
-            { pos: 2, name: 'Lando Norris', nationality: 'GB', car: 'McLaren', points: 176 },
-            { pos: 3, name: 'Max Verstappen', nationality: 'NL', car: 'Red Bull Racing', points: 155 },
-            { pos: 4, name: 'George Russell', nationality: 'GB', car: 'Mercedes', points: 136 },
-            { pos: 5, name: 'Charles Leclerc', nationality: 'MC', car: 'Ferrari', points: 104 },
-            { pos: 6, name: 'Lewis Hamilton', nationality: 'GB', car: 'Ferrari', points: 79 },
-            { pos: 7, name: 'Kimi Antonelli', nationality: 'IT', car: 'Mercedes', points: 63 },
-            { pos: 8, name: 'Alexander Albon', nationality: 'TH', car: 'Williams', points: 42 },
-            { pos: 9, name: 'Esteban Ocon', nationality: 'FR', car: 'Haas', points: 22 },
-            { pos: 10, name: 'Isack Hadjar', nationality: 'FR', car: 'Racing Bulls', points: 21 },
-            { pos: 11, name: 'Nico Hulkenberg', nationality: 'DE', car: 'Kick Sauber', points: 20 },
-            { pos: 12, name: 'Lance Stroll', nationality: 'CA', car: 'Aston Martin', points: 14 },
-            { pos: 13, name: 'Carlos Sainz', nationality: 'ES', car: 'Williams', points: 13 },
-            { pos: 14, name: 'Pierre Gasly', nationality: 'FR', car: 'Alpine', points: 11 },
-            { pos: 15, name: 'Yuki Tsunoda', nationality: 'JP', car: 'Red Bull Racing', points: 10 },
-            { pos: 16, name: 'Fernando Alonso', nationality: 'ES', car: 'Aston Martin', points: 8 },
-            { pos: 17, name: 'Oliver Bearman', nationality: 'GB', car: 'Haas', points: 6 },
-            { pos: 18, name: 'Liam Lawson', nationality: 'NZ', car: 'Racing Bulls', points: 4 },
-            { pos: 19, name: 'Gabriel Bortoleto', nationality: 'BR', car: 'Kick Sauber', points: 0 },
-            { pos: 20, name: 'Franco Colapinto', nationality: 'AR', car: 'Alpine', points: 0 },
-            { pos: 21, name: 'Jack Doohan', nationality: 'AU', car: 'Alpine', points: 0 },
+            { pos: 1, name: 'Oscar Piastri', nationality: 'AUS', car: 'McLaren', points: 198 },
+            { pos: 2, name: 'Lando Norris', nationality: 'GBR', car: 'McLaren', points: 176 },
+            { pos: 3, name: 'Max Verstappen', nationality: 'NED', car: 'Red Bull Racing', points: 155 },
+            { pos: 4, name: 'George Russell', nationality: 'GBR', car: 'Mercedes', points: 136 },
+            { pos: 5, name: 'Charles Leclerc', nationality: 'MON', car: 'Ferrari', points: 104 },
+            { pos: 6, name: 'Lewis Hamilton', nationality: 'GBR', car: 'Ferrari', points: 79 },
+            { pos: 7, name: 'Kimi Antonelli', nationality: 'ITA', car: 'Mercedes', points: 63 },
+            { pos: 8, name: 'Alexander Albon', nationality: 'THA', car: 'Williams', points: 42 },
+            { pos: 9, name: 'Esteban Ocon', nationality: 'FRA', car: 'Haas', points: 22 },
+            { pos: 10, name: 'Isack Hadjar', nationality: 'FRA', car: 'Racing Bulls', points: 21 },
+            { pos: 11, name: 'Nico Hulkenberg', nationality: 'DEU', car: 'Kick Sauber', points: 20 },
+            { pos: 12, name: 'Lance Stroll', nationality: 'CAN', car: 'Aston Martin', points: 14 },
+            { pos: 13, name: 'Carlos Sainz', nationality: 'ESP', car: 'Williams', points: 13 },
+            { pos: 14, name: 'Pierre Gasly', nationality: 'FRA', car: 'Alpine', points: 11 },
+            { pos: 15, name: 'Yuki Tsunoda', nationality: 'JPN', car: 'Red Bull Racing', points: 10 },
+            { pos: 16, name: 'Fernando Alonso', nationality: 'ESP', car: 'Aston Martin', points: 8 },
+            { pos: 17, name: 'Oliver Bearman', nationality: 'GBR', car: 'Haas', points: 6 },
+            { pos: 18, name: 'Liam Lawson', nationality: 'NZL', car: 'Racing Bulls', points: 4 },
+            { pos: 19, name: 'Gabriel Bortoleto', nationality: 'BRA', car: 'Kick Sauber', points: 0 },
+            { pos: 20, name: 'Franco Colapinto', nationality: 'ARG', car: 'Alpine', points: 0 },
+            { pos: 21, name: 'Jack Doohan', nationality: 'AUS', car: 'Alpine', points: 0 },
         ];
         
         // This function runs after the entire page is loaded.
@@ -92,12 +93,13 @@
                 standingsData.forEach((driver, index) => {
                     const row = document.createElement('tr');
                     if (index % 2 !== 0) {
-                        row.className = 'bg-slate-800/50';
+                        row.className = 'bg-gray-50';
                     }
                     
                     row.innerHTML = `
                         <td class="px-6 py-4 whitespace-nowrap font-bold">${driver.pos}</td>
                         <td class="px-6 py-4 whitespace-nowrap">${driver.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${driver.nationality}</td>
                         <td class="px-6 py-4 whitespace-nowrap">${driver.car}</td>
                         <td class="px-6 py-4 whitespace-nowrap font-bold">${driver.points}</td>
                     `;
