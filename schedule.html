@@ -44,8 +44,8 @@
         
         <!-- Header -->
         <header class="text-center my-8">
-            <h1 class="text-5xl font-bold text-white">F1 Schedule</h1>
-            <p class="mt-2 text-xl text-white/90 font-semibold">2025 Season</p>
+            <h1 class="text-5xl font-bold text-white uppercase">F1 Schedule</h1>
+            <p class="mt-2 text-xl text-white/90 font-semibold uppercase">2025 Season</p>
         </header>
 
         <!-- Schedule Grid -->
@@ -82,12 +82,12 @@
             { round: 16, name: 'Italian Grand Prix', venue: 'Monza', date: 'September 5-7' },
             { round: 17, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'September 19-21' },
             { round: 18, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5' },
-            { round: 19, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19' },
-            { round: 20, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26' },
-            { round: 21, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'November 7-9' },
-            { round: 22, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22' },
-            { round: 23, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30' },
-            { round: 24, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7' }
+            { pos: 19, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19' },
+            { pos: 20, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26' },
+            { pos: 21, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'November 7-9' },
+            { pos: 22, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22' },
+            { pos: 23, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30' },
+            { pos: 24, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7' }
         ];
         
         window.onload = function() {
@@ -100,7 +100,7 @@
                     
                     card.innerHTML = `
                         <div>
-                            <p class="text-base font-bold text-red-600">ROUND ${race.round}</p>
+                            <p class="text-base font-bold text-red-600">ROUND ${race.round || race.pos}</p>
                             <h3 class="text-2xl font-bold text-gray-900 mt-2">${race.name.toUpperCase()}</h3>
                             <p class="text-lg text-gray-600 mt-2">${race.venue.toUpperCase()}</p>
                         </div>
