@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,11 +12,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Twemoji for flags -->
+    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
     <style>
         /* Use Inter as the default font */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #000;
+        }
+        /* Style for flag emojis */
+        .flag-emoji {
+            width: 1.5em;
+            height: 1.5em;
+            margin-right: 0.75rem;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -38,62 +47,12 @@
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Pos</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Driver</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Nationality</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Car</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Pts</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-700">
-                    <!-- Data based on 2025 standings -->
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">1</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Oscar Piastri</td>
-                        <td class="px-6 py-4 whitespace-nowrap">AUS</td>
-                        <td class="px-6 py-4 whitespace-nowrap">McLaren</td>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">198</td>
-                    </tr>
-                    <tr class="bg-slate-800/50">
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">2</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Lando Norris</td>
-                        <td class="px-6 py-4 whitespace-nowrap">GBR</td>
-                        <td class="px-6 py-4 whitespace-nowrap">McLaren</td>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">176</td>
-                    </tr>
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">3</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Max Verstappen</td>
-                        <td class="px-6 py-4 whitespace-nowrap">NED</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Red Bull Racing</td>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">155</td>
-                    </tr>
-                    <tr class="bg-slate-800/50">
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">4</td>
-                        <td class="px-6 py-4 whitespace-nowrap">George Russell</td>
-                        <td class="px-6 py-4 whitespace-nowrap">GBR</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Mercedes</td>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">136</td>
-                    </tr>
-                     <tr>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">5</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Charles Leclerc</td>
-                        <td class="px-6 py-4 whitespace-nowrap">MON</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Ferrari</td>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">104</td>
-                    </tr>
-                    <tr class="bg-slate-800/50">
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">6</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Lewis Hamilton</td>
-                        <td class="px-6 py-4 whitespace-nowrap">GBR</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Ferrari</td>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">79</td>
-                    </tr>
-                     <tr>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">7</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Kimi Antonelli</td>
-                        <td class="px-6 py-4 whitespace-nowrap">ITA</td>
-                        <td class="px-6 py-4 whitespace-nowrap">Mercedes</td>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">63</td>
-                    </tr>
+                <tbody id="standings-body" class="divide-y divide-slate-700">
+                    <!-- Driver data will be injected here by JavaScript -->
                 </tbody>
             </table>
         </div>
@@ -106,6 +65,81 @@
         </div>
 
     </div>
+    
+    <script>
+        const standingsData = [
+            { pos: 1, name: 'Oscar Piastri', nationality: 'AU', car: 'McLaren', points: 198 },
+            { pos: 2, name: 'Lando Norris', nationality: 'GB', car: 'McLaren', points: 176 },
+            { pos: 3, name: 'Max Verstappen', nationality: 'NL', car: 'Red Bull Racing', points: 155 },
+            { pos: 4, name: 'George Russell', nationality: 'GB', car: 'Mercedes', points: 136 },
+            { pos: 5, name: 'Charles Leclerc', nationality: 'MC', car: 'Ferrari', points: 104 },
+            { pos: 6, name: 'Lewis Hamilton', nationality: 'GB', car: 'Ferrari', points: 79 },
+            { pos: 7, name: 'Kimi Antonelli', nationality: 'IT', car: 'Mercedes', points: 63 },
+            { pos: 8, name: 'Alexander Albon', nationality: 'TH', car: 'Williams', points: 42 },
+            { pos: 9, name: 'Esteban Ocon', nationality: 'FR', car: 'Haas', points: 22 },
+            { pos: 10, name: 'Isack Hadjar', nationality: 'FR', car: 'Racing Bulls', points: 21 },
+            { pos: 11, name: 'Nico Hulkenberg', nationality: 'DE', car: 'Kick Sauber', points: 20 },
+            { pos: 12, name: 'Lance Stroll', nationality: 'CA', car: 'Aston Martin', points: 14 },
+            { pos: 13, name: 'Carlos Sainz', nationality: 'ES', car: 'Williams', points: 13 },
+            { pos: 14, name: 'Pierre Gasly', nationality: 'FR', car: 'Alpine', points: 11 },
+            { pos: 15, name: 'Yuki Tsunoda', nationality: 'JP', car: 'Red Bull Racing', points: 10 },
+            { pos: 16, name: 'Fernando Alonso', nationality: 'ES', car: 'Aston Martin', points: 8 },
+            { pos: 17, name: 'Oliver Bearman', nationality: 'GB', car: 'Haas', points: 6 },
+            { pos: 18, name: 'Liam Lawson', nationality: 'NZ', car: 'Racing Bulls', points: 4 },
+            { pos: 19, name: 'Gabriel Bortoleto', nationality: 'BR', car: 'Kick Sauber', points: 0 },
+            { pos: 20, name: 'Franco Colapinto', nationality: 'AR', car: 'Alpine', points: 0 },
+            { pos: 21, name: 'Jack Doohan', nationality: 'AU', car: 'Alpine', points: 0 },
+        ];
 
+        // Function to convert country code to flag emoji
+        function getFlagEmoji(countryCode) {
+            // Using Twemoji's library to get the image source for the flag
+            const countryCodeMap = {
+                'AU': '1f1e6-1f1fa', 'GB': '1f1ec-1f1e7', 'NL': '1f1f3-1f1f1', 'MC': '1f1f2-1f1e8',
+                'IT': '1f1ee-1f1f9', 'TH': '1f1f9-1f1ed', 'FR': '1f1eb-1f1f7', 'DE': '1f1e9-1f1ea',
+                'CA': '1f1e8-1f1e6', 'ES': '1f1ea-1f1f8', 'JP': '1f1ef-1f1f5', 'NZ': '1f1f3-1f1ff',
+                'BR': '1f1e7-1f1f7', 'AR': '1f1e6-1f1f7'
+            };
+            const code = countryCodeMap[countryCode];
+            if (code) {
+                 return `https://twemoji.maxcdn.com/v/latest/72x72/${code.toLowerCase()}.png`;
+            }
+            return ''; // Return empty if no flag found
+        }I'm a huge Formula 1 enthusiast. I love the technology, the strategy, and the thrill of race weekends. Check out the current driver standings!
+        
+        // This function runs after the entire page is loaded, ensuring twemoji is available.
+        window.onload = function() {
+            const standingsBody = document.getElementById('standings-body');
+            if (standingsBody) {
+                standingsData.forEach((driver, index) => {
+                    const row = document.createElement('tr');
+                    if (index % 2 !== 0) {
+                        row.className = 'bg-slate-800/50';
+                    }
+                    
+                    const flagSrc = getFlagEmoji(driver.nationality);
+
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap font-bold">${driver.pos}</td>
+                        <td class="px-6 py-4 whitespace-nowrap flex items-center">
+                            <img src="${flagSrc}" class="flag-emoji" alt="${driver.nationality} flag">
+                            <span>${driver.name}</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">${driver.car}</td>
+                        <td class="px-6 py-4 whitespace-nowrap font-bold">${driver.points}</td>
+                    `;
+                    standingsBody.appendChild(row);
+                });
+            }
+
+            // After populating, parse the document for emojis if twemoji is defined
+            if (typeof twemoji !== 'undefined') {
+                twemoji.parse(document.body, {
+                    folder: 'svg',
+                    ext: '.svg'
+                });
+            }
+        };
+    </script>
 </body>
 </html>
