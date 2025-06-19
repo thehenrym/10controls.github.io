@@ -21,18 +21,14 @@
             /* Ensure the page is high enough to see the full gradient */
             min-height: 100vh;
         }
-        /* Simple transition for the table containers */
+        /* Transition for the table containers */
         .standings-container {
-            transition: opacity 0.3s ease-in-out, visibility 0.3s;
+            /* Animate max-height for the slide effect */
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+            overflow: hidden;
         }
-        .standings-container.hidden {
-            opacity: 0;
-            visibility: hidden;
-            position: absolute; /* Take out of layout flow when hidden */
-        }
-        /* Added transition for the page title fade effect */
+        /* Style for the page title fade effect */
         #page-title {
-            /* Slower, smoother transition */
             transition: opacity 0.7s ease-in-out;
         }
     </style>
@@ -51,12 +47,9 @@
         <!-- Toggle Switch -->
         <div class="flex justify-center mb-6">
             <div class="relative w-48 h-10 flex bg-gray-200 rounded-full">
-                <!-- The sliding element is now a padded container to ensure correct width -->
                 <div id="slider" class="absolute top-0 left-0 h-full w-1/2 p-1 transition-transform duration-300 ease-in-out">
                     <div class="w-full h-full bg-red-600 rounded-full"></div>
                 </div>
-                
-                <!-- The buttons now have fixed height and center their content -->
                 <button id="show-drivers-btn" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-semibold text-white transition-colors duration-300">Drivers</button>
                 <button id="show-teams-btn" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-semibold text-gray-700 transition-colors duration-300">Teams</button>
             </div>
@@ -83,13 +76,15 @@
         </div>
         
         <!-- Team Standings Table -->
-        <div id="team-standings-container" class="standings-container hidden">
+        <div id="team-standings-container" class="standings-container">
              <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pos</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Team</th>
+                            <th scope="col" class="w-2/5 px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Team</th>
+                            <th scope="col" class="w-1/5"></th> <!-- Spacer Column -->
+                            <th scope="col" class="w-1/5"></th> <!-- Spacer Column -->
                             <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pts</th>
                         </tr>
                     </thead>
@@ -147,24 +142,25 @@
             { pos: 10, team: 'Alpine', points: 11 },
         ];
         
-        // This function runs after the entire page is loaded.
         window.onload = function() {
-            // Get table bodies
+            // Get elements
             const driverStandingsBody = document.getElementById('driver-standings-body');
             const teamStandingsBody = document.getElementById('team-standings-body');
+            const driverContainer = document.getElementById('driver-standings-container');
+            const teamContainer = document.getElementById('team-standings-container');
             
             // Populate Driver Table
             if (driverStandingsBody) {
                 driverStandingsData.forEach((driver, index) => {
                     const row = document.createElement('tr');
                     if (index % 2 !== 0) row.className = 'bg-gray-50';
-                    row.innerHTML = `
-                        <td class="px-6 py-4 whitespace-nowrap font-bold text-red-600">${driver.pos}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">${driver.name}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">${driver.nationality}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">${driver.car}</td>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">${driver.points}</td>
-                    `;
+                    let carCellContent = driver.car;
+                    if (driver.car === 'McLaren') {
+                        carCellContent = `<span class="flex items-center"><img src="https://images.icon-icons.com/2402/PNG/512/mclaren_logo_icon_145799.png" class="h-5 w-auto mr-2" alt="McLaren logo"><span>${driver.car}</span></span>`;
+                    } else if (driver.car === 'Kick Sauber') {
+                        carCellContent = `<span class="flex items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Stake_F1_Team_logo.png" class="h-5 w-auto mr-2" alt="Sauber logo"><span>${driver.car}</span></span>`;
+                    }
+                    row.innerHTML = `<td class="px-6 py-4 whitespace-nowrap font-bold text-red-600">${driver.pos}</td><td class="px-6 py-4 whitespace-nowrap">${driver.name}</td><td class="px-6 py-4 whitespace-nowrap">${driver.nationality}</td><td class="px-6 py-4 whitespace-nowrap">${carCellContent}</td><td class="px-6 py-4 whitespace-nowrap font-bold">${driver.points}</td>`;
                     driverStandingsBody.appendChild(row);
                 });
             }
@@ -174,69 +170,73 @@
                 teamStandingsData.forEach((item, index) => {
                     const row = document.createElement('tr');
                     if (index % 2 !== 0) row.className = 'bg-gray-50';
-                    row.innerHTML = `
-                        <td class="px-6 py-4 whitespace-nowrap font-bold text-red-600">${item.pos}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">${item.team}</td>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold">${item.points}</td>
-                    `;
+                    let teamCellContent = item.team;
+                    if (item.team === 'McLaren') {
+                        teamCellContent = `<span class="flex items-center"><img src="https://images.icon-icons.com/2402/PNG/512/mclaren_logo_icon_145799.png" class="h-5 w-auto mr-2" alt="McLaren logo"><span>${item.team}</span></span>`;
+                    } else if (item.team === 'Kick Sauber') {
+                         teamCellContent = `<span class="flex items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Stake_F1_Team_logo.png" class="h-5 w-auto mr-2" alt="Sauber logo"><span>${item.team}</span></span>`;
+                    }
+                    row.innerHTML = `<td class="px-6 py-4 whitespace-nowrap font-bold text-red-600">${item.pos}</td><td class="px-6 py-4 whitespace-nowrap">${teamCellContent}</td><td></td><td></td><td class="px-6 py-4 whitespace-nowrap font-bold">${item.points}</td>`;
                     teamStandingsBody.appendChild(row);
                 });
             }
+            
+            // Defer height calculation and event binding
+            setTimeout(() => {
+                const driverTableHeight = driverContainer.scrollHeight;
+                const teamTableHeight = teamContainer.scrollHeight;
 
-            // Toggle Logic
-            const showDriversBtn = document.getElementById('show-drivers-btn');
-            const showTeamsBtn = document.getElementById('show-teams-btn');
-            const slider = document.getElementById('slider');
-            const driverContainer = document.getElementById('driver-standings-container');
-            const teamContainer = document.getElementById('team-standings-container');
-            const pageTitle = document.getElementById('page-title');
+                // Set initial state
+                driverContainer.style.maxHeight = `${driverTableHeight}px`;
+                teamContainer.style.maxHeight = '0px';
 
-            const FADE_OUT_DURATION = 700; // Must match CSS transition duration
-            const BLANK_DURATION = 200; // 0.2 seconds
+                // Toggle Logic
+                const showDriversBtn = document.getElementById('show-drivers-btn');
+                const showTeamsBtn = document.getElementById('show-teams-btn');
+                const slider = document.getElementById('slider');
+                const pageTitle = document.getElementById('page-title');
 
-            showDriversBtn.addEventListener('click', () => {
-                slider.style.transform = 'translateX(0%)';
-                showDriversBtn.classList.add('text-white');
-                showDriversBtn.classList.remove('text-gray-700');
-                showTeamsBtn.classList.add('text-gray-700');
-                showTeamsBtn.classList.remove('text-white');
-                
-                driverContainer.classList.remove('hidden');
-                teamContainer.classList.add('hidden');
+                const FADE_OUT_DURATION = 700;
+                const BLANK_DURATION = 200;
 
-                // Animate title change
-                if (pageTitle.textContent !== 'F1 Driver Standings') {
-                    pageTitle.style.opacity = 0;
-                    setTimeout(() => {
-                        pageTitle.textContent = 'F1 Driver Standings';
+                showDriversBtn.addEventListener('click', () => {
+                    slider.style.transform = 'translateX(0%)';
+                    showDriversBtn.classList.add('text-white');
+                    showDriversBtn.classList.remove('text-gray-700');
+                    showTeamsBtn.classList.add('text-gray-700');
+                    showTeamsBtn.classList.remove('text-white');
+                    
+                    driverContainer.style.maxHeight = `${driverTableHeight}px`;
+                    teamContainer.style.maxHeight = '0px';
+
+                    if (pageTitle.textContent !== 'F1 Driver Standings') {
+                        pageTitle.style.opacity = 0;
                         setTimeout(() => {
-                           pageTitle.style.opacity = 1;
-                        }, BLANK_DURATION);
-                    }, FADE_OUT_DURATION);
-                }
-            });
+                            pageTitle.textContent = 'F1 Driver Standings';
+                            setTimeout(() => pageTitle.style.opacity = 1, BLANK_DURATION);
+                        }, FADE_OUT_DURATION);
+                    }
+                });
 
-            showTeamsBtn.addEventListener('click', () => {
-                slider.style.transform = 'translateX(100%)';
-                showTeamsBtn.classList.add('text-white');
-                showTeamsBtn.classList.remove('text-gray-700');
-                showDriversBtn.classList.add('text-gray-700');
-                showDriversBtn.classList.remove('text-white');
+                showTeamsBtn.addEventListener('click', () => {
+                    slider.style.transform = 'translateX(100%)';
+                    showTeamsBtn.classList.add('text-white');
+                    showTeamsBtn.classList.remove('text-gray-700');
+                    showDriversBtn.classList.add('text-gray-700');
+                    showDriversBtn.classList.remove('text-white');
 
-                teamContainer.classList.remove('hidden');
-                driverContainer.classList.add('hidden');
+                    driverContainer.style.maxHeight = '0px';
+                    teamContainer.style.maxHeight = `${teamTableHeight}px`;
 
-                // Animate title change
-                if (pageTitle.textContent !== 'F1 Team Standings') {
-                    pageTitle.style.opacity = 0;
-                    setTimeout(() => {
-                        pageTitle.textContent = 'F1 Team Standings';
-                         setTimeout(() => {
-                           pageTitle.style.opacity = 1;
-                        }, BLANK_DURATION);
-                    }, FADE_OUT_DURATION);
-                }
-            });
+                    if (pageTitle.textContent !== 'F1 Team Standings') {
+                        pageTitle.style.opacity = 0;
+                        setTimeout(() => {
+                            pageTitle.textContent = 'F1 Team Standings';
+                             setTimeout(() => pageTitle.style.opacity = 1, BLANK_DURATION);
+                        }, FADE_OUT_DURATION);
+                    }
+                });
+            }, 100); // Small delay to ensure browser has rendered content before measuring
         };
     </script>
 </body>
