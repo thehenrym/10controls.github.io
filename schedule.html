@@ -141,36 +141,36 @@
                     const card = document.createElement('div');
                     card.className = 'bg-white rounded-lg shadow-lg p-10 flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300';
                     let flagHtml = '';
-                     if (race.country === 'USA') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'QAT') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197618.png" alt="Qatar Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'GB') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197374.png" alt="British Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'IT') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'JP') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197604.png" alt="Japanese Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'BE') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197583.png" alt="Belgian Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'AT') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197447.png" alt="Austrian Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'BH') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197521.png" alt="Bahrain Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'HU') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'SG') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" alt="Singapore Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'BR') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197386.png" alt="Brazilian Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'NL') flagHtml = <img src="https://cdn-icons-png.flaticon.com/512/197/197441.png" alt="Netherlands Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'CN') flagHtml = <img src="https://cdn-icons-png.flaticon.com/512/197/197375.png" alt="Chinese Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'ES') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197593.png" alt="Spanish Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'CA') flagHtml = <img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" alt="Canadian Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'MC') flagHtml = <img src="https://cdn-icons-png.flaticon.com/512/197/197594.png" alt="Monaco Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'AE') flagHtml = <img src="https://cdn-icons-png.flaticon.com/512/197/197569.png" alt="UAE Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'MX') flagHtml = <img src="https://cdn-icons-png.flaticon.com/512/197/197397.png" alt="Mexican Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'AZ') flagHtml = <img src="https://cdn-icons-png.flaticon.com/512/197/197512.png" alt="Azerbaijan Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'SA') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197391.png" alt="Saudi Arabian Flag" class="h-8 w-auto mt-2 rounded-md">;
-                    else if (race.country === 'AU') flagHtml = <img src="https://cdn-icons-png.flaticon.com/128/197/197507.png" alt="Australian Flag" class="h-8 w-auto mt-2 rounded-md">;
+                     if (race.country === 'USA') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'QAT') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197618.png" alt="Qatar Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'GB') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197374.png" alt="British Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'IT') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'JP') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197604.png" alt="Japanese Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'BE') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197583.png" alt="Belgian Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'AT') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197447.png" alt="Austrian Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'BH') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197521.png" alt="Bahrain Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'HU') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'SG') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" alt="Singapore Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'BR') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197386.png" alt="Brazilian Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'NL') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197441.png" alt="Netherlands Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'CN') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197375.png" alt="Chinese Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'ES') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197593.png" alt="Spanish Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'CA') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" alt="Canadian Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'MC') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197594.png" alt="Monaco Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'AE') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197569.png" alt="UAE Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'MX') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197397.png" alt="Mexican Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'AZ') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197512.png" alt="Azerbaijan Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'SA') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197391.png" alt="Saudi Arabian Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    else if (race.country === 'AU') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197507.png" alt="Australian Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     
                     let circuitImageHtml = '';
                     if (race.imageUrl) {
                         let objectPositionClass = 'object-center';
                         if (race.name === 'Las Vegas Grand Prix') objectPositionClass = 'object-bottom';
-                        circuitImageHtml = <div class="h-48 overflow-hidden rounded-lg my-4"><img src="${race.imageUrl}" alt="${race.venue} Circuit" class="w-full h-full object-cover ${objectPositionClass}"></div>;
+                        circuitImageHtml = `<div class="h-48 overflow-hidden rounded-lg my-4"><img src="${race.imageUrl}" alt="${race.venue} Circuit" class="w-full h-full object-cover ${objectPositionClass}"></div>`;
                     }
-                    let footerContent = race.winner ? <p class="text-lg font-semibold text-gray-800 uppercase"><span class="font-bold text-red-600">WINNER:</span> ${race.winner}</p> : <p class="text-lg font-semibold text-gray-800">${race.date.toUpperCase()}</p>;
-                    card.innerHTML = <div><p class="text-lg font-bold text-red-600">ROUND ${race.round || race.pos}</p>${flagHtml}<h3 class="text-3xl font-bold text-gray-900 mt-2">${race.name.toUpperCase()}</h3><p class="text-xl text-gray-600 mt-2">${race.venue.toUpperCase()}</p>${circuitImageHtml}</div><div class="mt-6 pt-6 border-t border-gray-200">${footerContent}</div>;
+                    let footerContent = race.winner ? `<p class="text-lg font-semibold text-gray-800 uppercase"><span class="font-bold text-red-600">WINNER:</span> ${race.winner}</p>` : `<p class="text-lg font-semibold text-gray-800">${race.date.toUpperCase()}</p>`;
+                    card.innerHTML = `<div><p class="text-lg font-bold text-red-600">ROUND ${race.round || race.pos}</p>${flagHtml}<h3 class="text-3xl font-bold text-gray-900 mt-2">${race.name.toUpperCase()}</h3><p class="text-xl text-gray-600 mt-2">${race.venue.toUpperCase()}</p>${circuitImageHtml}</div><div class="mt-6 pt-6 border-t border-gray-200">${footerContent}</div>`;
                     scheduleGrid.appendChild(card);
                 });
             }
@@ -182,7 +182,7 @@
                     const dateString = race.date.replace(/ - /g, ' ').split(' ');
                     const month = dateString[0];
                     const day = parseInt(dateString[dateString.length - 1]);
-                    const raceEndDate = new Date(${month} ${day}, 2025 23:59:59);
+                    const raceEndDate = new Date(`${month} ${day}, 2025 23:59:59`);
                     return raceEndDate >= now;
                 });
 
@@ -194,15 +194,15 @@
                         const card = document.createElement('a');
                         card.href = '#'; // Placeholder link
                         card.className = 'relative group bg-cover bg-center h-48 rounded-lg overflow-hidden block';
-                        card.style.backgroundImage = url(${race.imageUrl || 'https://placehold.co/600x400/cccccc/ffffff?text=Track'});
-                        card.innerHTML = 
+                        card.style.backgroundImage = `url(${race.imageUrl || 'https://placehold.co/600x400/cccccc/ffffff?text=Track'})`;
+                        card.innerHTML = `
                             <div class="absolute inset-0 bg-black/50 race-card-overlay"></div>
                             <div class="absolute bottom-0 left-0 p-4 text-white">
                                 <p class="text-xs font-bold uppercase">Round ${race.round || race.pos}</p>
                                 <p class="text-lg font-bold uppercase">${race.venue}</p>
                                 <p class="text-xs uppercase">${race.date}</p>
                             </div>
-                        ;
+                        `;
                         scheduleDropdownContainer.appendChild(card);
                     });
                 } else {
