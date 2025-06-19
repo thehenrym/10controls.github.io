@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,24 +12,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Twemoji for flags -->
-    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
     <style>
         /* Use Inter as the default font */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #000;
-        }
-        /* Style for flag emojis */
-        .flag-emoji {
-            width: 1.5em;
-            height: 1.5em;
-            margin-right: 0.75rem;
-            vertical-align: middle;
+            /* Added a red-to-white gradient background */
+            background: linear-gradient(to bottom, #b91c1c, #ffffff);
+            /* Ensure the page is high enough to see the full gradient */
+            min-height: 100vh;
         }
     </style>
 </head>
-<body class="bg-black text-slate-300 font-medium">
+<body class="font-medium">
 
     <!-- Main Container -->
     <div class="relative max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
@@ -37,7 +31,7 @@
         <!-- Header -->
         <header class="text-center my-8">
             <h1 class="text-4xl font-bold text-white">F1 Driver Standings</h1>
-            <p class="mt-2 text-lg text-orange-400 font-semibold">2025 Season</p>
+            <p class="mt-2 text-lg text-white/90 font-semibold">2025 Season</p>
         </header>
 
         <!-- Standings Table -->
@@ -51,7 +45,7 @@
                         <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-slate-300 uppercase tracking-wider">Pts</th>
                     </tr>
                 </thead>
-                <tbody id="standings-body" class="divide-y divide-slate-700">
+                <tbody id="standings-body" class="divide-y divide-slate-700 text-slate-300">
                     <!-- Driver data will be injected here by JavaScript -->
                 </tbody>
             </table>
@@ -59,7 +53,7 @@
 
         <!-- Back Link -->
         <div class="text-center mt-8">
-            <a href="index.html" class="text-orange-400 hover:underline font-semibold">
+            <a href="index.html" class="text-red-700 hover:underline font-semibold">
                 <i class="fas fa-arrow-left mr-2"></i>Back to About Me
             </a>
         </div>
@@ -90,24 +84,8 @@
             { pos: 20, name: 'Franco Colapinto', nationality: 'AR', car: 'Alpine', points: 0 },
             { pos: 21, name: 'Jack Doohan', nationality: 'AU', car: 'Alpine', points: 0 },
         ];
-
-        // Function to convert country code to flag emoji
-        function getFlagEmoji(countryCode) {
-            // Using Twemoji's library to get the image source for the flag
-            const countryCodeMap = {
-                'AU': '1f1e6-1f1fa', 'GB': '1f1ec-1f1e7', 'NL': '1f1f3-1f1f1', 'MC': '1f1f2-1f1e8',
-                'IT': '1f1ee-1f1f9', 'TH': '1f1f9-1f1ed', 'FR': '1f1eb-1f1f7', 'DE': '1f1e9-1f1ea',
-                'CA': '1f1e8-1f1e6', 'ES': '1f1ea-1f1f8', 'JP': '1f1ef-1f1f5', 'NZ': '1f1f3-1f1ff',
-                'BR': '1f1e7-1f1f7', 'AR': '1f1e6-1f1f7'
-            };
-            const code = countryCodeMap[countryCode];
-            if (code) {
-                 return `https://twemoji.maxcdn.com/v/latest/72x72/${code.toLowerCase()}.png`;
-            }
-            return ''; // Return empty if no flag found
-        }I'm a huge Formula 1 enthusiast. I love the technology, the strategy, and the thrill of race weekends. Check out the current driver standings!
         
-        // This function runs after the entire page is loaded, ensuring twemoji is available.
+        // This function runs after the entire page is loaded.
         window.onload = function() {
             const standingsBody = document.getElementById('standings-body');
             if (standingsBody) {
@@ -117,26 +95,13 @@
                         row.className = 'bg-slate-800/50';
                     }
                     
-                    const flagSrc = getFlagEmoji(driver.nationality);
-
                     row.innerHTML = `
                         <td class="px-6 py-4 whitespace-nowrap font-bold">${driver.pos}</td>
-                        <td class="px-6 py-4 whitespace-nowrap flex items-center">
-                            <img src="${flagSrc}" class="flag-emoji" alt="${driver.nationality} flag">
-                            <span>${driver.name}</span>
-                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">${driver.name}</td>
                         <td class="px-6 py-4 whitespace-nowrap">${driver.car}</td>
                         <td class="px-6 py-4 whitespace-nowrap font-bold">${driver.points}</td>
                     `;
                     standingsBody.appendChild(row);
-                });
-            }
-
-            // After populating, parse the document for emojis if twemoji is defined
-            if (typeof twemoji !== 'undefined') {
-                twemoji.parse(document.body, {
-                    folder: 'svg',
-                    ext: '.svg'
                 });
             }
         };
