@@ -3,51 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1 Schedule - 2025</title>
-    <!-- Tailwind CSS CDN -->
+    <title>F1 Teams - 2025</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts (Inter, kept for fallback or other elements if desired) -->
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Define your custom font using @font-face */
-        @font-face {
-            font-family: 'KHInterference Bold'; /* This is the name you'll use in font-family */
-            src: url('fonts/KHInterference_Bold.ttf') format('truetype'); /* IMPORTANT: Replace with actual path on GitHub */
-            /* It's highly recommended to convert .ttf to .woff2 and .woff for better performance and compatibility */
-            /* Example for .woff2: src: url('path/to/your/fonts/KHInterference_Bold.woff2') format('woff2'); */
-            font-weight: normal; /* Adjust if your font has specific weights (e.g., 700 for bold) */
-            font-style: normal;
-        }
-
         body {
-            /* Apply the custom font first, with a fallback to Inter and then generic sans-serif */
-            font-family: 'KHInterference Bold', 'Inter', sans-serif;
+            font-family: 'Inter', sans-serif;
             background: linear-gradient(to bottom, #b91c1c, #ffffff);
             min-height: 100vh;
-        }
-
-        /* Explicitly apply custom font to headings and other elements that might override it */
-        h1, h2, h3, h4, h5, h6,
-        .font-bold, .font-semibold, .font-medium, .uppercase,
-        .text-3xl, .text-5xl, .text-xl, .text-lg, .text-sm {
-            font-family: 'KHInterference Bold', 'Inter', sans-serif;
-        }
-
-        /* Style for the main navigation dropdown (not related to team cards) */
-        #schedule-dropdown-container {
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
-            opacity: 0;
-            transform: translateY(-10px);
-            visibility: hidden; /* Use visibility instead of display */
-        }
-        .group:hover #schedule-dropdown-container {
-            opacity: 1;
-            transform: translateY(0);
-            visibility: visible; /* Use visibility instead of display */
         }
         /* Custom colors for teams */
         .bg-mclaren { background-color: #F47600; }
@@ -61,415 +30,132 @@
         .bg-kicksauber { background-color: #01C00E; }
         .bg-haas { background-color: #9C9FA2; }
 
-        /* Styles for the static driver section */
-        .static-driver-section {
-            background-color: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
-            color: white;
-            padding: 0.5rem 1rem; /* Padding for the section */
-            /* Match card rounded corners for the bottom */
-            border-bottom-left-radius: 0.5rem;
-            border-bottom-right-radius: 0.5rem;
-            display: flex; /* Enable flexbox for horizontal layout */
-            align-items: center; /* Center items vertically */
-            text-align: center; /* Center text within each item */
-            
-            /* Positioning to span full width at the bottom */
-            position: absolute; /* Changed from relative to absolute */
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin-top: 0; /* Removed margin-top as it's now absolutely positioned */
-            width: 100%; /* Ensure it takes full width of parent's *content-box* */
-            box-sizing: border-box; /* Include padding in width calculation */
-            z-index: 5; /* Ensure it's above other content if anything overlaps */
+        .team-card-group .background-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
         }
-
-        .driver-column {
-            flex: 1; /* Allow columns to grow and shrink */
-            padding: 0 0.5rem; /* Add some horizontal padding */
-            display: flex; /* Enable flexbox for content within column */
-            flex-direction: row; /* Horizontal arrangement */
-            align-items: center; /* Center items vertically within column */
-            justify-content: center; /* Center content horizontally within column */
-            gap: 0.5rem; /* Space between number and name */
-        }
-
-        .driver-column:first-child {
-            border-right: 1px solid rgba(255, 255, 255, 0.5); /* Vertical line */
-        }
-
-        /* Styling for the team standing in the top right */
-        .team-standing {
-            position: absolute;
-            top: 1rem; /* Adjust as needed for spacing from top */
-            right: 1rem; /* Adjust as needed for spacing from right */
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px; /* Full rounded corners (pill shape) */
-            font-weight: bold;
-            font-size: 0.875rem; /* text-sm */
-            z-index: 10; /* Ensure it's above other card content */
-        }
-
-        /* Styles for the background image overlay on hover */
-        .background-overlay {
-            position: absolute;
-            inset: 0; /* Covers the entire card */
-            background-image: url('https://cdn.discordapp.com/attachments/1323758532432236638/1385499058075992134/F1_75_Logo.png?ex=68564a0c&is=6854f88c&hm=744e08e11b761601e712a4edc17d23feb170b4bffe21b8272c9174f6c776ca0b&');
-            background-size: cover;
-            background-position: center;
-            opacity: 0; /* Hidden by default */
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Added transform to transition */
-            border-radius: 0.5rem; /* Match card's rounded corners */
-            z-index: 0; /* Ensure it's behind other content */
-        }
-
         .team-card-group:hover .background-overlay {
-            opacity: 0.25; /* 25% opacity on hover */
-            transform: scale(1.025); /* Zoom in by 2.5% on hover */
+            opacity: 0.25;
         }
-
-        /* Footer Styling */
         .footer {
-            background-color: #dc2626; /* A shade of red (Tailwind red-600) */
+            background-color: #dc2626;
             color: white;
             text-align: center;
             padding: 2rem 1rem;
-            margin-top: 2rem; /* Space from the content above */
-            border-top: 2px solid rgba(255, 255, 255, 0.2); /* Subtle white border top */
-        }
-
-        /* Specific styling for driver numbers */
-        .driver-number {
-            font-family: 'Inter', sans-serif; /* Use Inter Bold for numbers */
-            font-weight: bold;
-            font-size: 1.5rem; /* Slightly larger than name (text-xl is 1.25rem) */
-            white-space: nowrap; /* Keep number on a single line */
-            overflow: hidden; /* Hide overflow if text is too long */
-            text-overflow: ellipsis; /* Add ellipsis if text is too long */
-            text-align: center; /* Centered with content */
-            margin-right: 0.25rem; /* Small space between number and name */
-        }
-
-        /* Ensure driver names stay on one line with ellipsis and are centered */
-        .driver-name { /* This class is now used to target the driver name paragraphs */
-            white-space: nowrap; /* Keep name on a single line */
-            overflow: hidden; /* Hide overflow if text is too long */
-            text-overflow: ellipsis; /* Add ellipsis if text is too long */
-            text-align: center; /* Centered with content */
-            flex-grow: 1; /* Allow name to take available space */
-        }
-
-        /* Header Logo Styling */
-        .header-logo {
-            height: 50px; /* Adjust height as needed */
-            width: auto; /* Maintain aspect ratio */
-            position: absolute; /* Absolute positioning relative to parent nav */
-            left: calc(1rem - 75px); /* Adjusted to move 75px left from its initial 1rem */
-            top: 50%; /* Center vertically */
-            transform: translateY(-50%); /* Adjust for vertical centering */
-            z-index: 20; /* Ensure it's above other nav elements */
+            margin-top: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
 <body class="font-medium">
-<header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <!-- F1 Logo -->
-            <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385499058075992134/F1_75_Logo.png?ex=68564a0c&is=6854f88c&hm=744e08e11b761601e712a4edc17d23feb170b4bffe21b8272c9174f6c776ca0b&" alt="F1 75 Logo" class="header-logo">
-            
-            <div class="flex items-center justify-center h-20">
-                <div class="flex items-baseline space-x-4">
-                    <a href="latest.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium">Latest</a>
-                    <a href="schedule.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base aria-current">Schedule</a>
-                    <a href="standings.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium"">Standings</a>
-                    <a href="teams.html" class="bg-red-600 text-white px-4 py-3 rounded-md text-base font-medium" font-medium="page"">Teams</a>
-                    <a href="join.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium">Join Now</a>
+
+    <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385499058075992134/F1_75_Logo.png?ex=68564a0c&is=6854f88c&hm=744e08e11b761601e712a4edc17d23feb170b4bffe21b8272c9174f6c776ca0b&" alt="F1 75 Logo" class="h-10">
+                </div>
+                <div class="hidden md:flex items-baseline space-x-4">
+                    <a href="latest.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Latest</a>
+                    <a href="schedule.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Schedule</a>
+                    <a href="standings.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Standings</a>
+                    <a href="teams.html" class="bg-red-600 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Teams</a>
+                    <a href="join.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Join Now</a>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <svg id="menu-open-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="menu-close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </nav>
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="latest.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Latest</a>
+                <a href="schedule.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Schedule</a>
+                <a href="standings.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Standings</a>
+                <a href="teams.html" class="bg-red-600 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Teams</a>
+                <a href="join.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Join Now</a>
+            </div>
+        </div>
     </header>
-<div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        
+
+    <div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         <header class="text-center my-8">
-            <h1 class="text-5xl font-bold text-white uppercase">Teams</h1>
-            <p class="mt-2 text-xl text-white/90 font-semibold uppercase">2025 Season</p>
+            <h1 class="text-4xl sm:text-5xl font-bold text-white uppercase">Teams</h1>
+            <p class="mt-2 text-lg sm:text-xl text-white/90 font-semibold uppercase">2025 Season</p>
         </header>
-<div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    </div>
-    
+        <div id="teams-grid" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Team cards will be injected here by JavaScript -->
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2003-2025 Formula One World Championship Limited</p>
+    </footer>
+
     <script>
-        // Function to get ordinal suffix for numbers
         function getOrdinalSuffix(n) {
             const s = ["TH", "ST", "ND", "RD"];
             const v = n % 100;
             return n + (s[(v - 20) % 10] || s[v] || s[0]);
         }
 
-        const scheduleData = [
-            // Updated data with 'drivers' property and 'standing' for each team
-            { name: 'McLaren', venue: 'Woking, UK', drivers: [
-                { name: 'LANDO NORRIS', number: 4 },
-                { name: 'OSCAR PIASTRI', number: 81 }
-            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp', standing: 1, teamColor: '#F47600' }, // McLaren is 1st
-            { name: 'Ferrari', venue: 'Maranello, Italy', drivers: [
-                { name: 'CHARLES LECLERC', number: 16 },
-                { name: 'LEWIS HAMILTON', number: 44 }
-            ], country: 'IT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp', standing: 3, teamColor: '#ED1131' }, // Ferrari is 3rd
-            { name: 'Red Bull Racing', venue: 'Milton Keynes, UK', drivers: [
-                { name: 'MAX VERSTAPPEN', number: 1 },
-                { name: 'YUKI TSUNODA', number: 22 }
-            ], country: 'AT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp', standing: 4, teamColor: '#4781D7' }, // Red Bull is 4th
-            { name: 'Mercedes', venue: 'Brackley, UK', drivers: [
-                { name: 'GEORGE RUSSELL', number: 63 },
-                { name: 'KIMI ANTONELLI', number: 12 }
-            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp', standing: 2, teamColor: '#00D7B6' }, // Mercedes is 2nd
-            { name: 'Aston Martin', venue: 'Silverstone, UK', drivers: [
-                { name: 'FERNANDO ALONSO', number: 14 },
-                { name: 'LANCE STROLL', number: 18 }
-            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp', standing: 8, teamColor: '#229971' },
-            { name: 'Williams', venue: 'Grove, UK', drivers: [
-                { name: 'ALEXANDER ALBON', number: 23 },
-                { name: 'CARLOS SAINZ', number: 55 }
-            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp', standing: 5, teamColor: '#1868DB' },
-            { name: 'Kick Sauber', venue: 'Hinwil, Switzerland', drivers: [
-                { name: 'NICO HÜLKENBERG', number: 27 },
-                { name: 'GABRIEL BORTOLETO', number: 8 }
-            ], country: 'CH', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp', standing: 9, teamColor: '#01C00E' },
-            { name: 'Haas', venue: 'Kannapolis, USA', drivers: [
-                { name: 'ESTEBAN OCON', number: 31 },
-                { name: 'OLIVER BEARMAN', number: 87 }
-            ], country: 'USA', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp', standing: 6, teamColor: '#9C9FA2' },
-            { name: 'Racing Bulls', venue: 'Faenza, Italy', drivers: [
-                { name: 'ISACK HADJAR', number: 6 },
-                { name: 'LIAM LAWSON', number: 30 }
-            ], country: 'IT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp', standing: 7, teamColor: '#6C98FF' },
-            { name: 'Alpine', venue: 'Enstone, UK', drivers: [
-                { name: 'PIERRE GASLY', number: 10 },
-                { name: 'PAUL ARON', number: 17 }
-            ], country: 'FR', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp', standing: 10, teamColor: '#00A1E8' },
-            { pos: 11, name: 'Austrian Grand Prix', venue: 'Spielberg', date: 'June 27-29', country: 'AT' },
-            { pos: 12, name: 'British Grand Prix', venue: 'Silverstone', date: 'July 4-6', country: 'GB' },
-            { pos: 13, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 25-27', country: 'BE' },
-            { pos: 14, name: 'Hungarian Grand Prix', venue: 'Budapest', date: 'August 1-3', country: 'HU' },
-            { pos: 15, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'August 29-31', country: 'NL' },
-            { pos: 16, name: 'Italian Grand Prix', venue: 'Monza', date: 'September 5-7', country: 'IT' },
-            { pos: 17, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'September 19-21', country: 'AZ' },
-            { pos: 18, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
-            { pos: 19, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19', country: 'USA' },
-            { pos: 20, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26', country: 'MX' },
-            { pos: 21, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'November 7-9', country: 'BR' },
-            { pos: 22, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22', country: 'USA', imageUrl: 'https://www.hollywoodreporter.com/wp-content/uploads/2024/11/F1-Grand-Prix-Las-Vegas-Race-Charles-LeClerc-GettyImages-1801966267-MAIN-2024.jpg?w=1296&amp;h=729&amp;crop=1' },
-            { pos: 23, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30', country: 'QAT', imageUrl: 'https://www.alongtheracingline.com/wp-content/uploads/2023/10/lusail-2.jpeg' },
-            { pos: 24, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7', country: 'AE' }
+        const teamsData = [
+            { name: 'McLaren', venue: 'Woking, UK', drivers: [{ name: 'LANDO NORRIS', number: 4 },{ name: 'OSCAR PIASTRI', number: 81 }], imageUrl: 'https://media.formula1.com/image/upload/f_auto,c_limit,w_1920,q_auto/f_auto,c_limit,w_1920,q_auto/f1-website/2024/2024-Races/Miami/GettyImages-1487532321', standing: 1, teamColorClass: 'bg-mclaren' },
+            { name: 'Ferrari', venue: 'Maranello, Italy', drivers: [{ name: 'CHARLES LECLERC', number: 16 },{ name: 'LEWIS HAMILTON', number: 44 }], imageUrl: 'https://media.formula1.com/image/upload/f_auto,c_limit,w_1920,q_auto/f_auto,c_limit,w_1920,q_auto/f1-website/2024/2024-Races/Emilia-Romagna/GettyImages-2153097864', standing: 3, teamColorClass: 'bg-ferrari' },
+            { name: 'Red Bull Racing', venue: 'Milton Keynes, UK', drivers: [{ name: 'MAX VERSTAPPEN', number: 1 },{ name: 'YUKI TSUNODA', number: 22 }], imageUrl: 'https://media.formula1.com/image/upload/f_auto,c_limit,w_1920,q_auto/f_auto,c_limit,w_1920,q_auto/f1-website/2024/2024-Races/Japan/GettyImages-2129598818', standing: 4, teamColorClass: 'bg-redbull' },
+            { name: 'Mercedes', venue: 'Brackley, UK', drivers: [{ name: 'GEORGE RUSSELL', number: 63 },{ name: 'KIMI ANTONELLI', number: 12 }], imageUrl: 'https://media.formula1.com/image/upload/f_auto,c_limit,w_1920,q_auto/f_auto,c_limit,w_1920,q_auto/f1-website/2024/2024-Races/Monaco/GettyImages-2155122170', standing: 2, teamColorClass: 'bg-mercedes' },
+            { name: 'Aston Martin', venue: 'Silverstone, UK', drivers: [{ name: 'FERNANDO ALONSO', number: 14 },{ name: 'LANCE STROLL', number: 18 }], imageUrl: 'https://media.formula1.com/image/upload/f_auto,c_limit,w_1920,q_auto/f_auto,c_limit,w_1920,q_auto/f1-website/2024/2024-Races/Saudi%20Arabia/GettyImages-2081373575', standing: 8, teamColorClass: 'bg-astonmartin' },
+            { name: 'Williams', venue: 'Grove, UK', drivers: [{ name: 'ALEXANDER ALBON', number: 23 },{ name: 'CARLOS SAINZ', number: 55 }], imageUrl: 'https://media.formula1.com/image/upload/f_auto,c_limit,w_1920,q_auto/f_auto,c_limit,w_1920,q_auto/f1-website/2024/2024-Races/Australia/GettyImages-2108003624', standing: 5, teamColorClass: 'bg-williams' },
+            { name: 'Kick Sauber', venue: 'Hinwil, Switzerland', drivers: [{ name: 'NICO HÜLKENBERG', number: 27 },{ name: 'GABRIEL BORTOLETO', number: 8 }], imageUrl: 'https://media.formula1.com/image/upload/f_auto,c_limit,w_1920,q_auto/f_auto,c_limit,w_1920,q_auto/f1-website/2024/2024-Races/China/GettyImages-2148122822', standing: 9, teamColorClass: 'bg-kicksauber' },
+            { name: 'Haas', venue: 'Kannapolis, USA', drivers: [{ name: 'ESTEBAN OCON', number: 31 },{ name: 'OLIVER BEARMAN', number: 87 }], imageUrl: 'https://media.formula1.com/image/upload/f_auto,c_limit,w_1920,q_auto/f_auto,c_limit,w_1920,q_auto/f1-website/2024/2024-Races/Bahrain/GettyImages-2064560738', standing: 6, teamColorClass: 'bg-haas' },
+            { name: 'Racing Bulls', venue: 'Faenza, Italy', drivers: [{ name: 'ISACK HADJAR', number: 6 },{ name: 'LIAM LAWSON', number: 30 }], imageUrl: 'https://media.formula1.com/image/upload/f_auto,c_limit,w_1920,q_auto/f_auto,c_limit,w_1920,q_auto/f1-website/2024/2024-Races/Bahrain/GettyImages-2064560738', standing: 7, teamColorClass: 'bg-racingbulls' },
+            { name: 'Alpine', venue: 'Enstone, UK', drivers: [{ name: 'PIERRE GASLY', number: 10 },{ name: 'PAUL ARON', number: 17 }], imageUrl: 'https://media.formula1.com/image/upload/f_auto,c_limit,w_1920,q_auto/f_auto,c_limit,w_1920,q_auto/f1-website/2024/2024-Races/Canada/GettyImages-2157159051', standing: 10, teamColorClass: 'bg-alpine' },
         ];
         
         window.onload = function() {
-            const scheduleGrid = document.getElementById('schedule-grid');
-            const scheduleDropdownContainer = document.getElementById('dropdown-grid-container');
-// Populate Main Schedule Grid
-if (scheduleGrid) {
-    scheduleData.slice(0, 10).forEach(race => { // Only process the first 10 for team cards
-        const card = document.createElement('div');
-        card.className = 'rounded-lg shadow-lg p-10 flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden team-card-group';
-        
-        // Assign background color based on team name
-        let teamBgColor;
-        switch (race.name) {
-            case 'McLaren':
-                card.classList.add('bg-mclaren');
-                card.classList.add('text-white');
-                teamBgColor = '#F47600';
-                break;
-            case 'Ferrari':
-                card.classList.add('bg-ferrari');
-                card.classList.add('text-white');
-                teamBgColor = '#ED1131';
-                break;
-            case 'Red Bull Racing':
-                card.classList.add('bg-redbull');
-                card.classList.add('text-white');
-                teamBgColor = '#4781D7';
-                break;
-            case 'Mercedes':
-                card.classList.add('bg-mercedes');
-                card.classList.add('text-black'); // Changed to black for better contrast
-                teamBgColor = '#00D7B6';
-                break;
-            case 'Alpine':
-                card.classList.add('bg-alpine');
-                card.classList.add('text-white');
-                teamBgColor = '#00A1E8';
-                break;
-            case 'Racing Bulls':
-                card.classList.add('bg-racingbulls');
-                card.classList.add('text-white');
-                teamBgColor = '#6C98FF';
-                break;
-            case 'Aston Martin':
-                card.classList.add('bg-astonmartin');
-                card.classList.add('text-white');
-                teamBgColor = '#229971';
-                break;
-            case 'Williams':
-                card.classList.add('bg-williams');
-                card.classList.add('text-white');
-                teamBgColor = '#1868DB';
-                break;
-            case 'Kick Sauber':
-                card.classList.add('bg-kicksauber');
-                card.classList.add('text-black'); // Changed to black for better contrast
-                teamBgColor = '#01C00E';
-                break;
-            case 'Haas':
-                card.classList.add('bg-haas');
-                card.classList.add('text-black'); // Changed to black for better contrast
-                teamBgColor = '#9C9FA2';
-                break;
-            default:
-                card.classList.add('bg-white');
-                card.classList.add('text-gray-900');
-                teamBgColor = '#FFFFFF'; // Default white
-                break;
-        }
-                    let flagHtml = ''; // Initialize flagHtml
-                    // Update flags for Aston Martin, Williams, and Mercedes to the new British flag
-                    if (race.name === 'Aston Martin' || race.name === 'Williams' || race.name === 'Mercedes' || race.country === 'GB') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" alt="British Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (race.name === 'Ferrari') { // New condition for Ferrari
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (race.name === 'Alpine') { // New condition for Alpine
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197560.png" alt="French Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (race.name === 'Kick Sauber') { // New condition for Kick Sauber
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197540.png" alt="Swiss Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (race.country === 'USA') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'QAT') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197618.png" alt="Qatar Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'IT') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'JP') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197604.png" alt="Japanese Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'BE') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197583.png" alt="Belgian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'AT') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197447.png" alt="Austrian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'BH') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197521.png" alt="Bahrain Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'HU') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'SG') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" alt="Singapore Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'BR') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197386.png" alt="Brazilian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'NL') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197441.png" alt="Netherlands Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'CN') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197375.png" alt="Chinese Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'ES') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197593.png" alt="Spanish Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'CA') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" alt="Canadian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'MC') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197594.png" alt="Monaco Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'AE') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197569.png" alt="UAE Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'MX') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197397.png" alt="Mexican Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'AZ') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197512.png" alt="Azerbaijan Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'SA') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197578.png" alt="Saudi Arabian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'AU') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197507.png" alt="Australian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    
-                    let circuitImageHtml = '';
-                    if (race.imageUrl) {
-                        // All car images will use this consistent styling
-                        if (['McLaren', 'Ferrari', 'Red Bull Racing', 'Mercedes', 'Aston Martin', 'Williams', 'Kick Sauber', 'Haas', 'Racing Bulls', 'Alpine'].includes(race.name)) {
-                            circuitImageHtml = `<div class="my-4 w-48">
-                                                    <img src="${race.imageUrl}" alt="${race.name} Car" class="h-20 w-full object-contain rounded-md">
-                                                </div>`;
-                        } else {
-                            // Original logic for other images (like track images for races)
-                            let objectPositionClass = 'object-center';
-                            if (race.name === 'Las Vegas Grand-Prix') objectPositionClass = 'object-bottom';
-                            circuitImageHtml = `<div class="h-48 overflow-hidden rounded-lg my-4">
-                                                    <img src="${race.imageUrl}" alt="${race.name} Circuit" class="w-full h-full object-contain ${objectPositionClass}">
-                                                </div>`;
-                        }
-                    }
-                    
-                    // Main content of the card (z-index 10 to be above the overlay)
-                    let mainCardContent = `
-                        <div class="relative z-10">
-                            ${flagHtml}
-                            <h3 class="text-3xl font-bold mt-2 uppercase">${race.name.toUpperCase()}</h3>
-                            <p class="text-xl mt-2 uppercase">${race.venue.toUpperCase()}</p>
-                            ${circuitImageHtml}
-                        </div>
-                        <div class="mt-6 relative z-10"></div> 
-                    `;
-
-                    // Driver content (now always visible - static)
-                    let driverSectionHtml = '';
-                    if (race.drivers && race.drivers.length === 2) {
-                        driverSectionHtml = `
-                            <div class="static-driver-section">
-                                <div class="driver-column">
-                                    <p class="text-xl font-medium driver-name">${race.drivers[0].name.toUpperCase()}</p>
-                                </div>
-                                <div class="driver-column">
-                                    <p class="text-xl font-medium driver-name">${race.drivers[1].name.toUpperCase()}</p>
-                                </div>
-                            </div>
-                        `;
-                    } else if (race.drivers && race.drivers.length > 0) { // Fallback for more than 2 drivers or less than 2
-                         driverSectionHtml = `
-                            <div class="static-driver-section flex-col">
-                                <p class="text-lg font-semibold uppercase">DRIVERS:</p>
-                                <p class="text-xl font-medium">${race.drivers.map(driver => (driver.name || driver).toUpperCase()).join('<br>')}</p>
-                            </div>
-                        `;
-                    }
-
-                    // Combining all content for the card, with overlay at the bottom z-index
+            const teamsGrid = document.getElementById('teams-grid');
+            if (teamsGrid) {
+                teamsData.forEach(team => {
+                    const card = document.createElement('div');
+                    card.className = `relative text-white rounded-lg shadow-lg p-6 flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300 overflow-hidden ${team.teamColorClass}`;
                     card.innerHTML = `
-                        ${mainCardContent}
-                        ${driverSectionHtml}
+                        <div class="relative z-10">
+                            <h3 class="text-3xl font-bold uppercase">${team.name}</h3>
+                            <p class="text-lg uppercase">${team.venue}</p>
+                            <img src="${team.imageUrl}" class="my-4 rounded-md w-full h-auto object-cover">
+                        </div>
+                        <div class="relative z-10 mt-auto pt-4 border-t border-white/50">
+                            <div class="flex justify-between items-center">
+                                <p class="text-xl font-semibold">${team.drivers[0].name} #${team.drivers[0].number}</p>
+                                <p class="text-xl font-semibold">${team.drivers[1].name} #${team.drivers[1].number}</p>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 text-xl font-bold bg-black/50 rounded-full px-4 py-2">${getOrdinalSuffix(team.standing)}</div>
                     `;
-                    
-                    // Add team standing badge (z-index 10 to be above other content)
-                    if (race.standing) {
-                        const standingBadge = document.createElement('div');
-                        standingBadge.className = 'team-standing';
-                        standingBadge.textContent = getOrdinalSuffix(race.standing);
-                        card.appendChild(standingBadge);
-                    }
+                    teamsGrid.appendChild(card);
+                });
+            }
 
-                    scheduleGrid.appendChild(card);
-                });
-            }
-            
-            // Populate Dropdown (for the main schedule dropdown if applicable)
-            if (scheduleDropdownContainer) {
-                const now = new Date(); // Use client's current date
-                const upcomingRaces = scheduleData.filter(race => {
-                    const dateString = race.date.replace(' - ', '-');
-                    const parts = dateString.split(/[\s-]+/);
-                    let month, day;
-                    if (parts.length > 2 && isNaN(parseInt(parts[2])) && parts[2] !== undefined) {
-                        month = parts[3];
-                        day = parseInt(parts[4]);
-                    } else {
-                        month = parts[0];
-                        day = parseInt(parts[parts.length - 1]);
-                    }
-                    const raceEndDate = new Date(`${month} ${day}, 2025 23:59:59`);
-                    return raceEndDate >= now;
-                });
-const nextFiveRaces = upcomingRaces.slice(0, 5);
-                
-                if (nextFiveRaces.length > 0) {
-                    nextFiveRaces.forEach(race => {
-                        const card = document.createElement('a');
-                        card.href = '#'; // Placeholder link
-                        card.className = 'bg-white rounded-lg p-4 text-gray-900 text-center hover:bg-red-600 hover:text-white transition-colors duration-300';
-                        card.innerHTML = `<p class="font-bold text-sm uppercase">${race.name}</p>                            <p class="text-xs text-gray-600 group-hover:text-gray-300 uppercase">${race.venue}</p>                            <p class="text-xs font-semibold mt-2 uppercase">${race.date}</p>`;
-                        scheduleDropdownContainer.appendChild(card);
-                    });
-                } else {
-                    const noRacesItem = document.createElement('span');
-                    noRacesItem.className = 'col-span-5 block px-4 py-2 text-sm text-gray-400 text-center';
-                    noRacesItem.textContent = 'No upcoming races';
-                    scheduleDropdownContainer.appendChild(noRacesItem);
-                }
-            }
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-open-icon');
+            const closeIcon = document.getElementById('menu-close-icon');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                openIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
         };
     </script>
-    <footer class="footer">
-        <p>&copy; 2003-2025 Formula One World Championship Limited</p>
-    </footer>
 </body>
 </html>
