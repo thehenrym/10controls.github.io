@@ -84,6 +84,16 @@
          #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
             transform: translateY(-6px) rotate(-45deg);
         }
+
+        /* Custom scrollbar for horizontal carousel */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            scroll-behavior: smooth; /* Smooth scroll for carousel */
+        }
     </style>
 </head>
 <body class="font-medium">
@@ -155,7 +165,6 @@
             <!-- Featured Story Section (Left/Top) -->
             <div class="lg:col-span-2 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in">
                 <div class="relative">
-                    <!-- Image and text replaced as per user request -->
                     <img src="https://www.pcgamesn.com/wp-content/sites/pcgamesn/2025/05/F1-25-haas-sauber-at-Australia-1.jpg" alt="F1 Featured Story" class="w-full h-auto object-cover rounded-t-lg">
                     <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
                         <h2 class="text-2xl sm:text-3xl font-bold leading-tight mb-2 text-white">MAXFAN1982 AND FOCUSER COLLIDE LAST LAP FOR WIN</h2>
@@ -200,54 +209,54 @@
             </div>
         </div>
 
-        <!-- POSTS Section (formerly Stories) -->
-        <div class="mb-12">
-            <h3 class="text-xl font-bold text-gray-900 mb-6">POSTS</h3> <!-- Changed title from STORIES to POSTS -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+        <!-- POSTS Section (Horizontal Carousel) -->
+        <div class="mb-12 relative">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">POSTS</h3>
+            <div id="posts-carousel" class="flex overflow-x-auto no-scrollbar snap-x snap-mandatory space-x-4 pb-4">
                 <!-- Post Card 1 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-200">
-                    <!-- Updated image src for Instagram Post 1 -->
-                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385723503403204768/img.jpg?ex=68571b14&is=6855c994&hm=32f42324ba7d019a044c1dac4899428a8c781ab6cf08165e113ec9d2c00d6139&" alt="Instagram Post 1" class="w-full h-32 object-cover">
-                    <div class="p-3">
-                        <p class="text-sm font-semibold text-gray-900 truncate">Instagram Post Caption 1: A great weekend!</p> 
-                    </div>
+                <div class="flex-none w-[200px] sm:w-[250px] md:w-[300px] lg:w-96 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-200 snap-center relative">
+                    <span class="absolute top-2 left-2 bg-pink-600 text-white text-xs font-bold px-2 py-1 rounded-md z-10">NEW</span>
+                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385723503403204768/img.jpg?ex=68571b14&is=6855c994&hm=32f42324ba7d019a044c1dac4899428a8c781ab6cf08165e113ec9d2c00d6139&" alt="Instagram Post 1" class="w-full h-full object-cover">
+                    <!-- Removed caption -->
                 </div>
                 <!-- Post Card 2 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-300">
-                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385723503856324639/img1.jpg?ex=68571b14&is=6855c994&hm=c147db2332d6508552eb71e7676f0fdbe014e21b5f88df7aa827db8a92fc703e&" alt="Instagram Post 2" class="w-full h-32 object-cover">
-                    <div class="p-3">
-                        <p class="text-sm font-semibold text-gray-900 truncate">Instagram Post Caption 2: On track for success!</p>
-                    </div>
+                <div class="flex-none w-[200px] sm:w-[250px] md:w-[300px] lg:w-96 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-300 snap-center relative">
+                    <!-- Removed NEW tag -->
+                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385723503856324639/img1.jpg?ex=68571b14&is=6855c994&hm=c147db2332d6508552eb71e7676f0fdbe014e21b5f88df7aa827db8a92fc703e&" alt="Instagram Post 2" class="w-full h-full object-cover">
+                    <!-- Removed caption -->
                 </div>
                 <!-- Post Card 3 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-400">
-                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385723504217030868/img2.jpg?ex=68571b14&is=6855c994&hm=c408c79cba0db1ef0796ccf79c4282b62ddc2cc80c64303a6fabd76fa73b5a21&" alt="Instagram Post 3" class="w-full h-32 object-cover">
-                    <div class="p-3">
-                        <p class="text-sm font-semibold text-gray-900 truncate">Instagram Post Caption 3: Driver's view.</p>
-                    </div>
+                <div class="flex-none w-[200px] sm:w-[250px] md:w-[300px] lg:w-96 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-400 snap-center relative">
+                    <!-- Removed NEW tag -->
+                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385723504217030868/img2.jpg?ex=68571b14&is=6855c994&hm=c408c79cba0db1ef0796ccf79c4282b62ddc2cc80c64303a6fabd76fa73b5a21&" alt="Instagram Post 3" class="w-full h-full object-cover">
+                    <!-- Removed caption -->
                 </div>
                 <!-- Post Card 4 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-500">
-                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385723504556773478/img3.jpg?ex=68571b14&is=6855c994&hm=6263612e780d4164e3d540dbd6069648222e6d02ce74b64025cd193b418a98f0&" alt="Instagram Post 4" class="w-full h-32 object-cover">
-                    <div class="p-3">
-                        <p class="text-sm font-semibold text-gray-900 truncate">Instagram Post Caption 4: Teamwork makes the dream work!</p>
-                    </div>
+                <div class="flex-none w-[200px] sm:w-[250px] md:w-[300px] lg:w-96 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-500 snap-center relative">
+                    <!-- Removed NEW tag -->
+                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385723504556773478/img3.jpg?ex=68571b14&is=6855c994&hm=6263612e780d4164e3d540dbd6069648222e6d02ce74b64025cd193b418a98f0&" alt="Instagram Post 4" class="w-full h-full object-cover">
+                    <!-- Removed caption -->
                 </div>
                 <!-- Post Card 5 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-600">
-                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385723504929931304/img4.jpg?ex=68571b15&is=6855c995&hm=f67e47dc05dabf2f6cf0521effa661bee188361647e4c18f1a021ef944a060e3&" alt="Instagram Post 5" class="w-full h-32 object-cover">
-                    <div class="p-3">
-                        <p class="text-sm font-semibold text-gray-900 truncate">Instagram Post Caption 5: Celebrating victory!</p>
-                    </div>
+                <div class="flex-none w-[200px] sm:w-[250px] md:w-[300px] lg:w-96 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-600 snap-center relative">
+                    <!-- Removed NEW tag -->
+                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385723504929931304/img4.jpg?ex=68571b15&is=6855c995&hm=f67e47dc05dabf2f6cf0521effa661bee188361647e4c18f1a021ef944a060e3&" alt="Instagram Post 5" class="w-full h-full object-cover">
+                    <!-- Removed caption -->
                 </div>
                 <!-- Post Card 6 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-700">
-                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385723505265348649/img5.jpg?ex=68571b15&is=6855c995&hm=b53c3d221f589472d1ddc6255660559f7cd8043c7961587e3f660c6ee043e0d5&" alt="Instagram Post 6" class="w-full h-32 object-cover">
-                    <div class="p-3">
-                        <p class="text-sm font-semibold text-gray-900 truncate">Instagram Post Caption 6: Ready for the next race.</p>
-                    </div>
+                <div class="flex-none w-[200px] sm:w-[250px] md:w-[300px] lg:w-96 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-700 snap-center relative">
+                    <!-- Removed NEW tag -->
+                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385723505265348649/img5.jpg?ex=68571b15&is=6855c995&hm=b53c3d221f589472d1ddc6255660559f7cd8043c7961587e3f660c6ee043e0d5&" alt="Instagram Post 6" class="w-full h-full object-cover">
+                    <!-- Removed caption -->
                 </div>
             </div>
+            <!-- Navigation Arrows -->
+            <button id="scrollLeftBtn" class="absolute left-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full shadow-lg hover:bg-opacity-75 focus:outline-none z-20">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="scrollRightBtn" class="absolute right-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full shadow-lg hover:bg-opacity-75 focus:outline-none z-20">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
 
         <!-- RECENT STREAM Section -->
@@ -422,6 +431,23 @@
             } else {
                 upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
                 clientTimeEl.parentElement.style.display = 'none'; // Hide time if season over
+            }
+
+            // --- Carousel scroll functionality for POSTS section ---
+            const postsCarousel = document.getElementById('posts-carousel');
+            const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+            const scrollRightBtn = document.getElementById('scrollRightBtn');
+
+            if (postsCarousel && scrollLeftBtn && scrollRightBtn) {
+                const scrollAmount = 300; // Adjust scroll distance as needed based on card width
+
+                scrollRightBtn.addEventListener('click', () => {
+                    postsCarousel.scrollLeft += scrollAmount;
+                });
+
+                scrollLeftBtn.addEventListener('click', () => {
+                    postsCarousel.scrollLeft -= scrollAmount;
+                });
             }
         };
     </script>
