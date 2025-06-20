@@ -91,7 +91,7 @@
             flex-direction: row; /* Horizontal arrangement */
             align-items: center; /* Center items vertically within column */
             justify-content: center; /* Center content horizontally within column */
-            gap: 0.5rem; /* Space between name and image */
+            gap: 0.5rem; /* Space between number and name */
         }
 
         .driver-column:first-child {
@@ -116,7 +116,7 @@
         .background-overlay {
             position: absolute;
             inset: 0; /* Covers the entire card */
-            background-image: url('https://cdn.discordapp.com/attachments/1323758532432236638/1385493311611207690/image.png?ex=685644b2&is=6854f332&hm=fdf978732de2573c43768edc6bb44a599adecdd6c4ee51254736786e03954741&');
+            background-image: url('https://cdn.discordapp.com/attachments/1323758532432236638/1385499058075992134/F1_75_Logo.png?ex=68564a0c&is=6854f88c&hm=744e08e11b761601e712a4edc17d23feb170b4bffe21b8272c9174f6c776ca0b&');
             background-size: cover;
             background-position: center;
             opacity: 0; /* Hidden by default */
@@ -148,15 +148,16 @@
             white-space: nowrap; /* Keep number on a single line */
             overflow: hidden; /* Hide overflow if text is too long */
             text-overflow: ellipsis; /* Add ellipsis if text is too long */
-            /* Color will be set dynamically via JavaScript */
+            text-align: center; /* Centered with content */
+            margin-right: 0.25rem; /* Small space between number and name */
         }
 
-        /* Ensure driver names stay on one line with ellipsis */
+        /* Ensure driver names stay on one line with ellipsis and are centered */
         .driver-name { /* This class is now used to target the driver name paragraphs */
             white-space: nowrap; /* Keep name on a single line */
             overflow: hidden; /* Hide overflow if text is too long */
             text-overflow: ellipsis; /* Add ellipsis if text is too long */
-            text-align: left; /* Aligned left next to number */
+            text-align: center; /* Centered with content */
             flex-grow: 1; /* Allow name to take available space */
         }
 
@@ -164,25 +165,27 @@
         .header-logo {
             height: 50px; /* Adjust height as needed */
             width: auto; /* Maintain aspect ratio */
-            margin-right: 2rem; /* Space between logo and nav links */
+            position: absolute; /* Absolute positioning relative to parent nav */
+            left: calc(1rem - 75px); /* Adjusted to move 75px left from its initial 1rem */
+            top: 50%; /* Center vertically */
+            transform: translateY(-50%); /* Adjust for vertical centering */
+            z-index: 20; /* Ensure it's above other nav elements */
         }
     </style>
 </head>
 <body class="font-medium">
 <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20"> <!-- Changed to justify-between -->
-                <div class="flex items-center">
-                    <!-- F1 Logo -->
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/F1_75_Logo.png" alt="F1 75 Logo" class="header-logo">
-                    
-                    <div class="flex items-baseline space-x-4">
-                        <a href="latest.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium">Latest</a>
-                        <a href="schedule.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base aria-current">Schedule</a>
-                        <a href="standings.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium"">Standings</a>
-                        <a href="teams.html" class="bg-red-600 text-white px-4 py-3 rounded-md text-base font-medium" font-medium="page"">Teams</a>
-                        <a href="join.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium">Join Now</a>
-                    </div>
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <!-- F1 Logo -->
+            <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385499058075992134/F1_75_Logo.png?ex=68564a0c&is=6854f88c&hm=744e08e11b761601e712a4edc17d23feb170b4bffe21b8272c9174f6c776ca0b&" alt="F1 75 Logo" class="header-logo">
+            
+            <div class="flex items-center justify-center h-20">
+                <div class="flex items-baseline space-x-4">
+                    <a href="latest.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium">Latest</a>
+                    <a href="schedule.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base aria-current">Schedule</a>
+                    <a href="standings.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium"">Standings</a>
+                    <a href="teams.html" class="bg-red-600 text-white px-4 py-3 rounded-md text-base font-medium" font-medium="page"">Teams</a>
+                    <a href="join.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium">Join Now</a>
                 </div>
             </div>
         </nav>
@@ -395,12 +398,10 @@ if (scheduleGrid) {
                         driverSectionHtml = `
                             <div class="static-driver-section">
                                 <div class="driver-column">
-                                    <span class="driver-number" style="color: ${teamBgColor};">${race.drivers[0].number}</span>
-                                    <p class="text-xl font-medium text-left driver-name">${race.drivers[0].name.toUpperCase()}</p>
+                                    <p class="text-xl font-medium driver-name">${race.drivers[0].name.toUpperCase()}</p>
                                 </div>
                                 <div class="driver-column">
-                                    <span class="driver-number" style="color: ${teamBgColor};">${race.drivers[1].number}</span>
-                                    <p class="text-xl font-medium text-left driver-name">${race.drivers[1].name.toUpperCase()}</p>
+                                    <p class="text-xl font-medium driver-name">${race.drivers[1].name.toUpperCase()}</p>
                                 </div>
                             </div>
                         `;
@@ -415,7 +416,6 @@ if (scheduleGrid) {
 
                     // Combining all content for the card, with overlay at the bottom z-index
                     card.innerHTML = `
-                        <div class="absolute inset-0 background-overlay"></div> <!-- Background Overlay -->
                         ${mainCardContent}
                         ${driverSectionHtml}
                     `;
