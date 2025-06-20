@@ -162,9 +162,9 @@
     <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 text-gray-900">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             <!-- Featured Story Section (Left/Top) -->
-            <div class="lg:col-span-2 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in">
-                <div class="relative">
-                    <img src="https://www.pcgamesn.com/wp-content/sites/pcgamesn/2025/05/F1-25-haas-sauber-at-Australia-1.jpg" alt="F1 Featured Story" class="w-full h-auto object-cover rounded-t-lg">
+            <div id="featured-story-container" class="lg:col-span-2 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in">
+                <div class="relative w-full h-full">
+                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385737470242586694/F1_25_photo_20250620_233155.png?ex=68572816&is=6855d696&hm=8d3917cebae057bae901fe3aa56d407a51c91fd09e5b0eb4457deb740835a5d3&" alt="F1 Featured Story" class="w-full h-full object-cover rounded-t-lg object-bottom">
                     <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
                         <h2 class="text-2xl sm:text-3xl font-bold leading-tight mb-2 text-white">MAXFAN1982 AND FOCUSER COLLIDE LAST LAP FOR WIN</h2>
                         <p class="text-gray-300 text-sm">A POTENTIAL CHAMPIONSHIP BATTLE IN THE MAKING?</p>
@@ -172,49 +172,83 @@
                 </div>
             </div>
 
-            <!-- DRIVERS STANDINGS (formerly Sidebar News) -->
-            <div class="lg:col-span-1 space-y-4">
-                <h3 class="text-xl font-bold text-gray-900">DRIVERS STANDINGS</h3>
-                <div class="bg-white rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-100">
-                    <!-- Driver 1 -->
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-sm font-bold text-red-600">1</span>
-                            <p class="text-sm font-semibold text-gray-900">Max Verstappen</p>
+            <!-- DRIVERS STANDINGS & TEAMS STANDINGS -->
+            <div id="standings-column" class="lg:col-span-1 space-y-8 flex flex-col justify-between">
+                <!-- DRIVERS STANDINGS -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-white">DRIVERS STANDINGS</h3>
+                    <div class="bg-white rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-100 w-full">
+                        <!-- Driver 1 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-red-600">1</span>
+                                <p class="text-sm font-semibold text-gray-900">Oscar Piastri</p>
+                            </div>
+                            <span class="text-sm font-bold text-gray-700">198 PTS</span>
                         </div>
-                        <span class="text-sm font-bold text-gray-700">300 PTS</span>
+                        <!-- Driver 2 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-gray-700">2</span>
+                                <p class="text-sm font-semibold text-gray-900">Lando Norris</p>
+                            </div>
+                            <span class="text-sm font-bold text-gray-700">176 PTS</span>
+                        </div>
+                        <!-- Driver 3 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-gray-700">3</span>
+                                <p class="text-sm font-semibold text-gray-900">Max Verstappen</p>
+                            </div>
+                            <span class="text-sm font-bold text-gray-700">155 PTS</span>
+                        </div>
+                        <!-- Driver 4 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-gray-700">4</span>
+                                <p class="text-sm font-semibold text-gray-900">George Russell</p>
+                            </div>
+                            <span class="text-sm font-bold text-gray-700">136 PTS</span>
+                        </div>
+                        <!-- Driver 5 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-gray-700">5</span>
+                                <p class="text-sm font-semibold text-gray-900">Charles Leclerc</p>
+                            </div>
+                            <span class="text-sm font-bold text-gray-700">104 PTS</span>
+                        </div>
                     </div>
-                    <!-- Driver 2 -->
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-sm font-bold text-gray-700">2</span>
-                            <p class="text-sm font-semibold text-gray-900">Lando Norris</p>
+                </div>
+
+                <!-- TEAMS STANDINGS -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-white">TEAMS STANDINGS</h3>
+                    <div class="bg-white rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-200 w-full">
+                        <!-- Team 1 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-red-600">1</span>
+                                <p class="text-sm font-semibold text-gray-900">McLaren</p>
+                            </div>
+                            <span class="text-sm font-bold text-gray-700">374 PTS</span>
                         </div>
-                        <span class="text-sm font-bold text-gray-700">285 PTS</span>
-                    </div>
-                    <!-- Driver 3 -->
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-sm font-bold text-gray-700">3</span>
-                            <p class="text-sm font-semibold text-gray-900">Charles Leclerc</p>
+                        <!-- Team 2 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-gray-700">2</span>
+                                <p class="text-sm font-semibold text-gray-900">Mercedes</p>
+                            </div>
+                            <span class="text-sm font-bold text-gray-700">199 PTS</span>
                         </div>
-                        <span class="text-sm font-bold text-gray-700">260 PTS</span>
-                    </div>
-                    <!-- Driver 4 -->
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-sm font-bold text-gray-700">4</span>
-                            <p class="text-sm font-semibold text-gray-900">George Russell</p>
+                        <!-- Team 3 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-gray-700">3</span>
+                                <p class="text-sm font-semibold text-gray-900">Ferrari</p>
+                            </div>
+                            <span class="text-sm font-bold text-gray-700">183 PTS</span>
                         </div>
-                        <span class="text-sm font-bold text-gray-700">240 PTS</span>
-                    </div>
-                    <!-- Driver 5 -->
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-sm font-bold text-gray-700">5</span>
-                            <p class="text-sm font-semibold text-gray-900">Carlos Sainz</p>
-                        </div>
-                        <span class="text-sm font-bold text-gray-700">220 PTS</span>
                     </div>
                 </div>
             </div>
@@ -321,10 +355,10 @@
             { round: 15, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'August 29-31', country: 'NL' },
             { round: 16, name: 'Italian Grand Prix', venue: 'Monza', date: 'September 5-7', country: 'IT' },
             { round: 17, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'September 19-21', country: 'AZ' },
-            { round: 18, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
+            { pos: 18, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
             { pos: 19, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19', country: 'USA' },
             { pos: 20, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26', country: 'MX' },
-            { pos: 21, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'November 7-9', country: 'BR' },
+            { pos: 21, name: 'Brazilian Grand Prix', date: 'November 7-9', country: 'BR' },
             { pos: 22, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22', country: 'USA' },
             { pos: 23, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30', country: 'QAT' },
             { pos: 24, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7', country: 'AE' }
@@ -444,14 +478,64 @@
                 clientTimeEl.parentElement.style.display = 'none'; // Hide time if season over
             }
 
+            // --- Dynamically set heights and alignment ---
+            const featuredStoryContainer = document.getElementById('featured-story-container');
+            const standingsColumn = document.getElementById('standings-column');
+            const driversStandingsTable = standingsColumn.querySelector('.bg-white.rounded-lg.shadow-lg.p-4.space-y-3.content-fade-in.delay-100');
+            const teamsStandingsTable = standingsColumn.querySelector('.bg-white.rounded-lg.shadow-lg.p-4.space-y-3.content-fade-in.delay-200');
+
+
+            const adjustLayout = () => {
+                if (featuredStoryContainer && standingsColumn && driversStandingsTable && teamsStandingsTable) {
+                    const featuredImage = featuredStoryContainer.querySelector('img');
+
+                    if (featuredImage && (featuredImage.complete || featuredImage.naturalWidth > 0)) {
+                        // Reset heights to allow natural content flow for measurement
+                        featuredStoryContainer.style.height = 'auto';
+                        driversStandingsTable.style.height = 'auto';
+                        teamsStandingsTable.style.height = 'auto';
+                        standingsColumn.style.height = 'auto';
+
+                        // Calculate total height of the standings column
+                        // This includes the h3, padding, and content of both tables, plus space-y-8
+                        const standingsTotalHeight = standingsColumn.offsetHeight;
+
+                        // Apply this total height to the featured story container
+                        featuredStoryContainer.style.height = `${standingsTotalHeight}px`;
+
+                        // Ensure image within featured story container fills its new height
+                        featuredImage.style.height = '100%';
+                        featuredImage.style.objectFit = 'cover';
+                        featuredImage.style.objectPosition = 'bottom'; // Adjusted object-position to "zoom in" and hide top/middle
+
+                        // Ensure the standings column itself takes the measured height
+                        // This might be redundant if the content defines its height, but good for explicit control
+                        standingsColumn.style.height = `${standingsTotalHeight}px`;
+
+                        // Distribute space vertically if there's extra space within standingsColumn
+                        standingsColumn.style.display = 'flex';
+                        standingsColumn.style.flexDirection = 'column';
+                        standingsColumn.style.justifyContent = 'space-between';
+                    } else if (featuredImage) {
+                        // If image not loaded, set onload listener
+                        featuredImage.onload = adjustLayout;
+                    }
+                }
+            };
+
+            // Initial adjustment
+            adjustLayout();
+            // Re-adjust on window resize to maintain responsiveness
+            window.addEventListener('resize', adjustLayout);
+
+
             // --- Carousel scroll functionality for POSTS section ---
             const postsCarousel = document.getElementById('posts-carousel');
             const scrollLeftBtn = document.getElementById('scrollLeftBtn');
             const scrollRightBtn = document.getElementById('scrollRightBtn');
 
             if (postsCarousel && scrollLeftBtn && scrollRightBtn) {
-                // Adjust scroll amount to match the new item width more closely (e.g., w-48 is 192px)
-                const scrollAmount = 200; 
+                const scrollAmount = 200; // Adjust scroll distance as needed based on card width
 
                 scrollRightBtn.addEventListener('click', () => {
                     postsCarousel.scrollLeft += scrollAmount;
