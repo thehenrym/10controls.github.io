@@ -1,3 +1,214 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Latest - 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, #b91c1c, #ffffff);
+            min-height: 100vh;
+        }
+        .footer {
+            background-color: #dc2626; /* A shade of red (Tailwind red-600) */
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        /* Styles for the staggered fade-in animation (for future use or content specific animations) */
+        .content-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .content-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Styles for smooth hamburger menu transition */
+        #mobile-menu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 100%;
+            background-color: #dc2626; /* red-600 */
+        }
+
+        #mobile-menu.menu-open {
+            max-height: 25rem;
+            opacity: 1;
+        }
+
+        /* Styles for the sliding navigation highlighter */
+        #desktop-menu-items {
+            position: relative;
+        }
+
+        #sliding-highlighter {
+            position: absolute;
+            top: 0;
+            left: 0; /* Will be set by JS */
+            width: 0; /* Will be set by JS */
+            height: 100%;
+            background-color: #dc2626; /* red-600 */
+            border-radius: 0.375rem; /* rounded-md */
+            transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+            z-index: -1; /* Place it behind the text */
+        }
+        
+        /* Hamburger Icon Animation */
+        .hamburger-icon span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s cubic-bezier(.08,.82,.17,1);
+        }
+
+        #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
+             transform: translateY(6px) rotate(45deg);
+        }
+        #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
+            opacity: 0;
+        }
+         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+    </style>
+</head>
+<body class="font-medium">
+
+    <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="latest.html">
+                        <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385499058075992134/F1_75_Logo.png?ex=68564a0c&is=6854f88c&hm=744e08e11b761601e712a4edc17d23feb170b4bffe21b8272c9174f6c776ca0b&" alt="F1 75 Logo" class="h-10">
+                    </a>
+                </div>
+
+                <div id="desktop-menu-items" class="hidden md:flex items-center space-x-4">
+                    <div id="sliding-highlighter"></div>
+                    <!-- Updated aria-current to 'page' for Latest -->
+                    <a href="latest.html" class="text-white px-3 py-2 rounded-md text-sm font-medium relative z-10" aria-current="page">Latest</a>
+                    <a href="schedule.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
+                    <a href="standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
+                    <a href="teams.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Teams</a>
+                    <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
+                </div>
+
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="bg-red-600 inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-red-700 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <div class="hamburger-icon space-y-1.5">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div class="md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <!-- Updated active link for mobile menu -->
+                <a href="latest.html" class="bg-red-700 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Latest</a>
+                <a href="schedule.html" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">Schedule</a>
+                <a href="standings.html" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">Standings</a>
+                <a href="teams.html" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">Teams</a>
+                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">Join Now</a>
+            </div>
+        </div>
+    </header>
+
+    <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full">
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
+                </div>
+                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-6 sm:h-8 w-auto">
+                <div class="text-right text-xs sm:text-sm">
+                   <p id="client-time" class="font-bold"></p>
+                   <p id="race-time" class="text-gray-300"></p>
+               </div>
+           </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area - Latest Page Layout -->
+    <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 text-gray-900">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Featured Story Section (Left/Top) -->
+            <div class="lg:col-span-2 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in">
+                <div class="relative">
+                    <!-- Image and text replaced as per user request -->
+                    <img src="https://www.pcgamesn.com/wp-content/sites/pcgamesn/2025/05/F1-25-haas-sauber-at-Australia-1.jpg" alt="F1 Featured Story" class="w-full h-auto object-cover rounded-t-lg">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                        <h2 class="text-2xl sm:text-3xl font-bold leading-tight mb-2 text-white">MAXFAN1982 AND FOCUSER COLLIDE LAST LAP FOR WIN</h2>
+                        <p class="text-gray-300 text-sm">A POTENTIAL CHAMPIONSHIP BATTLE IN THE MAKING?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar News (Right/Bottom) -->
+            <div class="lg:col-span-1 space-y-4">
+                <h3 class="text-xl font-bold text-gray-900">LATEST NEWS</h3>
+                <div class="bg-white rounded-lg shadow-lg p-4 space-y-4 content-fade-in delay-100">
+                    <div class="flex items-start space-x-4">
+                        <img src="https://placehold.co/100x60/3b82f6/ffffff?text=News" alt="News Thumbnail" class="w-24 h-16 object-cover rounded-md">
+                        <div>
+                            <p class="text-sm font-semibold text-gray-900">Red Bull's path to championship: Analysis</p>
+                            <span class="text-xs text-gray-700">5 min read</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://placehold.co/100x60/3b82f6/ffffff?text=News" alt="News Thumbnail" class="w-24 h-16 object-cover rounded-md">
+                        <div>
+                            <p class="text-sm font-semibold text-gray-900">New regulations impacting aerodynamics</p>
+                            <span class="text-xs text-gray-700">8 min read</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://placehold.co/100x60/3b82f6/ffffff?text=News" alt="News Thumbnail" class="w-24 h-16 object-cover rounded-md">
+                        <div>
+                            <p class="text-sm font-semibold text-gray-900">Ferrari's resurgence: What's changed?</p>
+                            <span class="text-xs text-gray-700">12 min read</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://placehold.co/100x60/3b82f6/ffffff?text=News" alt="News Thumbnail" class="w-24 h-16 object-cover rounded-md">
+                        <div>
+                            <p class="text-sm font-semibold text-gray-900">Rookie drivers making an impact</p>
+                            <span class="text-xs text-gray-700">6 min read</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- POSTS Section (formerly Stories) -->
+        <div class="mb-12">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">POSTS</h3> <!-- Changed title from STORIES to POSTS -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                <!-- Post Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-200">
+                    <!-- Updated image src and di
+
+Instagram Post Caption 1: A great weekend!
 mensions for Instagram Post 1 -->
                     <img src="https://cdn.insta-stories-viewer.com/img.php?url=11a77Zgd0aytJ7051WnqSnnA764ZHO40e7vW%2FkMC7zxL%2BXWrDjQmn7IBpM%2FCQgFAdbbHHyVQwdf5qfrgJn3T7JK%2Bp6aU4dAUCkEY%2FqNrQGHr5ujCoiNIrlB96oou%2BI1%2BobKJ9GM3o6W1vWery7ZWpejfDl4g2kr37a6b7tqB1fFbYdgekkV9szy9O9gxQUwZm8lDLTYQR9ZQDJa2245TK8UU4FW1RTo3rpUaDl6%2BjhxHgjMsrlgat3PAZ5y0T9xiDYd3WvnGaOqzJ9feevm9yKMrjr0KeqzWKxp4HLkSAFT1BqVyDQf2mYxNokkzvQoZZH3p6Hu5vJ9y2poH7MQ68h%2Ft6LhygelA%2BG9kFQFn6kkx7XqYQ%2FWhJ%2BisMnb61MvLXgD3Jr527xX87p6iuSuFfKCLM%2FOnpaSMj%2FEuBHOR6txvIGR%2F6fo0mh3ZX0Mzb5FU9sA7wFLcZb%2B1Tr9Ep3LKlhHkTFScsj%2Bq0Kv0jFqRL%2Fv3kH8BGyMWn%2FM4t1ShcC2pOuE7PqEVO2yWPnBm1qQrmHWd%2FgTDtw8JGElj091YZXwTfXipivohr5s6Dizql44mrQp8eK4DsIAZMGsngpeVeTqCuaCep9RBjh%2FGV45G7co4TXaV%2BC%2BhcSpN4Da17atBfUh6aVg1Bf0GGsHqNPpqdhtsB0aUccZ9VGAEnQdw9ZqJKQba5dH%2Fe4q6IMKicTnX8ogHOPPUUPKt%2F4nnyTgiwaXLuPR7Ro%2BzkR7yI1ICUyw%3D" alt="Instagram Post 1" class="w-full h-[500px] object-cover">
                     <div class="p-3">
