@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 Teams - 2025</title>
+    <link rel="icon" type="image/png" href="https://logos-world.net/wp-content/uploads/2023/12/F1-Logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -213,11 +214,11 @@
                     let driver1NumberHtml, driver2NumberHtml;
 
                     if (driverNumberColor.startsWith('#')) {
-                        driver1NumberHtml = `<span class="text-lg font-bold" style="color: ${driverNumberColor};">${team.driverNumbers[0]}</span>`;
-                        driver2NumberHtml = `<span class="text-lg font-bold" style="color: ${driverNumberColor};">${team.driverNumbers[1]}</span>`;
+                        driver1NumberHtml = `<span class="text-lg font-bold hidden sm:inline" style="color: ${driverNumberColor};">${team.driverNumbers[0]}</span>`;
+                        driver2NumberHtml = `<span class="text-lg font-bold hidden sm:inline" style="color: ${driverNumberColor};">${team.driverNumbers[1]}</span>`;
                     } else {
-                        driver1NumberHtml = `<span class="text-lg font-bold ${driverNumberColor}">${team.driverNumbers[0]}</span>`;
-                        driver2NumberHtml = `<span class="text-lg font-bold ${driverNumberColor}">${team.driverNumbers[1]}</span>`;
+                        driver1NumberHtml = `<span class="text-lg font-bold hidden sm:inline ${driverNumberColor}">${team.driverNumbers[0]}</span>`;
+                        driver2NumberHtml = `<span class="text-lg font-bold hidden sm:inline ${driverNumberColor}">${team.driverNumbers[1]}</span>`;
                     }
                     
                     let carImage = '';
