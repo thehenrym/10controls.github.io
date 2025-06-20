@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,11 +12,13 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(to bottom, #b91c1c, #ffffff);
+            /* Changed red background color to #492833 */
+            background: linear-gradient(to bottom, #492833, #ffffff);
             min-height: 100vh;
         }
         .footer {
-            background-color: #dc2626; /* A shade of red (Tailwind red-600) */
+            /* Changed footer background color to #492833 */
+            background-color: #492833;
             color: white;
             text-align: center;
             padding: 2rem 1rem;
@@ -30,7 +33,8 @@
             width: 100%;
             left: 0;
             top: 100%;
-            background-color: #dc2626; /* red-600 */
+            /* Changed mobile menu background color to #492833 */
+            background-color: #492833;
         }
 
         #mobile-menu.menu-open {
@@ -49,7 +53,8 @@
             left: 0; /* Will be set by JS */
             width: 0; /* Will be set by JS */
             height: 100%;
-            background-color: #dc2626; /* red-600 */
+            /* Changed highlighter background color to #492833 */
+            background-color: #492833;
             border-radius: 0.375rem; /* rounded-md */
             transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
             z-index: -1; /* Place it behind the text */
@@ -65,12 +70,12 @@
         }
 
         #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
-             transform: translateY(6px) rotate(45deg);
+            transform: translateY(6px) rotate(45deg);
         }
         #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
             opacity: 0;
         }
-         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
+        #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
             transform: translateY(-6px) rotate(-45deg);
         }
 
@@ -98,31 +103,23 @@
         .race-table tr:hover {
             background-color: #e5e7eb; /* Light hover effect */
         }
+        /* New style for position number color */
+        .race-table .pos-number {
+            color: #492833; /* Dark brown color */
+        }
     </style>
 </head>
-<body class="font-medium">
-
-    <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex-shrink-0">
-                    <a href="latest.html">
-                        <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385499058075992134/F1_75_Logo.png?ex=68564a0c&is=6854f88c&hm=744e08e11b761601e712a4edc17d23feb170b4bffe21b8272c9174f6c776ca0b&" alt="F1 75 Logo" class="h-10">
-                    </a>
-                </div>
-
-                <div id="desktop-menu-items" class="hidden md:flex items-center space-x-4">
-                    <div id="sliding-highlighter"></div>
-                    <a href="latest.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Latest</a>
+<body class="font-medium">BAHRAIN GRAND PRIX - RACE RESULTxt-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Latest</a>
                     <a href="schedule.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
                     <a href="standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
                     <a href="teams.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Teams</a>
-                    <!-- Removed New link for Race Results -->
                     <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
                 </div>
 
+                <!-- Mobile menu button (hamburger icon) -->
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-button" class="bg-red-600 inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-red-700 focus:outline-none">
+                    <!-- Changed background color of button to #492833 -->
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833; hover-bg-color: #3a2029;">
                         <span class="sr-only">Open main menu</span>
                         <div class="hamburger-icon space-y-1.5">
                             <span></span>
@@ -133,24 +130,28 @@
                 </div>
             </div>
         </nav>
+        <!-- Mobile menu content, toggled by JS -->
         <div class="md:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="latest.html" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">Latest</a>
-                <a href="schedule.html" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">Schedule</a>
-                <a href="standings.html" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">Standings</a>
-                <a href="teams.html" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">Teams</a>
-                <!-- Removed New link for Race Results -->
-                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">Join Now</a>
+                <!-- Changed hover background color for mobile menu links to a darker shade of #492833 -->
+                <a href="latest.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Latest</a>
+                <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Schedule</a>
+                <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Standings</a>
+                <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Teams</a>
+                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Join Now</a>
             </div>
         </div>
     </header>
 
+    <!-- Sub-header displaying upcoming race info and time -->
     <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full">
             <div class="flex items-center space-x-2 sm:space-x-4">
                 <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
+                    <!-- Upcoming race info populated by JavaScript -->
                 </div>
                 <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
+                    <!-- Upcoming race date populated by JavaScript -->
                 </div>
             </div>
             <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
@@ -166,228 +167,223 @@
     <!-- Main Content Area - Race Result Page Layout -->
     <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         <div class="flex items-center justify-between mb-6">
-            <!-- Changed text color to white -->
-            <h1 class="text-2xl sm:text-3xl font-bold text-white">FORMULA 1 PIRELLI GRAND PRIX DU CANADA 2025 - <br class="sm:hidden">RACE RESULT</h1>
-            <!-- Removed Pirelli Logo -->
+            <!-- Changed text as per user request -->
+            <h1 class="text-2xl sm:text-3xl font-bold text-white">BAHRAIN GRAND PRIX - <br class="sm:hidden">RACE RESULT</h1>
         </div>
-        <!-- Changed text color to white -->
-        <p class="text-sm text-white mb-8">1-3 JUN 2025 | Circuit Gilles-Villeneuve, Montreal</p>
+        <!-- Changed text as per user request to all caps -->
+        <p class="text-sm text-white mb-8">JUNE 13TH | BAHRAIN INTERNATIONAL CIRCUIT, SAKHIR</p>
 
+        <!-- Race Result Table -->
         <div class="overflow-x-auto rounded-lg shadow-lg">
             <table class="min-w-full divide-y divide-gray-700 race-table">
                 <thead>
                     <tr>
                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-200 sm:pl-6">POS.</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200">NO.</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell">GRID</th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200">DRIVER</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200">TEAM</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200">LAPS</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200">TIME / RETIRED</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell">TEAM</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell">STOPS</th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell">TIME</th>
                         <th scope="col" class="py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-200 sm:pr-6">PTS.</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-800">
+                    <!-- Race Result Data -->
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">1</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">63</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">George Russell</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Mercedes</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">70</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">1:31:15.688</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">1</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">ANTON CHEBE...</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">MCLAREN</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">1</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">45:15:184</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">25</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">1</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Max Verstappen</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Red Bull Racing</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">70</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+0.228s</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">5</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">FOCUSER</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">MCLAREN</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+10.026</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">18</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">3</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">12</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Kimi Antonelli</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Mercedes</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">70</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+1.014s</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">3</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">YUKI TSUNODA</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">RED BULL</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+22.388</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">15</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">4</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">81</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Oscar Piastri</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">McLaren</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">70</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+2.109s</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">4</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">1</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">MAXFAN 1982</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">RED BULL</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+24.353</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">12</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">5</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">16</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Charles Leclerc</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Ferrari</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">70</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+3.442s</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">5</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">4</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">ALPHAROMEO127</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">SCUDERIA FERRARI HP</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">1</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+26.454</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">10</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">6</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">44</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Lewis Hamilton</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Mercedes</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">70</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+10.713s</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">6</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">SEBEINKRO</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">MERCEDES-AMG PETRONAS</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+28.709</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">8</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">7</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">14</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Fernando Alonso</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Aston Martin</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">70</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+10.972s</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">7</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">9</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">STRA</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">ASTON MARTIN</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+29.581</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">6</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">8</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">27</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Nico Hulkenberg</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Kick Sauber</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">70</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+15.364s</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">8</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">MORA</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">VISA CASH APP RACING BULLS</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+32.937</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">4</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">9</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">31</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Esteban Ocon</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Haas</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">69</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+1 lap</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">9</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">TSAR</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">VISA CASH APP RACING BULLS</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">1</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+40.504</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">2</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">10</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">55</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Carlos Sainz</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Williams</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">69</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+1 lap</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">10</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">JSTN NL</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">SCUDERIA FERRARI HP</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+41.860</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">1</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">11</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">87</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Oliver Bearman</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Haas</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">69</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+1 lap</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">11</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">10</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">ASPEC33</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">ALPINE</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+47.038</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">12</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">22</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Yuki Tsunoda</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Red Bull Racing</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">69</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+1 lap</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">12</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">16</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">COUNTERFEIT</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">KICK SAUBER</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">1</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+54.468</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">13</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">43</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Franco Colapinto</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Alpine</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">69</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+1 lap</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">13</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">SHENGEN</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">MERCEDES-AMG PETRONAS</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+54.789</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">14</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">5</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Gabriel Bortoleto</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Kick Sauber</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">69</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+1 lap</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">14</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">12</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">MAX HOUSLEY</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">HAAS</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+1:00.196</td>
+                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
+                    </tr>
+                    <!-- New rows for positions 15-19 -->
+                    <tr>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">15</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">15</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">LUCA STEVENS</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">ASTON MARTIN</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+1 LAP</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">15</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">10</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Pierre Gasly</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Alpine</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">69</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+1 lap</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">16</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">17</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">ARUTHLESS GUY</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">ALPINE</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+1 LAP</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">16</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">6</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Isaak Hadjar</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Racing Bulls</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">69</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+1 lap</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">17</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">14</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">NOJUS GEDVILAS</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">HAAS</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+1 LAP</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">17</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">18</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Lance Stroll</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Aston Martin</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">69</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">+1 lap</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">18</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">18</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">IOLER_XD</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">WILLIAMS</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+1 LAP</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
                     </tr>
                     <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">18</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">4</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Lando Norris</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">McLaren</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">66</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">DNF</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">NC</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">30</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Liam Lawson</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Racing Bulls</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">53</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">DNF</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">NC</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">23</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Alexander Albon</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">Williams</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">46</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">DNF</td>
+                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">19</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">19</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">C324R</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">KICK SAUBER</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">3</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">DNF</td>
                         <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <!-- Updated text color to black -->
-        <p class="text-sm text-black mt-4">Note - Norris received a five-second time penalty for causing a collision.</p>
+        <!-- Removed the previous note text -->
     </main>
 
+    <!-- Footer for social media links -->
     <footer class="bg-gray-800 text-white text-center py-5 px-2 mt-8">
         <div class="max-w-7xl mx-auto flex justify-center items-center space-x-6">
             <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
             <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
             <a href="https://www.youtube.com/@10controls24" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
-            <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
+            <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="class="text-gray-400 hover:text-white transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
         </div>
     </footer>
     
+    <!-- Copyright footer -->
     <footer class="footer">
         <p>© 2003-2025 Formula One World Championship Limited</p>
     </footer>
     
     <script>
+        // Schedule data for upcoming races. This data is used by the sub-header.
         const scheduleData = [
             { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris', country: 'AU' },
             { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23', winner: 'Oscar Piastri', country: 'CN' },
@@ -415,6 +411,7 @@
             { pos: 24, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7', country: 'AE' }
         ];
 
+        // Mapping of venues to their respective time zones for accurate time display.
         const timeZoneMap = {
             'Melbourne': 'Australia/Melbourne',
             'Shanghai': 'Asia/Shanghai',
@@ -443,15 +440,12 @@
         };
         
         window.onload = function() {
-            // --- Content population script ---
-            // This script block is only relevant for pages using scheduleData to populate elements
-            // Since this is a fixed race result table, no dynamic population needed here.
-
             // --- Mobile menu toggle script ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const subHeader = document.getElementById('sub-header');
 
+            // Event listener to toggle the mobile menu and hide/show the sub-header
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('menu-open');
                 mobileMenuButton.classList.toggle('open');
@@ -459,25 +453,33 @@
                 subHeader.classList.toggle('pointer-events-none');
             });
             
-            // --- Sliding highlighter script ---
+            // --- Sliding highlighter script for desktop navigation ---
             const menuItemsContainer = document.getElementById('desktop-menu-items');
             if (menuItemsContainer) {
                 const menuLinks = menuItemsContainer.querySelectorAll('a');
                 const highlighter = document.getElementById('sliding-highlighter');
-                // Set active link for this page (now "Schedule" as Race Results is removed)
+                // Set the active link to 'Schedule' by default as 'Race Results' is not a separate page
                 const activeLink = menuItemsContainer.querySelector('a[href="schedule.html"]');
+
+                // Function to position and size the highlighter based on the active link
                 function setHighlighterToLink(link) {
                     if (!link) {
-                         highlighter.style.width = '0px'; // Hide if no active link
-                         return;
+                        highlighter.style.width = '0px'; // Hide if no active link
+                        return;
                     }
                     highlighter.style.left = `${link.offsetLeft}px`;
                     highlighter.style.width = `${link.offsetWidth}px`;
                 }
+
+                // Initialize highlighter position
                 setHighlighterToLink(activeLink);
+
+                // Add mouseover event listeners to all menu links for dynamic highlighting
                 menuLinks.forEach(link => {
                     link.addEventListener('mouseenter', () => setHighlighterToLink(link));
                 });
+
+                // When the mouse leaves the menu container, return the highlighter to the active link
                 menuItemsContainer.addEventListener('mouseleave', () => {
                     setHighlighterToLink(activeLink);
                 });
@@ -490,14 +492,15 @@
             const raceTimeEl = document.getElementById('race-time');
             const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
 
-            // Helper to parse date strings like "March 14-16"
+            // Helper function to parse date strings from the schedule data
             function parseRaceDate(dateStr) {
                 const monthStr = dateStr.split(' ')[0];
                 const dayStr = dateStr.split(' ')[1].split('-')[0];
+                // Assuming the year is 2025 as per the F1 2025 context
                 return new Date(`${monthStr} ${dayStr}, 2025`);
             }
 
-            // Find the upcoming race
+            // Find the upcoming race based on the current date
             const now = new Date();
             let upcomingRace = null;
             for (const race of scheduleData) {
@@ -508,12 +511,14 @@
                 }
             }
 
+            // Update the sub-header with upcoming race information
             if (upcomingRace) {
                 upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
                 upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
 
                 const raceTimeZone = timeZoneMap[upcomingRace.venue];
 
+                // Function to update client and track times
                 function updateTimes() {
                     const currentTime = new Date();
                     clientTimeEl.textContent = `MY TIME: ${currentTime.toLocaleTimeString([], timeOptions)}`;
@@ -523,11 +528,12 @@
                         raceTimeEl.textContent = `TRACK TIME: N/A`;
                     }
                 }
-                updateTimes();
+                updateTimes(); // Initial call
                 setInterval(updateTimes, 1000 * 60); // Update every minute
             } else {
                 upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                clientTimeEl.parentElement.style.display = 'none'; // Hide time if season over
+                // Hide time display if the season is over
+                clientTimeEl.parentElement.style.display = 'none'; 
             }
         };
     </script>
