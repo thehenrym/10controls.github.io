@@ -1,23 +1,117 @@
-/* Use Inter as the default font */
+@font-face {
+    font-family: 'KHInterference Bold'; /* This is the name you'll use in font-family */
+    src: url('fonts/KHInterference_Bold.ttf') format('truetype'); /* IMPORTANT: Replace with actual path on GitHub, e.g., url('./fonts/KHInterference_Bold.ttf') */
+    /* It's highly recommended to convert .ttf to .woff2 and .woff for better performance and compatibility */
+    /* Example for .woff2: src: url('path/to/your/fonts/KHInterference_Bold.woff2') format('woff2'); */
+    font-weight: normal; /* Adjust if your font has specific weights (e.g., 700 for bold) */
+    font-style: normal;
+    font-display: swap; /* Recommended for better user experience */
+}
+
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f8fafc; /* This is the same as Tailwind's bg-slate-50 */
+    /* Apply the custom font first, with a fallback to Inter and then generic sans-serif */
+    font-family: 'KHInterference Bold', 'Inter', sans-serif;
+    background: linear-gradient(to bottom, #b91c1c, #ffffff);
+    min-height: 100vh;
 }
 
-/* Simple scroll-behavior for smooth anchor link scrolling */
-html {
-    scroll-behavior: smooth;
+/* Explicitly apply custom font to headings and other elements that might override it */
+h1, h2, h3, h4, h5, h6,
+.font-bold, .font-semibold, .font-medium, .uppercase,
+.text-3xl, .text-5xl, .text-xl, .text-lg, .text-sm {
+    font-family: 'KHInterference Bold', 'Inter', sans-serif;
 }
 
-/* Add a subtle animation for section fade-in */
-.section-fade-in {
+
+/* Style for the main navigation dropdown (not related to team cards) */
+#schedule-dropdown-container {
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(-10px);
+    visibility: hidden; /* Use visibility instead of display */
 }
-
-.section-fade-in.visible {
+.group:hover #schedule-dropdown-container {
     opacity: 1;
     transform: translateY(0);
+    visibility: visible; /* Use visibility instead of display */
 }
-```
+/* Custom colors for teams */
+.bg-mclaren { background-color: #F47600; }
+.bg-ferrari { background-color: #ED1131; }
+.bg-redbull { background-color: #4781D7; }
+.bg-mercedes { background-color: #00D7B6; }
+.bg-alpine { background-color: #00A1E8; }
+.bg-racingbulls { background-color: #6C98FF; }
+.bg-astonmartin { background-color: #229971; }
+.bg-williams { background-color: #1868DB; }
+.bg-kicksauber { background-color: #01C00E; }
+.bg-haas { background-color: #9C9FA2; }
+
+/* Styles for the static driver section */
+.static-driver-section {
+    background-color: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
+    color: white;
+    padding: 0.5rem 1rem; /* Padding for the section */
+    /* Match card rounded corners for the bottom */
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    display: flex; /* Enable flexbox for horizontal layout */
+    align-items: center; /* Center items vertically */
+    text-align: center; /* Center text within each item */
+    
+    /* Positioning to span full width at the bottom */
+    position: absolute; /* Changed from relative to absolute */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: 0; /* Removed margin-top as it's now absolutely positioned */
+    width: 100%; /* Ensure it takes full width of parent's *content-box* */
+    box-sizing: border-box; /* Include padding in width calculation */
+    z-index: 5; /* Ensure it's above other content if anything overlaps */
+}
+
+.driver-column {
+    flex: 1; /* Allow columns to grow and shrink */
+    padding: 0 0.5rem; /* Add some horizontal padding */
+    display: flex; /* Enable flexbox for content within column */
+    flex-direction: row; /* Horizontal arrangement */
+    align-items: center; /* Center items vertically within column */
+    justify-content: center; /* Center content horizontally within column */
+    gap: 0.5rem; /* Space between name and image */
+}
+
+.driver-column:first-child {
+    border-right: 1px solid rgba(255, 255, 255, 0.5); /* Vertical line */
+}
+
+/* Styling for the team standing in the top right */
+.team-standing {
+    position: absolute;
+    top: 1rem; /* Adjust as needed for spacing from top */
+    right: 1rem; /* Adjust as needed for spacing from right */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px; /* Full rounded corners (pill shape) */
+    font-weight: bold;
+    font-size: 0.875rem; /* text-sm */
+    z-index: 10; /* Ensure it's above other card content */
+}
+
+/* Styles for the new background image overlay on hover */
+.background-overlay {
+    position: absolute;
+    inset: 0; /* Covers the entire card */
+    background-image: url('https://img.freepik.com/free-vector/elegant-modern-halftone-background_1055-8410.jpg?ga=GA1.1.1740845269.1750394398&semt=ais_hybrid&w=740');
+    background-size: cover;
+    background-position: center;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Added transform to transition */
+    border-radius: 0.5rem; /* Match card's rounded corners */
+    z-index: 0; /* Ensure it's behind other content */
+}
+
+.team-card-group:hover .background-overlay {
+    opacity: 0.25; /* 25% opacity on hover */
+    transform: scale(1.025); /* Zoom in by 2.5% on hover */
+}
