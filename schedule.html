@@ -76,12 +76,12 @@
         }
 
         #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
-             transform: translateY(6px) rotate(45deg);
+            transform: translateY(6px) rotate(45deg);
         }
         #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
             opacity: 0;
         }
-         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
+        #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
             transform: translateY(-6px) rotate(-45deg);
         }
 
@@ -110,7 +110,7 @@
                 <div class="-mr-2 flex md:hidden">
                     <button type="button" id="mobile-menu-button" class="bg-red-600 inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-red-700 focus:outline-none">
                         <span class="sr-only">Open main menu</span>
-                         <div class="hamburger-icon space-y-1.5">
+                        <div class="hamburger-icon space-y-1.5">
                             <span></span>
                             <span></span>
                             <span></span>
@@ -277,12 +277,17 @@
                         flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197507.png" alt="Australian Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     }
                     
+                    let resultButtonHref = "#"; // Default href
+                    if (race.name === 'Canadian Grand Prix') {
+                        resultButtonHref = "canada.html"; // Specific link for Canadian Grand Prix
+                    }
+
                     let footerHtml;
                     if (race.winner) {
                         footerHtml = `
                             <div class="flex justify-between items-center">
                                 <p class="text-base font-semibold text-gray-800 uppercase"><span class="font-bold text-red-600">WINNER:</span> ${race.winner}</p>
-                                <a href="#" class="bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700 transition-colors">Results</a>
+                                <a href="${resultButtonHref}" class="bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700 transition-colors">Results</a>
                             </div>
                         `;
                     } else {
@@ -297,7 +302,7 @@
                             <p class="text-lg text-gray-600 mt-2">${race.venue.toUpperCase()}</p>
                         </div>
                         <div class="mt-6 pt-6 border-t border-gray-200">
-                           ${footerHtml}
+                            ${footerHtml}
                         </div>
                     `;
                     scheduleGrid.appendChild(card);
@@ -383,8 +388,8 @@
                 updateTimes();
                 setInterval(updateTimes, 1000 * 60); // Update every minute
             } else {
-                 upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                 clientTimeEl.parentElement.style.display = 'none'; // Hide time if season over
+                upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
+                clientTimeEl.parentElement.style.display = 'none'; // Hide time if season over
             }
         };
     </script>
