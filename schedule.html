@@ -130,12 +130,8 @@
                     <!-- Date will be injected here -->
                 </div>
             </div>
-            <div class="flex items-center space-x-3">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-8 w-auto">
-                <div class="text-right text-sm">
-                    <p id="client-time" class="font-bold"></p>
-                    <p id="race-time" class="text-gray-300"></p>
-                </div>
+            <div id="time-and-logo" class="flex items-center space-x-3">
+                 <!-- This div will be populated by JS -->
             </div>
         </div>
     </div>
@@ -338,9 +334,8 @@
             // --- Sub-header time and race script ---
             const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
             const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
-            const clientTimeEl = document.getElementById('client-time');
-            const raceTimeEl = document.getElementById('race-time');
-            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+            const timeAndLogoContainer = document.getElementById('time-and-logo');
+
 
             // Helper to parse date strings like "March 14-16"
             function parseRaceDate(dateStr) {
@@ -363,23 +358,12 @@
             if (upcomingRace) {
                 upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
                 upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
-
-                const raceTimeZone = timeZoneMap[upcomingRace.venue];
-
-                function updateTimes() {
-                    const currentTime = new Date();
-                    clientTimeEl.textContent = `MY TIME: ${currentTime.toLocaleTimeString([], timeOptions)}`;
-                    if (raceTimeZone) {
-                        raceTimeEl.textContent = `TRACK TIME: ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
-                    } else {
-                        raceTimeEl.textContent = `TRACK TIME: N/A`;
-                    }
-                }
-                updateTimes();
-                setInterval(updateTimes, 1000 * 60); // Update every minute
+                timeAndLogoContainer.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-8 w-auto">`;
             } else {
                  upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
+                 timeAndLogoContainer.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-8 w-auto">`;
             }
+
         };
     </script>
 </body>
