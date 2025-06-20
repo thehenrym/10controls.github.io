@@ -80,7 +80,9 @@
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
+                    <a href="latest.html">
                         <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385499058075992134/F1_75_Logo.png?ex=68564a0c&is=6854f88c&hm=744e08e11b761601e712a4edc17d23feb170b4bffe21b8272c9174f6c776ca0b&" alt="F1 75 Logo" class="h-10">
+                    </a>
                 </div>
 
                 <!-- Desktop Menu with Sliding Highlighter -->
@@ -95,7 +97,7 @@
 
                 <!-- Mobile menu button -->
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                    <button type="button" id="mobile-menu-button" class="bg-red-600 inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-red-700 focus:outline-none">
                         <span class="sr-only">Open main menu</span>
                         <svg id="menu-open-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -120,7 +122,7 @@
     </header>
 
     <!-- Sub-Header -->
-    <div class="bg-black text-white h-12">
+    <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full">
             <div class="flex items-center space-x-2 sm:space-x-4">
                 <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
@@ -307,10 +309,13 @@
             // --- Mobile menu toggle script ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
+            const subHeader = document.getElementById('sub-header');
             const openIcon = document.getElementById('menu-open-icon');
             const closeIcon = document.getElementById('menu-close-icon');
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('menu-open');
+                subHeader.classList.toggle('opacity-0');
+                subHeader.classList.toggle('pointer-events-none');
                 openIcon.classList.toggle('hidden');
                 closeIcon.classList.toggle('hidden');
             });
@@ -368,11 +373,11 @@
 
                 function updateTimes() {
                     const currentTime = new Date();
-                    clientTimeEl.textContent = `MY TIME ${currentTime.toLocaleTimeString([], timeOptions)}`;
+                    clientTimeEl.textContent = `MY TIME: ${currentTime.toLocaleTimeString([], timeOptions)}`;
                     if (raceTimeZone) {
-                        raceTimeEl.textContent = `TRACK TIME ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
+                        raceTimeEl.textContent = `TRACK TIME: ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
                     } else {
-                        raceTimeEl.textContent = `TRACK TIME N/A`;
+                        raceTimeEl.textContent = `TRACK TIME: N/A`;
                     }
                 }
                 updateTimes();
