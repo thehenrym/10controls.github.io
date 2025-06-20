@@ -120,21 +120,21 @@
     </header>
 
     <!-- Sub-Header -->
-    <div class="bg-black text-white h-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full">
-            <div class="flex items-center space-x-4">
+    <div class="bg-black text-white py-2 sm:h-12 sm:py-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center sm:justify-between h-full text-center sm:text-left">
+            <div class="flex items-center space-x-4 mb-2 sm:mb-0">
                 <div id="upcoming-race-info" class="text-sm font-semibold">
                     <!-- Upcoming race info will be injected here -->
                 </div>
-                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md">
+                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
                     <!-- Date will be injected here -->
                 </div>
             </div>
             <div class="flex items-center space-x-3">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-8 w-auto -ml-[5px]">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-8 w-auto">
                 <div class="text-right text-sm">
-                    <p id="client-time" class="font-bold text-white cursor-pointer transition-colors duration-200"></p>
-                    <p id="race-time" class="font-normal text-gray-300 cursor-pointer transition-colors duration-200"></p>
+                    <p id="client-time" class="font-bold"></p>
+                    <p id="race-time" class="text-gray-300"></p>
                 </div>
             </div>
         </div>
@@ -368,11 +368,11 @@
 
                 function updateTimes() {
                     const currentTime = new Date();
-                    clientTimeEl.textContent = `MY TIME ${currentTime.toLocaleTimeString([], timeOptions)}`;
+                    clientTimeEl.textContent = `MY TIME: ${currentTime.toLocaleTimeString([], timeOptions)}`;
                     if (raceTimeZone) {
-                        raceTimeEl.textContent = `TRACK TIME ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
+                        raceTimeEl.textContent = `TRACK TIME: ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
                     } else {
-                        raceTimeEl.textContent = `TRACK TIME N/A`;
+                        raceTimeEl.textContent = `TRACK TIME: N/A`;
                     }
                 }
                 updateTimes();
@@ -380,23 +380,6 @@
             } else {
                  upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
             }
-            
-            // Time selection highlight logic
-            clientTimeEl.addEventListener('click', () => {
-                clientTimeEl.classList.add('font-bold', 'text-white');
-                clientTimeEl.classList.remove('font-normal', 'text-gray-300');
-
-                raceTimeEl.classList.add('font-normal', 'text-gray-300');
-                raceTimeEl.classList.remove('font-bold', 'text-white');
-            });
-
-            raceTimeEl.addEventListener('click', () => {
-                raceTimeEl.classList.add('font-bold', 'text-white');
-                raceTimeEl.classList.remove('font-normal', 'text-gray-300');
-                
-                clientTimeEl.classList.add('font-normal', 'text-gray-300');
-                clientTimeEl.classList.remove('font-bold', 'text-white');
-            });
         };
     </script>
 </body>
