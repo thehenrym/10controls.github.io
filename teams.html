@@ -1,23 +1,21 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 Schedule - 2025</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(to bottom, #b91c1c, #ffffff);
             min-height: 100vh;
         }
-        /* Style for the dropdown to ensure smooth transition */
+        /* Style for the main navigation dropdown (not related to team cards) */
         #schedule-dropdown-container {
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
             opacity: 0;
@@ -29,12 +27,61 @@
             transform: translateY(0);
             visibility: visible; /* Use visibility instead of display */
         }
+        /* Custom colors for teams */
+        .bg-mclaren { background-color: #F47600; }
+        .bg-ferrari { background-color: #ED1131; }
+        .bg-redbull { background-color: #4781D7; }
+        .bg-mercedes { background-color: #00D7B6; }
+        .bg-alpine { background-color: #00A1E8; }
+        .bg-racingbulls { background-color: #6C98FF; }
+        .bg-astonmartin { background-color: #229971; }
+        .bg-williams { background-color: #1868DB; }
+        .bg-kicksauber { background-color: #01C00E; }
+        .bg-haas { background-color: #9C9FA2; }
+
+        /* Styles for the static driver section (formerly team-hover-dropdown visual styles) */
+        .static-driver-section {
+            background-color: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
+            color: white;
+            padding: 0.5rem 1rem; /* Padding for the section */
+            /* Match card rounded corners for the bottom */
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            display: flex; /* Enable flexbox for horizontal layout */
+            align-items: center; /* Center items vertically */
+            text-align: center; /* Center text within each item */
+            
+            /* Positioning to span full width at the bottom */
+            position: absolute; /* Changed from relative to absolute */
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin-top: 0; /* Removed margin-top as it's now absolutely positioned */
+            width: 100%; /* Ensure it takes full width of parent's *content-box* */
+            box-sizing: border-box; /* Include padding in width calculation */
+            z-index: 5; /* Ensure it's above other content if anything overlaps */
+        }
+
+        .driver-column {
+            flex: 1; /* Allow columns to grow and shrink */
+            padding: 0 0.5rem; /* Add some horizontal padding */
+            display: flex; /* Enable flexbox for content within column */
+            flex-direction: row; /* Horizontal arrangement */
+            align-items: center; /* Center items vertically within column */
+            justify-content: center; /* Center content horizontally within column */
+            gap: 0.5rem; /* Space between name and image */
+        }
+
+        .driver-column:first-child {
+            border-right: 1px solid rgba(255, 255, 255, 0.5); /* Vertical line */
+        }
+
+        /* Removed styling for the hover background image overlay */
+        /* .team-card-overlay is no longer present */
     </style>
 </head>
 <body class="font-medium">
-
-        <!-- Header Navigation -->
-    <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
+<header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-center h-20">
                 <div class="flex items-center">
@@ -49,43 +96,70 @@
             </div>
         </nav>
     </header>
-
-    <!-- Main Container -->
-    <div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+<div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         
         <header class="text-center my-8">
             <h1 class="text-5xl font-bold text-white uppercase">Teams</h1>
             <p class="mt-2 text-xl text-white/90 font-semibold uppercase">2025 Season</p>
         </header>
-
-        <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <!-- Schedule cards will be populated by JavaScript -->
-        </div>
+<div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    </div>
     
     <script>
         const scheduleData = [
-            { round: 1, name: 'McLaren', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris', country: 'GB' },
-            { round: 2, name: 'Ferrari', venue: 'Imola', date: 'March 21-23', winner: 'Oscar Piastri', country: 'CN' },
-            { round: 3, name: 'Red Bull Racing', venue: 'Suzuka', date: 'April 4-6', winner: 'Max Verstappen', country: 'AT' },
-            { round: 4, name: 'Mercedes', venue: 'Sakhir', date: 'April 11-13', winner: 'Oscar Piastri', country: 'GB' },
-            { round: 5, name: 'Aston Martin', venue: 'Jeddah', date: 'April 18-20', winner: 'Oscar Piastri', country: 'SA' },
-            { round: 6, name: 'Williams', venue: 'Miami', date: 'May 2-4', country: 'GB', winner: 'Oscar Piastri' },
-            { round: 7, name: 'Kick Sauber', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen', country: 'IT' },
-            { round: 8, name: 'Haas', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'USA' },
-            { round: 9, name: 'Racing Bulls', venue: 'Imola', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'IT' },
-            { round: 10, name: 'Alpine', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'FR' },
-            { round: 11, name: 'Austrian Grand Prix', venue: 'Spielberg', date: 'June 27-29', country: 'AT' },
-            { round: 12, name: 'British Grand Prix', venue: 'Silverstone', date: 'July 4-6', country: 'GB' },
-            { round: 13, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 25-27', country: 'BE' },
-            { round: 14, name: 'Hungarian Grand Prix', venue: 'Budapest', date: 'August 1-3', country: 'HU' },
-            { round: 15, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'August 29-31', country: 'NL' },
-            { round: 16, name: 'Italian Grand Prix', venue: 'Monza', date: 'September 5-7', country: 'IT' },
-            { round: 17, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'September 19-21', country: 'AZ' },
-            { round: 18, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
+            // Updated data with 'drivers' property with current 2025 lineups (as of June 20th, 2025)
+            { name: 'McLaren', venue: 'Woking, UK', drivers: [
+                { name: 'Lando Norris' },
+                { name: 'Oscar Piastri' }
+            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp' },
+            { name: 'Ferrari', venue: 'Maranello, Italy', drivers: [
+                { name: 'Charles Leclerc' },
+                { name: 'Lewis Hamilton' }
+            ], country: 'IT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp' },
+            { name: 'Red Bull Racing', venue: 'Milton Keynes, UK', drivers: [
+                { name: 'Max Verstappen' },
+                { name: 'Yuki Tsunoda' }
+            ], country: 'AT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp' },
+            { name: 'Mercedes', venue: 'Brackley, UK', drivers: [
+                { name: 'George Russell' },
+                { name: 'Kimi Antonelli' }
+            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp' },
+            { name: 'Aston Martin', venue: 'Silverstone, UK', drivers: [
+                { name: 'Fernando Alonso' },
+                { name: 'Lance Stroll' }
+            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp' },
+            { name: 'Williams', venue: 'Grove, UK', drivers: [
+                { name: 'Alexander Albon' },
+                { name: 'Carlos Sainz' }
+            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp' },
+            { name: 'Kick Sauber', venue: 'Hinwil, Switzerland', drivers: [
+                { name: 'Nico Hülkenberg' },
+                { name: 'Gabriel Bortoleto' }
+            ], country: 'CH', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp' },
+            { name: 'Haas', venue: 'Kannapolis, USA', drivers: [
+                { name: 'Esteban Ocon' },
+                { name: 'Oliver Bearman' }
+            ], country: 'USA', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp' },
+            { name: 'Racing Bulls', venue: 'Faenza, Italy', drivers: [
+                { name: 'Isack Hadjar' },
+                { name: 'Liam Lawson' }
+            ], country: 'IT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp' },
+            { name: 'Alpine', venue: 'Enstone, UK', drivers: [
+                { name: 'Pierre Gasly' },
+                { name: 'Franco Colapinto' }
+            ], country: 'FR', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp' },
+            { pos: 11, name: 'Austrian Grand Prix', venue: 'Spielberg', date: 'June 27-29', country: 'AT' },
+            { pos: 12, name: 'British Grand Prix', venue: 'Silverstone', date: 'July 4-6', country: 'GB' },
+            { pos: 13, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 25-27', country: 'BE' },
+            { pos: 14, name: 'Hungarian Grand Prix', venue: 'Budapest', date: 'August 1-3', country: 'HU' },
+            { pos: 15, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'August 29-31', country: 'NL' },
+            { pos: 16, name: 'Italian Grand Prix', venue: 'Monza', date: 'September 5-7', country: 'IT' },
+            { pos: 17, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'September 19-21', country: 'AZ' },
+            { pos: 18, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
             { pos: 19, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19', country: 'USA' },
             { pos: 20, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26', country: 'MX' },
             { pos: 21, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'November 7-9', country: 'BR' },
-            { pos: 22, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22', country: 'USA', imageUrl: 'https://www.hollywoodreporter.com/wp-content/uploads/2024/11/F1-Grand-Prix-Las-Vegas-Race-Charles-LeClerc-GettyImages-1801966267-MAIN-2024.jpg?w=1296&h=729&crop=1' },
+            { pos: 22, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22', country: 'USA', imageUrl: 'https://www.hollywoodreporter.com/wp-content/uploads/2024/11/F1-Grand-Prix-Las-Vegas-Race-Charles-LeClerc-GettyImages-1801966267-MAIN-2024.jpg?w=1296&amp;h=729&amp;crop=1' },
             { pos: 23, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30', country: 'QAT', imageUrl: 'https://www.alongtheracingline.com/wp-content/uploads/2023/10/lusail-2.jpeg' },
             { pos: 24, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7', country: 'AE' }
         ];
@@ -93,15 +167,72 @@
         window.onload = function() {
             const scheduleGrid = document.getElementById('schedule-grid');
             const scheduleDropdownContainer = document.getElementById('dropdown-grid-container');
-
-           // Populate Main Schedule Grid
+// Populate Main Schedule Grid
 if (scheduleGrid) {
-    scheduleData.slice(0, 10).forEach(race => {
+    scheduleData.slice(0, 10).forEach(race => { // Only process the first 10 for team cards
         const card = document.createElement('div');
-        card.className = 'bg-white rounded-lg shadow-lg p-10 flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300';
-                     if (race.country === 'USA') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md">`;
+        // REVERTED: Now `relative` and `overflow-hidden` are for the hover dropdown logic
+        card.className = 'rounded-lg shadow-lg p-10 flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden team-card-group';
+        
+        // Assign background color based on team name
+        switch (race.name) {
+            case 'McLaren':
+                card.classList.add('bg-mclaren');
+                card.classList.add('text-white');
+                break;
+            case 'Ferrari':
+                card.classList.add('bg-ferrari');
+                card.classList.add('text-white');
+                break;
+            case 'Red Bull Racing':
+                card.classList.add('bg-redbull');
+                card.classList.add('text-white');
+                break;
+            case 'Mercedes':
+                card.classList.add('bg-mercedes');
+                card.classList.add('text-black'); // Changed to black for better contrast
+                break;
+            case 'Alpine':
+                card.classList.add('bg-alpine');
+                card.classList.add('text-white');
+                break;
+            case 'Racing Bulls':
+                card.classList.add('bg-racingbulls');
+                card.classList.add('text-white');
+                break;
+            case 'Aston Martin':
+                card.classList.add('bg-astonmartin');
+                card.classList.add('text-white');
+                break;
+            case 'Williams':
+                card.classList.add('bg-williams');
+                card.classList.add('text-white');
+                break;
+            case 'Kick Sauber':
+                card.classList.add('bg-kicksauber');
+                card.classList.add('text-black'); // Changed to black for better contrast
+                break;
+            case 'Haas':
+                card.classList.add('bg-haas');
+                card.classList.add('text-black'); // Changed to black for better contrast
+                break;
+            default:
+                card.classList.add('bg-white');
+                card.classList.add('text-gray-900');
+                break;
+        }
+                    let flagHtml = ''; // Initialize flagHtml
+                    // Update flags for Aston Martin, Williams, and Mercedes to the new British flag
+                    if (race.name === 'Aston Martin' || race.name === 'Williams' || race.name === 'Mercedes' || race.country === 'GB') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" alt="British Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    } else if (race.name === 'Ferrari') { // New condition for Ferrari
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    } else if (race.name === 'Alpine') { // New condition for Alpine
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197560.png" alt="French Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    } else if (race.name === 'Kick Sauber') { // New condition for Kick Sauber
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197540.png" alt="Swiss Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                    } else if (race.country === 'USA') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     else if (race.country === 'QAT') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197618.png" alt="Qatar Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    else if (race.country === 'GB') flagHtml = `<img src="https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp" alt="British Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     else if (race.country === 'IT') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     else if (race.country === 'JP') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197604.png" alt="Japanese Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     else if (race.country === 'BE') flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197583.png" alt="Belgian Flag" class="h-8 w-auto mt-2 rounded-md">`;
@@ -123,24 +254,71 @@ if (scheduleGrid) {
                     
                     let circuitImageHtml = '';
                     if (race.imageUrl) {
-                        let objectPositionClass = 'object-center';
-                        if (race.name === 'Las Vegas Grand Prix') objectPositionClass = 'object-bottom';
-                        circuitImageHtml = `<div class="h-48 overflow-hidden rounded-lg my-4"><img src="${race.imageUrl}" alt="${race.venue} Circuit" class="w-full h-full object-cover ${objectPositionClass}"></div>`;
+                        // All car images will use this consistent styling
+                        if (['McLaren', 'Ferrari', 'Red Bull Racing', 'Mercedes', 'Aston Martin', 'Williams', 'Kick Sauber', 'Haas', 'Racing Bulls', 'Alpine'].includes(race.name)) {
+                            circuitImageHtml = `<div class="my-4 w-48">
+                                                    <img src="${race.imageUrl}" alt="${race.name} Car" class="h-20 w-full object-contain rounded-md">
+                                                </div>`;
+                        } else {
+                            // Original logic for other images (like track images for races)
+                            let objectPositionClass = 'object-center';
+                            if (race.name === 'Las Vegas Grand Prix') objectPositionClass = 'object-bottom';
+                            circuitImageHtml = `<div class="h-48 overflow-hidden rounded-lg my-4">
+                                                    <img src="${race.imageUrl}" alt="${race.name} Circuit" class="w-full h-full object-contain ${objectPositionClass}">
+                                                </div>`;
+                        }
                     }
-                    let footerContent = race.winner ? `<p class="text-lg font-semibold text-gray-800 uppercase"><span class="font-bold text-red-600">WINNER:</span> ${race.winner}</p>` : `<p class="text-lg font-semibold text-gray-800">${race.date.toUpperCase()}</p>`;
-                    card.innerHTML = `<div><p class="text-lg font-bold text-red-600">ROUND ${race.round || race.pos}</p>${flagHtml}<h3 class="text-3xl font-bold text-gray-900 mt-2">${race.name.toUpperCase()}</h3><p class="text-xl text-gray-600 mt-2">${race.venue.toUpperCase()}</p>${circuitImageHtml}</div><div class="mt-6 pt-6 border-t border-gray-200">${footerContent}</div>`;
+                    
+                    // Main content of the card
+                    let mainCardContent = `
+                        <div class="relative z-10">
+                            ${flagHtml}
+                            <h3 class="text-3xl font-bold mt-2 uppercase">${race.name.toUpperCase()}</h3>
+                            <p class="text-xl mt-2 uppercase">${race.venue.toUpperCase()}</p>
+                            ${circuitImageHtml}
+                        </div>
+                        <div class="mt-6 relative z-10"></div>
+                    `;
+
+                    // Driver content (now always visible - static)
+                    let driverSectionHtml = '';
+                    if (race.drivers && race.drivers.length === 2) { // Ensure there are exactly two drivers
+                        driverSectionHtml = `
+                            <div class="static-driver-section">
+                                <div class="driver-column">
+                                    <p class="text-xl font-medium text-right">${race.drivers[0].name.toUpperCase()}</p>
+                                </div>
+                                <div class="driver-column">
+                                    <p class="text-xl font-medium text-right">${race.drivers[1].name.toUpperCase()}</p>
+                                </div>
+                            </div>
+                        `;
+                    } else if (race.drivers && race.drivers.length > 0) { // Fallback for more than 2 drivers or less than 2
+                         driverSectionHtml = `
+                            <div class="static-driver-section flex-col">
+                                <p class="text-lg font-semibold uppercase">DRIVERS:</p>
+                                <p class="text-xl font-medium">${race.drivers.map(driver => (driver.name || driver).toUpperCase()).join('<br>')}</p>
+                            </div>
+                        `;
+                    }
+
+                    // Combining content for the card
+                    card.innerHTML = `
+                        ${mainCardContent}
+                        ${driverSectionHtml}
+                    `;
                     scheduleGrid.appendChild(card);
                 });
             }
             
-            // Populate Dropdown
+            // Populate Dropdown (for the main schedule dropdown if applicable)
             if (scheduleDropdownContainer) {
                 const now = new Date(); // Use client's current date
                 const upcomingRaces = scheduleData.filter(race => {
                     const dateString = race.date.replace(' - ', '-');
                     const parts = dateString.split(/[\s-]+/);
                     let month, day;
-                    if (parts.length > 2 && isNaN(parseInt(parts[2]))) {
+                    if (parts.length > 2 && isNaN(parseInt(parts[2])) && parts[2] !== undefined) {
                         month = parts[3];
                         day = parseInt(parts[4]);
                     } else {
@@ -150,19 +328,14 @@ if (scheduleGrid) {
                     const raceEndDate = new Date(`${month} ${day}, 2025 23:59:59`);
                     return raceEndDate >= now;
                 });
-
-                const nextFiveRaces = upcomingRaces.slice(0, 5);
+const nextFiveRaces = upcomingRaces.slice(0, 5);
                 
                 if (nextFiveRaces.length > 0) {
                     nextFiveRaces.forEach(race => {
                         const card = document.createElement('a');
                         card.href = '#'; // Placeholder link
                         card.className = 'bg-white rounded-lg p-4 text-gray-900 text-center hover:bg-red-600 hover:text-white transition-colors duration-300';
-                        card.innerHTML = `
-                            <p class="font-bold text-sm uppercase">${race.name}</p>
-                            <p class="text-xs text-gray-600 group-hover:text-gray-300 uppercase">${race.venue}</p>
-                            <p class="text-xs font-semibold mt-2 uppercase">${race.date}</p>
-                        `;
+                        card.innerHTML = `<p class="font-bold text-sm uppercase">${race.name}</p>                            <p class="text-xs text-gray-600 group-hover:text-gray-300 uppercase">${race.venue}</p>                            <p class="text-xs font-semibold mt-2 uppercase">${race.date}</p>`;
                         scheduleDropdownContainer.appendChild(card);
                     });
                 } else {
