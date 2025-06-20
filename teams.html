@@ -112,11 +112,11 @@
             z-index: 10; /* Ensure it's above other card content */
         }
 
-        /* Styles for the new background image overlay on hover */
+        /* Styles for the background image overlay on hover */
         .background-overlay {
             position: absolute;
             inset: 0; /* Covers the entire card */
-            background-image: url('https://cdn.discordapp.com/attachments/1323758532432236638/1385493311611207690/image.png?ex=685644b2&is=6854f332&hm=fdf978732de2573c43768edc6bb44a599adecdd6c4ee51254736786e03954741&'); /* Updated image URL */
+            background-image: url('https://cdn.discordapp.com/attachments/1323758532432236638/1385493311611207690/image.png?ex=685644b2&is=6854f332&hm=fdf978732de2573c43768edc6bb44a599adecdd6c4ee51254736786e03954741&');
             background-size: cover;
             background-position: center;
             opacity: 0; /* Hidden by default */
@@ -139,13 +139,43 @@
             margin-top: 2rem; /* Space from the content above */
             border-top: 2px solid rgba(255, 255, 255, 0.2); /* Subtle white border top */
         }
+
+        /* Specific styling for driver numbers */
+        .driver-number {
+            font-family: 'Inter', sans-serif; /* Use Inter Bold for numbers */
+            font-weight: bold;
+            font-size: 1.5rem; /* Slightly larger than name (text-xl is 1.25rem) */
+            white-space: nowrap; /* Keep number on a single line */
+            overflow: hidden; /* Hide overflow if text is too long */
+            text-overflow: ellipsis; /* Add ellipsis if text is too long */
+            /* Color will be set dynamically via JavaScript */
+        }
+
+        /* Ensure driver names stay on one line with ellipsis */
+        .driver-name { /* This class is now used to target the driver name paragraphs */
+            white-space: nowrap; /* Keep name on a single line */
+            overflow: hidden; /* Hide overflow if text is too long */
+            text-overflow: ellipsis; /* Add ellipsis if text is too long */
+            text-align: left; /* Aligned left next to number */
+            flex-grow: 1; /* Allow name to take available space */
+        }
+
+        /* Header Logo Styling */
+        .header-logo {
+            height: 50px; /* Adjust height as needed */
+            width: auto; /* Maintain aspect ratio */
+            margin-right: 2rem; /* Space between logo and nav links */
+        }
     </style>
 </head>
 <body class="font-medium">
 <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-center h-20">
+            <div class="flex items-center justify-between h-20"> <!-- Changed to justify-between -->
                 <div class="flex items-center">
+                    <!-- F1 Logo -->
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/F1_75_Logo.png" alt="F1 75 Logo" class="header-logo">
+                    
                     <div class="flex items-baseline space-x-4">
                         <a href="latest.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium">Latest</a>
                         <a href="schedule.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base aria-current">Schedule</a>
@@ -177,45 +207,45 @@
         const scheduleData = [
             // Updated data with 'drivers' property and 'standing' for each team
             { name: 'McLaren', venue: 'Woking, UK', drivers: [
-                { name: 'LANDO NORRIS' },
-                { name: 'OSCAR PIASTRI' }
-            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp', standing: 1 }, // McLaren is 1st
+                { name: 'LANDO NORRIS', number: 4 },
+                { name: 'OSCAR PIASTRI', number: 81 }
+            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp', standing: 1, teamColor: '#F47600' }, // McLaren is 1st
             { name: 'Ferrari', venue: 'Maranello, Italy', drivers: [
-                { name: 'CHARLES LECLERC' },
-                { name: 'LEWIS HAMILTON' }
-            ], country: 'IT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp', standing: 3 }, // Ferrari is 3rd
+                { name: 'CHARLES LECLERC', number: 16 },
+                { name: 'LEWIS HAMILTON', number: 44 }
+            ], country: 'IT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp', standing: 3, teamColor: '#ED1131' }, // Ferrari is 3rd
             { name: 'Red Bull Racing', venue: 'Milton Keynes, UK', drivers: [
-                { name: 'MAX VERSTAPPEN' },
-                { name: 'YUKI TSUNODA' }
-            ], country: 'AT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp', standing: 4 }, // Red Bull is 4th
+                { name: 'MAX VERSTAPPEN', number: 1 },
+                { name: 'YUKI TSUNODA', number: 22 }
+            ], country: 'AT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp', standing: 4, teamColor: '#4781D7' }, // Red Bull is 4th
             { name: 'Mercedes', venue: 'Brackley, UK', drivers: [
-                { name: 'GEORGE RUSSELL' },
-                { name: 'KIMI ANTONELLI' }
-            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp', standing: 2 }, // Mercedes is 2nd
+                { name: 'GEORGE RUSSELL', number: 63 },
+                { name: 'KIMI ANTONELLI', number: 12 }
+            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp', standing: 2, teamColor: '#00D7B6' }, // Mercedes is 2nd
             { name: 'Aston Martin', venue: 'Silverstone, UK', drivers: [
-                { name: 'FERNANDO ALONSO' },
-                { name: 'LANCE STROLL' }
-            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp', standing: 8 }, // Aston Martin is 8th
+                { name: 'FERNANDO ALONSO', number: 14 },
+                { name: 'LANCE STROLL', number: 18 }
+            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp', standing: 8, teamColor: '#229971' },
             { name: 'Williams', venue: 'Grove, UK', drivers: [
-                { name: 'ALEXANDER ALBON' },
-                { name: 'CARLOS SAINZ' }
-            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp', standing: 5 }, // Williams is 5th
+                { name: 'ALEXANDER ALBON', number: 23 },
+                { name: 'CARLOS SAINZ', number: 55 }
+            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp', standing: 5, teamColor: '#1868DB' },
             { name: 'Kick Sauber', venue: 'Hinwil, Switzerland', drivers: [
-                { name: 'NICO HÜLKENBERG' },
-                { name: 'GABRIEL BORTOLETO' }
-            ], country: 'CH', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp', standing: 9 }, // Sauber is 9th
+                { name: 'NICO HÜLKENBERG', number: 27 },
+                { name: 'GABRIEL BORTOLETO', number: 8 }
+            ], country: 'CH', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp', standing: 9, teamColor: '#01C00E' },
             { name: 'Haas', venue: 'Kannapolis, USA', drivers: [
-                { name: 'ESTEBAN OCON' },
-                { name: 'OLIVER BEARMAN' }
-            ], country: 'USA', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp', standing: 6 }, // Haas is 6th
+                { name: 'ESTEBAN OCON', number: 31 },
+                { name: 'OLIVER BEARMAN', number: 87 }
+            ], country: 'USA', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp', standing: 6, teamColor: '#9C9FA2' },
             { name: 'Racing Bulls', venue: 'Faenza, Italy', drivers: [
-                { name: 'ISACK HADJAR' },
-                { name: 'LIAM LAWSON' }
-            ], country: 'IT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp', standing: 7 }, // Racing Bulls is 7th
+                { name: 'ISACK HADJAR', number: 6 },
+                { name: 'LIAM LAWSON', number: 30 }
+            ], country: 'IT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp', standing: 7, teamColor: '#6C98FF' },
             { name: 'Alpine', venue: 'Enstone, UK', drivers: [
-                { name: 'PIERRE GASLY' },
-                { name: 'FRANCO COLAPINTO' }
-            ], country: 'FR', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp', standing: 10 }, // Alpine is 10th
+                { name: 'PIERRE GASLY', number: 10 },
+                { name: 'PAUL ARON', number: 17 }
+            ], country: 'FR', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp', standing: 10, teamColor: '#00A1E8' },
             { pos: 11, name: 'Austrian Grand Prix', venue: 'Spielberg', date: 'June 27-29', country: 'AT' },
             { pos: 12, name: 'British Grand Prix', venue: 'Silverstone', date: 'July 4-6', country: 'GB' },
             { pos: 13, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 25-27', country: 'BE' },
@@ -242,50 +272,62 @@ if (scheduleGrid) {
         card.className = 'rounded-lg shadow-lg p-10 flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden team-card-group';
         
         // Assign background color based on team name
+        let teamBgColor;
         switch (race.name) {
             case 'McLaren':
                 card.classList.add('bg-mclaren');
                 card.classList.add('text-white');
+                teamBgColor = '#F47600';
                 break;
             case 'Ferrari':
                 card.classList.add('bg-ferrari');
                 card.classList.add('text-white');
+                teamBgColor = '#ED1131';
                 break;
             case 'Red Bull Racing':
                 card.classList.add('bg-redbull');
                 card.classList.add('text-white');
+                teamBgColor = '#4781D7';
                 break;
             case 'Mercedes':
                 card.classList.add('bg-mercedes');
                 card.classList.add('text-black'); // Changed to black for better contrast
+                teamBgColor = '#00D7B6';
                 break;
             case 'Alpine':
                 card.classList.add('bg-alpine');
                 card.classList.add('text-white');
+                teamBgColor = '#00A1E8';
                 break;
             case 'Racing Bulls':
                 card.classList.add('bg-racingbulls');
                 card.classList.add('text-white');
+                teamBgColor = '#6C98FF';
                 break;
             case 'Aston Martin':
                 card.classList.add('bg-astonmartin');
                 card.classList.add('text-white');
+                teamBgColor = '#229971';
                 break;
             case 'Williams':
                 card.classList.add('bg-williams');
                 card.classList.add('text-white');
+                teamBgColor = '#1868DB';
                 break;
             case 'Kick Sauber':
                 card.classList.add('bg-kicksauber');
                 card.classList.add('text-black'); // Changed to black for better contrast
+                teamBgColor = '#01C00E';
                 break;
             case 'Haas':
                 card.classList.add('bg-haas');
                 card.classList.add('text-black'); // Changed to black for better contrast
+                teamBgColor = '#9C9FA2';
                 break;
             default:
                 card.classList.add('bg-white');
                 card.classList.add('text-gray-900');
+                teamBgColor = '#FFFFFF'; // Default white
                 break;
         }
                     let flagHtml = ''; // Initialize flagHtml
@@ -353,14 +395,16 @@ if (scheduleGrid) {
                         driverSectionHtml = `
                             <div class="static-driver-section">
                                 <div class="driver-column">
-                                    <p class="text-xl font-medium text-right">${race.drivers[0].name.toUpperCase()}</p>
+                                    <span class="driver-number" style="color: ${teamBgColor};">${race.drivers[0].number}</span>
+                                    <p class="text-xl font-medium text-left driver-name">${race.drivers[0].name.toUpperCase()}</p>
                                 </div>
                                 <div class="driver-column">
-                                    <p class="text-xl font-medium text-right">${race.drivers[1].name.toUpperCase()}</p>
+                                    <span class="driver-number" style="color: ${teamBgColor};">${race.drivers[1].number}</span>
+                                    <p class="text-xl font-medium text-left driver-name">${race.drivers[1].name.toUpperCase()}</p>
                                 </div>
                             </div>
                         `;
-                    } else if (race.drivers && race.drivers.length > 0) {
+                    } else if (race.drivers && race.drivers.length > 0) { // Fallback for more than 2 drivers or less than 2
                          driverSectionHtml = `
                             <div class="static-driver-section flex-col">
                                 <p class="text-lg font-semibold uppercase">DRIVERS:</p>
