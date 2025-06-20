@@ -45,13 +45,16 @@
             position: absolute;
             width: 100%;
             left: 0;
-            background-color: rgba(0, 0, 0, 0.7); /* Match header (bg-black/70) */
-            backdrop-filter: blur(4px); /* Match header (backdrop-blur-sm) */
+            background-color: black;
         }
 
         #mobile-menu.menu-open {
             max-height: 25rem; /* Increased height to show all items */
             opacity: 1;
+        }
+        
+        #mobile-menu a, #mobile-menu .border-t {
+             border-top: 1px solid #4a4a4a;
         }
 
         /* Styles for the sliding navigation highlighter */
@@ -70,6 +73,11 @@
             transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
             z-index: -1; /* Place it behind the text */
         }
+        
+        #menu-open-icon, #menu-close-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+
     </style>
 </head>
 <body class="font-medium">
@@ -313,11 +321,18 @@
             const openIcon = document.getElementById('menu-open-icon');
             const closeIcon = document.getElementById('menu-close-icon');
             mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('menu-open');
-                subHeader.classList.toggle('opacity-0');
-                subHeader.classList.toggle('pointer-events-none');
+                const isOpen = mobileMenu.classList.toggle('menu-open');
+                if (isOpen) {
+                    openIcon.style.transform = 'rotate(180deg)';
+                    closeIcon.style.transform = 'rotate(0)';
+                } else {
+                    openIcon.style.transform = 'rotate(0)';
+                    closeIcon.style.transform = 'rotate(-180deg)';
+                }
                 openIcon.classList.toggle('hidden');
                 closeIcon.classList.toggle('hidden');
+                subHeader.classList.toggle('opacity-0');
+                subHeader.classList.toggle('pointer-events-none');
             });
             
             // --- Sliding highlighter script ---
