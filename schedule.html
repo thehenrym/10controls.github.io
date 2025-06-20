@@ -40,12 +40,15 @@
             opacity: 0;
             overflow: hidden;
             transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-            
-            /* Make the menu overlay the content */
             position: absolute;
-            width: 100%;
-            left: 0;
-            background-color: black;
+            width: calc(100% - 2rem);
+            left: 1rem;
+            top: calc(100% + 0.5rem);
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         #mobile-menu.menu-open {
@@ -53,8 +56,8 @@
             opacity: 1;
         }
         
-        #mobile-menu a, #mobile-menu .border-t {
-             border-top: 1px solid #4a4a4a;
+        #mobile-menu a:not(:last-child) {
+             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Styles for the sliding navigation highlighter */
@@ -74,8 +77,23 @@
             z-index: -1; /* Place it behind the text */
         }
         
-        #menu-open-icon, #menu-close-icon {
-            transition: transform 0.3s ease-in-out;
+        /* Hamburger Icon Animation */
+        .hamburger-icon span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s cubic-bezier(.08,.82,.17,1);
+        }
+
+        #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
+             transform: translateY(6px) rotate(45deg);
+        }
+        #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
+            opacity: 0;
+        }
+         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
         }
 
     </style>
@@ -107,24 +125,23 @@
                 <div class="-mr-2 flex md:hidden">
                     <button type="button" id="mobile-menu-button" class="bg-red-600 inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-red-700 focus:outline-none">
                         <span class="sr-only">Open main menu</span>
-                        <svg id="menu-open-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        <svg id="menu-close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                         <div class="hamburger-icon space-y-1.5">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
                     </button>
                 </div>
             </div>
         </nav>
         <!-- Mobile menu -->
         <div class="md:hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="latest.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Latest</a>
-                <a href="schedule.html" class="bg-red-600 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Schedule</a>
-                <a href="standings.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Standings</a>
-                <a href="teams.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Teams</a>
-                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Join Now</a>
+            <div class="px-2 pt-2 pb-3">
+                <a href="latest.html" class="text-gray-300 hover:bg-gray-700/50 hover:text-white block px-3 py-3 rounded-md text-base font-medium">Latest</a>
+                <a href="schedule.html" class="bg-red-600 text-white block px-3 py-3 rounded-md text-base font-medium" aria-current="page">Schedule</a>
+                <a href="standings.html" class="text-gray-300 hover:bg-gray-700/50 hover:text-white block px-3 py-3 rounded-md text-base font-medium">Standings</a>
+                <a href="teams.html" class="text-gray-300 hover:bg-gray-700/50 hover:text-white block px-3 py-3 rounded-md text-base font-medium">Teams</a>
+                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:bg-gray-700/50 hover:text-white block px-3 py-3 rounded-md text-base font-medium">Join Now</a>
             </div>
         </div>
     </header>
@@ -318,19 +335,10 @@
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const subHeader = document.getElementById('sub-header');
-            const openIcon = document.getElementById('menu-open-icon');
-            const closeIcon = document.getElementById('menu-close-icon');
+
             mobileMenuButton.addEventListener('click', () => {
-                const isOpen = mobileMenu.classList.toggle('menu-open');
-                if (isOpen) {
-                    openIcon.style.transform = 'rotate(180deg)';
-                    closeIcon.style.transform = 'rotate(0)';
-                } else {
-                    openIcon.style.transform = 'rotate(0)';
-                    closeIcon.style.transform = 'rotate(-180deg)';
-                }
-                openIcon.classList.toggle('hidden');
-                closeIcon.classList.toggle('hidden');
+                mobileMenu.classList.toggle('menu-open');
+                mobileMenuButton.classList.toggle('open');
                 subHeader.classList.toggle('opacity-0');
                 subHeader.classList.toggle('pointer-events-none');
             });
