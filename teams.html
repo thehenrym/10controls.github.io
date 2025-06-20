@@ -4,17 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 Schedule - 2025</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter, kept for fallback or other elements if desired) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Define your custom font using @font-face */
+        @font-face {
+            font-family: 'KHInterference Bold'; /* This is the name you'll use in font-family */
+            src: url('fonts/KHInterference_Bold.ttf') format('truetype'); /* IMPORTANT: Replace with actual path on GitHub */
+            /* It's highly recommended to convert .ttf to .woff2 and .woff for better performance and compatibility */
+            /* Example for .woff2: src: url('path/to/your/fonts/KHInterference_Bold.woff2') format('woff2'); */
+            font-weight: normal; /* Adjust if your font has specific weights (e.g., 700 for bold) */
+            font-style: normal;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            /* Apply the custom font first, with a fallback to Inter and then generic sans-serif */
+            font-family: 'KHInterference Bold', 'Inter', sans-serif;
             background: linear-gradient(to bottom, #b91c1c, #ffffff);
             min-height: 100vh;
         }
+
+        /* Explicitly apply custom font to headings and other elements that might override it */
+        h1, h2, h3, h4, h5, h6,
+        .font-bold, .font-semibold, .font-medium, .uppercase,
+        .text-3xl, .text-5xl, .text-xl, .text-lg, .text-sm {
+            font-family: 'KHInterference Bold', 'Inter', sans-serif;
+        }
+
         /* Style for the main navigation dropdown (not related to team cards) */
         #schedule-dropdown-container {
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
@@ -39,7 +61,7 @@
         .bg-kicksauber { background-color: #01C00E; }
         .bg-haas { background-color: #9C9FA2; }
 
-        /* Styles for the static driver section (formerly team-hover-dropdown visual styles) */
+        /* Styles for the static driver section */
         .static-driver-section {
             background-color: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
             color: white;
@@ -76,8 +98,47 @@
             border-right: 1px solid rgba(255, 255, 255, 0.5); /* Vertical line */
         }
 
-        /* Removed styling for the hover background image overlay */
-        /* .team-card-overlay is no longer present */
+        /* Styling for the team standing in the top right */
+        .team-standing {
+            position: absolute;
+            top: 1rem; /* Adjust as needed for spacing from top */
+            right: 1rem; /* Adjust as needed for spacing from right */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px; /* Full rounded corners (pill shape) */
+            font-weight: bold;
+            font-size: 0.875rem; /* text-sm */
+            z-index: 10; /* Ensure it's above other card content */
+        }
+
+        /* Styles for the new background image overlay on hover */
+        .background-overlay {
+            position: absolute;
+            inset: 0; /* Covers the entire card */
+            background-image: url('https://cdn.discordapp.com/attachments/1323758532432236638/1385493311611207690/image.png?ex=685644b2&is=6854f332&hm=fdf978732de2573c43768edc6bb44a599adecdd6c4ee51254736786e03954741&'); /* Updated image URL */
+            background-size: cover;
+            background-position: center;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Added transform to transition */
+            border-radius: 0.5rem; /* Match card's rounded corners */
+            z-index: 0; /* Ensure it's behind other content */
+        }
+
+        .team-card-group:hover .background-overlay {
+            opacity: 0.25; /* 25% opacity on hover */
+            transform: scale(1.025); /* Zoom in by 2.5% on hover */
+        }
+
+        /* Footer Styling */
+        .footer {
+            background-color: #dc2626; /* A shade of red (Tailwind red-600) */
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem; /* Space from the content above */
+            border-top: 2px solid rgba(255, 255, 255, 0.2); /* Subtle white border top */
+        }
     </style>
 </head>
 <body class="font-medium">
@@ -106,48 +167,55 @@
                     </div>
     
     <script>
+        // Function to get ordinal suffix for numbers
+        function getOrdinalSuffix(n) {
+            const s = ["TH", "ST", "ND", "RD"];
+            const v = n % 100;
+            return n + (s[(v - 20) % 10] || s[v] || s[0]);
+        }
+
         const scheduleData = [
-            // Updated data with 'drivers' property with current 2025 lineups (as of June 20th, 2025)
+            // Updated data with 'drivers' property and 'standing' for each team
             { name: 'McLaren', venue: 'Woking, UK', drivers: [
-                { name: 'Lando Norris' },
-                { name: 'Oscar Piastri' }
-            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp' },
+                { name: 'LANDO NORRIS' },
+                { name: 'OSCAR PIASTRI' }
+            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp', standing: 1 }, // McLaren is 1st
             { name: 'Ferrari', venue: 'Maranello, Italy', drivers: [
-                { name: 'Charles Leclerc' },
-                { name: 'Lewis Hamilton' }
-            ], country: 'IT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp' },
+                { name: 'CHARLES LECLERC' },
+                { name: 'LEWIS HAMILTON' }
+            ], country: 'IT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp', standing: 3 }, // Ferrari is 3rd
             { name: 'Red Bull Racing', venue: 'Milton Keynes, UK', drivers: [
-                { name: 'Max Verstappen' },
-                { name: 'Yuki Tsunoda' }
-            ], country: 'AT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp' },
+                { name: 'MAX VERSTAPPEN' },
+                { name: 'YUKI TSUNODA' }
+            ], country: 'AT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp', standing: 4 }, // Red Bull is 4th
             { name: 'Mercedes', venue: 'Brackley, UK', drivers: [
-                { name: 'George Russell' },
-                { name: 'Kimi Antonelli' }
-            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp' },
+                { name: 'GEORGE RUSSELL' },
+                { name: 'KIMI ANTONELLI' }
+            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp', standing: 2 }, // Mercedes is 2nd
             { name: 'Aston Martin', venue: 'Silverstone, UK', drivers: [
-                { name: 'Fernando Alonso' },
-                { name: 'Lance Stroll' }
-            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp' },
+                { name: 'FERNANDO ALONSO' },
+                { name: 'LANCE STROLL' }
+            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp', standing: 8 }, // Aston Martin is 8th
             { name: 'Williams', venue: 'Grove, UK', drivers: [
-                { name: 'Alexander Albon' },
-                { name: 'Carlos Sainz' }
-            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp' },
+                { name: 'ALEXANDER ALBON' },
+                { name: 'CARLOS SAINZ' }
+            ], country: 'GB', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp', standing: 5 }, // Williams is 5th
             { name: 'Kick Sauber', venue: 'Hinwil, Switzerland', drivers: [
-                { name: 'Nico Hülkenberg' },
-                { name: 'Gabriel Bortoleto' }
-            ], country: 'CH', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp' },
+                { name: 'NICO HÜLKENBERG' },
+                { name: 'GABRIEL BORTOLETO' }
+            ], country: 'CH', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp', standing: 9 }, // Sauber is 9th
             { name: 'Haas', venue: 'Kannapolis, USA', drivers: [
-                { name: 'Esteban Ocon' },
-                { name: 'Oliver Bearman' }
-            ], country: 'USA', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp' },
+                { name: 'ESTEBAN OCON' },
+                { name: 'OLIVER BEARMAN' }
+            ], country: 'USA', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp', standing: 6 }, // Haas is 6th
             { name: 'Racing Bulls', venue: 'Faenza, Italy', drivers: [
-                { name: 'Isack Hadjar' },
-                { name: 'Liam Lawson' }
-            ], country: 'IT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp' },
+                { name: 'ISACK HADJAR' },
+                { name: 'LIAM LAWSON' }
+            ], country: 'IT', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp', standing: 7 }, // Racing Bulls is 7th
             { name: 'Alpine', venue: 'Enstone, UK', drivers: [
-                { name: 'Pierre Gasly' },
-                { name: 'Franco Colapinto' }
-            ], country: 'FR', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp' },
+                { name: 'PIERRE GASLY' },
+                { name: 'FRANCO COLAPINTO' }
+            ], country: 'FR', imageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp', standing: 10 }, // Alpine is 10th
             { pos: 11, name: 'Austrian Grand Prix', venue: 'Spielberg', date: 'June 27-29', country: 'AT' },
             { pos: 12, name: 'British Grand Prix', venue: 'Silverstone', date: 'July 4-6', country: 'GB' },
             { pos: 13, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 25-27', country: 'BE' },
@@ -171,7 +239,6 @@
 if (scheduleGrid) {
     scheduleData.slice(0, 10).forEach(race => { // Only process the first 10 for team cards
         const card = document.createElement('div');
-        // REVERTED: Now `relative` and `overflow-hidden` are for the hover dropdown logic
         card.className = 'rounded-lg shadow-lg p-10 flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden team-card-group';
         
         // Assign background color based on team name
@@ -262,14 +329,14 @@ if (scheduleGrid) {
                         } else {
                             // Original logic for other images (like track images for races)
                             let objectPositionClass = 'object-center';
-                            if (race.name === 'Las Vegas Grand Prix') objectPositionClass = 'object-bottom';
+                            if (race.name === 'Las Vegas Grand-Prix') objectPositionClass = 'object-bottom';
                             circuitImageHtml = `<div class="h-48 overflow-hidden rounded-lg my-4">
                                                     <img src="${race.imageUrl}" alt="${race.name} Circuit" class="w-full h-full object-contain ${objectPositionClass}">
                                                 </div>`;
                         }
                     }
                     
-                    // Main content of the card
+                    // Main content of the card (z-index 10 to be above the overlay)
                     let mainCardContent = `
                         <div class="relative z-10">
                             ${flagHtml}
@@ -277,12 +344,12 @@ if (scheduleGrid) {
                             <p class="text-xl mt-2 uppercase">${race.venue.toUpperCase()}</p>
                             ${circuitImageHtml}
                         </div>
-                        <div class="mt-6 relative z-10"></div>
+                        <div class="mt-6 relative z-10"></div> 
                     `;
 
                     // Driver content (now always visible - static)
                     let driverSectionHtml = '';
-                    if (race.drivers && race.drivers.length === 2) { // Ensure there are exactly two drivers
+                    if (race.drivers && race.drivers.length === 2) {
                         driverSectionHtml = `
                             <div class="static-driver-section">
                                 <div class="driver-column">
@@ -293,7 +360,7 @@ if (scheduleGrid) {
                                 </div>
                             </div>
                         `;
-                    } else if (race.drivers && race.drivers.length > 0) { // Fallback for more than 2 drivers or less than 2
+                    } else if (race.drivers && race.drivers.length > 0) {
                          driverSectionHtml = `
                             <div class="static-driver-section flex-col">
                                 <p class="text-lg font-semibold uppercase">DRIVERS:</p>
@@ -302,11 +369,21 @@ if (scheduleGrid) {
                         `;
                     }
 
-                    // Combining content for the card
+                    // Combining all content for the card, with overlay at the bottom z-index
                     card.innerHTML = `
+                        <div class="absolute inset-0 background-overlay"></div> <!-- Background Overlay -->
                         ${mainCardContent}
                         ${driverSectionHtml}
                     `;
+                    
+                    // Add team standing badge (z-index 10 to be above other content)
+                    if (race.standing) {
+                        const standingBadge = document.createElement('div');
+                        standingBadge.className = 'team-standing';
+                        standingBadge.textContent = getOrdinalSuffix(race.standing);
+                        card.appendChild(standingBadge);
+                    }
+
                     scheduleGrid.appendChild(card);
                 });
             }
@@ -347,5 +424,8 @@ const nextFiveRaces = upcomingRaces.slice(0, 5);
             }
         };
     </script>
+    <footer class="footer">
+        <p>&copy; 2003-2025 Formula One World Championship Limited</p>
+    </footer>
 </body>
 </html>
