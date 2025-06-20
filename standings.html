@@ -34,18 +34,45 @@
     <!-- Header Navigation -->
     <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-center h-20">
-                <div class="flex items-center">
-                    <div class="flex items-baseline space-x-4">
-                        <a href="latest.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium">Latest</a>
-                        <a href="schedule.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium">Schedule</a>
-                        <a href="standings.html" class="bg-red-600 text-white px-4 py-3 rounded-md text-base font-medium" aria-current="page">Standings</a>
-                        <a href="teams.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium">Teams</a>
-                        <a href="join.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-3 rounded-md text-base font-medium">Join Now</a>
-                    </div>
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                     <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385499058075992134/F1_75_Logo.png?ex=68564a0c&is=6854f88c&hm=744e08e11b761601e712a4edc17d23feb170b4bffe21b8272c9174f6c776ca0b&" alt="F1 75 Logo" class="h-10">
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-baseline space-x-4">
+                    <a href="latest.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Latest</a>
+                    <a href="schedule.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Schedule</a>
+                    <a href="standings.html" class="bg-red-600 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Standings</a>
+                    <a href="teams.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Teams</a>
+                    <a href="join.html" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Join Now</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <svg id="menu-open-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg id="menu-close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </nav>
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="latest.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Latest</a>
+                <a href="schedule.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Schedule</a>
+                <a href="standings.html" class="bg-red-600 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Standings</a>
+                <a href="teams.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Teams</a>
+                <a href="join.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Join Now</a>
+            </div>
+        </div>
     </header>
 
     <!-- Main Container -->
@@ -53,8 +80,8 @@
         
         <!-- Header -->
         <header class="text-center my-8">
-            <h1 id="page-title" class="text-4xl font-bold text-white">F1 Driver Standings</h1>
-            <p class="mt-2 text-lg text-white/90 font-semibold">2025 Season</p>
+            <h1 id="page-title" class="text-4xl sm:text-5xl font-bold text-white">F1 Driver Standings</h1>
+            <p class="mt-2 text-lg sm:text-xl text-white/90 font-semibold">2025 Season</p>
         </header>
 
         <!-- Toggle Switch -->
@@ -70,15 +97,15 @@
 
         <!-- Driver Standings Table -->
         <div id="driver-standings-container" class="standings-container">
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <table class="min-w-full divide-y divide-gray-200 table-fixed">
+             <div class="bg-white rounded-lg shadow-lg overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th scope="col" class="w-[8.33%] px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pos</th>
-                            <th scope="col" class="w-[33.33%] px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Driver</th>
-                            <th scope="col" class="w-[25%] px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Nationality</th>
-                            <th scope="col" class="w-[25%] px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Team</th>
-                            <th scope="col" class="w-[8.33%] px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pts</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pos</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Driver</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Nationality</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Team</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pts</th>
                         </tr>
                     </thead>
                     <tbody id="driver-standings-body" class="divide-y divide-gray-200 text-gray-900">
@@ -90,13 +117,13 @@
 
         <!-- Team Standings Table -->
         <div id="team-standings-container" class="standings-container">
-             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <table class="min-w-full divide-y divide-gray-200 table-fixed">
+             <div class="bg-white rounded-lg shadow-lg overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th scope="col" class="w-[8.33%] px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pos</th>
-                            <th scope="col" class="w-[83.33%] px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Team</th>
-                            <th scope="col" class="w-[8.33%] px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pts</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pos</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Team</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pts</th>
                         </tr>
                     </thead>
                     <tbody id="team-standings-body" class="divide-y divide-gray-200 text-gray-900">
@@ -105,7 +132,6 @@
                 </table>
             </div>
         </div>
-
     </div>
     
     <script>
@@ -229,6 +255,18 @@
                     }
                 });
             }, 100);
+
+             // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-open-icon');
+            const closeIcon = document.getElementById('menu-close-icon');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                openIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            });
         };
     </script>
 </body>
