@@ -400,7 +400,6 @@
                     { text: 'POS', key: 'pos', classes: 'py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6' },
                     { text: 'DRIVER', key: 'driver', classes: 'px-3 py-3.5 text-left text-sm font-semibold' },
                     { text: 'TEAM', key: 'team', classes: 'px-3 py-3.5 text-left text-sm font-semibold hidden md:table-cell' },
-                    { text: 'TYRE', key: 'tyre', classes: 'px-3 py-3.5 text-center text-sm font-semibold' },
                     { text: 'BEST', key: 'best', classes: 'px-3 py-3.5 text-left text-sm font-semibold hidden md:table-cell' },
                     { text: 'GAP', key: 'gap', classes: 'py-3.5 pl-3 pr-4 text-right text-sm font-semibold' }
                 ];
@@ -456,8 +455,6 @@
                             if (header.key === 'pos') td.classList.add('pos-number');
 
                             if (type === 'qualifying' && header.key === 'gap' && rowData.pos === 1) {
-                                // For P1 in qualifying, show the pole time in the gap column on mobile only.
-                                // On desktop, this cell will be empty, as the pole time is in the 'BEST' column.
                                 td.innerHTML = `<span class="md:hidden">${rowData['best']}</span>`;
                             } else {
                                 const cellValue = rowData[header.key];
@@ -466,8 +463,6 @@
                                         td.innerHTML = `<img src="https://flagsapi.com/${rowData.flag}/flat/16.png" alt="${rowData.flag}" class="inline-block mr-2 h-4" onerror="this.style.display='none'"> ${cellValue}`;
                                     } else if (header.key === 'team' && teamIcons[cellValue]) {
                                         td.innerHTML = `<img src="${teamIcons[cellValue]}" alt="${cellValue}" class="inline-block mr-2 h-5 w-5" onerror="this.style.display='none'"> ${cellValue}`;
-                                    } else if (header.key === 'tyre' && type === 'qualifying') {
-                                        td.innerHTML = `<span class="font-bold text-red-500">${cellValue}</span>`;
                                     } else {
                                         td.textContent = cellValue;
                                     }
