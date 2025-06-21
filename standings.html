@@ -389,7 +389,7 @@
             { driver: "RABAS", team: "JOHN DEERE WILLIAMS", pts: 0, flag: "ES" },
             { driver: "YUKI TSUNODA", team: "NEWPORT ROLEX RED BULL", pts: 0, flag: "PL" },
             { driver: "MAXLINXC", team: "TINDER ALPINE", pts: 0, flag: "NL" },
-            { driver: "YULIAN KALENANTOVICH", team: "KICK SAUBER", pts: 0, flag: "UA" }, 
+            { driver: "YULIAN KALENANTOVICH", team: "TWITCH SAUBER", pts: 0, flag: "UA" }, 
             { driver: "STRA", team: "LOCKHEED MARTIN AM", pts: 0, flag: "RS" },
             { driver: "THEROMANIANDEVIL", team: "MERCEDES-AMG PETRONAS", pts: 0, flag: "RO" },
             { driver: "LOLER_XD", team: "JOHN DEERE WILLIAMS", pts: 0, flag: "PL" }, 
@@ -469,7 +469,6 @@
                 else if (result.team.includes("HAAS ONLYFANS")) displayTeamName = "HAAS ONLYFANS"; 
                 else if (result.team.includes("TWITCH SAUBER")) displayTeamName = "TWITCH SAUBER"; 
                 else if (result.team.includes("JOHN DEERE WILLIAMS")) displayTeamName = "JOHN DEERE WILLIAMS"; 
-                else if (result.team.includes("KICK SAUBER") && displayTeamName !== "TWITCH SAUBER") displayTeamName = "KICK SAUBER"; 
 
                 if (teamPointsMap.has(normalizedTeamName)) {
                     teamPointsMap.get(normalizedTeamName).points += result.pts;
@@ -484,6 +483,9 @@
         updateTeamStandings(raceResultsAustralia);
 
         let updatedTeamStandings = Array.from(teamPointsMap.values());
+        // Filter out "KICK SAUBER"
+        updatedTeamStandings = updatedTeamStandings.filter(team => team.team.toUpperCase() !== "KICK SAUBER");
+
         updatedTeamStandings.sort((a, b) => b.points - a.points); // Sort by points descending
         updatedTeamStandings.forEach((team, index) => team.pos = index + 1); // Assign new positions
 
