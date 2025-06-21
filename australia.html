@@ -126,8 +126,9 @@
         }
         #toggle-slider {
             position: absolute;
-            top: 4px;
-            left: 4px;
+            top: 4px;an you update the points in the race chart to match the current motogp points system, <!DOCTYPE html>
+
+<html lang="en"> 
             height: calc(100% - 8px);
             width: 50%;
             background-color: #492833;
@@ -311,13 +312,14 @@
                 // Mapping of venues to their respective time zones
                 const timeZoneMap = {
                     'Imola': 'Europe/Rome', // Example for next race
-                    'Sakhir': 'Asia/Bahrain' // For this result page
+                    'Sakhir': 'Asia/Bahrain', // For this result page
+                    'Melbourne': 'Australia/Melbourne' // For the current Australian GP
                 };
 
                 if (upcomingRaceInfoEl) upcomingRaceInfoEl.textContent = `UPCOMING: ${NEXT_RACE_NAME}`;
                 if (upcomingRaceDateEl) upcomingRaceDateEl.textContent = NEXT_RACE_DATE_DISPLAY;
                 
-                const raceTimeZone = timeZoneMap[NEXT_RACE_VENUE];
+                const raceTimeZone = timeZoneMap['Melbourne']; // Use Melbourne for this specific page
 
                 function updateTimes() {
                     const currentTime = new Date();
@@ -344,20 +346,20 @@
                 // --- Race and Qualifying Data ---
                 const raceResults = [
                     { pos: 1, driver: "MAXFAN1982", team: "NEWPORT ROLEX RED BULL", grid: 1, stops: 2, bestLap: "1:18.801", time: "46:34.539", pts: 25, flag: "PL" },
-                    { pos: 2, driver: "FOCUSER", team: "HOT WHEELS MCLAREN", grid: 2, stops: 2, bestLap: "1:18.282", time: "+3.552", pts: 18, flag: "ES" },
-                    { pos: 3, driver: "MAX HOUSLEY", team: "TINDER ALPINE", grid: 10, stops: 3, bestLap: "1:19.379", time: "+4.530", pts: 15, flag: "GB" },
-                    { pos: 4, driver: "SEBEINKRO", team: "MERCEDES-AMG PETRONAS", grid: 7, stops: 2, bestLap: "1:19.253", time: "+6.868", pts: 12, flag: "DK" },
-                    { pos: 5, driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", grid: 6, stops: 2, bestLap: "1:19.149", time: "+7.528", pts: 10, flag: "ES" },
-                    { pos: 6, driver: "LUCA STEVENS", team: "LOCKHEED MARTIN AM", grid: 16, stops: 2, bestLap: "1:19.881", time: "+10.799", pts: 8, flag: "GB" },
-                    { pos: 7, driver: "COUNTERFEIT", team: "KICK SAUBER", grid: 13, stops: 3, bestLap: "1:19.903", time: "+12.213", pts: 6, flag: "GB" },
-                    { pos: 8, driver: "TSAR", team: "RACING BULLS PEUGEOT SPORT", grid: 12, stops: 3, bestLap: "1:19.031", time: "+12.665", pts: 4, flag: "HU" },
-                    { pos: 9, driver: "ANTONIO BRANCATI", team: "SCUDERIA FERRARI HP", grid: 9, stops: 2, bestLap: "1:19.010", time: "+14.116", pts: 2, flag: "IT" },
-                    { pos: 10, driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS", grid: 17, stops: 2, bestLap: "1:19.794", time: "+22.685", pts: 1, flag: "LT" },
-                    { pos: 11, driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", grid: 4, stops: 2, bestLap: "1:18.804", time: "+25.075", pts: 0, flag: "UA" },
-                    { pos: 12, driver: "EDGE", team: "HAAS ONLYFANS", grid: 20, stops: 2, bestLap: "1:21.998", time: "+26.424", pts: 0, flag: "PL" },
-                    { pos: 13, driver: "RABAS", team: "JOHN DEERE WILLIAMS", grid: 19, stops: 3, bestLap: "1:21.094", time: "+29.581", pts: 0, flag: "ES" },
-                    { pos: 14, driver: "YUKI TSUNODA", team: "NEWPORT ROLEX RED BULL", grid: 3, stops: 3, bestLap: "1:18.544", time: "+33.076", pts: 0, flag: "PL" },
-                    { pos: 15, driver: "MAXLINXC", team: "TINDER ALPINE", grid: 8, stops: 3, bestLap: "1:19.928", time: "+3 LAPS", pts: 0, flag: "NL" },
+                    { pos: 2, driver: "FOCUSER", team: "HOT WHEELS MCLAREN", grid: 2, stops: 2, bestLap: "1:18.282", time: "+3.552", pts: 20, flag: "ES" },
+                    { pos: 3, driver: "MAX HOUSLEY", team: "TINDER ALPINE", grid: 10, stops: 3, bestLap: "1:19.379", time: "+4.530", pts: 16, flag: "GB" },
+                    { pos: 4, driver: "SEBEINKRO", team: "MERCEDES-AMG PETRONAS", grid: 7, stops: 2, bestLap: "1:19.253", time: "+6.868", pts: 13, flag: "DK" },
+                    { pos: 5, driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", grid: 6, stops: 2, bestLap: "1:19.149", time: "+7.528", pts: 11, flag: "ES" },
+                    { pos: 6, driver: "LUCA STEVENS", team: "LOCKHEED MARTIN AM", grid: 16, stops: 2, bestLap: "1:19.881", time: "+10.799", pts: 10, flag: "GB" },
+                    { pos: 7, driver: "COUNTERFEIT", team: "KICK SAUBER", grid: 13, stops: 3, bestLap: "1:19.903", time: "+12.213", pts: 9, flag: "GB" },
+                    { pos: 8, driver: "TSAR", team: "RACING BULLS PEUGEOT SPORT", grid: 12, stops: 3, bestLap: "1:19.031", time: "+12.665", pts: 8, flag: "HU" },
+                    { pos: 9, driver: "ANTONIO BRANCATI", team: "SCUDERIA FERRARI HP", grid: 9, stops: 2, bestLap: "1:19.010", time: "+14.116", pts: 7, flag: "IT" },
+                    { pos: 10, driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS", grid: 17, stops: 2, bestLap: "1:19.794", time: "+22.685", pts: 6, flag: "LT" },
+                    { pos: 11, driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", grid: 4, stops: 2, bestLap: "1:18.804", time: "+25.075", pts: 5, flag: "UA" },
+                    { pos: 12, driver: "EDGE", team: "HAAS ONLYFANS", grid: 20, stops: 2, bestLap: "1:21.998", time: "+26.424", pts: 4, flag: "PL" },
+                    { pos: 13, driver: "RABAS", team: "JOHN DEERE WILLIAMS", grid: 19, stops: 3, bestLap: "1:21.094", time: "+29.581", pts: 3, flag: "ES" },
+                    { pos: 14, driver: "YUKI TSUNODA", team: "NEWPORT ROLEX RED BULL", grid: 3, stops: 3, bestLap: "1:18.544", time: "+33.076", pts: 2, flag: "PL" },
+                    { pos: 15, driver: "MAXLINXC", team: "TINDER ALPINE", grid: 8, stops: 3, bestLap: "1:19.928", time: "+3 LAPS", pts: 1, flag: "NL" },
                     { pos: 16, driver: "YULIAN KALENANTOVICH", team: "KICK SAUBER", grid: 15, stops: 0, bestLap: "1:20.549", time: "DNF", pts: 0, flag: "UA" },
                     { pos: 17, driver: "STRA", team: "LOCKHEED MARTIN AM", grid: 11, stops: 1, bestLap: "1:21.217", time: "DNF", pts: 0, flag: "RS" },
                     { pos: 18, driver: "THEROMANIANDEVIL", team: "MERCEDES-AMG PETRONAS", grid: 14, stops: 1, bestLap: "1:21.940", time: "DNF", pts: 0, flag: "RO" },
