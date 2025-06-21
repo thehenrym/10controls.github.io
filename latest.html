@@ -11,11 +11,13 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(to bottom, #b91c1c, #ffffff);
+            /* Updated background gradient from the Schedule page */
+            background: linear-gradient(to bottom, #492833, #ffffff);
             min-height: 100vh;
         }
         .footer {
-            background-color: #dc2626; /* A shade of red (Tailwind red-600) */
+            /* Updated footer background color from the Schedule page */
+            background-color: #492833;
             color: white;
             text-align: center;
             padding: 2rem 1rem;
@@ -41,7 +43,8 @@
             width: 100%;
             left: 0;
             top: 100%;
-            background-color: #dc2626; /* red-600 */
+            /* Updated background color from the Schedule page */
+            background-color: #492833;
         }
 
         #mobile-menu.menu-open {
@@ -60,7 +63,8 @@
             left: 0; /* Will be set by JS */
             width: 0; /* Will be set by JS */
             height: 100%;
-            background-color: #dc2626; /* red-600 */
+            /* Updated header selector background color from the Schedule page */
+            background-color: #ffc0cb;
             border-radius: 0.375rem; /* rounded-md */
             transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
             z-index: -1; /* Place it behind the text */
@@ -76,12 +80,12 @@
         }
 
         #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
-             transform: translateY(6px) rotate(45deg);
+            transform: translateY(6px) rotate(45deg);
         }
         #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
             opacity: 0;
         }
-         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
+        #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
             transform: translateY(-6px) rotate(-45deg);
         }
 
@@ -103,13 +107,14 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
                     <a href="latest.html">
-                        <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385499058075992134/F1_75_Logo.png?ex=68564a0c&is=6854f88c&hm=744e08e11b761601e712a4edc17d23feb170b4bffe21b8272c9174f6c776ca0b&" alt="F1 75 Logo" class="h-10">
+                        <!-- Updated logo image source as requested -->
+                        <img src="https://cdn.discordapp.com/attachments/1283851662678556756/1385758517608321129/10c.png?ex=68573bb0&is=6855ea30&hm=1cf947d3f5bd6fed88d1fa4f0f89f0e003846df2d560644f398e68dde9a1cee2&" alt="10 Controls Logo" class="h-10">
                     </a>
                 </div>
 
                 <div id="desktop-menu-items" class="hidden md:flex items-center space-x-4">
                     <div id="sliding-highlighter"></div>
-                    <!-- Updated aria-current to 'page' for Latest -->
+                    <!-- 'Latest' link is active -->
                     <a href="latest.html" class="text-white px-3 py-2 rounded-md text-sm font-medium relative z-10" aria-current="page">Latest</a>
                     <a href="schedule.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
                     <a href="standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
@@ -118,7 +123,8 @@
                 </div>
 
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-button" class="bg-red-600 inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-red-700 focus:outline-none">
+                    <!-- Updated background and hover background color for mobile menu button -->
+                    <button type="button" id="mobile-menu-button" class="bg-[#492833] inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-gray-700 focus:outline-none">
                         <span class="sr-only">Open main menu</span>
                         <div class="hamburger-icon space-y-1.5">
                             <span></span>
@@ -131,11 +137,12 @@
         </nav>
         <div class="md:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <!-- Updated active link for mobile menu -->
-                <a href="latest.html" class="bg-red-700 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Latest</a>
-                <a href="schedule.html" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">Schedule</a>
-                <a href="standings.html" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">Standings</a>
-                <a href="teams.html" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">Join Now</a>
+                <!-- 'Latest' link is active in mobile menu -->
+                <a href="latest.html" class="bg-[#492833] text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Latest</a>
+                <a href="schedule.html" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Schedule</a>
+                <a href="standings.html" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Standings</a>
+                <a href="teams.html" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Teams</a>
+                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Join Now</a>
             </div>
         </div>
     </header>
@@ -153,7 +160,7 @@
                 <div class="text-right text-xs sm:text-sm">
                    <p id="client-time" class="font-bold"></p>
                    <p id="race-time" class="text-gray-300"></p>
-               </div>
+                </div>
            </div>
         </div>
     </div>
@@ -181,42 +188,42 @@
                         <!-- Driver 1 -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
-                                <span class="text-sm font-bold text-red-600">1</span>
-                                <p class="text-sm font-semibold text-gray-900">Oscar Piastri</p>
+                                <span class="text-sm font-bold text-[#492833]">1</span>
+                                <p class="text-sm font-semibold text-gray-900">MAXFAN1982</p>
                             </div>
-                            <span class="text-sm font-bold text-gray-700">198 PTS</span>
+                            <span class="text-sm font-bold text-gray-700">37 PTS</span>
                         </div>
                         <!-- Driver 2 -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-gray-700">2</span>
-                                <p class="text-sm font-semibold text-gray-900">Lando Norris</p>
+                                <p class="text-sm font-semibold text-gray-900">FOCUSER</p>
                             </div>
-                            <span class="text-sm font-bold text-gray-700">176 PTS</span>
+                            <span class="text-sm font-bold text-gray-700">36 PTS</span>
                         </div>
                         <!-- Driver 3 -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-gray-700">3</span>
-                                <p class="text-sm font-semibold text-gray-900">Max Verstappen</p>
+                                <p class="text-sm font-semibold text-gray-900">ANTON CHEBOTAROV</p>
                             </div>
-                            <span class="text-sm font-bold text-gray-700">155 PTS</span>
+                            <span class="text-sm font-bold text-gray-700">25 PTS</span>
                         </div>
                         <!-- Driver 4 -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-gray-700">4</span>
-                                <p class="text-sm font-semibold text-gray-900">George Russell</p>
+                                <p class="text-sm font-semibold text-gray-900">SEBEINKRO</p>
                             </div>
-                            <span class="text-sm font-bold text-gray-700">136 PTS</span>
+                            <span class="text-sm font-bold text-gray-700">20 PTS</span>
                         </div>
                         <!-- Driver 5 -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-gray-700">5</span>
-                                <p class="text-sm font-semibold text-gray-900">Charles Leclerc</p>
+                                <p class="text-sm font-semibold text-gray-900">YUKI TSUNODA</p>
                             </div>
-                            <span class="text-sm font-bold text-gray-700">104 PTS</span>
+                            <span class="text-sm font-bold text-gray-700">15 PTS</span>
                         </div>
                     </div>
                 </div>
@@ -228,26 +235,26 @@
                         <!-- Team 1 -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
-                                <span class="text-sm font-bold text-red-600">1</span>
-                                <p class="text-sm font-semibold text-gray-900">McLaren</p>
+                                <span class="text-sm font-bold text-[#492833]">1</span>
+                                <p class="text-sm font-semibold text-gray-900">HOT WHEELS MCLAREN</p>
                             </div>
-                            <span class="text-sm font-bold text-gray-700">374 PTS</span>
+                            <span class="text-sm font-bold text-gray-700">61 PTS</span>
                         </div>
                         <!-- Team 2 -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-gray-700">2</span>
-                                <p class="text-sm font-semibold text-gray-900">Mercedes</p>
+                                <p class="text-sm font-semibold text-gray-900">NEWPORT ROLEX RED BULL</p>
                             </div>
-                            <span class="text-sm font-bold text-gray-700">199 PTS</span>
+                            <span class="text-sm font-bold text-gray-700">52 PTS</span>
                         </div>
                         <!-- Team 3 -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-gray-700">3</span>
-                                <p class="text-sm font-semibold text-gray-900">Ferrari</p>
+                                <p class="text-sm font-semibold text-gray-900">MERCEDES-AMG PETRONAS</p>
                             </div>
-                            <span class="text-sm font-bold text-gray-700">183 PTS</span>
+                            <span class="text-sm font-bold text-gray-700">20 PTS</span>
                         </div>
                     </div>
                 </div>
@@ -314,7 +321,8 @@
                     <div>
                         <h4 class="text-lg font-bold text-gray-900">Watch the Latest Stream from 10 Controls!</h4>
                         <p class="text-gray-700 text-sm mt-1">Click below to watch the most recent stream for 10 Controls.</p>
-                        <a href="https://www.twitch.tv/videos/2491286798" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition-colors">
+                        <!-- Updated Watch Stream button color -->
+                        <a href="https://www.twitch.tv/videos/2491286798" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-[#492833] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md transition-colors">
                             Watch Stream
                         </a>
                     </div>
@@ -333,10 +341,12 @@
     </footer>
     
     <footer class="footer">
-        <p>© 2003-2025 Formula One World Championship Limited</p>
+        <!-- Updated copyright text from the Schedule page -->
+        <p>© 2022-2025 10 Controls Limited</p>
     </footer>
     
     <script>
+        // Retained the more extensive schedule data from the original Latest page
         const scheduleData = [
             { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris', country: 'AU' },
             { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23', winner: 'Oscar Piastri', country: 'CN' },
@@ -348,7 +358,8 @@
             { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'MC' },
             { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'ES' },
             { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'CA' },
-            { round: 11, name: 'Austrian Grand Prix', venue: 'Spielberg', date: 'June 27-29', country: 'AT' },
+            // Modified upcoming race information as requested
+            { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
             { round: 12, name: 'British Grand Prix', venue: 'Silverstone', date: 'July 4-6', country: 'GB' },
             { round: 13, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 25-27', country: 'BE' },
             { round: 14, name: 'Hungarian Grand Prix', venue: 'Budapest', date: 'August 1-3', country: 'HU' },
@@ -415,7 +426,7 @@
             if (menuItemsContainer) {
                 const menuLinks = menuItemsContainer.querySelectorAll('a');
                 const highlighter = document.getElementById('sliding-highlighter');
-                // Active link is now 'Latest'
+                // Active link is 'Latest' for this page
                 const activeLink = menuItemsContainer.querySelector('a[aria-current="page"]'); 
                 function setHighlighterToLink(link) {
                     if (!link) return;
@@ -438,10 +449,14 @@
             const raceTimeEl = document.getElementById('race-time');
             const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
 
-            // Helper to parse date strings like "March 14-16"
+            // Helper to parse date strings like "March 14-16" or "August 1st"
             function parseRaceDate(dateStr) {
                 const monthStr = dateStr.split(' ')[0];
-                const dayStr = dateStr.split(' ')[1].split('-')[0];
+                let dayStr = dateStr.split(' ')[1].split('-')[0]; // Handles "14-16"
+                // Handle dates like "August 1st", "June 27th"
+                if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
+                    dayStr = dayStr.substring(0, dayStr.length - 2);
+                }
                 return new Date(`${monthStr} ${dayStr}, 2025`);
             }
 
