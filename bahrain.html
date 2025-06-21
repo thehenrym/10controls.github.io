@@ -12,18 +12,15 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* Changed red background color to #492833 */
             background: linear-gradient(to bottom, #492833, #ffffff);
             min-height: 100vh;
         }
         .footer {
-            /* Changed footer background color to #492833 */
             background-color: #492833;
             color: white;
             text-align: center;
             padding: 2rem 1rem;
         }
-        /* Styles for smooth hamburger menu transition */
         #mobile-menu {
             max-height: 0;
             opacity: 0;
@@ -33,34 +30,26 @@
             width: 100%;
             left: 0;
             top: 100%;
-            /* Changed mobile menu background color to #492833 */
             background-color: #492833;
         }
-
         #mobile-menu.menu-open {
             max-height: 25rem;
             opacity: 1;
         }
-
-        /* Styles for the sliding navigation highlighter */
         #desktop-menu-items {
             position: relative;
         }
-
         #sliding-highlighter {
             position: absolute;
             top: 0;
-            left: 0; /* Will be set by JS */
-            width: 0; /* Will be set by JS */
+            left: 0;
+            width: 0;
             height: 100%;
-            /* Changed highlighter background color to #492833 */
             background-color: #492833;
-            border-radius: 0.375rem; /* rounded-md */
+            border-radius: 0.375rem;
             transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
-            z-index: -1; /* Place it behind the text */
+            z-index: -1;
         }
-        
-        /* Hamburger Icon Animation */
         .hamburger-icon span {
             display: block;
             width: 24px;
@@ -68,7 +57,6 @@
             background-color: white;
             transition: all 0.3s cubic-bezier(.08,.82,.17,1);
         }
-
         #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
             transform: translateY(6px) rotate(45deg);
         }
@@ -78,34 +66,66 @@
         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
             transform: translateY(-6px) rotate(-45deg);
         }
-
-        /* Table specific styles for a white theme */
         .race-table th {
-            background-color: #f3f4f6; /* Light gray background for header */
-            color: #1f2937; /* Dark text */
+            background-color: #f3f4f6;
+            color: #1f2937;
             padding: 0.75rem 1rem;
             text-align: left;
             font-weight: 600;
-            font-size: 0.875rem; /* text-sm */
-            border-bottom: 1px solid #d1d5db; /* Lighter border */
+            font-size: 0.875rem;
+            border-bottom: 1px solid #d1d5db;
         }
         .race-table td {
             padding: 0.75rem 1rem;
-            color: #374151; /* Darker gray text for content */
-            border-bottom: 1px solid #e5e7eb; /* Lightest border for rows */
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
         }
         .race-table tr:nth-child(even) {
-            background-color: #f9fafb; /* Lighter background for even rows */
+            background-color: #f9fafb;
         }
         .race-table tr:nth-child(odd) {
-            background-color: #ffffff; /* White background for odd rows */
+            background-color: #ffffff;
         }
         .race-table tr:hover {
-            background-color: #e5e7eb; /* Light hover effect */
+            background-color: #e5e7eb;
         }
-        /* New style for position number color */
         .race-table .pos-number {
-            color: #492833; /* Dark brown color */
+            color: #492833;
+        }
+        /* Custom styles for the toggle buttons */
+        .toggle-button-container {
+            position: relative;
+            background-color: #e5e7eb; /* Light gray background for the container */
+            border-radius: 9999px; /* rounded-full */
+            padding: 4px; /* p-1 equivalent */
+        }
+        .toggle-button {
+            position: relative; /* Ensure buttons are positioned relative to container */
+            z-index: 1; /* Place text above the slider */
+            color: #492833; /* Default text color */
+            padding-left: 1rem; /* px-4 equivalent */
+            padding-right: 1rem; /* px-4 equivalent */
+            padding-top: 0.5rem; /* py-2 equivalent */
+            padding-bottom: 0.5rem; /* py-2 equivalent */
+            border-radius: 9999px; /* rounded-full */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* font-medium */
+            transition: color 0.3s ease-in-out; /* Smooth text color transition */
+            background-color: transparent; /* No direct background on button */
+        }
+        .toggle-button.active {
+            color: white; /* Active text color */
+        }
+        #toggle-slider {
+            position: absolute;
+            top: 4px; /* Adjust based on padding of container */
+            left: 4px; /* Adjust based on padding of container */
+            height: calc(100% - 8px); /* Adjust based on padding of container */
+            width: 50%; /* Will be set dynamically by JS for smooth slide */
+            background-color: #492833;
+            border-radius: 9999px; /* rounded-full */
+            transition: left 0.3s ease-in-out; /* Smooth sliding transition */
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
         }
     </style>
 </head>
@@ -117,7 +137,6 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
                     <a href="latest.html">
-                        <!-- Updated F1 75 Logo URL -->
                         <img src="https://cdn.discordapp.com/attachments/1283851662678556756/1385758517608321129/10c.png?ex=68573bb0&is=6855ea30&hm=1cf947d3f5bd6fed88d1fa4f0f89f0e003846df2d560644f398e68dde9a1cee2&" alt="F1 75 Logo" class="h-10">
                     </a>
                 </div>
@@ -134,7 +153,6 @@
 
                 <!-- Mobile menu button (hamburger icon) -->
                 <div class="-mr-2 flex md:hidden">
-                    <!-- Changed background color of button to #492833 -->
                     <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833; hover-bg-color: #3a2029;">
                         <span class="sr-only">Open main menu</span>
                         <div class="hamburger-icon space-y-1.5">
@@ -149,7 +167,6 @@
         <!-- Mobile menu content, toggled by JS -->
         <div class="md:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <!-- Changed hover background color for mobile menu links to a darker shade of #492833 -->
                 <a href="latest.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Latest</a>
                 <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Schedule</a>
                 <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Standings</a>
@@ -183,204 +200,32 @@
     <!-- Main Content Area - Race Result Page Layout -->
     <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         <div class="flex items-center justify-between mb-6">
-            <!-- Changed text as per user request -->
-            <h1 class="text-2xl sm:text-3xl font-bold text-white">BAHRAIN GRAND PRIX - <br class="sm:hidden">RACE RESULT</h1>
+            <h1 id="main-title" class="text-2xl sm:text-3xl font-bold text-white">BAHRAIN GRAND PRIX - <br class="sm:hidden">RACE RESULT</h1>
         </div>
-        <!-- Changed text as per user request to all caps -->
         <p class="text-sm text-white mb-8">JUNE 13TH | BAHRAIN INTERNATIONAL CIRCUIT, SAKHIR</p>
+
+        <!-- Race/Qualifying Toggle Button -->
+        <div class="flex justify-end mb-4">
+            <div class="toggle-button-container inline-flex">
+                <div id="toggle-slider"></div>
+                <button id="race-button" class="toggle-button">RACE</button>
+                <button id="qualifying-button" class="toggle-button">QUALIFYING</button>
+            </div>
+        </div>
 
         <!-- Race Result Table -->
         <div class="overflow-x-auto rounded-lg shadow-lg">
             <table class="min-w-full divide-y divide-gray-700 race-table">
                 <thead>
                     <tr>
-                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-200 sm:pl-6">POS.</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell">GRID</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200">DRIVER</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell">TEAM</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell">STOPS</th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell">TIME</th>
-                        <th scope="col" class="py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-200 sm:pr-6">PTS.</th>
+                        <!-- Headers will be dynamically injected by JavaScript -->
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-800">
-                    <!-- Race Result Data -->
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">1</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">ANTON CHEBE...</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">MCLAREN</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">1</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">45:15:184</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">25</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">5</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">FOCUSER</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">MCLAREN</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+10.026</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">18</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">3</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">YUKI TSUNODA</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">RED BULL</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+22.388</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">15</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">4</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">1</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">MAXFAN 1982</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">RED BULL</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+24.353</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">12</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">5</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">4</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">ALPHAROMEO127</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">SCUDERIA FERRARI HP</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">1</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+26.454</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">10</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">6</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">SEBEINKRO</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">MERCEDES-AMG PETRONAS</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+28.709</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">8</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">7</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">9</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">STRA</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">ASTON MARTIN</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+29.581</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">6</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">8</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">MORA</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">VISA CASH APP RACING BULLS</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+32.937</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">4</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">9</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">TSAR</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">VISA CASH APP RACING BULLS</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">1</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+40.504</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">2</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">10</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">JSTN NL</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">SCUDERIA FERRARI HP</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+41.860</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">1</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">11</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">10</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">ASPEC33</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">ALPINE</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+47.038</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">12</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">16</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">COUNTERFEIT</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">KICK SAUBER</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">1</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+54.468</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">13</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">SHENGEN</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">MERCEDES-AMG PETRONAS</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+54.789</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">14</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">12</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">MAX HOUSLEY</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">HAAS</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+1:00.196</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
-                    </tr>
-                    <!-- New rows for positions 15-19 -->
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">15</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">15</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">LUCA STEVENS</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">ASTON MARTIN</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+1 LAP</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">16</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">17</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">ARUTHLESS GUY</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">ALPINE</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+1 LAP</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">17</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">14</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">NOJUS GEDVILAS</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">HAAS</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+1 LAP</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">18</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">18</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">IOLER_XD</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">WILLIAMS</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">2</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">+1 LAP</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
-                    </tr>
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium pos-number sm:pl-6">19</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">19</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700">C324R</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">KICK SAUBER</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">3</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 hidden md:table-cell">DNF</td>
-                        <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm text-gray-700 sm:pr-6">0</td>
-                    </tr>
+                <tbody>
+                    <!-- Rows will be dynamically injected by JavaScript -->
                 </tbody>
             </table>
         </div>
-        <!-- Removed the previous note text -->
     </main>
 
     <!-- Footer for social media links -->
@@ -461,7 +306,6 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const subHeader = document.getElementById('sub-header');
 
-            // Event listener to toggle the mobile menu and hide/show the sub-header
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('menu-open');
                 mobileMenuButton.classList.toggle('open');
@@ -474,83 +318,215 @@
             if (menuItemsContainer) {
                 const menuLinks = menuItemsContainer.querySelectorAll('a');
                 const highlighter = document.getElementById('sliding-highlighter');
-                // Set the active link to 'Schedule' by default as 'Race Results' is not a separate page
                 const activeLink = menuItemsContainer.querySelector('a[href="schedule.html"]');
 
-                // Function to position and size the highlighter based on the active link
                 function setHighlighterToLink(link) {
                     if (!link) {
-                        highlighter.style.width = '0px'; // Hide if no active link
+                        highlighter.style.width = '0px';
                         return;
                     }
                     highlighter.style.left = `${link.offsetLeft}px`;
                     highlighter.style.width = `${link.offsetWidth}px`;
                 }
-
-                // Initialize highlighter position
                 setHighlighterToLink(activeLink);
-
-                // Add mouseover event listeners to all menu links for dynamic highlighting
                 menuLinks.forEach(link => {
                     link.addEventListener('mouseenter', () => setHighlighterToLink(link));
                 });
-
-                // When the mouse leaves the menu container, return the highlighter to the active link
                 menuItemsContainer.addEventListener('mouseleave', () => {
                     setHighlighterToLink(activeLink);
                 });
             }
 
-            // --- Sub-header time and race script ---
+            // --- Hardcoded upcoming race information for this page ---
             const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
             const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
             const clientTimeEl = document.getElementById('client-time');
             const raceTimeEl = document.getElementById('race-time');
             const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
 
-            // Helper function to parse date strings from the schedule data
-            function parseRaceDate(dateStr) {
-                const monthStr = dateStr.split(' ')[0];
-                const dayStr = dateStr.split(' ')[1].split('-')[0];
-                // Assuming the year is 2025 as per the F1 2025 context
-                return new Date(`${monthStr} ${dayStr}, 2025`);
-            }
+            upcomingRaceInfoEl.textContent = `UPCOMING: EMILIA ROMAGNA GRAND PRIX`;
+            upcomingRaceDateEl.textContent = `JUNE 27TH`;
+            const raceTimeZone = 'Europe/Rome';
 
-            // Find the upcoming race based on the current date
-            const now = new Date();
-            let upcomingRace = null;
-            for (const race of scheduleData) {
-                const raceDate = parseRaceDate(race.date);
-                if (raceDate > now) {
-                    upcomingRace = race;
-                    break;
+            function updateTimes() {
+                const currentTime = new Date();
+                clientTimeEl.textContent = `MY TIME: ${currentTime.toLocaleTimeString([], timeOptions)}`;
+                if (raceTimeZone) {
+                    raceTimeEl.textContent = `TRACK TIME: ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
+                } else {
+                    raceTimeEl.textContent = `TRACK TIME: N/A`;
+                }
+            }
+            updateTimes();
+            setInterval(updateTimes, 1000 * 60);
+
+            // --- Race and Qualifying Data ---
+            const raceResults = [
+                { pos: 1, grid: 2, driver: "MAXFAN 1982", team: "MCLAREN", stops: 1, time: "45:15:184", pts: 25 },
+                { pos: 2, grid: 5, driver: "FOCUSER", team: "MCLAREN", stops: 2, time: "+10.026", pts: 18 },
+                { pos: 3, grid: 2, driver: "YUKI TSUNODA", team: "RED BULL", stops: 2, time: "+22.388", pts: 15 },
+                { pos: 4, grid: 1, driver: "MAXFAN 1982", team: "RED BULL", stops: 2, time: "+24.353", pts: 12 },
+                { pos: 5, grid: 4, driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI HP", stops: 1, time: "+26.454", pts: 10 },
+                { pos: 6, grid: 2, driver: "SHENGEN", team: "MERCEDES-AMG PETRONAS", stops: 2, time: "+28.709", pts: 8 },
+                { pos: 7, grid: 9, driver: "MORA", team: "ASTON MARTIN", stops: 2, time: "+29.581", pts: 6 },
+                { pos: 8, grid: 2, driver: "MORA", team: "VISA CASH APP RACING BULLS", stops: 2, time: "+32.937", pts: 4 },
+                { pos: 9, grid: 2, driver: "TSAR", team: "VISA CASH APP RACING BULLS", stops: 1, time: "+40.504", pts: 2 },
+                { pos: 10, grid: 2, driver: "JSTN NL", team: "SCUDERIA FERRARI HP", stops: 2, time: "+41.860", pts: 1 },
+                { pos: 11, grid: 10, driver: "TSAR", team: "ALPINE", stops: 2, time: "+47.038", pts: 0 },
+                { pos: 12, grid: 16, driver: "COUNTERFEIT", team: "KICK SAUBER", stops: 1, time: "+54.468", pts: 0 },
+                { pos: 13, grid: 2, driver: "SHENGEN", team: "MERCEDES-AMG PETRONAS", stops: 2, time: "+54.789", pts: 0 },
+                { pos: 14, grid: 12, driver: "MAX HOUSLEY", team: "HAAS", stops: 2, time: "+1:00.196", pts: 0 },
+                { pos: 15, grid: 15, driver: "LUCA STEVENS", team: "ASTON MARTIN", stops: 2, time: "+1 LAP", pts: 0 },
+                { pos: 16, grid: 17, driver: "ARUTHLESS GUY", team: "ALPINE", stops: 2, time: "+1 LAP", pts: 0 },
+                { pos: 17, grid: 14, driver: "NOJUS GEDVILAS", team: "HAAS", stops: 2, time: "+1 LAP", pts: 0 },
+                { pos: 18, grid: 18, driver: "IOLER_XD", team: "WILLIAMS", stops: 2, time: "+1 LAP", pts: 0 },
+                { pos: 19, grid: 19, driver: "C324R", team: "KICK SAUBER", stops: 3, time: "DNF", pts: 0 }
+            ];
+
+            const qualifyingResults = [
+                { pos: 1, driver: "MAXFAN 1982", team: "RED BULL", tyre: "S", best: "1:27.240", gap: "" },
+                { pos: 2, driver: "ANTON CHEB...", team: "MCLAREN", tyre: "S", best: "1:27.344", gap: "+0.104" },
+                { pos: 3, driver: "FOCUSER", team: "MCLAREN", tyre: "S", best: "1:27.562", gap: "+0.322" },
+                { pos: 4, driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI HP", tyre: "S", best: "1:27.723", gap: "+0.483" },
+                { pos: 5, driver: "YUKI TSUNODA", team: "RED BULL", tyre: "S", best: "1:27.852", gap: "+0.612" },
+                { pos: 6, driver: "SHENGEN", team: "MERCEDES-AMG PETRONAS", tyre: "S", best: "1:27.965", gap: "+0.725" },
+                { pos: 7, driver: "MORA T", team: "VISA CASH APP RACING BULLS", tyre: "S", best: "1:27.968", gap: "+0.728" },
+                { pos: 8, driver: "JSTN NL", team: "SCUDERIA FERRARI HP", tyre: "S", best: "1:28.118", gap: "+0.878" },
+                { pos: 9, driver: "STRA", team: "ASTON MARTIN", tyre: "S", best: "1:28.238", gap: "+0.998" },
+                { pos: 10, driver: "ASPEC33", team: "ALPINE", tyre: "S", best: "1:28.412", gap: "+1.172" },
+                { pos: 11, driver: "TSAR", team: "VISA CASH APP RACING BULLS", tyre: "S", best: "1:28.475", gap: "+1.235" },
+                { pos: 12, driver: "MAX HOUSLEY", team: "HAAS", tyre: "S", best: "1:28.559", gap: "+1.319" },
+                { pos: 13, driver: "SEBEINKRO", team: "MERCEDES-AMG PETRONAS", tyre: "S", best: "1:28.623", gap: "+1.383" },
+                { pos: 14, driver: "NOJUS GEDVILAS", team: "HAAS", tyre: "S", best: "1:28.766", gap: "+1.526" },
+                { pos: 15, driver: "LUCA STEVENS", team: "ASTON MARTIN", tyre: "S", best: "1:29.016", gap: "+1.776" },
+                { pos: 16, driver: "COUNTERFEIT", team: "KICK SAUBER", tyre: "S", best: "1:29.103", gap: "+1.863" },
+                { pos: 17, driver: "ARUTHLESS GUY", team: "ALPINE", tyre: "S", best: "1:29.200", gap: "+1.960" },
+                { pos: 18, driver: "IOLER_XD", team: "WILLIAMS", tyre: "S", best: "1:29.859", gap: "+2.619" },
+                { pos: 19, driver: "C3Z4R", team: "KICK SAUBER", tyre: "S", best: "1:31.082", gap: "+3.842" }
+            ];
+
+            // Header definitions with mobile visibility classes
+            const raceHeaders = [
+                { text: 'POS.', col_key: 'pos', class: 'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-200 sm:pl-6' },
+                { text: 'GRID', col_key: 'grid', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell' },
+                { text: 'DRIVER', col_key: 'driver', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200' },
+                { text: 'TEAM', col_key: 'team', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell' },
+                { text: 'STOPS', col_key: 'stops', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell' },
+                { text: 'TIME', col_key: 'time', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell' },
+                { text: 'PTS.', col_key: 'pts', class: 'py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-200 sm:pl-6' }
+            ];
+
+            const qualifyingHeaders = [
+                { text: 'POS.', col_key: 'pos', class: 'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-200 sm:pl-6' },
+                { text: 'DRIVER', col_key: 'driver', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200' },
+                { text: 'TEAM', col_key: 'team', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell' },
+                { text: 'TYRE', col_key: 'tyre', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200' }, /* Tyres always visible */
+                { text: 'BEST', col_key: 'best', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell' },
+                { text: 'GAP', col_key: 'gap', class: 'py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-200 sm:pl-6' }
+            ];
+
+            const toggleSlider = document.getElementById('toggle-slider');
+            const raceButton = document.getElementById('race-button');
+            const qualifyingButton = document.getElementById('qualifying-button');
+            const mainTitle = document.getElementById('main-title'); // Get reference to the main title
+
+            // Function to update the slider position and active button state
+            function updateSliderAndActiveButton(activeButton) {
+                // Ensure buttons have been rendered and have offset properties
+                if (!raceButton.offsetWidth || !qualifyingButton.offsetWidth) {
+                    // Re-try after a short delay if elements are not yet laid out
+                    setTimeout(() => updateSliderAndActiveButton(activeButton), 50);
+                    return;
+                }
+
+                if (activeButton === raceButton) {
+                    toggleSlider.style.left = `${raceButton.offsetLeft}px`;
+                    toggleSlider.style.width = `${raceButton.offsetWidth}px`;
+                    raceButton.classList.add('active');
+                    qualifyingButton.classList.remove('active');
+                } else {
+                    toggleSlider.style.left = `${qualifyingButton.offsetLeft}px`;
+                    toggleSlider.style.width = `${qualifyingButton.offsetWidth}px`;
+                    qualifyingButton.classList.add('active');
+                    raceButton.classList.remove('active');
                 }
             }
 
-            // Update the sub-header with upcoming race information
-            if (upcomingRace) {
-                upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
-                upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
+            // Function to render the table dynamically based on type (race or qualifying)
+            function renderTable(type) {
+                const tableHeadRow = document.querySelector('.race-table thead tr');
+                const tableBody = document.querySelector('.race-table tbody');
+                tableHeadRow.innerHTML = ''; // Clear existing headers
+                tableBody.innerHTML = ''; // Clear existing body
 
-                const raceTimeZone = timeZoneMap[upcomingRace.venue];
+                let currentData = [];
+                let currentHeaders = [];
 
-                // Function to update client and track times
-                function updateTimes() {
-                    const currentTime = new Date();
-                    clientTimeEl.textContent = `MY TIME: ${currentTime.toLocaleTimeString([], timeOptions)}`;
-                    if (raceTimeZone) {
-                        raceTimeEl.textContent = `TRACK TIME: ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
-                    } else {
-                        raceTimeEl.textContent = `TRACK TIME: N/A`;
-                    }
+                if (type === 'race') {
+                    currentData = raceResults;
+                    currentHeaders = raceHeaders;
+                    mainTitle.innerHTML = 'BAHRAIN GRAND PRIX - <br class="sm:hidden">RACE RESULT'; // Set title for Race
+                } else if (type === 'qualifying') {
+                    currentData = qualifyingResults;
+                    currentHeaders = qualifyingHeaders;
+                    mainTitle.innerHTML = 'BAHRAIN GRAND PRIX - <br class="sm:hidden">QUALIFYING RESULT'; // Set title for Qualifying
                 }
-                updateTimes(); // Initial call
-                setInterval(updateTimes, 1000 * 60); // Update every minute
-            } else {
-                upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                // Hide time display if the season is over
-                clientTimeEl.parentElement.style.display = 'none'; 
+
+                // Render headers
+                currentHeaders.forEach(headerDef => {
+                    const th = document.createElement('th');
+                    th.scope = 'col';
+                    th.className = headerDef.class;
+                    th.textContent = headerDef.text;
+                    tableHeadRow.appendChild(th);
+                });
+
+                // Render body rows
+                currentData.forEach(rowData => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'whitespace-nowrap';
+
+                    // Iterate through header definitions to match data to columns
+                    currentHeaders.forEach(headerDef => {
+                        const td = document.createElement('td');
+                        // Use base class and then apply specific styles
+                        td.className = headerDef.class.replace('font-semibold text-gray-200', 'text-gray-700'); 
+
+                        if (headerDef.col_key === 'pos') {
+                            td.classList.add('pos-number'); // Apply specific color for POS
+                        }
+                        
+                        // Populate cell content based on column key
+                        if (rowData[headerDef.col_key] !== undefined) {
+                            if (headerDef.col_key === 'tyre' && type === 'qualifying') {
+                                td.textContent = rowData[headerDef.col_key];
+                                td.style.color = 'red'; // Make 'S' red
+                            } else {
+                                td.textContent = rowData[headerDef.col_key];
+                            }
+                        } else {
+                            td.textContent = ''; // Handle missing data gracefully
+                        }
+                        tr.appendChild(td);
+                    });
+                    tableBody.appendChild(tr);
+                });
             }
+
+            // Event Listeners for Toggle Buttons
+            raceButton.addEventListener('click', () => {
+                updateSliderAndActiveButton(raceButton);
+                renderTable('race');
+            });
+
+            qualifyingButton.addEventListener('click', () => {
+                updateSliderAndActiveButton(qualifyingButton);
+                renderTable('qualifying');
+            });
+
+            // Initial render and slider position on page load
+            renderTable('race');
+            updateSliderAndActiveButton(raceButton); // Set initial slider position to Race button
         };
     </script>
 </body>
