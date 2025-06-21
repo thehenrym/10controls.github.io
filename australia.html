@@ -126,9 +126,7 @@
         }
         #toggle-slider {
             position: absolute;
-            top: 4px;an you update the points in the race chart to match the current motogp points system, <!DOCTYPE html>
-
-<html lang="en"> 
+            top: 4px;
             height: calc(100% - 8px);
             width: 50%;
             background-color: #492833;
@@ -434,6 +432,7 @@
                     const targetButton = activeButton === 'race' ? raceButton : qualifyingButton;
                     const otherButton = activeButton === 'race' ? qualifyingButton : raceButton;
 
+                    // Ensure the element has rendered before trying to get its dimensions
                     if (targetButton.offsetWidth === 0) {
                         requestAnimationFrame(() => updateSliderAndActiveButton(activeButton));
                         return;
