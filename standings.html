@@ -26,8 +26,12 @@
         }
         /* Transition for the table containers */
         .standings-container {
-            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
-            overflow: hidden;
+            /* Removed max-height and overflow as they will be absolutely positioned */
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
         }
         
         /* Styles for smooth hamburger menu transition */
@@ -252,42 +256,45 @@
             </div>
         </div>
 
-        <!-- Driver Standings Table -->
-        <div id="driver-standings-container" class="standings-container">
-             <div class="standings-table-container"> <!-- Added custom class for new styles -->
-                <table class="standings-table"> <!-- Added custom class for new styles -->
-                    <thead>
-                        <tr>
-                            <th scope="col">Pos</th>
-                            <th scope="col">Driver</th>
-                            <!-- Removed Nationality column header -->
-                            <th scope="col" class="hidden-mobile">Team</th>
-                            <th scope="col">Pts</th>
-                        </tr>
-                    </thead>
-                    <tbody id="driver-standings-body">
-                        </tbody>
-                </table>
+        <!-- Tables Wrapper to prevent layout shifts -->
+        <div id="tables-wrapper" class="relative"> 
+            <!-- Driver Standings Table -->
+            <div id="driver-standings-container" class="standings-container">
+                 <div class="standings-table-container"> <!-- Added custom class for new styles -->
+                    <table class="standings-table"> <!-- Added custom class for new styles -->
+                        <thead>
+                            <tr>
+                                <th scope="col">Pos</th>
+                                <th scope="col">Driver</th>
+                                <!-- Removed Nationality column header -->
+                                <th scope="col" class="hidden-mobile">Team</th>
+                                <th scope="col">Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody id="driver-standings-body">
+                            </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        <!-- Team Standings Table -->
-        <div id="team-standings-container" class="standings-container">
-             <div class="standings-table-container"> <!-- Added custom class for new styles -->
-                <table class="standings-table"> <!-- Added custom class for new styles -->
-                    <thead>
-                        <tr>
-                            <th scope="col">Pos</th>
-                            <th scope="col">Team</th>
-                            <th scope="col">Pts</th>
-                        </tr>
-                    </thead>
-                    <tbody id="team-standings-body">
-                        </tbody>
-                </table>
+            <!-- Team Standings Table -->
+            <div id="team-standings-container" class="standings-container">
+                 <div class="standings-table-container"> <!-- Added custom class for new styles -->
+                    <table class="standings-table"> <!-- Added custom class for new styles -->
+                        <thead>
+                            <tr>
+                                <th scope="col">Pos</th>
+                                <th scope="col">Team</th>
+                                <th scope="col">Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody id="team-standings-body">
+                            </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </div>
+        </div> <!-- End tables-wrapper -->
+    </div> <!-- End Main Container -->
     
       <!-- Pre-Footer -->
     <footer class="bg-gray-800 text-white text-center py-5 px-2 mt-8">
@@ -642,7 +649,8 @@
             const teamStandingsBody = document.getElementById('team-standings-body');
             const driverContainer = document.getElementById('driver-standings-container');
             const teamContainer = document.getElementById('team-standings-container');
-            
+            const tablesWrapper = document.getElementById('tables-wrapper'); // Get the new wrapper
+
             // Populate driver standings table
             if (driverStandingsBody) {
                 updatedDriverStandings.forEach((driver, index) => {
@@ -682,14 +690,17 @@
             
             // Set initial visibility and handle toggle logic
             setTimeout(() => {
+                // Calculate max height after content is rendered
                 const driverTableHeight = driverContainer.scrollHeight;
                 const teamTableHeight = teamContainer.scrollHeight;
+                const maxTableHeight = Math.max(driverTableHeight, teamTableHeight);
+                tablesWrapper.style.minHeight = `${maxTableHeight}px`; // Set fixed height for wrapper
 
-                // Initially show drivers, hide teams
-                driverContainer.style.maxHeight = `${driverTableHeight}px`;
+                // Initialize visibility
                 driverContainer.style.opacity = '1';
-                teamContainer.style.maxHeight = '0px';
+                driverContainer.style.visibility = 'visible';
                 teamContainer.style.opacity = '0';
+                teamContainer.style.visibility = 'hidden';
 
                 const showDriversBtn = document.getElementById('show-drivers-btn');
                 const showTeamsBtn = document.getElementById('show-teams-btn');
@@ -702,12 +713,10 @@
                     showTeamsBtn.classList.add('text-gray-700');
                     showTeamsBtn.classList.remove('text-white');
                     
-                    teamContainer.style.maxHeight = '0px';
                     teamContainer.style.opacity = '0';
-                    setTimeout(() => {
-                        driverContainer.style.maxHeight = `${driverTableHeight}px`;
-                        driverContainer.style.opacity = '1';
-                    }, 300); // Small delay to allow fade out before fade in
+                    teamContainer.style.visibility = 'hidden';
+                    driverContainer.style.opacity = '1';
+                    driverContainer.style.visibility = 'visible';
                 });
 
                 showTeamsBtn.addEventListener('click', () => {
@@ -717,12 +726,10 @@
                     showDriversBtn.classList.add('text-gray-700');
                     showDriversBtn.classList.remove('text-white');
 
-                    driverContainer.style.maxHeight = '0px';
                     driverContainer.style.opacity = '0';
-                    setTimeout(() => {
-                        teamContainer.style.maxHeight = `${teamTableHeight}px`;
-                        teamContainer.style.opacity = '1';
-                    }, 300); // Small delay
+                    driverContainer.style.visibility = 'hidden';
+                    teamContainer.style.opacity = '1';
+                    teamContainer.style.visibility = 'visible';
                 });
             }, 100); // Small timeout to ensure elements are rendered before calculating scrollHeight
         };
