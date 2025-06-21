@@ -15,12 +15,12 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* Background gradient matching the standings page */
+            /* Background gradient matching the reference page */
             background: linear-gradient(to bottom, #492833, #ffffff);
             min-height: 100vh;
         }
         .footer {
-            /* Footer background color matching the standings page */
+            /* Footer background color matching the reference page */
             background-color: #492833;
             color: white;
             text-align: center;
@@ -37,7 +37,7 @@
             transform: translateY(0);
         }
 
-        /* Styles for smooth hamburger menu transition, matching standings page */
+        /* Styles for smooth hamburger menu transition, matching reference page */
         #mobile-menu {
             max-height: 0;
             opacity: 0;
@@ -47,7 +47,7 @@
             width: 100%;
             left: 0;
             top: 100%;
-            /* Background color matching the standings page */
+            /* Background color matching the reference page */
             background-color: #492833;
         }
 
@@ -56,7 +56,7 @@
             opacity: 1;
         }
 
-        /* Styles for the sliding navigation highlighter, matching standings page */
+        /* Styles for the sliding navigation highlighter, matching reference page */
         #desktop-menu-items {
             position: relative;
         }
@@ -67,58 +67,32 @@
             left: 0; /* Will be set by JS */
             width: 0; /* Will be set by JS */
             height: 100%;
-            /* Background color matching the standings page */
-            background-color: #ffc0cb;
+            /* Background color matching the reference page */
+            background-color: #492833;
             border-radius: 0.375rem; /* rounded-md */
             transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
             z-index: -1; /* Place it behind the text */
         }
         
-        /* Hamburger Icon Animation, copied from standings.html for consistency */
-        .hamburger-icon {
-            width: 24px;
-            height: 18px;
-            position: relative;
-        }
-
+        /* Styles for Hamburger Icon to "X" Animation */
         .hamburger-icon span {
             display: block;
-            position: absolute;
+            width: 24px;
             height: 2px;
-            width: 100%;
-            background: white;
-            border-radius: 2px;
-            opacity: 1;
-            left: 0;
-            transform: rotate(0deg);
-            transition: .25s ease-in-out;
-        }
-
-        .hamburger-icon span:nth-child(1) {
-            top: 0px;
-        }
-
-        .hamburger-icon span:nth-child(2) {
-            top: 8px;
-        }
-
-        .hamburger-icon span:nth-child(3) {
-            top: 16px;
+            background-color: white;
+            transition: all 0.3s cubic-bezier(.08,.82,.17,1);
         }
 
         #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
-            top: 8px;
-            transform: rotate(135deg);
+            transform: translateY(10px) rotate(45deg);
         }
 
         #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
             opacity: 0;
-            left: -24px;
         }
 
         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
-            top: 8px;
-            transform: rotate(-135deg);
+            transform: translateY(-10px) rotate(-45deg);
         }
     </style>
 </head>
@@ -145,10 +119,10 @@
                 </div>
 
                 <div class="-mr-2 flex md:hidden">
-                    <!-- Mobile menu button, keeping Tailwind classes for styling -->
-                    <button type="button" id="mobile-menu-button" class="bg-[#492833] inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-gray-700 focus:outline-none">
+                    <!-- Mobile menu button -->
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833; hover-bg-color: #3a2029;">
                         <span class="sr-only">Open main menu</span>
-                        <div class="hamburger-icon">
+                        <div class="hamburger-icon space-y-2">
                             <span></span>
                             <span></span>
                             <span></span>
@@ -158,14 +132,13 @@
             </div>
         </nav>
         <div class="md:hidden" id="mobile-menu">
+            <!-- Mobile menu links updated to match reference page styling -->
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="latest.html" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Latest</a>
-                <!-- Active background for Schedule link in mobile menu -->
-                <a href="schedule.html" class="bg-[#492833] text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Schedule</a>
-                <a href="standings.html" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Standings</a>
-                <!-- New 'Teams' link added to mobile menu for consistency -->
-                <a href="teams.html" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Teams</a>
-                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Join Now</a>
+                <a href="latest.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Latest</a>
+                <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Schedule</a>
+                <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Standings</a>
+                <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Teams</a>
+                 <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Join Now</a>
             </div>
         </div>
     </header>
@@ -195,19 +168,19 @@
         </div>
     </div>
 
-    <!-- Pre-Footer for Social Media Links -->
-    <footer class="bg-gray-800 text-white text-center py-5 px-2 mt-8">
+    <!-- Social Media Links Footer -->
+    <footer class="bg-black text-white text-center py-5 px-2 mt-8">
         <div class="max-w-7xl mx-auto flex justify-center items-center space-x-6">
-            <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
-            <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
-            <a href="https://www.youtube.com/@10controls24" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
-            <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
+            <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
+            <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="https://www.youtube.com/@10controls24" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
+            <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
         </div>
     </footer>
 
-    <!-- Main Footer with Copyright -->
+    <!-- Main Copyright Footer -->
     <footer class="footer">
-        <p>© 2022-2025 10 Controls Limited</p>
+        <p>© 2003-2025 Formula One World Championship Limited</p>
     </footer>
     
     <script>
@@ -322,10 +295,33 @@
                     // Conditionally create the footer HTML based on whether the race has a winner
                     let footerHtml;
                     if ((race.round === 1 || race.round === 2) && race.winner) {
+                        
+                        let winnerDisplayHtml = '';
+                        if (race.winner === 'Anton Chebotarov') {
+                            winnerDisplayHtml = `
+                                <span class="flex items-center">
+                                    <img src="https://cdn-icons-png.flaticon.com/128/197/197572.png" alt="Ukraine Flag" class="h-5 w-auto mr-2 rounded-sm" onerror="this.style.display='none'">
+                                    ${race.winner}
+                                </span>
+                            `;
+                        } else if (race.winner === 'Maxfan1982') {
+                            winnerDisplayHtml = `
+                                <span class="flex items-center">
+                                    <img src="https://cdn-icons-png.flaticon.com/128/197/197529.png" alt="Poland Flag" class="h-5 w-auto mr-2 rounded-sm" onerror="this.style.display='none'">
+                                    ${race.winner}
+                                </span>
+                            `;
+                        } else {
+                            winnerDisplayHtml = `<span>${race.winner}</span>`;
+                        }
+
                         // Display winner and a "Results" button for completed races
                         footerHtml = `
                             <div class="flex justify-between items-center">
-                                <p class="text-base font-semibold text-gray-800 uppercase"><span class="font-bold text-[#492833]">WINNER:</span> ${race.winner}</p>
+                                <div class="text-base font-semibold text-gray-800 uppercase flex items-center">
+                                    <span class="font-bold text-[#492833] mr-2">WINNER:</span>
+                                    ${winnerDisplayHtml}
+                                </div>
                                 <a href="${resultButtonHref}" class="bg-[#492833] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Results</a>
                             </div>
                         `;
@@ -414,7 +410,7 @@
                 const monthStr = dateStr.split(' ')[0];
                 let dayStr = dateStr.split(' ')[1];
                 // Remove ordinal suffixes (st, nd, rd, th) from the day string
-                if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
+                if (dayStr && (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th'))) {
                     dayStr = dayStr.substring(0, dayStr.length - 2);
                 }
                 // Return a Date object for the current year (assuming 2025 based on the page title)
