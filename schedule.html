@@ -94,6 +94,15 @@
         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
             transform: translateY(-10px) rotate(-45deg);
         }
+
+        /* Styles for the mobile menu link hover effect */
+        .mobile-menu-link {
+            background-color: #492833; /* The original dark red color */
+            transition: background-color 0.2s ease-in-out;
+        }
+        .mobile-menu-link:hover {
+            background-color: #000000; /* Black */
+        }
     </style>
 </head>
 <body class="font-medium">
@@ -132,20 +141,20 @@
             </div>
         </nav>
         <div class="md:hidden" id="mobile-menu">
-            <!-- Mobile menu links updated to match reference page styling -->
+            <!-- Mobile menu links with new class for hover effect -->
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="latest.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Latest</a>
-                <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Schedule</a>
-                <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Standings</a>
-                <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Teams</a>
-                 <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Join Now</a>
+                <a href="latest.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Latest</a>
+                <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
+                <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
+                <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Teams</a>
+                 <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
             </div>
         </div>
     </header>
 
-    <!-- Sub-Header for Upcoming Race Info and Time -->
-    <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full">
+    <!-- Sub-Header for Upcoming Race Info and Time. Hidden on mobile. -->
+    <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300 hidden md:flex">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
             <div class="flex items-center space-x-2 sm:space-x-4">
                 <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
                 </div>
@@ -295,33 +304,10 @@
                     // Conditionally create the footer HTML based on whether the race has a winner
                     let footerHtml;
                     if ((race.round === 1 || race.round === 2) && race.winner) {
-                        
-                        let winnerDisplayHtml = '';
-                        if (race.winner === 'Anton Chebotarov') {
-                            winnerDisplayHtml = `
-                                <span class="flex items-center">
-                                    <img src="https://cdn-icons-png.flaticon.com/128/197/197572.png" alt="Ukraine Flag" class="h-5 w-auto mr-2 rounded-sm" onerror="this.style.display='none'">
-                                    ${race.winner}
-                                </span>
-                            `;
-                        } else if (race.winner === 'Maxfan1982') {
-                            winnerDisplayHtml = `
-                                <span class="flex items-center">
-                                    <img src="https://cdn-icons-png.flaticon.com/128/197/197529.png" alt="Poland Flag" class="h-5 w-auto mr-2 rounded-sm" onerror="this.style.display='none'">
-                                    ${race.winner}
-                                </span>
-                            `;
-                        } else {
-                            winnerDisplayHtml = `<span>${race.winner}</span>`;
-                        }
-
                         // Display winner and a "Results" button for completed races
                         footerHtml = `
                             <div class="flex justify-between items-center">
-                                <div class="text-base font-semibold text-gray-800 uppercase flex items-center">
-                                    <span class="font-bold text-[#492833] mr-2">WINNER:</span>
-                                    ${winnerDisplayHtml}
-                                </div>
+                                <p class="text-base font-semibold text-gray-800 uppercase"><span class="font-bold text-[#492833]">WINNER:</span> ${race.winner}</p>
                                 <a href="${resultButtonHref}" class="bg-[#492833] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Results</a>
                             </div>
                         `;
@@ -360,14 +346,10 @@
             // --- Mobile menu toggle script ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            const subHeader = document.getElementById('sub-header');
 
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('menu-open');
                 mobileMenuButton.classList.toggle('open');
-                // Also toggle the visibility of the sub-header to prevent overlap
-                subHeader.classList.toggle('opacity-0');
-                subHeader.classList.toggle('pointer-events-none'); // Disable clicks when hidden
             });
             
             // --- Sliding highlighter script for desktop menu ---
@@ -439,12 +421,12 @@
                 // Function to update client and track times
                 function updateTimes() {
                     const currentTime = new Date();
-                    clientTimeEl.textContent = `MY TIME: ${currentTime.toLocaleTimeString([], timeOptions)}`;
+                    clientTimeEl.textContent = `MY TIME ${currentTime.toLocaleTimeString([], timeOptions)}`;
                     if (raceTimeZone) {
-                        raceTimeEl.textContent = `TRACK TIME: ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
+                        raceTimeEl.textContent = `TRACK TIME ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
                     } else {
                         // Display N/A if time zone for the venue is not in our map
-                        raceTimeEl.textContent = `TRACK TIME: N/A`;
+                        raceTimeEl.textContent = `TRACK TIME N/A`;
                     }
                 }
                 updateTimes(); // Initial call to display times right away
