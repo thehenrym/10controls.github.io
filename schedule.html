@@ -185,7 +185,7 @@
                    <p id="client-time" class="font-bold"></p>
                    <p id="race-time" class="text-gray-300"></p>
                 </div>
-           </div>
+            </div>
         </div>
     </div>
 
@@ -253,18 +253,20 @@
             'Yas Marina': 'Asia/Dubai'
         };
         
+        // This function runs when the entire page has finished loading.
         window.onload = function() {
             // --- Content population script for schedule cards ---
             const scheduleGrid = document.getElementById('schedule-grid');
             if (scheduleGrid) {
+                // Loop through each race in the schedule data array
                 scheduleData.forEach((race, index) => {
                     const card = document.createElement('div');
-                    // Add Tailwind classes for styling, hover effects, and rounded corners
+                    // Add Tailwind classes for styling, hover effects, and the initial animation state
                     card.className = 'schedule-card bg-white rounded-lg shadow-lg p-8 flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300';
                     
                     let flagHtml = '';
-                    // Conditional flag image rendering based on country code
-                    // Using Flaticon for flags, with a placeholder fallback on error
+                    // This large block conditionally sets the HTML for the country flag image based on the 'country' code.
+                    // It uses Flaticon URLs and provides a placeholder image if the flag fails to load.
                     if (race.country === 'USA') {
                         flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
                     } else if (race.country === 'QAT') {
@@ -309,7 +311,7 @@
                         flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197507.png" alt="Australian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
                     }
                     
-                    let resultButtonHref = "#"; // Default href for results button
+                    let resultButtonHref = "#"; // Default href for the results button
                     // Logic to set specific href for Bahrain and Australia Grand Prix results buttons
                     if (race.round === 1 && race.name === 'Bahrain Grand Prix') {
                         resultButtonHref = "bahrain.html";
@@ -317,9 +319,10 @@
                         resultButtonHref = "australia.html";
                     }
 
+                    // Conditionally create the footer HTML based on whether the race has a winner
                     let footerHtml;
                     if ((race.round === 1 || race.round === 2) && race.winner) {
-                        // Display winner and results button only for round 1 and 2 if a winner exists
+                        // Display winner and a "Results" button for completed races
                         footerHtml = `
                             <div class="flex justify-between items-center">
                                 <p class="text-base font-semibold text-gray-800 uppercase"><span class="font-bold text-[#492833]">WINNER:</span> ${race.winner}</p>
@@ -327,10 +330,11 @@
                             </div>
                         `;
                     } else {
-                        // For all other rounds, or if no winner is specified for round 1/2, just display the date
+                        // For all other rounds, or if no winner is specified, just display the date
                         footerHtml = `<p class="text-base font-semibold text-gray-800">${race.date.toUpperCase()}</p>`;
                     }
 
+                    // Set the full inner HTML for the card, combining all the pieces
                     card.innerHTML = `
                         <div>
                             <p class="text-base font-bold text-[#492833]">ROUND ${race.round || race.pos}</p>
@@ -342,15 +346,18 @@
                             ${footerHtml}
                         </div>
                     `;
+                    // Add the newly created card to the grid
                     scheduleGrid.appendChild(card);
                 });
 
-                // Apply staggered fade-in animation to schedule cards
+                // --- Staggered fade-in animation logic ---
                 const cards = document.querySelectorAll('.schedule-card');
+                // A short delay before starting the animations to ensure all cards are in the DOM
                 setTimeout(() => {
                     cards.forEach((card, index) => {
-                        // Stagger the animation slightly for each card
+                        // Stagger the animation for each card by multiplying its index by 100ms
                         setTimeout(() => {
+                            // Add the 'visible' class to trigger the CSS transition
                             card.classList.add('visible');
                         }, index * 100); 
                     });
@@ -365,9 +372,9 @@
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('menu-open');
                 mobileMenuButton.classList.toggle('open');
-                // Toggle visibility of sub-header when mobile menu is open
+                // Also toggle the visibility of the sub-header to prevent overlap
                 subHeader.classList.toggle('opacity-0');
-                subHeader.classList.toggle('pointer-events-none'); // Disable pointer events when hidden
+                subHeader.classList.toggle('pointer-events-none'); // Disable clicks when hidden
             });
             
             // --- Sliding highlighter script for desktop menu ---
@@ -377,22 +384,22 @@
                 const highlighter = document.getElementById('sliding-highlighter');
                 const activeLink = menuItemsContainer.querySelector('a[aria-current="page"]');
 
-                // Function to set the highlighter's position and width to match a given link
+                // Function to move the highlighter to a specific link's position
                 function setHighlighterToLink(link) {
                     if (!link) return;
                     highlighter.style.left = `${link.offsetLeft}px`;
                     highlighter.style.width = `${link.offsetWidth}px`;
                 }
 
-                // Initialize highlighter position to the active link
+                // Initialize highlighter on the currently active link
                 setHighlighterToLink(activeLink);
 
-                // Add mouseenter event listeners to all menu links to move the highlighter
+                // Add mouseover event listeners to all links to move the highlighter
                 menuLinks.forEach(link => {
                     link.addEventListener('mouseenter', () => setHighlighterToLink(link));
                 });
 
-                // When mouse leaves the menu container, return highlighter to the active link
+                // When the mouse leaves the menu, return the highlighter to the active link
                 menuItemsContainer.addEventListener('mouseleave', () => {
                     setHighlighterToLink(activeLink);
                 });
@@ -403,38 +410,37 @@
             const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
             const clientTimeEl = document.getElementById('client-time');
             const raceTimeEl = document.getElementById('race-time');
-            // Options for time formatting (24-hour format)
             const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
 
-            // Helper function to parse race date strings (e.g., "March 14-16", "June 27th")
+            // Helper function to parse various date formats from the schedule data
             function parseRaceDate(dateStr) {
                 const monthStr = dateStr.split(' ')[0];
                 let dayStr = dateStr.split(' ')[1];
-                // Remove ordinal suffixes (st, nd, rd, th) from day string
+                // Remove ordinal suffixes (st, nd, rd, th) from the day string
                 if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
                     dayStr = dayStr.substring(0, dayStr.length - 2);
                 }
-                // Return a Date object for the current year (assuming 2025 based on page title)
+                // Return a Date object for the current year (assuming 2025 based on the page title)
                 return new Date(`${monthStr} ${dayStr}, 2025`);
             }
 
-            // Find the next upcoming race based on current date
+            // Find the next upcoming race by comparing race dates with the current time
             const now = new Date();
             let upcomingRace = null;
             for (const race of scheduleData) {
                 const raceDate = parseRaceDate(race.date);
                 if (raceDate > now) {
                     upcomingRace = race;
-                    break;
+                    break; // Stop after finding the first future race
                 }
             }
 
             if (upcomingRace) {
-                // Populate upcoming race information
+                // Populate the sub-header with the upcoming race details
                 upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
                 upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
 
-                // Get the time zone for the upcoming race's venue
+                // Get the IANA time zone for the race's venue from our map
                 const raceTimeZone = timeZoneMap[upcomingRace.venue];
 
                 // Function to update client and track times
@@ -444,16 +450,16 @@
                     if (raceTimeZone) {
                         raceTimeEl.textContent = `TRACK TIME: ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
                     } else {
-                        // Display N/A if time zone is not available for the venue
+                        // Display N/A if time zone for the venue is not in our map
                         raceTimeEl.textContent = `TRACK TIME: N/A`;
                     }
                 }
-                updateTimes(); // Initial call to display times immediately
+                updateTimes(); // Initial call to display times right away
                 setInterval(updateTimes, 1000 * 60); // Update times every minute
             } else {
-                // If no upcoming race, display season concluded message and hide time display
+                // If no upcoming races are found, display a season concluded message
                 upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                // Check if parentElement exists before trying to access its style
+                // Hide the time display elements
                 if (clientTimeEl && clientTimeEl.parentElement) {
                     clientTimeEl.parentElement.style.display = 'none';
                 }
