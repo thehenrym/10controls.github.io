@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Race Result - 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, #492833, #ffffff);
+            min-height: 100vh;
+        }
+        .footer {
+            background-color: #492833;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        #mobile-menu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 100%;
+            background-color: #492833;
+        }
+        #mobile-menu.menu-open {
+            max-height: 25rem;
+            opacity: 1;
+        }
+        #desktop-menu-items {
+            position: relative;
+        }
+        #sliding-highlighter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: #492833;
+            border-radius: 0.375rem;
+            transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+            z-index: -1;
+        }
+        .hamburger-icon span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s cubic-bezier(.08,.82,.17,1);
+        }
+        #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+        #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
+            opacity: 0;
+        }
+        #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+        /* Updated table styles for a dark theme with #492833 */
+        .race-table th {
+            background-color: #382028; /* Slightly darker shade of #492833 for headers */
+            color: #ffffff; /* White text for headers */
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border-bottom: 1px solid #4a4a4a; /* Darker border */
+        }
+        .race-table td {
+            padding: 0.75rem 1rem;
+            color: #d1d5db; /* Light grey text for content */
+            border-bottom: 1px solid #554146; /* Adjusted border to complement new background */
+        }
+        .race-table tr:nth-child(odd) {
+            background-color: #492833; /* Main requested dark color for odd rows */
+        }
+        .race-table tr:nth-child(even) {
+            background-color: #3e242d; /* Slightly darker shade for even rows */
+        }
+        .race-table tr:hover {
+            background-color: #554146; /* Darker hover effect */
+        }
+        .race-table .pos-number {
+            color: #ffffff; /* White color for position number for better contrast */
+        }
+        /* Custom styles for the toggle buttons */
+        .toggle-button-container {
+            position: relative;
+            background-color: #e5e7eb; /* Light gray background for the container */
+            border-radius: 9999px; /* rounded-full */
+            padding: 4px; /* p-1 equivalent */
+        }
+        .toggle-button {
+            position: relative; /* Ensure buttons are positioned relative to container */
+            z-index: 1; /* Place text above the slider */
+            color: #492833; /* Default text color */
+            padding-left: 1rem; /* px-4 equivalent */
+            padding-right: 1rem; /* px-4 equivalent */
+            padding-top: 0.5rem; /* py-2 equivalent */
+            padding-bottom: 0.5rem; /* py-2 equivalent */
+            border-radius: 9999px; /* rounded-full */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* font-medium */
+            transition: color 0.3s ease-in-out; /* Smooth text color transition */
+            background-color: transparent; /* No direct background on button */
+        }
+        .toggle-button.active {
+            color: white; /* Active text color */
+        }
+        #toggle-slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            height: calc(100% - 8px);
+            width: 50%;
+            background-color: #492833;
+            border-radius: 9999px;
+            transition: left 0.3s ease-in-out;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="font-medium">
+
+    <!-- Header section with navigation -->
+    <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center"> <!-- Added flex and items-center here -->
+                    <a href="latest.html">
+                        <img src="https://cdn.discordapp.com/attachments/1283851662678556756/1385758517608321129/10c.png?ex=68573bb0&is=6855ea30&hm=1cf947d3f5bd6fed88d1fa4f0f89f0e003846df2d560644f398e68dde9a1cee2&" alt="F1 75 Logo" class="h-10">
+                    </a>
+                    <!-- Removed SEASON 6 text here -->
+                </div>
+
+                <!-- Desktop navigation items -->
+                <div id="desktop-menu-items" class="hidden md:flex items-center space-x-4">
+                    <div id="sliding-highlighter"></div>
+                    <a href="latest.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Latest</a>
+                    <a href="schedule.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
+                    <a href="standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
+                    <a href="teams.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Teams</a>
+                    <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
+                </div>
+
+                <!-- Mobile menu button (hamburger icon) -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833; hover-bg-color: #3a2029;">
+                        <span class="sr-only">Open main menu</span>
+                        <div class="hamburger-icon space-y-1.5">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Mobile menu content, toggled by JS -->
+        <div class="md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="latest.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Latest</a>
+                <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Schedule</a>
+                <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Standings</a>
+                <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium" style="--tw-bg-opacity: 1; background-color: rgba(73, 40, 51, var(--tw-bg-opacity));">Join Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-header displaying upcoming race info and time -->
+    <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full">
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
+                    <!-- Upcoming race info populated by JavaScript -->
+                </div>
+                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
+                    <!-- Upcoming race date populated by JavaScript -->
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-6 sm:h-8 w-auto">
+                <div class="text-right text-xs sm:text-sm">
+                   <p id="client-time" class="font-bold"></p>
+                   <p id="race-time" class="text-gray-300"></p>
+                </div>
+           </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area - Race Result Page Layout -->
+    <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="flex items-center justify-between mb-6">
+            <h1 id="main-title" class="text-2xl sm:text-3xl font-bold text-white">AUSTRALIAN GRAND PRIX - <br class="sm:hidden">RACE RESULT</h1>
+        </div>
+        <p class="text-sm text-white mb-8" id="race-date-venue">JUNE 20TH | ALBERT PARK CIRCUIT, MELBOURNE</p>
+
+        <!-- Race/Qualifying Toggle Button -->
+        <div class="flex justify-end mb-4">
+            <div class="toggle-button-container inline-flex">
+                <div id="toggle-slider"></div>
+                <button id="race-button" class="toggle-button">RACE</button>
+                <button id="qualifying-button" class="toggle-button">QUALIFYING</button>
+            </div>
+        </div>
+
+        <!-- Race Result Table -->
+        <div class="overflow-x-auto rounded-lg shadow-lg">
+            <table class="min-w-full divide-y divide-gray-700 race-table">
+                <thead>
+                    <tr>
+                        <!-- Headers will be dynamically injected by JavaScript -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be dynamically injected by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Footer for social media links -->
+    <footer class="bg-gray-800 text-white text-center py-5 px-2 mt-8">
+        <div class="max-w-7xl mx-auto flex justify-center items-center space-x-6">
+            <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
+            <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="https://www.youtube.com/@10controls24" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
+            <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="class="text-gray-400 hover:text-white transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
+        </div>
+    </footer>
+    
+    <!-- Copyright footer -->
+    <footer class="footer">
+        <p>© 2003-2025 Formula One World Championship Limited</p>
+    </footer>
+    
+    <script>
+        // Function to parse time strings (MM:SS.ms) into milliseconds
+        function parseTimeToMs(timeStr) {
+            if (timeStr === null || typeof timeStr === 'undefined') {
+                return 0; // Handle null or undefined time strings
+            }
+            const parts = timeStr.split(':');
+            if (parts.length === 2) { // MM:SS.ms
+                const [minutes, secondsMs] = parts;
+                const [seconds, ms] = secondsMs.split('.');
+                return parseInt(minutes) * 60 * 1000 + parseInt(seconds) * 1000 + parseInt(ms);
+            } else if (parts.length === 1) { // Just seconds.ms or a penalty string
+                if (timeStr.startsWith('+')) { // A gap time like "+0.104"
+                    return parseFloat(timeStr) * 1000;
+                } else if (timeStr.includes('.')) { // A best lap time like "1:27.240"
+                    const [seconds, ms] = timeStr.split('.');
+                    return parseInt(seconds) * 1000 + parseInt(ms);
+                } else { // Can't parse, return 0 or handle error
+                    return 0;
+                }
+            }
+            return 0; // Default or error
+        }
+
+        // Function to format milliseconds back to time string or gap
+        function formatMsToTime(ms) {
+            const totalSeconds = Math.floor(ms / 1000);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            const milliseconds = ms % 1000;
+
+            const formattedMinutes = String(minutes).padStart(2, '0');
+            const formattedSeconds = String(seconds).padStart(2, '0');
+            const formattedMilliseconds = String(milliseconds).padStart(3, '0');
+
+            return `${formattedMinutes}:${formattedSeconds}.${formattedMilliseconds}`;
+        }
+        
+        // Calculate gap for qualifying results
+        function calculateQualifyingGaps(results) {
+            if (results.length === 0) return results;
+
+            const poleTimeStr = results[0].best;
+            const poleTimeMs = parseTimeToMs(poleTimeStr);
+
+            return results.map(row => {
+                if (row.pos === 1) {
+                    return { ...row, gap: "" };
+                } else {
+                    const driverTimeMs = parseTimeToMs(row.best);
+                    const gapMs = driverTimeMs - poleTimeMs;
+                    // Format gap to "+X.XXX"
+                    const formattedGap = `+${(gapMs / 1000).toFixed(3)}`;
+                    return { ...row, gap: formattedGap };
+                }
+            });
+        }
+
+        const scheduleData = [
+            { round: 1, name: 'Australian GRAND PRIX', venue: 'Melbourne', date: 'March 14-16', winner: 'LANDO NORRIS', country: 'AU' },
+            { round: 2, name: 'Chinese GRAND PRIX', venue: 'Shanghai', date: 'March 21-23', winner: 'OSCAR PIASTRI', country: 'CN' },
+            { round: 3, name: 'Japanese GRAND PRIX', venue: 'Suzuka', date: 'April 4-6', winner: 'MAX VERSTAPPEN', country: 'JP' },
+            { round: 4, name: 'Bahrain GRAND PRIX', venue: 'Sakhir', date: 'April 11-13', winner: 'OSCAR PIASTRI', country: 'BH' },
+            { round: 5, name: 'Saudi Arabian GRAND PRIX', venue: 'Jeddah', date: 'April 18-20', winner: 'OSCAR PIASTRI', country: 'SA' },
+            { round: 6, name: 'Miami GRAND PRIX', venue: 'Miami', date: 'May 2-4', winner: 'OSCAR PIASTRI', country: 'USA' },
+            { round: 7, name: 'Emilia Romagna GRAND PRIX', venue: 'Imola', date: 'May 16-18', winner: 'MAX VERSTAPPEN', country: 'IT' },
+            { round: 8, name: 'Monaco GRAND PRIX', venue: 'Monaco', date: 'May 23-25', winner: 'LANDO NORRIS', country: 'MC' },
+            { round: 9, name: 'Spanish GRAND PRIX', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'OSCAR PIASTRI', country: 'ES' },
+            { round: 10, name: 'Canadian GRAND PRIX', venue: 'Montreal', date: 'June 13-15', winner: 'GEORGE RUSSELL', country: 'CA' },
+            { round: 11, name: 'Austrian GRAND PRIX', venue: 'Spielberg', date: 'June 27-29', country: 'AT' },
+            { round: 12, name: 'British GRAND PRIX', venue: 'Silverstone', date: 'July 4-6', country: 'GB' },
+            { round: 13, name: 'Belgian GRAND PRIX', venue: 'Spa', date: 'July 25-27', country: 'BE' },
+            { round: 14, name: 'Hungarian GRAND PRIX', venue: 'Budapest', date: 'August 1-3', country: 'HU' },
+            { round: 15, name: 'Dutch GRAND PRIX', venue: 'Zandvoort', date: 'August 29-31', country: 'NL' },
+            { round: 16, name: 'Italian GRAND PRIX', venue: 'Monza', date: 'September 5-7', country: 'IT' },
+            { pos: 18, name: 'Singapore GRAND PRIX', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
+            { pos: 19, name: 'United States GRAND PRIX', venue: 'Austin', date: 'October 17-19', country: 'USA' },
+            { pos: 20, name: 'Mexican GRAND PRIX', venue: 'Mexico City', date: 'October 24-26', country: 'MX' },
+            { pos: 21, name: 'Brazilian GRAND PRIX', date: 'November 7-9', country: 'BR' },
+            { pos: 22, name: 'Las Vegas GRAND PRIX', venue: 'Las Vegas', date: 'November 20-22', country: 'USA' },
+            { pos: 23, name: 'Qatar GRAND PRIX', venue: 'Lusail', date: 'November 28-30', country: 'QAT' },
+            { pos: 24, name: 'Abu Dhabi GRAND PRIX', venue: 'Yas Marina', date: 'December 5-7', country: 'AE' }
+        ];
+
+        // Mapping of venues to their respective time zones for accurate time display.
+        const timeZoneMap = {
+            'Melbourne': 'Australia/Melbourne',
+            'Shanghai': 'Asia/Shanghai',
+            'Suzuka': 'Asia/Tokyo',
+            'Sakhir': 'Asia/Bahrain',
+            'Jeddah': 'Asia/Riyadh',
+            'Miami': 'America/New_York',
+            'Imola': 'Europe/Rome',
+            'Monaco': 'Europe/Monaco',
+            'Barcelona': 'Europe/Madrid',
+            'Montreal': 'America/Toronto',
+            'Spielberg': 'Europe/Vienna',
+            'Silverstone': 'Europe/London',
+            'Spa': 'Europe/Brussels',
+            'Budapest': 'Europe/Budapest',
+            'Zandvoort': 'Europe/Amsterdam',
+            'Monza': 'Europe/Rome',
+            'Baku': 'Asia/Baku',
+            'Singapore': 'Asia/Singapore',
+            'Austin': 'America/Chicago',
+            'Mexico City': 'America/Mexico_City',
+            'Sao Paulo': 'America/Sao_Paulo',
+            'Las Vegas': 'America/Los_Angeles',
+            'Lusail': 'Asia/Qatar',
+            'Yas Marina': 'Asia/Dubai'
+        };
+        
+        window.onload = function() {
+            // --- Mobile menu toggle script ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const subHeader = document.getElementById('sub-header');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('menu-open');
+                mobileMenuButton.classList.toggle('open');
+                subHeader.classList.toggle('opacity-0');
+                subHeader.classList.toggle('pointer-events-none');
+            });
+            
+            // --- Sliding highlighter script for desktop navigation ---
+            const menuItemsContainer = document.getElementById('desktop-menu-items');
+            if (menuItemsContainer) {
+                const menuLinks = menuItemsContainer.querySelectorAll('a');
+                const highlighter = document.getElementById('sliding-highlighter');
+                const activeLink = menuItemsContainer.querySelector('a[href="schedule.html"]');
+
+                function setHighlighterToLink(link) {
+                    if (!link) {
+                        highlighter.style.width = '0px';
+                        return;
+                    }
+                    highlighter.style.left = `${link.offsetLeft}px`;
+                    highlighter.style.width = `${link.offsetWidth}px`;
+                }
+                setHighlighterToLink(activeLink);
+                menuLinks.forEach(link => {
+                    link.addEventListener('mouseenter', () => setHighlighterToLink(link));
+                });
+                menuItemsContainer.addEventListener('mouseleave', () => {
+                    setHighlighterToLink(activeLink);
+                });
+            }
+
+            // --- Hardcoded upcoming race information for this page ---
+            const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
+            const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
+            const clientTimeEl = document.getElementById('client-time');
+            const raceTimeEl = document.getElementById('race-time');
+            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+
+            upcomingRaceInfoEl.textContent = `UPCOMING: EMILIA ROMAGNA GRAND PRIX`;
+            upcomingRaceDateEl.textContent = `JUNE 27TH`;
+            const raceTimeZone = 'Europe/Rome';
+
+            function updateTimes() {
+                const currentTime = new Date();
+                clientTimeEl.textContent = `MY TIME: ${currentTime.toLocaleTimeString([], timeOptions)}`;
+                if (raceTimeZone) {
+                    raceTimeEl.textContent = `TRACK TIME: ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
+                } else {
+                    raceTimeEl.textContent = `TRACK TIME: N/A`;
+                }
+            }
+            updateTimes();
+            setInterval(updateTimes, 1000 * 60);
+
+            // --- Race and Qualifying Data ---
+            const raceResults = [
+                { pos: 1, driver: "MAXFAN 1982", team: "NEWPORT ROLEX RED BULL", grid: 1, stops: 2, bestLap: "1:18.801", time: "46:34.539", pts: 25, flag: "PL" },
+                { pos: 2, driver: "FOCUSER", team: "HOT WHEELS MCLAREN", grid: 2, stops: 2, bestLap: "1:18.282", time: "+3.552", pts: 18, flag: "ES" },
+                { pos: 3, driver: "M. HOUSLEY", team: "TINDER ALPINE", grid: 10, stops: 3, bestLap: "1:19.379", time: "+4.530", pts: 15, flag: "GB" },
+                { pos: 4, driver: "SEBEINKRO", team: "MERCEDES-AMG PETRONAS", grid: 7, stops: 2, bestLap: "1:19.253", time: "+6.868", pts: 12, flag: "DK" },
+                { pos: 5, driver: "MORA", team: "VISA CASH APP RACING BULLS", grid: 6, stops: 2, bestLap: "1:19.149", time: "+7.528", pts: 10, flag: "ES" },
+                { pos: 6, driver: "LUCA STEVENS", team: "LOCKHEED MARTIN AM", grid: 16, stops: 2, bestLap: "1:19.881", time: "+10.799", pts: 8, flag: "GB" },
+                { pos: 7, driver: "COUNTERFEIT", team: "KICK SAUBER", grid: 13, stops: 3, bestLap: "1:19.903", time: "+12.213", pts: 6, flag: "GB" },
+                { pos: 8, driver: "TSAR", team: "VISA CASH APP RACING BULLS", grid: 12, stops: 3, bestLap: "1:19.031", time: "+12.665", pts: 4, flag: "HU" },
+                { pos: 9, driver: "ANTONIO BRANCATI", team: "SCUDERIA FERRARI HP", grid: 9, stops: 2, bestLap: "1:19.010", time: "+14.116", pts: 2, flag: "IT" },
+                { pos: 10, driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS", grid: 17, stops: 2, bestLap: "1:19.794", time: "+22.685", pts: 1, flag: "LT" },
+                { pos: 11, driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", grid: 4, stops: 2, bestLap: "1:18.804", time: "+25.075", pts: 0, flag: "UA" },
+                { pos: 12, driver: "EDGE", team: "HAAS ONLYFANS", grid: 20, stops: 2, bestLap: "1:21.998", time: "+26.424", pts: 0, flag: "PL" },
+                { pos: 13, driver: "RABAS", team: "JOHN DEERE WILLIAMS", grid: 19, stops: 3, bestLap: "1:21.094", time: "+29.581", pts: 0, flag: "ES" },
+                { pos: 14, driver: "YUKI TSUNODA", team: "NEWPORT ROLEX RED BULL", grid: 3, stops: 3, bestLap: "1:18.544", time: "+33.076", pts: 0, flag: "PL" },
+                { pos: 15, driver: "MAXLINXC", team: "TINDER ALPINE", grid: 8, stops: 3, bestLap: "1:19.928", time: "x1 (+3 secs.)", pts: 0, flag: "NL" },
+                { pos: 16, driver: "YULIAN KALENYCH", team: "KICK SAUBER", grid: 15, stops: 0, bestLap: "1:20.549", time: "DNF", pts: 0, flag: "UA" },
+                { pos: 17, driver: "STRA", team: "LOCKHEED MARTIN AM", grid: 11, stops: 1, bestLap: "1:21.217", time: "DNF", pts: 0, flag: "RS" },
+                { pos: 18, driver: "THEROMANIANDEVIL", team: "MERCEDES-AMG PETRONAS", grid: 14, stops: 1, bestLap: "1:21.940", time: "DNF", pts: 0, flag: "RO" },
+                { pos: 19, driver: "IOLER_XD", team: "JOHN DEERE WILLIAMS", grid: 18, stops: 0, bestLap: "----", time: "DNF", pts: 0, flag: "PL" },
+                { pos: 20, driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI HP", grid: 5, stops: 0, bestLap: "----", time: "DNF", pts: 0, flag: "NL" }
+            ];
+
+
+            // Updated qualifying results based on the provided image and previous data
+            const qualifyingResults = [
+                { pos: 1, driver: "MAXFAN 1982", team: "NEWPORT ROLEX RED BULL", tyre: "S", best: "1:15.398", gap: "", flag: "PL" }, // Poland flag
+                { pos: 2, driver: "FOCUSER", team: "HOT WHEELS MCLAREN", tyre: "S", best: "1:15.544", gap: "+0.146", flag: "ES" },
+                { pos: 3, driver: "MAX HOUSLEY", team: "NEWPORT ROLEX RED BULL", tyre: "S", best: "1:15.634", gap: "+0.236", flag: "PL" }, // Poland flag - UPDATED driver name
+                { pos: 4, driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", tyre: "S", best: "1:15.707", gap: "+0.309", flag: "UA" }, // Ukraine flag
+                { pos: 5, driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI HP", tyre: "S", best: "1:15.778", gap: "+0.380", flag: "NL" }, // Netherlands flag
+                { pos: 6, driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", tyre: "S", best: "1:16.104", gap: "+0.706", flag: "ES" }, // Spanish flag - UPDATED
+                { pos: 7, driver: "SEBEINKRO", team: "MERCEDES-AMG PETRONAS", tyre: "S", best: "1:16.348", gap: "+0.950", flag: "DK" }, // Denmark flag
+                { pos: 8, driver: "MAXLINXC", team: "TINDER ALPINE", tyre: "S", best: "1:16.355", gap: "+0.957", flag: "NL" }, // United Kingdom flag (assumed) - UPDATED flag
+                { pos: 9, driver: "ANTONIO BRANCATI", team: "SCUDERIA FERRARI HP", tyre: "S", best: "1:16.368", gap: "+0.970", flag: "IT" }, // Italy flag (assumed)
+                { pos: 10, driver: "M. HOUSLEY", team: "TINDER ALPINE", tyre: "S", best: "1:16.413", gap: "+1.015", flag: "GB" }, // UK flag
+                { pos: 11, driver: "STRA", team: "LOCKHEED MARTIN AM", tyre: "S", best: "1:16.513", gap: "+1.115", flag: "RS" }, // Serbia flag
+                { pos: 12, driver: "TSAR", team: "RACING BULLS PEUGEOT SPORT", tyre: "S", best: "1:16.688", gap: "+1.290", flag: "HU" }, // Hungary flag - UPDATED
+                { pos: 13, driver: "COUNTERFEIT", team: "TWITCH SAUBER", tyre: "S", best: "1:16.773", gap: "+1.375", flag: "GB" }, // United Kingdom flag - UPDATED
+                { pos: 14, driver: "THEROMANIANDEVIL", team: "MERCEDES-AMG PETRONAS", tyre: "S", best: "1:16.947", gap: "+1.549", flag: "RO" }, // Romania flag (assumed)
+                { pos: 15, driver: "YULIAN KALENYCH", team: "TWITCH SAUBER", tyre: "S", best: "1:16.978", gap: "+1.580", flag: "UA" }, // Ukraine flag (from image) - UPDATED
+                { pos: 16, driver: "LUCA STEVENS", team: "LOCKHEED MARTIN AM", tyre: "S", best: "1:16.994", gap: "+1.596", flag: "GB" }, // UK flag (from image)
+                { pos: 17, driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS", tyre: "S", best: "1:17.388", gap: "+1.990", flag: "LT" }, // Lithuania flag (from image)
+                { pos: 18, driver: "IOLER_XD", team: "JOHN DEERE WILLIAMS", tyre: "S", best: "1:19.567", gap: "+4.169", flag: "PL" }, // Poland flag (from image)
+                { pos: 19, driver: "RABAS", team: "JOHN DEERE WILLIAMS", tyre: "S", best: "No Time", gap: "----", flag: "ES" }, // Spain flag (from image)
+                { pos: 20, driver: "EDGE", team: "HAAS ONLYFANS", tyre: "S", best: "----", gap: "----", flag: "PL" } // Poland flag (from image)
+            ];
+
+            // Header definitions with mobile visibility classes
+            const raceHeaders = [
+                { text: 'POS.', col_key: 'pos', class: 'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-200 sm:pl-6' },
+                { text: 'DRIVER', col_key: 'driver', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200' },
+                { text: 'TEAM', col_key: 'team', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell' },
+                { text: 'GRID', col_key: 'grid', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell' },
+                { text: 'STOPS', col_key: 'stops', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell' },
+                { text: 'BEST', col_key: 'bestLap', class: 'px-3 py-3.5 text-right text-sm font-semibold text-gray-200 hidden md:table-cell' }, /* Right align Best in Race */
+                { text: 'TIME', col_key: 'time', class: 'px-3 py-3.5 text-right text-sm font-semibold text-gray-200 hidden md:table-cell' }, /* Right align Time in Race */
+                { text: 'PTS.', col_key: 'pts', class: 'py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-200' } // Right align PTS
+            ];
+
+            const qualifyingHeaders = [
+                { text: 'POS.', col_key: 'pos', class: 'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-200 sm:pl-6' },
+                { text: 'DRIVER', col_key: 'driver', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200' },
+                { text: 'TEAM', col_key: 'team', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell' },
+                { text: 'TYRE', col_key: 'tyre', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200' }, /* Tyres always visible */
+                { text: 'BEST', col_key: 'best', class: 'px-3 py-3.5 text-left text-sm font-semibold text-gray-200 hidden md:table-cell' },
+                { text: 'GAP', col_key: 'gap', class: 'py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-200' } // Right align GAP
+            ];
+
+            const toggleSlider = document.getElementById('toggle-slider');
+            const raceButton = document.getElementById('race-button');
+            const qualifyingButton = document.getElementById('qualifying-button');
+            const mainTitle = document.getElementById('main-title'); // Get reference to the main title
+            const raceDateVenue = document.getElementById('race-date-venue'); // Get reference to the race date and venue
+
+            // Function to update the slider position and active button state
+            function updateSliderAndActiveButton(activeButton) {
+                // Ensure buttons have been rendered and have offset properties
+                if (!raceButton.offsetWidth || !qualifyingButton.offsetWidth) {
+                    // Re-try after a short delay if elements are not yet laid out
+                    setTimeout(() => updateSliderAndActiveButton(activeButton), 50);
+                    return;
+                }
+
+                if (activeButton === raceButton) {
+                    toggleSlider.style.left = `${raceButton.offsetLeft}px`;
+                    toggleSlider.style.width = `${raceButton.offsetWidth}px`;
+                    raceButton.classList.add('active');
+                    qualifyingButton.classList.remove('active');
+                } else {
+                    toggleSlider.style.left = `${qualifyingButton.offsetLeft}px`;
+                    toggleSlider.style.width = `${qualifyingButton.offsetWidth}px`;
+                    qualifyingButton.classList.add('active');
+                    raceButton.classList.remove('active');
+                }
+            }
+
+            // Function to render the table dynamically based on type (race or qualifying)
+            function renderTable(type) {
+                const tableHeadRow = document.querySelector('.race-table thead tr');
+                const tableBody = document.querySelector('.race-table tbody');
+                tableHeadRow.innerHTML = ''; // Clear existing headers
+                tableBody.innerHTML = ''; // Clear existing body
+
+                let currentData = [];
+                let currentHeaders = [];
+
+                if (type === 'race') {
+                    currentData = raceResults;
+                    currentHeaders = raceHeaders;
+                    mainTitle.innerHTML = 'AUSTRALIAN GRAND PRIX - <br class="sm:hidden">RACE RESULT'; // Set title for Race
+                } else if (type === 'qualifying') {
+                    currentData = qualifyingResults;
+                    currentHeaders = qualifyingHeaders;
+                    mainTitle.innerHTML = 'AUSTRALIAN GRAND PRIX - <br class="sm:hidden">QUALIFYING RESULT'; // Set title for Qualifying
+                }
+
+                // Render headers
+                currentHeaders.forEach(headerDef => {
+                    const th = document.createElement('th');
+                    th.scope = 'col';
+                    // Apply common classes and then specific classes from headerDef
+                    let thClasses = headerDef.class;
+                    if (headerDef.col_key === 'pts' || headerDef.col_key === 'gap' || headerDef.col_key === 'bestLap' || headerDef.col_key === 'time') {
+                        thClasses = thClasses.replace('text-left', 'text-right'); // Ensure alignment
+                    }
+                    th.className = thClasses;
+                    th.textContent = headerDef.text;
+                    tableHeadRow.appendChild(th);
+                });
+
+                // Render body rows
+                currentData.forEach(rowData => {
+                    const tr = document.createElement('tr');
+                    
+                    // Iterate through header definitions to match data to columns
+                    currentHeaders.forEach(headerDef => {
+                        const td = document.createElement('td');
+                        // Use base class and then apply specific styles
+                        let tdClasses = headerDef.class.replace('font-semibold text-gray-200', 'text-gray-700'); 
+                        
+                        // Dynamically adjust whitespace property for cells
+                        if (headerDef.col_key !== 'driver') { // Apply whitespace-nowrap to all columns except 'driver'
+                            tdClasses += ' whitespace-nowrap';
+                        } else {
+                            // Ensure driver column is not nowrap (default behavior allows wrapping)
+                            tdClasses += ' whitespace-normal';
+                        }
+
+                        // Apply text alignment from header to data cells
+                        if (headerDef.col_key === 'pts' || headerDef.col_key === 'gap' || headerDef.col_key === 'bestLap' || headerDef.col_key === 'time') {
+                            tdClasses = tdClasses.replace('text-left', 'text-right');
+                        }
+
+                        td.className = tdClasses;
+
+                        if (headerDef.col_key === 'pos') {
+                            td.classList.add('pos-number'); // Apply specific color for POS
+                        }
+                        
+                        // Populate cell content based on column key
+                        if (rowData[headerDef.col_key] !== undefined) {
+                            if (headerDef.col_key === 'driver') { // Handle driver column for flags
+                                if (rowData.flag) {
+                                    const flagImg = document.createElement('img');
+                                    flagImg.src = `https://flagsapi.com/${rowData.flag}/flat/16.png`;
+                                    flagImg.alt = `${rowData.flag} Flag`;
+                                    flagImg.className = 'inline-block mr-1'; // Added mr-1 for spacing
+                                    td.appendChild(flagImg);
+                                }
+                                td.appendChild(document.createTextNode(rowData[headerDef.col_key]));
+                            } else if (headerDef.col_key === 'team') { // Handle team column for team icons
+                                let teamIconSrc = '';
+                                if (rowData.team === "RACING BULLS PEUGEOT SPORT") {
+                                    teamIconSrc = 'https://cdn.discordapp.com/emojis/1377646844578103346.webp?size=44';
+                                } else if (rowData.team === "NEWPORT ROLEX RED BULL") {
+                                    teamIconSrc = 'https://cdn.discordapp.com/emojis/1378696277180813312.webp?size=44';
+                                } else if (rowData.team === "HOT WHEELS MCLAREN") {
+                                    teamIconSrc = 'https://cdn.discordapp.com/emojis/1378699086982811679.webp?size=44';
+                                } else if (rowData.team === "SCUDERIA FERRARI HP") {
+                                    teamIconSrc = 'https://cdn.discordapp.com/emojis/1215769617272934440.webp?size=44';
+                                } else if (rowData.team === "TINDER ALPINE") {
+                                    teamIconSrc = 'https://cdn.discordapp.com/emojis/1379862213493260328.webp?size=44';
+                                } else if (rowData.team === "HAAS ONLYFANS") {
+                                    teamIconSrc = 'https://cdn.discordapp.com/emojis/1378698433652588645.webp?size=44'; // New HAAS icon
+                                } else if (rowData.team === "TWITCH SAUBER") {
+                                    teamIconSrc = 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44'; // New TWITCH SAUBER icon
+                                } else if (rowData.team === "JOHN DEERE WILLIAMS") {
+                                    teamIconSrc = 'https://cdn.discordapp.com/emojis/1377791374341963917.webp?size=44'; // New JOHN DEERE WILLIAMS icon
+                                } else if (rowData.team === "MERCEDES-AMG PETRONAS") {
+                                    teamIconSrc = 'https://cdn.discordapp.com/emojis/1215769603851030608.webp?size=44'; // New MERCEDES icon
+                                } else if (rowData.team === "LOCKHEED MARTIN AM") {
+                                    teamIconSrc = 'https://cdn.discordapp.com/emojis/1215769484078354483.webp?size=44'; // New ASTON MARTIN icon
+                                } else if (rowData.team === "VISA CASH APP RACING BULLS") {
+                                    teamIconSrc = 'https://placehold.co/44x44/ADD8E6/000000?text=V-C-R-B'; // Placeholder for Visa Cash App Racing Bulls
+                                } else if (rowData.team === "KICK SAUBER") {
+                                    teamIconSrc = 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44'; // Correct Twitch Sauber icon
+                                } else if (rowData.team === "Williams") { // Added for new data
+                                    teamIconSrc = 'https://placehold.co/44x44/00FFFF/000000?text=W'; // Placeholder for Williams
+                                } else if (rowData.team === "Haas") { // Added for new data
+                                    teamIconSrc = 'https://cdn.discordapp.com/emojis/1378698433652588645.webp?size=44'; // Correct HAAS ONLYFANS icon
+                                }
+                                
+                                if (teamIconSrc) {
+                                    const teamIcon = document.createElement('img');
+                                    teamIcon.src = teamIconSrc;
+                                    teamIcon.alt = `${rowData.team} Icon`;
+                                    teamIcon.className = 'inline-block h-5 w-5 mr-1'; // Adjust size as needed
+                                    td.appendChild(teamIcon);
+                                }
+                                td.appendChild(document.createTextNode(rowData[headerDef.col_key])); // Still display text
+                            }
+                            else if (headerDef.col_key === 'tyre' && type === 'qualifying') {
+                                td.textContent = rowData[headerDef.col_key];
+                                td.style.color = 'red'; // Make 'S' red
+                            } else {
+                                td.appendChild(document.createTextNode(rowData[headerDef.col_key]));
+                            }
+                        } else {
+                            td.textContent = ''; // Handle missing data gracefully
+                        }
+                        tr.appendChild(td);
+                    });
+                    tableBody.appendChild(tr);
+                });
+            }
+
+            // Event Listeners for Toggle Buttons
+            raceButton.addEventListener('click', () => {
+                updateSliderAndActiveButton(raceButton);
+                renderTable('race');
+            });
+
+            qualifyingButton.addEventListener('click', () => {
+                updateSliderAndActiveButton(qualifyingButton);
+                renderTable('qualifying');
+            });
+
+            // Initial render and slider position on page load
+            renderTable('race');
+            updateSliderAndActiveButton(raceButton); // Set initial slider position to Race button
+        };
+    </script>
+</body>
+</html>
