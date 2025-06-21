@@ -203,16 +203,16 @@
     <script>
         // Data for F1 Teams (kept from original)
         const teamData = [
-            { id: 'ferrari-card', name: 'Scuderia Ferrari HP', venue: 'Maranello', drivers: ['ALPHAROMEO127', 'ANTONIO BRANCATI'], driverNumbers: ['16', '44'], country: 'IT', bgColor: '#821729', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp' },
-            { id: 'mercedes-card', name: 'Mercedes-AMG PETRONAS F1 Team', venue: 'Brackley', drivers: ['SEBEINKRO', 'SHENGEN'], driverNumbers: ['63', '12'], country: 'GB', bgColor: '#C8CCCE', textColor: 'text-black', subTextColor: 'text-gray-700', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197571.png', driverNumberColor: 'text-teal-400', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp' },
-            { id: 'redbull-card', name: 'NEWPORT ROLEX RED BULL RACING', venue: 'Milton Keynes', drivers: ['MAXFAN1982', 'YUKI TSUNODA'], driverNumbers: ['1', '22'], country: 'AT', bgColor: '#003773', textColor: 'text-white', subTextColor: 'text-gray-200', driverNumberColor: '#E30118', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp' },
-            { id: 'mclaren-card', name: 'HOT WHEELS MCLAREN', venue: 'Woking', drivers: ['FOCUSER', 'ANTON CHEBOTAROV'], driverNumbers: ['4', '81'], country: 'GB', bgColor: '#F47600', textColor: 'text-black', subTextColor: 'text-gray-800', driverNumberColor: '#F47600', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp' },
-            { id: 'astonmartin-card', name: 'Lockheed Martin Aston Martin', venue: 'Silverstone', drivers: ['STRA', 'LUCA STEVENS'], driverNumbers: ['14', '18'], country: 'GB', bgColor: '#037A68', textColor: 'text-white', subTextColor: 'text-gray-200', driverNumberColor: 'text-lime-400', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp' },
-            { id: 'alpine-card', name: 'Tinder Alpine F1 Team', venue: 'Enstone', drivers: ['MAX HOUSLEY', 'ASPEC33'], driverNumbers: ['10', '17'], country: 'FR', bgColor: '#F282B4', textColor: 'text-black', subTextColor: 'text-gray-800', driverNumberColor: '#2673E2', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp' },
-            { id: 'williams-card', name: 'John Deere Williams Racing', venue: 'Grove', drivers: ['RABAS', 'LOLER'], driverNumbers: ['23', '55'], country: 'GB', bgColor: '#00A0DE', textColor: 'text-white', subTextColor: 'text-gray-200', driverNumberColor: '#fec524', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp' },
-            { id: 'rb-card', name: 'RACING BULLS PEUGEOT SPORT', venue: 'Faenza', drivers: ['MORA', 'TSAR'], driverNumbers: ['6', '40'], country: 'IT', bgColor: '#bbda0c', textColor: 'text-black', subTextColor: 'text-gray-800', driverNumberColor: 'text-red-500', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp' },
-            { id: 'sauber-card', name: 'TWITCH SAUBER', venue: 'Hinwil', drivers: ['YULIAN KALENANTOVICH', 'C3Z4R'], driverNumbers: ['27', '5'], country: 'CH', bgColor: '#9146ff', textColor: 'text-black', subTextColor: 'text-gray-800', driverNumberColor: '#01C00E', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp' },
-            { id: 'haas-card', name: 'HAAS ONLYFANS RACING', venue: 'Kannapolis', drivers: ['NOJUS GEDVILAS', 'COUNTERFEIT'], driverNumbers: ['87', '31'], country: 'USA', bgColor: '#00AFF0', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp' }
+            { id: 'ferrari-card', name: 'Scuderia Ferrari HP', venue: 'Maranello', drivers: [{ name: 'ALPHAROMEO127', flagCountryCode: 'NL' }, { name: 'ANTONIO BRANCATI', flagCountryCode: 'IT' }], country: 'IT', bgColor: '#821729', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp' },
+            { id: 'mercedes-card', name: 'Mercedes-AMG PETRONAS F1 Team', venue: 'Brackley', drivers: [{ name: 'SEBEINKRO', flagCountryCode: 'DK' }, { name: 'SHENGEN', flagCountryCode: 'FI' }], country: 'GB', bgColor: '#C8CCCE', textColor: 'text-black', subTextColor: 'text-gray-700', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197571.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp' },
+            { id: 'redbull-card', name: 'NEWPORT ROLEX RED BULL RACING', venue: 'Milton Keynes', drivers: [{ name: 'MAXFAN1982', flagCountryCode: 'EE' }, { name: 'YUKI TSUNODA', flagCountryCode: 'EE' }], country: 'AT', bgColor: '#003773', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp' },
+            { id: 'mclaren-card', name: 'HOT WHEELS MCLAREN', venue: 'Woking', drivers: [{ name: 'FOCUSER', flagCountryCode: 'ES' }, { name: 'ANTON CHEBOTAROV', flagCountryCode: 'UA' }], country: 'GB', bgColor: '#F47600', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp' },
+            { id: 'astonmartin-card', name: 'Lockheed Martin Aston Martin', venue: 'Silverstone', drivers: [{ name: 'STRA', flagCountryCode: 'RU' }, { name: 'LUCA STEVENS', flagCountryCode: 'GB' }], country: 'GB', bgColor: '#037A68', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp' },
+            { id: 'alpine-card', name: 'Tinder Alpine F1 Team', venue: 'Enstone', drivers: [{ name: 'MAX HOUSLEY', flagCountryCode: 'GB' }, { name: 'ASPEC33', flagCountryCode: 'GB' }], country: 'FR', bgColor: '#F282B4', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp' },
+            { id: 'williams-card', name: 'John Deere Williams Racing', venue: 'Grove', drivers: [{ name: 'RABAS', flagCountryCode: 'ES' }, { name: 'LOLER', flagCountryCode: 'EE' }], country: 'GB', bgColor: '#00A0DE', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp' },
+            { id: 'rb-card', name: 'RACING BULLS PEUGEOT SPORT', venue: 'Faenza', drivers: [{ name: 'MORA', flagCountryCode: 'NL' }, { name: 'TSAR', flagCountryCode: 'HU' }], country: 'IT', bgColor: '#bbda0c', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp' },
+            { id: 'sauber-card', name: 'TWITCH SAUBER', venue: 'Hinwil', drivers: [{ name: 'YULIAN KALENANTOVICH', flagCountryCode: 'UA' }, { name: 'C3Z4R', flagCountryCode: 'BE' }], country: 'CH', bgColor: '#9146ff', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp' },
+            { id: 'haas-card', name: 'HAAS ONLYFANS RACING', venue: 'Kannapolis', drivers: [{ name: 'NOJUS GEDVILAS', flagCountryCode: 'PL' }, { name: 'COUNTERFEIT', flagCountryCode: 'GB' }], country: 'USA', bgColor: '#00AFF0', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp' }
         ];
 
         // Data for F1 Race Schedule (newly added for sub-header functionality)
@@ -256,12 +256,56 @@
             'Lusail': 'Asia/Qatar',
             'Yas Marina': 'Asia/Dubai'
         };
+
+        // Function to get flag HTML based on country code for drivers
+        function getFlagHtmlForDriver(countryCode) {
+            let flagUrl = '';
+            // Using placeholder image with text 'NF' (No Flag) as a fallback
+            const fallbackFlag = `https://placehold.co/32x32/cccccc/000000?text=NF`; 
+
+            if (countryCode === 'PL') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197612.png`; // Poland (for Nojus Gedvilas)
+            } else if (countryCode === 'UA') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197572.png`; // Ukraine
+            } else if (countryCode === 'DK') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197579.png`; // Denmark (for Sebeinkro)
+            } else if (countryCode === 'JP') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197604.png`; // Japan
+            } else if (countryCode === 'GB') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197374.png`; // United Kingdom (for Counterfeit, Stra, Luca Stevens, Max Housley, Aspec33)
+            } else if (countryCode === 'NL') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197441.png`; // Netherlands
+            } else if (countryCode === 'IT') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197626.png`; // Italy (for Antonio Brancati)
+            } else if (countryCode === 'HU') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197584.png`; // Hungary
+            } else if (countryCode === 'LT') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197607.png`; // Lithuania
+            } else if (countryCode === 'FI') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197585.png`; // Finland (for Shengen)
+            } else if (countryCode === 'BE') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197583.png`; // Belgium
+            } else if (countryCode === 'RO') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197587.png`; // Romania
+            } else if (countryCode === 'ES') { 
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197593.png`; // Spain (for Focuser and Rabas)
+            } else if (countryCode === 'EE') { 
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197529.png`; // Estonia (for MAXFAN1982, Yuki Tsunoda, and LOLER)
+            } else if (countryCode === 'RU') { 
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197602.png`; // Russia (for STRA)
+            }
+
+            if (flagUrl) {
+                return `<img src="${flagUrl}" alt="${countryCode} Flag" class="h-5 w-auto rounded-md mr-2" onerror="this.onerror=null;this.src='${fallbackFlag}';">`;
+            }
+            return '';
+        }
         
         window.onload = function() {
-            // --- Content population script for TEAM cards (kept from original) ---
+            // --- Content population script for TEAM cards ---
             const scheduleGrid = document.getElementById('schedule-grid');
             if (scheduleGrid) {
-                teamData.forEach(team => { // Using teamData here
+                teamData.forEach(team => {
                     const card = document.createElement('div');
                     card.className = 'schedule-card rounded-lg shadow-lg flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300';
                     
@@ -276,30 +320,24 @@
 
                     const textColor = team.textColor || 'text-gray-900';
                     const subTextColor = team.subTextColor || 'text-gray-600';
-                    // driverNumberColor is no longer used for displaying numbers but is kept for consistency in data structure.
-                    // const driverNumberColor = team.driverNumberColor || 'text-white'; 
 
-                    let flagHtml = '';
-                    // Conditional flag image based on country (for teams)
+                    let teamFlagHtml = '';
+                    // Conditional flag image based on country (for teams) - kept for main team info
                     if (team.flagUrl) {
-                        flagHtml = `<img src="${team.flagUrl}" alt="${team.name} Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                        teamFlagHtml = `<img src="${team.flagUrl}" alt="${team.name} Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     } else if (team.country === 'USA') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     } else if (team.country === 'GB') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197374.png" alt="British Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197374.png" alt="British Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     } else if (team.country === 'IT') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     } else if (team.country === 'CH') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197540.png" alt="Swiss Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197540.png" alt="Swiss Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     } else if (team.country === 'FR') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197560.png" alt="French Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197560.png" alt="French Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     } else if (team.country === 'AT') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197447.png" alt="Austrian Flag" class="h-8 w-auto mt-2 rounded-md">`;
+                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197447.png" alt="Austrian Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     }
-
-                    // Remove driver numbers from display
-                    let driver1NumberHtml = ''; 
-                    let driver2NumberHtml = '';
                     
                     let carImage = '';
                     if(team.carImageUrl) {
@@ -310,11 +348,15 @@
                         `
                     }
                     
+                    // Generate driver flag and name HTML for each driver
+                    const driver1FlagHtml = getFlagHtmlForDriver(team.drivers[0].flagCountryCode);
+                    const driver2FlagHtml = getFlagHtmlForDriver(team.drivers[1].flagCountryCode);
+
                     card.innerHTML = `
                         <!-- Main Content -->
                         <div class="p-8 relative">
                             ${carImage}
-                            ${flagHtml}
+                            ${teamFlagHtml}
                             <h3 class="text-2xl font-bold ${textColor} mt-2">${team.name.toUpperCase()}</h3>
                             <p class="text-lg ${subTextColor} mt-2">${team.venue.toUpperCase()}</p>
                         </div>
@@ -322,13 +364,13 @@
                         <div class="bg-black/70 backdrop-blur-sm mt-auto">
                             <div class="flex items-center justify-around text-white">
                                 <div class="w-full text-center py-3 flex items-center justify-center space-x-2">
-                                    ${driver1NumberHtml}
-                                    <span class="font-medium text-sm tracking-wider">${team.drivers[0].toUpperCase()}</span>
+                                    ${driver1FlagHtml}
+                                    <span class="font-medium text-sm tracking-wider">${team.drivers[0].name.toUpperCase()}</span>
                                 </div>
                                 <div class="h-6 w-px bg-white/30"></div>
                                 <div class="w-full text-center py-3 flex items-center justify-center space-x-2">
-                                    ${driver2NumberHtml}
-                                    <span class="font-medium text-sm tracking-wider">${team.drivers[1].toUpperCase()}</span>
+                                    ${driver2FlagHtml}
+                                    <span class="font-medium text-sm tracking-wider">${team.drivers[1].name.toUpperCase()}</span>
                                 </div>
                             </div>
                         </div>
