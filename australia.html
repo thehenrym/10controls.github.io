@@ -317,7 +317,8 @@
                 if (upcomingRaceInfoEl) upcomingRaceInfoEl.textContent = `UPCOMING: ${NEXT_RACE_NAME}`;
                 if (upcomingRaceDateEl) upcomingRaceDateEl.textContent = NEXT_RACE_DATE_DISPLAY;
                 
-                const raceTimeZone = timeZoneMap['Melbourne']; // Use Melbourne for this specific page
+                // Dynamically set raceTimeZone based on the NEXT_RACE_VENUE
+                const raceTimeZone = timeZoneMap[NEXT_RACE_VENUE];
 
                 function updateTimes() {
                     const currentTime = new Date();
