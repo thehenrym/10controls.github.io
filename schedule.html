@@ -302,7 +302,7 @@
                     } else if (race.country === 'AE') {
                         flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197569.png" alt="UAE Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
                     } else if (race.country === 'MX') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197397.png" alt="Mexican Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197397.png" alt="Mexican Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co_32x32/cccccc/000000?text=NF';">`;
                     } else if (race.country === 'AZ') {
                         flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197512.png" alt="Azerbaijan Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
                     } else if (race.country === 'SA') {
@@ -350,16 +350,13 @@
                     scheduleGrid.appendChild(card);
                 });
 
-                // --- Staggered fade-in animation logic ---
+                // --- Simultaneous fade-in animation logic ---
                 const cards = document.querySelectorAll('.schedule-card');
                 // A short delay before starting the animations to ensure all cards are in the DOM
                 setTimeout(() => {
-                    cards.forEach((card, index) => {
-                        // Stagger the animation for each card by multiplying its index by 100ms
-                        setTimeout(() => {
-                            // Add the 'visible' class to trigger the CSS transition
-                            card.classList.add('visible');
-                        }, index * 100); 
+                    cards.forEach((card) => {
+                        // Add the 'visible' class to all cards at once to make them fade in together
+                        card.classList.add('visible');
                     });
                 }, 100);
             }
