@@ -343,7 +343,7 @@
                     if(team.carImageUrl) {
                         carImage = `
                         <div class="absolute top-0 right-0 p-2 bg-black/20 rounded-bl-lg">
-                            <img src="${team.carImageUrl}" class="h-12" alt="${team.name} F1 Car">
+                            <img src="${team.carImageUrl}" class="h-12" alt="${team.name} F1 Car" onerror="this.style.display='none'">
                         </div>
                         `
                     }
@@ -351,6 +351,12 @@
                     // Generate driver flag and name HTML for each driver
                     const driver1FlagHtml = getFlagHtmlForDriver(team.drivers[0].flagCountryCode);
                     const driver2FlagHtml = getFlagHtmlForDriver(team.drivers[1].flagCountryCode);
+
+                    // Generate driver profile links
+                    const driver1Name = team.drivers[0].name.toUpperCase();
+                    const driver2Name = team.drivers[1].name.toUpperCase();
+                    const driver1Link = `https://thehenrym.github.io/driverprofile.html?driver=${encodeURIComponent(driver1Name)}`;
+                    const driver2Link = `https://thehenrym.github.io/driverprofile.html?driver=${encodeURIComponent(driver2Name)}`;
 
                     card.innerHTML = `
                         <!-- Main Content -->
@@ -365,12 +371,12 @@
                             <div class="flex items-center justify-around text-white">
                                 <div class="w-full text-center py-3 flex items-center justify-center space-x-2">
                                     ${driver1FlagHtml}
-                                    <span class="font-medium text-sm tracking-wider">${team.drivers[0].name.toUpperCase()}</span>
+                                    <a href="${driver1Link}" target="_blank" rel="noopener noreferrer" class="font-medium text-sm tracking-wider hover:underline">${driver1Name}</a>
                                 </div>
                                 <div class="h-6 w-px bg-white/30"></div>
                                 <div class="w-full text-center py-3 flex items-center justify-center space-x-2">
                                     ${driver2FlagHtml}
-                                    <span class="font-medium text-sm tracking-wider">${team.drivers[1].name.toUpperCase()}</span>
+                                    <a href="${driver2Link}" target="_blank" rel="noopener noreferrer" class="font-medium text-sm tracking-wider hover:underline">${driver2Name}</a>
                                 </div>
                             </div>
                         </div>
@@ -468,7 +474,11 @@
                     const currentTime = new Date();
                     clientTimeEl.textContent = `MY TIME ${currentTime.toLocaleTimeString([], timeOptions)}`;
                     if (raceTimeZone) {
-                        raceTimeEl.textContent = `TRACK TIME ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
+                        try {
+                            raceTimeEl.textContent = `TRACK TIME ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
+                        } catch (e) {
+                             raceTimeEl.textContent = `TRACK TIME N/A`;
+                        }
                     } else {
                         // Display N/A if time zone for the venue is not in our map
                         raceTimeEl.textContent = `TRACK TIME N/A`;
