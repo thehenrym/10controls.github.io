@@ -544,11 +544,11 @@
 
                 function updateTimes() {
                     const currentTime = new Date();
-                    clientTimeEl.textContent = `MY TIME: ${currentTime.toLocaleTimeString([], timeOptions)}`;
+                    clientTimeEl.textContent = `MY TIME ${currentTime.toLocaleTimeString([], timeOptions)}`;
                     if (raceTimeZone) {
-                        raceTimeEl.textContent = `TRACK TIME: ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
+                        raceTimeEl.textContent = `TRACK TIME ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
                     } else {
-                        raceTimeEl.textContent = `TRACK TIME: N/A`;
+                        raceTimeEl.textContent = `TRACK TIME N/A`;
                     }
                 }
                 updateTimes();
