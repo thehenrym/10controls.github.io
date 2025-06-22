@@ -3,35 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1 Driver Profile</title>
-    <!-- Tailwind CSS -->
+    <title>F1 Latest - 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter and Titillium Web as fallback -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom Font Definition */
-        @font-face {
-            font-family: 'KHInterference-Bold';
-            src: url('fonts/KHInterference-Bold.ttf') format('truetype');
-            font-weight: bold;
-            font-style: normal;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
+            /* Updated background gradient from the Schedule page */
             background: linear-gradient(to bottom, #492833, #ffffff);
             min-height: 100vh;
         }
         .footer {
+            /* Updated footer background color from the Schedule page */
             background-color: #492833;
             color: white;
             text-align: center;
             padding: 2rem 1rem;
         }
+        /* Styles for the staggered fade-in animation (for future use or content specific animations) */
+        .content-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .content-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Styles for smooth hamburger menu transition */
         #mobile-menu {
             max-height: 0;
             opacity: 0;
@@ -41,26 +44,34 @@
             width: 100%;
             left: 0;
             top: 100%;
+            /* Updated background color from the Schedule page */
             background-color: #492833;
         }
+
         #mobile-menu.menu-open {
             max-height: 25rem;
             opacity: 1;
         }
+
+        /* Styles for the sliding navigation highlighter */
         #desktop-menu-items {
             position: relative;
         }
+
         #sliding-highlighter {
             position: absolute;
             top: 0;
-            left: 0;
-            width: 0;
+            left: 0; /* Will be set by JS */
+            width: 0; /* Will be set by JS */
             height: 100%;
-            background-color: #492833;
-            border-radius: 0.375rem;
+            /* Updated header selector background color from the Schedule page */
+            background-color: #492833; /* Changed to match the dark red from Schedule page */
+            border-radius: 0.375rem; /* rounded-md */
             transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
-            z-index: -1;
+            z-index: -1; /* Place it behind the text */
         }
+        
+        /* Hamburger Icon Animation */
         .hamburger-icon span {
             display: block;
             width: 24px;
@@ -68,27 +79,34 @@
             background-color: white;
             transition: all 0.3s cubic-bezier(.08,.82,.17,1);
         }
+
         #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
-            transform: translateY(10px) rotate(45deg);
+            transform: translateY(10px) rotate(45deg); /* Updated transform */
         }
         #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
             opacity: 0;
         }
         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
-            transform: translateY(-10px) rotate(-45deg);
+            transform: translateY(-10px) rotate(-45deg); /* Updated transform */
         }
+
+        /* Custom scrollbar for horizontal carousel */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;   /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            scroll-behavior: smooth; /* Smooth scroll for carousel */
+        }
+
+        /* Styles for the mobile menu link hover effect */
         .mobile-menu-link {
-            background-color: #492833;
+            background-color: #492833; /* The original dark red color */
             transition: background-color 0.2s ease-in-out;
         }
         .mobile-menu-link:hover {
-            background-color: #000000;
-        }
-        .font-display {
-            font-family: 'Inter', sans-serif;
-        }
-        .font-kh-interference {
-            font-family: 'KHInterference-Bold', 'Titillium Web', sans-serif; /* Fallback font */
+            background-color: #000000; /* Black */
         }
     </style>
 </head>
@@ -99,22 +117,29 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
                     <a href="latest.html">
-                        <img src="https://cdn.discordapp.com/attachments/1283851662678556756/1385758517608321129/10c.png?ex=68573bb0&is=6855ea30&hm=1cf947d3f5bd6fed88d1fa4f0f89f0e003846df2d560644f398e68dde9a1cee2&" alt="10 Controls Logo" class="h-10">
+                        <!-- Updated logo image source as requested -->
+                        <img src="images/10c.png" alt="10 Controls Logo" class="h-10">
                     </a>
                 </div>
+
                 <div id="desktop-menu-items" class="hidden md:flex items-center space-x-4">
                     <div id="sliding-highlighter"></div>
-                    <a href="latest.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Latest</a>
+                    <!-- 'Latest' link is active -->
+                    <a href="latest.html" class="text-white px-3 py-2 rounded-md text-sm font-medium relative z-10" aria-current="page">Latest</a>
                     <a href="schedule.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
                     <a href="standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
                     <a href="teams.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Teams</a>
                     <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
                 </div>
+
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833;">
+                    <!-- Updated background and hover background color for mobile menu button -->
+                    <button type="button" id="mobile-menu-button" class="bg-[#492833] inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-[#3a2029] focus:outline-none">
                         <span class="sr-only">Open main menu</span>
-                        <div class="hamburger-icon space-y-2">
-                            <span></span><span></span><span></span>
+                        <div class="hamburger-icon space-y-2"> <!-- Changed from space-y-1.5 to space-y-2 -->
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
                     </button>
                 </div>
@@ -122,7 +147,8 @@
         </nav>
         <div class="md:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="latest.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Latest</a>
+                <!-- 'Latest' link is active in mobile menu -->
+                <a href="latest.html" class="bg-[#492833] text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link" aria-current="page">Latest</a>
                 <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
                 <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
                 <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Teams</a>
@@ -131,12 +157,14 @@
         </div>
     </header>
 
-    <!-- Sub-Header for Upcoming Race Info -->
+    <!-- Sub-Header for Upcoming Race Info and Time. Hidden on mobile. -->
     <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300 hidden md:flex">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate"></div>
-                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block"></div>
+                <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
+                </div>
+                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
+                </div>
             </div>
             <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-6 sm:h-8 w-auto">
@@ -144,68 +172,183 @@
                    <p id="client-time" class="font-bold"></p>
                    <p id="race-time" class="text-gray-300"></p>
                 </div>
-            </div>
+           </div>
         </div>
     </div>
 
-    <!-- Driver Profile and Stats Section -->
-    <div id="driver-profile-section" style="background: linear-gradient(to bottom, #492833, #ffffff);">
-        <!-- Driver Info Banner -->
-        <div id="driver-banner" class="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-12 overflow-hidden">
-            <div class="relative z-10 text-center md:text-left flex-shrink-0 mb-8 md:mb-0">
-                <h1 id="driver-name" class="font-kh-interference text-6xl md:text-8xl font-bold text-white uppercase"></h1>
-                <p id="driver-details" class="flex items-center text-sm md:text-base text-white mt-2">
-                    <img id="driver-flag" src="" alt="Driver Flag" class="h-4 w-auto mr-2 inline-block">
-                    <span id="driver-country"></span> <span class="mx-2">•</span> <span id="driver-team"></span>
-                </p>
+    <!-- Main Content Area - Latest Page Layout -->
+    <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 text-gray-900">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Featured Story Section (Left/Top) -->
+            <div id="featured-story-container" class="lg:col-span-2 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in transform transition-transform duration-300 hover:-translate-y-2">
+                <div class="relative w-full h-full">
+                    <img src="images/mainphoto.png" alt="F1 Featured Story" class="w-full h-full object-cover rounded-t-lg object-bottom">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                        <h2 class="text-2xl sm:text-3xl font-bold leading-tight mb-2 text-white">MAXFAN1982 AND FOCUSER COLLIDE LAST LAP FOR WIN</h2>
+                        <p class="text-gray-300 text-sm">A POTENTIAL CHAMPIONSHIP BATTLE IN THE MAKING?</p>
+                    </div>
+                </div>
             </div>
-            <div class="relative z-10 flex-shrink-0">
-                <img id="driver-car-img" src="" alt="F1 Car" class="w-64 md:w-96 h-auto rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300">
+
+            <!-- DRIVERS STANDINGS & TEAMS STANDINGS -->
+            <div id="standings-column" class="lg:col-span-1 space-y-8 flex flex-col justify-between">
+                <!-- DRIVERS STANDINGS -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-white">DRIVERS STANDINGS</h3>
+                    <div class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-100 w-full transform transition-transform duration-300 hover:-translate-y-2">
+                        <!-- Driver 1 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-white">1</span>
+                                <p class="text-sm font-semibold text-white">MAXFAN1982</p>
+                            </div>
+                            <span class="text-sm font-bold text-white">37 PTS</span>
+                        </div>
+                        <!-- Driver 2 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-white">2</span>
+                                <p class="text-sm font-semibold text-white">FOCUSER</p>
+                            </div>
+                            <span class="text-sm font-bold text-white">36 PTS</span>
+                        </div>
+                        <!-- Driver 3 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-white">3</span>
+                                <p class="text-sm font-semibold text-white">ANTON CHEBOTAROV</p>
+                            </div>
+                            <span class="text-sm font-bold text-white">25 PTS</span>
+                        </div>
+                        <!-- Driver 4 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-white">4</span>
+                                <p class="text-sm font-semibold text-white">SEBEINKRO</p>
+                            </div>
+                            <span class="text-sm font-bold text-white">20 PTS</span>
+                        </div>
+                        <!-- Driver 5 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-white">5</span>
+                                <p class="text-sm font-semibold text-white">YUKI TSUNODA</p>
+                            </div>
+                            <span class="text-sm font-bold text-white">15 PTS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEAMS STANDINGS -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-white">TEAMS STANDINGS</h3>
+                    <div class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-200 w-full transform transition-transform duration-300 hover:-translate-y-2">
+                        <!-- Team 1 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-white">1</span>
+                                <p class="text-sm font-semibold text-white">HOT WHEELS MCLAREN</p>
+                            </div>
+                            <span class="text-sm font-bold text-white">61 PTS</span>
+                        </div>
+                        <!-- Team 2 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-white">2</span>
+                                <p class="text-sm font-semibold text-white">NEWPORT ROLEX RED BULL</p>
+                            </div>
+                            <span class="text-sm font-bold text-white">52 PTS</span>
+                        </div>
+                        <!-- Team 3 -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-bold text-white">3</span>
+                                <p class="text-sm font-semibold text-white">MERCEDES-AMG PETRONAS</p>
+                            </div>
+                            <span class="text-sm font-bold text-white">20 PTS</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Statistics Section -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:p-8 py-12">
-            <h2 class="font-kh-interference text-3xl font-bold text-white mb-8 uppercase">Statistics</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <!-- 2025 Season Stats -->
-                <div>
-                    <h3 class="font-kh-interference text-xl font-bold text-white mb-6 uppercase">2025 Season</h3>
-                    <div id="season-stats-grid" class="grid grid-cols-2 gap-y-4 gap-x-2 text-gray-800"></div>
-                </div>
-                <!-- Career Stats -->
-                <div>
-                    <h3 class="font-kh-interference text-xl font-bold text-white mb-6 uppercase">Career Stats</h3>
-                    <div id="career-stats-grid" class="grid grid-cols-2 gap-y-4 gap-x-2 text-gray-800"></div>
-                </div>
+        <!-- POSTS Section (Horizontal Carousel) -->
+        <div class="mb-12 relative">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">POSTS</h3>
+            <div id="posts-carousel" class="flex overflow-x-auto no-scrollbar snap-x snap-mandatory space-x-4 pb-4">
+                <!-- Post Card 1 -->
+                <a href="https://www.instagram.com/10controls/p/DKczIchtL3c/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-200 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                    <!-- Changed bg-pink-600 to bg-[#ffc0cb] and text-white to text-black -->
+                    <span class="absolute top-2 left-2 bg-[#ffc0cb] text-black text-xs font-bold px-2 py-1 rounded-md z-10">NEW</span>
+                    <img src="images/post1.jpg" alt="Instagram Post 1" class="w-full h-full object-cover">
+                    <!-- Removed caption -->
+                </a>
+                <!-- Post Card 2 -->
+                <a href="https://www.instagram.com/10controls/p/DKNnYnWNVez/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-300 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                    <!-- Removed NEW tag -->
+                    <img src="images/pos2.jpg" alt="Instagram Post 2" class="w-full h-full object-cover">
+                    <!-- Removed caption -->
+                </a>
+                <!-- Post Card 3 -->
+                <a href="https://www.instagram.com/10controls/p/C6jHrqron25/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-400 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                    <!-- Removed NEW tag -->
+                    <img src="images/post3.jpg" alt="Instagram Post 3" class="w-full h-full object-cover">
+                    <!-- Removed caption -->
+                </a>
+                <!-- Post Card 4 -->
+                <a href="https://www.instagram.com/10controls/p/C5G5D89tChN/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-500 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                    <!-- Removed NEW tag -->
+                    <img src="images/post4.jpg" alt="Instagram Post 4" class="w-full h-full object-cover">
+                    <!-- Removed caption -->
+                </a>
+                <!-- Post Card 5 -->
+                <a href="https://www.instagram.com/10controls/p/C4lOAXIoVHM/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-600 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                    <!-- Removed NEW tag -->
+                    <img src="images/post5.jpg" alt="Instagram Post 5" class="w-full h-full object-cover">
+                    <!-- Removed caption -->
+                </a>
+                <!-- Post Card 6 -->
+                <a href="https://www.instagram.com/10controls/p/C4YrxNGow-O/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-700 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                    <!-- Removed NEW tag -->
+                    <img src="images/post6.jpg" alt="Instagram Post 6" class="w-full h-full object-cover">
+                    <!-- Removed caption -->
+                </a>
+                <!-- New Post Card -->
+                <a href="https://www.instagram.com/10controls/p/C4JimyjoV6c/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-800 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385983291907113092/image.png?ex=68580d07&is=6856bb87&hm=eb630bd77f1e8f952884c020bd378e52fbcc3629e52fa6df6a301fdec5199522&" alt="New Instagram Post" class="w-full h-full object-cover">
+                </a>
             </div>
+            <!-- Navigation Arrows -->
+            <button id="scrollLeftBtn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full shadow-lg hover:bg-black/75 focus:outline-none z-20 flex items-center justify-center">
+                <i class="fas fa-chevron-left text-base"></i>
+            </button>
+            <button id="scrollRightBtn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full shadow-lg hover:bg-black/75 focus:outline-none z-20 flex items-center justify-center">
+                <i class="fas fa-chevron-right text-base"></i>
+            </button>
         </div>
-        
-        <!-- Recent Races Table Section -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:p-8 pt-0 pb-24">
-            <h2 class="font-kh-interference text-3xl font-bold text-white mb-8 uppercase">Recent Races</h2>
-            <div class="rounded-lg shadow-lg overflow-x-auto" style="background-color: #492833;">
-                <table class="w-full text-white text-sm">
-                    <thead class="border-b border-gray-500">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Grand Prix</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Pos</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Grid</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Stops</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Result</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Pts</th>
-                        </tr>
-                    </thead>
-                    <tbody id="recent-races-tbody">
-                        <!-- Race rows will be injected here by JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 
-    <!-- Social Media Links & Copyright Footer -->
-    <footer class="bg-black text-white text-center py-5 px-2">
+        <!-- RECENT STREAM Section -->
+        <div>
+            <h3 class="text-xl font-bold text-gray-900 mb-6">RECENT BROADCAST</h3>
+            <div class="bg-white rounded-lg shadow-lg p-6 content-fade-in delay-800 transform transition-transform duration-300 hover:-translate-y-2">
+                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <!-- Twitch VOD thumbnail updated -->
+                    <img src="https://placehold.co/200x120/6441a5/ffffff?text=Twitch+VOD" alt="Twitch Stream Thumbnail" class="w-full sm:w-auto h-32 sm:h-auto object-cover rounded-md">
+                    <div>
+                        <h4 class="text-lg font-bold text-gray-900">Watch the Latest Stream from 10 Controls!</h4>
+                        <p class="text-gray-700 text-sm mt-1">Click below to watch the most recent stream for 10 Controls.</p>
+                        <!-- Updated Watch Stream button color -->
+                        <a href="https://www.twitch.tv/videos/2491286798" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-[#492833] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md transition-colors">
+                            Watch Stream
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Social Media Links Footer -->
+    <footer class="bg-black text-white text-center py-5 px-2 mt-8">
         <div class="max-w-7xl mx-auto flex justify-center items-center space-x-6">
             <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
             <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
@@ -213,357 +356,230 @@
             <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
         </div>
     </footer>
+    
+    <!-- Main Copyright Footer -->
     <footer class="footer">
         <p>© 2022-2025 10 Controls Limited</p>
     </footer>
     
     <script>
-        // --- DATA STORE ---
-        const teamColors = {
-            'HOT WHEELS MCLAREN': '#FF8000',
-            'NEWPORT ROLEX RED BULL RACING': '#003773',
-            'GUINNESS MERCEDES': '#C8CCCE',
-            'RACING BULLS PEUGEOT SPORT': '#BBDA0C',
-            'SCUDERIA FERRARI HP': '#821729',
-            'LOCKHEED MARTIN ASTON MARTIN': '#037A68',
-            'TINDER ALPINE F1 TEAM': '#F282B4',
-            'HAAS ONLYFANS RACING': '#00AFF0',
-            'JOHN DEERE WILLIAMS RACING': '#00A0DE',
-            'KICK SAUBER': '#9146FF',
-            'TWITCH SAUBER': '#9146FF',
-            'Placeholder Team': '#333333'
-        };
+        // Retained the more extensive schedule data from the original Latest page
+        const scheduleData = [
+            { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris', country: 'AU' },
+            { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23', winner: 'Oscar Piastri', country: 'CN' },
+            { round: 3, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'April 4-6', winner: 'Max Verstappen', country: 'JP' },
+            { round: 4, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'April 11-13', winner: 'Oscar Piastri', country: 'BH' },
+            { round: 5, name: 'Saudi Arabian Grand Prix', venue: 'Jeddah', date: 'April 18-20', winner: 'Oscar Piastri', country: 'SA' },
+            { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', winner: 'Oscar Piastri', country: 'USA' },
+            { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen', country: 'IT' },
+            { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'MC' },
+            { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'ES' },
+            { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'CA' },
+            // Modified upcoming race information as requested
+            { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
+            { round: 12, name: 'British Grand Prix', venue: 'Silverstone', date: 'July 4-6', country: 'GB' },
+            { round: 13, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 25-27', country: 'BE' },
+            { round: 14, name: 'Hungarian Grand Prix', venue: 'Budapest', date: 'August 1-3', country: 'HU' },
+            { round: 15, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'August 29-31', country: 'NL' },
+            { round: 16, name: 'Italian Grand Prix', venue: 'Monza', date: 'September 5-7', country: 'IT' },
+            { round: 17, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'September 19-21', country: 'AZ' },
+            { pos: 18, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
+            { pos: 19, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19', country: 'USA' },
+            { pos: 20, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26', country: 'MX' },
+            { pos: 21, name: 'Brazilian Grand Prix', date: 'November 7-9', country: 'BR' },
+            { pos: 22, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22', country: 'USA' },
+            { pos: 23, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30', country: 'QAT' },
+            { pos: 24, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7', country: 'AE' }
+        ];
 
-        const driverData = {
-            'FOCUSER': {
-                name: 'FOCUSER', team: 'HOT WHEELS MCLAREN', country: 'SPAIN', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197593.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 57, 'Wins': 0, 'Podiums': 6, 'Career Points': 360, 'Pole Positions': 0, 'DNFs': 1, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '2', grid: '3', stops: '2', result: '+10.026', pts: '20' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '2', grid: '2', stops: '2', result: '+3.552', pts: '20' } ]
-            },
-            'MAXFAN1982': {
-                name: 'MAXFAN1982', team: 'NEWPORT ROLEX RED BULL RACING', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 28, 'Wins': 1, 'DNFs': 6, 'Pole Positions': 0, 'Career Points': 114, 'Podiums': 1, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '4', grid: '1', stops: '2', result: '+24.353', pts: '13' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '1', grid: '1', stops: '2', result: '46:34.539', pts: '25' }]
-            },
-            'AntonChebotarov': {
-                name: 'ANTON CHEBOTAROV', team: 'HOT WHEELS MCLAREN', country: 'UKRAINE', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197572.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 60, 'Wins': 5, 'DNFs': 5, 'Pole Positions': 4, 'Career Points': 527, 'Podiums': 21, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '1', grid: '2', stops: '2', result: '45:15:184', pts: '25' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '11', grid: '4', stops: '2', result: '+25.075', pts: '5' }]
-            },
-            'SEBEINKRO': {
-                name: 'SEBEINKRO', team: 'GUINNESS MERCEDES', country: 'NORWAY', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197579.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp',
-                baseCareerStats: {'World Championships': 0},
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '6', grid: '2', stops: '2', result: '+28.709', pts: '10' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '4', grid: '7', stops: '2', result: '+6.868', pts: '13' }]
-            },
-            'MORA': {
-                name: 'MORA', team: 'RACING BULLS PEUGEOT SPORT', country: 'SPAIN', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197593.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 32, 'Wins': 2, 'DNFs': 7, 'Pole Positions': 8, 'Career Points': 231, 'Podiums': 8, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '8', grid: '2', stops: '2', result: '+32.937', pts: '8' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '5', grid: '6', stops: '2', result: '+7.528', pts: '11' }]
-            },
-            'YUKITSUNODA': {
-                name: 'YUKI TSUNODA', team: 'NEWPORT ROLEX RED BULL RACING', country: 'JAPAN', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197604.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 3, 'Wins': 0, 'DNFs': 1, 'Pole Positions': 0, 'Career Points': 1, 'Podiums': 0, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '3', grid: '2', stops: '2', result: '+22.388', pts: '16' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '14', grid: '3', stops: '3', result: '+33.076', pts: '2' }]
-            },
-            'MAXHOUSLEY': {
-                name: 'MAX HOUSLEY', team: 'TINDER ALPINE F1 TEAM', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 9, 'Wins': 0, 'Podiums': 2, 'Career Points': 72, 'Pole Positions': 0, 'DNFs': 1, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '14', grid: '12', stops: '2', result: '+1:00.196', pts: '2' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '3', grid: '10', stops: '3', result: '+4.530', pts: '16' }]
-            },
-            'TSAR': {
-                name: 'TSAR', team: 'RACING BULLS PEUGEOT SPORT', country: 'HUNGARY', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197584.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 3, 'Wins': 0, 'DNFs': 2, 'Pole Positions': 0, 'Career Points': 0, 'Podiums': 0, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '9', grid: '2', stops: '1', result: '+40.504', pts: '7' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '8', grid: '12', stops: '3', result: '+12.665', pts: '8' }]
-            },
-            'COUNTERFEIT': {
-                name: 'COUNTERFEIT', team: 'HAAS ONLYFANS RACING', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 51, 'Wins': 0, 'DNFs': 15, 'Pole Positions': 0, 'Career Points': 223, 'Podiums': 3, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '12', grid: '16', stops: '1', result: '+54.468', pts: '4' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '7', grid: '13', stops: '3', result: '+12.213', pts: '9' }]
-            },
-            'ALPHAROMEO127': {
-                name: 'ALPHAROMEO127', team: 'SCUDERIA FERRARI HP', country: 'NETHERLANDS', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197441.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 19, 'Wins': 0, 'DNFs': 3, 'Pole Positions': 0, 'Career Points': 83, 'Podiums': 2, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '5', grid: '4', stops: '1', result: '+26.454', pts: '11' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '20', grid: '5', stops: '0', result: 'DNF', pts: '0' }]
-            },
-            'LUCASTEVENS': {
-                name: 'LUCA STEVENS', team: 'LOCKHEED MARTIN ASTON MARTIN', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 54, 'Wins': 3, 'Podiums': 14, 'Career Points': 451, 'Pole Positions': 0, 'DNFs': 4, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '15', grid: '15', stops: '2', result: '+1 LAP', pts: '1' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '6', grid: '16', stops: '2', result: '+10.799', pts: '10' }]
-            },
-            'STRA': {
-                name: 'STRA', team: 'LOCKHEED MARTIN ASTON MARTIN', country: 'SERBIA', flagUrl: 'https://cdn-icons-png.flaticon.com/512/197/197602.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 16, 'Wins': 0, 'Podiums': 0, 'Career Points': 53, 'Pole Positions': 0, 'DNFs': 7, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '7', grid: '9', stops: '2', result: '+29.581', pts: '9' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '17', grid: '11', stops: '1', result: 'DNF', pts: '0' }]
-            },
-            'ANTONIOBRANCATI': {
-                name: 'ANTONIO BRANCATI', team: 'SCUDERIA FERRARI HP', country: 'ITALY', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197626.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 52, 'Wins': 5, 'DNFs': 9, 'Pole Positions': 6, 'Career Points': 355, 'Podiums': 14, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '9', grid: '9', stops: '2', result: '+14.116', pts: '7' }]
-            },
-            'JSTNNL': {
-                name: 'JSTN NL', team: 'SCUDERIA FERRARI HP', country: 'NETHERLANDS', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197441.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp',
-                baseCareerStats: {'World Championships': 0},
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '10', grid: '2', stops: '2', result: '+41.860', pts: '6' }]
-            },
-            'NOJUSGEDVILAS': {
-                name: 'NOJUS GEDVILAS', team: 'HAAS ONLYFANS RACING', country: 'LITHUANIA', flagUrl: 'https://cdn-icons-png.flaticon.com/512/197/197612.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp',
-                baseCareerStats: {'World Championships': 0},
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '17', grid: '14', stops: '2', result: '+1 LAP', pts: '0' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '10', grid: '17', stops: '2', result: '+22.685', pts: '6' }]
-            },
-            'ASPEC33': {
-                name: 'ASPEC33', team: 'TINDER ALPINE F1 TEAM', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
-                baseCareerStats: {'World Championships': 0},
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '11', grid: '10', stops: '2', result: '+47.038', pts: '5' }]
-            },
-            'EDGE': {
-                name: 'EDGE', team: 'HAAS ONLYFANS RACING', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
-                baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '12', grid: '20', stops: '2', result: '+26.424', pts: '4' }]
-            },
-            'SHENGEN': {
-                name: 'SHENGEN', team: 'GUINNESS MERCEDES', country: 'FINLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197585.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp',
-                baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '13', grid: '2', stops: '2', result: '+54.789', pts: '3' }]
-            },
-            'RABAS': {
-                name: 'RABAS', team: 'JOHN DEERE WILLIAMS RACING', country: 'SPAIN', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197593.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp',
-                baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '13', grid: '19', stops: '3', result: '+29.581', pts: '3' }]
-            },
-            'MAXLINXC': {
-                name: 'MAXLINXC', team: 'HAAS ONLYFANS RACING', country: 'NETHERLANDS', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197441.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp',
-                baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '15', grid: '8', stops: '3', result: '+3 LAPS', pts: '1' }]
-            },
-            'ARUTHLESSGUY': {
-                name: 'A RUTHLESS GUY', team: 'TINDER ALPINE F1 TEAM', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
-                baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '16', grid: '17', stops: '2', result: '+1 LAP', pts: '0' }]
-            },
-            'LOLER': {
-                name: 'LOLER', team: 'JOHN DEERE WILLIAMS RACING', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp',
-                baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '18', grid: '18', stops: '2', result: '+1 LAP', pts: '0' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '19', grid: '18', stops: '0', result: 'DNF', pts: '0' }]
-            },
-            'C3Z4R': {
-                name: 'C3Z4R', team: 'TWITCH SAUBER', country: 'BELGIUM', flagUrl: 'https://cdn-icons-png.flaticon.com/512/197/197583.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp',
-                baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '19', grid: '19', stops: '3', result: 'DNF', pts: '0' }]
-            },
-            'YULIANKALENANTOVICH': {
-                name: 'YULIAN KALENANTOVICH', team: 'TWITCH SAUBER', country: 'UKRAINE', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197572.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp',
-                baseCareerStats: { 'Grand Prix Entered': 5, 'Wins': 0, 'DNFs': 2, 'Pole Positions': 0, 'Career Points': 2, 'Podiums': 0, 'World Championships': 0 },
-                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '16', grid: '15', stops: '0', result: 'DNF', pts: '0' }]
-            },
-            'THEROMANIANDEVIL': {
-                name: 'THE ROMANIAN DEVIL', team: 'GUINNESS MERCEDES', country: 'ROMANIA', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197587.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp',
-                baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '18', grid: '14', stops: '1', result: 'DNF', pts: '0' }]
-            }
-        };
-
-        // --- PAGE LOAD LOGIC ---
-        window.onload = function() {
-            // Calculate season stats for all drivers before loading the page
-            calculateAllSeasonStats();
-            
-            const urlParams = new URLSearchParams(window.location.search);
-            const driverKey = (urlParams.get('driver') || 'FOCUSER').replace(/[\s_]/g, '').toUpperCase();
-            const foundKey = Object.keys(driverData).find(k => k.replace(/[\s_]/g, '').toUpperCase() === driverKey);
-            
-            loadDriverData(foundKey || 'FOCUSER');
-            setupMenu();
-            setupSubHeader();
+        const timeZoneMap = {
+            'Melbourne': 'Australia/Melbourne',
+            'Shanghai': 'Asia/Shanghai',
+            'Suzuka': 'Asia/Tokyo',
+            'Sakhir': 'Asia/Bahrain',
+            'Jeddah': 'Asia/Riyadh',
+            'Miami': 'America/New_York',
+            'Imola': 'Europe/Rome',
+            'Monaco': 'Europe/Monaco',
+            'Barcelona': 'Europe/Madrid',
+            'Montreal': 'America/Toronto',
+            'Spielberg': 'Europe/Vienna',
+            'Silverstone': 'Europe/London',
+            'Spa': 'Europe/Brussels',
+            'Budapest': 'Europe/Budapest',
+            'Zandvoort': 'Europe/Amsterdam',
+            'Monza': 'Europe/Rome',
+            'Baku': 'Asia/Baku',
+            'Singapore': 'Asia/Singapore',
+            'Austin': 'America/Chicago',
+            'Mexico City': 'America/Mexico_City',
+            'Sao Paulo': 'America/Sao_Paulo',
+            'Las Vegas': 'America/Los_Angeles',
+            'Lusail': 'Asia/Qatar',
+            'Yas Marina': 'Asia/Dubai'
         };
         
-        // --- DATA CALCULATION & LOADING FUNCTIONS ---
-        function calculateAllSeasonStats() {
-            const standings = [];
-            for (const key in driverData) {
-                const driver = driverData[key];
-                const recentRaces = driver.recentRaces || [];
-                
-                let seasonPoints = 0;
-                let seasonWins = 0;
-                let seasonPodiums = 0;
-                let seasonPoles = 0;
-                let seasonDNFs = 0;
-                let seasonTop10s = 0;
+        window.onload = function() {
+            // --- Content population script (retained for 'Latest' page content, no change) ---
+            const contentElements = document.querySelectorAll('.content-fade-in');
+            setTimeout(() => {
+                contentElements.forEach(el => el.classList.add('visible'));
+            }, 100);
 
-                recentRaces.forEach(race => {
-                    seasonPoints += parseInt(race.pts || 0);
-                    if (race.pos === '1') seasonWins++;
-                    if (['1', '2', '3'].includes(race.pos)) seasonPodiums++;
-                    if (race.grid === '1') seasonPoles++;
-                    if (race.result === 'DNF') seasonDNFs++;
-                    if (parseInt(race.pos) <= 10) seasonTop10s++;
-                });
-
-                driver.seasonStats = {
-                    'Grand Prix Points': seasonPoints,
-                    'Grand Prix Races': recentRaces.length,
-                    'Wins': seasonWins,
-                    'Podiums': seasonPodiums,
-                    'Pole Positions': seasonPoles,
-                    'DNFs': seasonDNFs,
-                    'Grand Prix Top 10s': seasonTop10s
-                };
-                standings.push({ key: key, points: seasonPoints });
-            }
-            
-            // Sort drivers by points to determine season position
-            standings.sort((a, b) => b.points - a.points);
-            standings.forEach((driver, index) => {
-                driverData[driver.key].seasonStats['Season Position'] = (index + 1) + (['st', 'nd', 'rd'][index] || 'th');
-            });
-        }
-
-        function loadDriverData(driverKey) {
-            let driver = driverData[driverKey];
-            if (!driver) {
-                driver = driverData['FOCUSER'];
-            }
-
-            // --- Calculate Combined Career Stats ---
-            const baseCareer = driver.baseCareerStats || {};
-            const season = driver.seasonStats || {};
-            const getStat = (stat) => parseInt(stat || 0, 10);
-
-            const calculatedCareerStats = {
-                'Grand Prix Entered': getStat(baseCareer['Grand Prix Entered']) + getStat(season['Grand Prix Races']),
-                'Wins': getStat(baseCareer['Wins']) + getStat(season['Wins']),
-                'Podiums': getStat(baseCareer['Podiums']) + getStat(season['Podiums']),
-                'Career Points': getStat(baseCareer['Career Points']) + getStat(season['Grand Prix Points']),
-                'Pole Positions': getStat(baseCareer['Pole Positions']) + getStat(season['Pole Positions']),
-                'DNFs': getStat(baseCareer['DNFs']) + getStat(season['DNFs']),
-                'World Championships': baseCareer['World Championships'] !== undefined ? baseCareer['World Championships'] : 'N/A'
-            };
-
-            // Update banner
-            const banner = document.getElementById('driver-banner');
-            const teamColor = teamColors[driver.team] || '#FF8000'; // Default to orange
-            banner.style.backgroundColor = teamColor;
-
-            document.getElementById('driver-name').textContent = driver.name;
-            document.getElementById('driver-flag').src = driver.flagUrl;
-            document.getElementById('driver-country').textContent = driver.country;
-            document.getElementById('driver-team').textContent = driver.team;
-            document.getElementById('driver-car-img').src = driver.carImageUrl;
-            document.getElementById('driver-car-img').alt = driver.team + ' F1 Car';
-
-            // Helper function to populate a stats grid
-            const populateStatsGrid = (gridId, stats) => {
-                const grid = document.getElementById(gridId);
-                grid.innerHTML = ''; // Clear existing stats
-                const careerOrder = ['Grand Prix Entered', 'Wins', 'Podiums', 'Career Points', 'Pole Positions', 'DNFs', 'World Championships'];
-                const seasonOrder = ['Season Position', 'Grand Prix Points', 'Grand Prix Races', 'Wins', 'Podiums', 'Pole Positions', 'Grand Prix Top 10s', 'DNFs'];
-                const order = gridId === 'career-stats-grid' ? careerOrder : seasonOrder;
-
-                for (const label of order) {
-                     if (stats[label] !== undefined) {
-                         grid.innerHTML += `
-                             <div class="flex flex-col">
-                                 <span class="font-kh-interference text-lg font-semibold text-white">${stats[label]}</span>
-                                 <span class="text-sm">${label}</span>
-                             </div>
-                         `;
-                     }
-                }
-            };
-            
-            // Populate stats grids
-            populateStatsGrid('season-stats-grid', driver.seasonStats);
-            populateStatsGrid('career-stats-grid', calculatedCareerStats);
-
-            // Populate recent races table
-            const racesTbody = document.getElementById('recent-races-tbody');
-            racesTbody.innerHTML = ''; // Clear existing rows
-            if(driver.recentRaces && driver.recentRaces.length > 0){
-                driver.recentRaces.forEach((race, index) => {
-                    const borderClass = index < driver.recentRaces.length - 1 ? 'border-b border-gray-600' : '';
-                    racesTbody.innerHTML += `
-                        <tr class="${borderClass}">
-                            <td class="px-6 py-4 whitespace-nowrap uppercase">
-                                <div class="flex items-center">
-                                    <img src="${race.flag}" alt="${race.gp} Flag" class="h-4 w-auto mr-3 rounded-sm">
-                                    <span>${race.gp}</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap uppercase">${race.pos}</td>
-                            <td class="px-6 py-4 whitespace-nowrap uppercase">${race.grid}</td>
-                            <td class="px-6 py-4 whitespace-nowrap uppercase">${race.stops}</td>
-                            <td class="px-6 py-4 whitespace-nowrap uppercase">${race.result}</td>
-                            <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">${race.pts}</td>
-                        </tr>
-                    `;
-                });
-            } else {
-                 racesTbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 uppercase">No recent race data available.</td></tr>`;
-            }
-        }
-
-        // --- UI SETUP FUNCTIONS ---
-        function setupMenu() {
+            // --- Mobile menu toggle script ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
+            // subHeader is now hidden on mobile via CSS, so no need for JS toggle on opacity/pointer-events
+            // const subHeader = document.getElementById('sub-header'); 
+
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('menu-open');
                 mobileMenuButton.classList.toggle('open');
+                // Removed subHeader toggle for mobile as it's now handled by CSS 'hidden md:flex'
+                // subHeader.classList.toggle('opacity-0');
+                // subHeader.classList.toggle('pointer-events-none');
             });
             
+            // --- Sliding highlighter script ---
             const menuItemsContainer = document.getElementById('desktop-menu-items');
             if (menuItemsContainer) {
                 const menuLinks = menuItemsContainer.querySelectorAll('a');
                 const highlighter = document.getElementById('sliding-highlighter');
-                const activeLink = menuItemsContainer.querySelector('a[aria-current="page"]');
-
+                // Active link is 'Latest' for this page, keeping consistency with current page
+                const activeLink = menuItemsContainer.querySelector('a[aria-current="page"]'); 
                 function setHighlighterToLink(link) {
                     if (!link) return;
                     highlighter.style.left = `${link.offsetLeft}px`;
                     highlighter.style.width = `${link.offsetWidth}px`;
                 }
                 setHighlighterToLink(activeLink);
-                menuLinks.forEach(link => link.addEventListener('mouseenter', () => setHighlighterToLink(link)));
-                menuItemsContainer.addEventListener('mouseleave', () => setHighlighterToLink(activeLink));
+                menuLinks.forEach(link => {
+                    link.addEventListener('mouseenter', () => setHighlighterToLink(link));
+                });
+                menuItemsContainer.addEventListener('mouseleave', () => {
+                    setHighlighterToLink(activeLink);
+                });
             }
-        }
 
-        function setupSubHeader() {
-            // This data is static for the sub-header example.
-            const subHeaderScheduleData = [
-                { name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th' },
-                { name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th' }
-            ];
-             const timeZoneMap = {'Imola': 'Europe/Rome', 'Spa': 'Europe/Brussels'};
-
+            // --- Sub-header time and race script ---
             const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
             const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
             const clientTimeEl = document.getElementById('client-time');
             const raceTimeEl = document.getElementById('race-time');
+            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
 
-            const upcomingRace = subHeaderScheduleData[0]; // Simple example, always shows first race
+            // Helper to parse date strings like "March 14-16" or "August 1st"
+            function parseRaceDate(dateStr) {
+                const monthStr = dateStr.split(' ')[0];
+                let dayStr = dateStr.split(' ')[1].split('-')[0]; // Handles "14-16"
+                // Handle dates like "August 1st", "June 27th" by removing ordinal suffixes
+                if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
+                    dayStr = dayStr.substring(0, dayStr.length - 2);
+                }
+                return new Date(`${monthStr} ${dayStr}, 2025`);
+            }
+
+            // Find the upcoming race
+            const now = new Date();
+            let upcomingRace = null;
+            for (const race of scheduleData) {
+                const raceDate = parseRaceDate(race.date);
+                if (raceDate > now) {
+                    upcomingRace = race;
+                    break;
+                }
+            }
+
             if (upcomingRace) {
                 upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
                 upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
+
                 const raceTimeZone = timeZoneMap[upcomingRace.venue];
 
                 function updateTimes() {
-                    const now = new Date();
-                    const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
-                    clientTimeEl.textContent = `MY TIME ${now.toLocaleTimeString([], timeOptions)}`;
+                    const currentTime = new Date();
+                    clientTimeEl.textContent = `MY TIME ${currentTime.toLocaleTimeString([], timeOptions)}`; /* Removed colon */
                     if (raceTimeZone) {
-                        raceTimeEl.textContent = `TRACK TIME ${now.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
+                        raceTimeEl.textContent = `TRACK TIME ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`; /* Removed colon */
                     } else {
-                        raceTimeEl.textContent = `TRACK TIME N/A`;
+                        raceTimeEl.textContent = `TRACK TIME N/A`; /* Removed colon */
                     }
                 }
                 updateTimes();
-                setInterval(updateTimes, 60000);
+                setInterval(updateTimes, 1000 * 60); // Update every minute
             } else {
                 upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                if(clientTimeEl && clientTimeEl.parentElement) clientTimeEl.parentElement.style.display = 'none';
+                clientTimeEl.parentElement.style.display = 'none'; // Hide time if season over
             }
-        }
+
+            // --- Dynamically set heights and alignment ---
+            const featuredStoryContainer = document.getElementById('featured-story-container');
+            const standingsColumn = document.getElementById('standings-column');
+            const driversStandingsTable = standingsColumn.querySelector('.bg-white.rounded-lg.shadow-lg.p-4.space-y-3.content-fade-in.delay-100');
+            const teamsStandingsTable = standingsColumn.querySelector('.bg-white.rounded-lg.shadow-lg.p-4.space-y-3.content-fade-in.delay-200');
+
+
+            const adjustLayout = () => {
+                if (featuredStoryContainer && standingsColumn && driversStandingsTable && teamsStandingsTable) {
+                    const featuredImage = featuredStoryContainer.querySelector('img');
+
+                    if (featuredImage && (featuredImage.complete || featuredImage.naturalWidth > 0)) {
+                        // Reset heights to allow natural content flow for measurement
+                        featuredStoryContainer.style.height = 'auto';
+                        driversStandingsTable.style.height = 'auto';
+                        teamsStandingsTable.style.height = 'auto';
+                        standingsColumn.style.height = 'auto';
+
+                        // Calculate total height of the standings column
+                        // This includes the h3, padding, and content of both tables, plus space-y-8
+                        const standingsTotalHeight = standingsColumn.offsetHeight;
+
+                        // Apply this total height to the featured story container
+                        featuredStoryContainer.style.height = `${standingsTotalHeight}px`;
+
+                        // Ensure image within featured story container fills its new height
+                        featuredImage.style.height = '100%';
+                        featuredImage.style.objectFit = 'cover';
+                        featuredImage.style.objectPosition = 'bottom'; // Adjusted object-position to "zoom in" and hide top/middle
+
+                        // Ensure the standings column itself takes the measured height
+                        // This might be redundant if the content defines its height, but good for explicit control
+                        standingsColumn.style.height = `${standingsTotalHeight}px`;
+
+                        // Distribute space vertically if there's extra space within standingsColumn
+                        standingsColumn.style.display = 'flex';
+                        standingsColumn.style.flexDirection = 'column';
+                        standingsColumn.style.justifyContent = 'space-between';
+                    } else if (featuredImage) {
+                        // If image not loaded, set onload listener
+                        featuredImage.onload = adjustLayout;
+                    }
+                }
+            };
+
+            // Initial adjustment
+            adjustLayout();
+            // Re-adjust on window resize to maintain responsiveness
+            window.addEventListener('resize', adjustLayout);
+
+
+            // --- Carousel scroll functionality for POSTS section ---
+            const postsCarousel = document.getElementById('posts-carousel');
+            const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+            const scrollRightBtn = document.getElementById('scrollRightBtn');
+
+            if (postsCarousel && scrollLeftBtn && scrollRightBtn) {
+                const scrollAmount = 200; // Adjust scroll distance as needed based on card width
+
+                scrollRightBtn.addEventListener('click', () => {
+                    postsCarousel.scrollLeft += scrollAmount;
+                });
+
+                scrollLeftBtn.addEventListener('click', () => {
+                    postsCarousel.scrollLeft -= scrollAmount;
+                });
+            }
+        };
     </script>
 </body>
 </html>
