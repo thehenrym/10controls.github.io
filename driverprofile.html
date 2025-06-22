@@ -256,7 +256,7 @@
             },
             'MAXHOUSLEY': {
                 name: 'MAX HOUSLEY', team: 'TINDER ALPINE F1 TEAM', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
-                baseCareerStats: {},
+                baseCareerStats: { 'Grand Prix Entered': 9, 'Wins': 0, 'Podiums': 2, 'Career Points': 72, 'Pole Positions': 0, 'DNFs': 1, 'World Championships': 0 },
                 recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '14', grid: '12', stops: '2', result: '+1:00.196', pts: '2' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '3', grid: '10', stops: '3', result: '+4.530', pts: '16' }]
             },
             'TSAR': {
@@ -276,12 +276,12 @@
             },
             'LUCASTEVENS': {
                 name: 'LUCA STEVENS', team: 'LOCKHEED MARTIN ASTON MARTIN', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp',
-                baseCareerStats: {},
+                baseCareerStats: { 'Grand Prix Entered': 54, 'Wins': 3, 'Podiums': 14, 'Career Points': 451, 'Pole Positions': 0, 'DNFs': 4, 'World Championships': 0 },
                 recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '15', grid: '15', stops: '2', result: '+1 LAP', pts: '1' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '6', grid: '16', stops: '2', result: '+10.799', pts: '10' }]
             },
             'STRA': {
                 name: 'STRA', team: 'LOCKHEED MARTIN ASTON MARTIN', country: 'SERBIA', flagUrl: 'https://cdn-icons-png.flaticon.com/512/197/197602.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp',
-                baseCareerStats: {},
+                baseCareerStats: { 'Grand Prix Entered': 16, 'Wins': 0, 'Podiums': 0, 'Career Points': 53, 'Pole Positions': 0, 'DNFs': 7, 'World Championships': 0 },
                 recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '7', grid: '9', stops: '2', result: '+29.581', pts: '9' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '17', grid: '11', stops: '1', result: 'DNF', pts: '0' }]
             },
             'ANTONIOBRANCATI': {
@@ -450,12 +450,12 @@
 
                 for (const label of order) {
                      if (stats[label] !== undefined) {
-                        grid.innerHTML += `
-                            <div class="flex flex-col">
-                                <span class="text-lg font-semibold text-black">${stats[label]}</span>
-                                <span class="text-sm">${label}</span>
-                            </div>
-                        `;
+                         grid.innerHTML += `
+                             <div class="flex flex-col">
+                                 <span class="text-lg font-semibold text-black">${stats[label]}</span>
+                                 <span class="text-sm">${label}</span>
+                             </div>
+                         `;
                      }
                 }
             };
