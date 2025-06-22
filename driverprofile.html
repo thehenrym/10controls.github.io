@@ -546,3 +546,13 @@
                         raceTimeEl.textContent = `TRACK TIME N/A`;
                     }
                 }
+                updateTimes();
+                setInterval(updateTimes, 60000);
+            } else {
+                upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
+                if(clientTimeEl && clientTimeEl.parentElement) clientTimeEl.parentElement.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
