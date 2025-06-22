@@ -355,8 +355,8 @@
                     // Generate driver profile links
                     const driver1Name = team.drivers[0].name.toUpperCase();
                     const driver2Name = team.drivers[1].name.toUpperCase();
-                    const driver1Link = `https://thehenrym.github.io/testing2.html?driver=${encodeURIComponent(driver1Name)}`;
-                    const driver2Link = `hhttps://thehenrym.github.io/testing2.html?driver=${encodeURIComponent(driver2Name)}`;
+                    const driver1Link = `https://thehenrym.github.io/driverprofile.html?driver=${encodeURIComponent(driver1Name)}`;
+                    const driver2Link = `hhttps://thehenrym.github.io/driverprofile.html?driver=${encodeURIComponent(driver2Name)}`;
 
                     card.innerHTML = `
                         <!-- Main Content -->
@@ -371,12 +371,12 @@
                             <div class="flex items-center justify-around text-white">
                                 <div class="w-full text-center py-3 flex items-center justify-center space-x-2">
                                     ${driver1FlagHtml}
-                                    <a href="${driver1Link}" target="_blank" rel="noopener noreferrer" class="font-medium text-sm tracking-wider hover:underline">${driver1Name}</a>
+                                    <a href="${driver1Link}" target="_self" rel="noopener noreferrer" class="font-medium text-sm tracking-wider hover:underline">${driver1Name}</a>
                                 </div>
                                 <div class="h-6 w-px bg-white/30"></div>
                                 <div class="w-full text-center py-3 flex items-center justify-center space-x-2">
                                     ${driver2FlagHtml}
-                                    <a href="${driver2Link}" target="_blank" rel="noopener noreferrer" class="font-medium text-sm tracking-wider hover:underline">${driver2Name}</a>
+                                    <a href="${driver2Link}" target="_self" rel="noopener noreferrer" class="font-medium text-sm tracking-wider hover:underline">${driver2Name}</a>
                                 </div>
                             </div>
                         </div>
