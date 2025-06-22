@@ -6,10 +6,10 @@
     <title>F1 Driver Profile</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter, Oswald, Titillium Web -->
+    <!-- Google Fonts: Inter and Titillium Web as fallback -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;700&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -21,18 +21,31 @@
             font-style: normal;
         }
 
-        /* Base Body Styles */
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(to bottom, #1e1e2f, #111118);
-            color: #f1f1f1;
+            background: linear-gradient(to bottom, #492833, #ffffff);
             min-height: 100vh;
         }
-
-        /* Header and Navigation */
-        .header-nav {
-            background-color: rgba(10, 10, 20, 0.7);
-            backdrop-filter: blur(10px);
+        .footer {
+            background-color: #492833;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        #mobile-menu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 100%;
+            background-color: #492833;
+        }
+        #mobile-menu.menu-open {
+            max-height: 25rem;
+            opacity: 1;
         }
         #desktop-menu-items {
             position: relative;
@@ -43,30 +56,10 @@
             left: 0;
             width: 0;
             height: 100%;
-            background-color: #e10600; /* F1 Red */
+            background-color: #492833;
             border-radius: 0.375rem;
             transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
             z-index: -1;
-        }
-        .nav-link {
-            transition: color 0.2s ease-in-out;
-        }
-
-        /* Mobile Menu */
-        #mobile-menu {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-            position: absolute;
-            width: 100%;
-            left: 0;
-            top: 100%;
-            background-color: #1e1e2f;
-        }
-        #mobile-menu.menu-open {
-            max-height: 25rem;
-            opacity: 1;
         }
         .hamburger-icon span {
             display: block;
@@ -76,41 +69,32 @@
             transition: all 0.3s cubic-bezier(.08,.82,.17,1);
         }
         #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
+            transform: translateY(10px) rotate(45deg);
         }
         #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
             opacity: 0;
         }
         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
+            transform: translateY(-10px) rotate(-45deg);
         }
-
-        /* Custom Font Styles */
+        .mobile-menu-link {
+            background-color: #492833;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .mobile-menu-link:hover {
+            background-color: #000000;
+        }
+        .font-display {
+            font-family: 'Inter', sans-serif;
+        }
         .font-kh-interference {
             font-family: 'KHInterference-Bold', 'Titillium Web', sans-serif; /* Fallback font */
-        }
-        .font-oswald {
-            font-family: 'Oswald', sans-serif;
-        }
-        
-        /* Main content sections */
-        .content-section {
-             background: linear-gradient(to bottom, #1e1e2f, #111118);
-        }
-        
-        /* Footer */
-        .footer {
-            background-color: #111118;
-            color: white;
-            text-align: center;
-            padding: 2rem 1rem;
-            border-top: 1px solid #333;
         }
     </style>
 </head>
 <body class="font-medium">
 
-    <header class="header-nav sticky top-0 z-50 shadow-lg">
+    <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
@@ -120,16 +104,16 @@
                 </div>
                 <div id="desktop-menu-items" class="hidden md:flex items-center space-x-4">
                     <div id="sliding-highlighter"></div>
-                    <a href="latest.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Latest</a>
-                    <a href="schedule.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
-                    <a href="standings.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
-                    <a href="teams.html" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Teams</a>
-                    <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
+                    <a href="latest.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Latest</a>
+                    <a href="schedule.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
+                    <a href="standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
+                    <a href="teams.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Teams</a>
+                    <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
                 </div>
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #e10600;">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833;">
                         <span class="sr-only">Open main menu</span>
-                        <div class="hamburger-icon space-y-1.5">
+                        <div class="hamburger-icon space-y-2">
                             <span></span><span></span><span></span>
                         </div>
                     </button>
@@ -138,11 +122,11 @@
         </nav>
         <div class="md:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="latest.html" class="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Latest</a>
-                <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Schedule</a>
-                <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Standings</a>
-                <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Teams</a>
-                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Join Now</a>
+                <a href="latest.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Latest</a>
+                <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
+                <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
+                <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Teams</a>
+                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
             </div>
         </div>
     </header>
@@ -165,12 +149,12 @@
     </div>
 
     <!-- Driver Profile and Stats Section -->
-    <div class="content-section">
+    <div id="driver-profile-section" style="background: linear-gradient(to bottom, #492833, #ffffff);">
         <!-- Driver Info Banner -->
         <div id="driver-banner" class="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-12 overflow-hidden">
             <div class="relative z-10 text-center md:text-left flex-shrink-0 mb-8 md:mb-0">
-                <h1 id="driver-name" class="font-kh-interference text-6xl md:text-8xl font-bold text-white uppercase"></h1>
-                <p id="driver-details" class="flex items-center justify-center md:justify-start text-sm md:text-base text-white mt-2">
+                <h1 id="driver-name" class="font-display text-6xl md:text-8xl font-bold text-white uppercase"></h1>
+                <p id="driver-details" class="flex items-center text-sm md:text-base text-white mt-2">
                     <img id="driver-flag" src="" alt="Driver Flag" class="h-4 w-auto mr-2 inline-block">
                     <span id="driver-country"></span> <span class="mx-2">•</span> <span id="driver-team"></span>
                 </p>
@@ -182,34 +166,34 @@
 
         <!-- Statistics Section -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:p-8 py-12">
-            <h2 class="font-kh-interference text-3xl font-bold text-white mb-8 uppercase">Statistics</h2>
+            <h2 class="text-3xl font-bold text-black mb-8 uppercase">Statistics</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <!-- 2025 Season Stats -->
                 <div>
-                    <h3 class="font-oswald text-xl font-bold text-white mb-6 uppercase">2025 Season</h3>
-                    <div id="season-stats-grid" class="grid grid-cols-2 gap-y-6 gap-x-4 text-gray-200"></div>
+                    <h3 class="font-kh-interference text-xl font-bold text-black mb-6 uppercase">2025 Season</h3>
+                    <div id="season-stats-grid" class="grid grid-cols-2 gap-y-4 gap-x-2 text-gray-800"></div>
                 </div>
                 <!-- Career Stats -->
                 <div>
-                    <h3 class="font-oswald text-xl font-bold text-white mb-6 uppercase">Career Stats</h3>
-                    <div id="career-stats-grid" class="grid grid-cols-2 gap-y-6 gap-x-4 text-gray-200"></div>
+                    <h3 class="font-kh-interference text-xl font-bold text-black mb-6 uppercase">Career Stats</h3>
+                    <div id="career-stats-grid" class="grid grid-cols-2 gap-y-4 gap-x-2 text-gray-800"></div>
                 </div>
             </div>
         </div>
         
         <!-- Recent Races Table Section -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:p-8 pt-0 pb-24">
-            <h2 class="font-kh-interference text-3xl font-bold text-white mb-8 uppercase">Recent Races</h2>
-            <div class="rounded-lg shadow-lg overflow-x-auto bg-gray-800/20">
+            <h2 class="text-3xl font-bold text-black mb-8 uppercase">Recent Races</h2>
+            <div class="rounded-lg shadow-lg overflow-x-auto" style="background-color: #492833;">
                 <table class="w-full text-white text-sm">
-                    <thead class="border-b-2 border-gray-700">
+                    <thead class="border-b border-gray-500">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider font-oswald">Grand Prix</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider font-oswald">Pos</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider font-oswald">Grid</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider font-oswald">Stops</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider font-oswald">Result</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider font-oswald">Pts</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Grand Prix</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Pos</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Grid</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Stops</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Result</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Pts</th>
                         </tr>
                     </thead>
                     <tbody id="recent-races-tbody">
@@ -223,14 +207,14 @@
     <!-- Social Media Links & Copyright Footer -->
     <footer class="bg-black text-white text-center py-5 px-2">
         <div class="max-w-7xl mx-auto flex justify-center items-center space-x-6">
-            <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-red-500 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
-            <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-red-500 transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
-            <a href="https://www.youtube.com/@10controls24" target="_blank" rel="noopener noreferrer" class="text-white hover:text-red-500 transition-colors" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
-            <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:text-red-500 transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
+            <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
+            <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="https://www.youtube.com/@10controls24" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
+            <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
         </div>
     </footer>
     <footer class="footer">
-        <p class="text-xs">&copy; 2022-2025 10 Controls Limited</p>
+        <p>© 2022-2025 10 Controls Limited</p>
     </footer>
     
     <script>
@@ -238,14 +222,14 @@
         const teamColors = {
             'HOT WHEELS MCLAREN': '#FF8000',
             'NEWPORT ROLEX RED BULL RACING': '#003773',
-            'GUINNESS MERCEDES': '#6c6c6c',
+            'GUINNESS MERCEDES': '#C8CCCE',
             'RACING BULLS PEUGEOT SPORT': '#BBDA0C',
-            'SCUDERIA FERRARI HP': '#D40000',
-            'LOCKHEED MARTIN ASTON MARTIN': '#00665e',
-            'TINDER ALPINE F1 TEAM': '#0090ff',
-            'HAAS ONLYFANS RACING': '#ffffff',
-            'JOHN DEERE WILLIAMS RACING': '#00a0de',
-            'KICK SAUBER': '#52e03a',
+            'SCUDERIA FERRARI HP': '#821729',
+            'LOCKHEED MARTIN ASTON MARTIN': '#037A68',
+            'TINDER ALPINE F1 TEAM': '#F282B4',
+            'HAAS ONLYFANS RACING': '#00AFF0',
+            'JOHN DEERE WILLIAMS RACING': '#00A0DE',
+            'KICK SAUBER': '#9146FF',
             'TWITCH SAUBER': '#9146FF',
             'Placeholder Team': '#333333'
         };
@@ -457,17 +441,8 @@
 
             // Update banner
             const banner = document.getElementById('driver-banner');
-            const teamColor = teamColors[driver.team] || '#e10600'; // Default to F1 red
+            const teamColor = teamColors[driver.team] || '#FF8000'; // Default to orange
             banner.style.backgroundColor = teamColor;
-            if (driver.team === 'HAAS ONLYFANS RACING') {
-                banner.style.color = '#000000'; // Use black text for better contrast on white background
-                document.getElementById('driver-name').classList.remove('text-white');
-                 document.getElementById('driver-details').classList.remove('text-white');
-            } else {
-                 document.getElementById('driver-name').classList.add('text-white');
-                 document.getElementById('driver-details').classList.add('text-white');
-            }
-
 
             document.getElementById('driver-name').textContent = driver.name;
             document.getElementById('driver-flag').src = driver.flagUrl;
@@ -488,8 +463,8 @@
                      if (stats[label] !== undefined) {
                          grid.innerHTML += `
                              <div class="flex flex-col">
-                                 <span class="font-kh-interference text-3xl font-bold text-white">${stats[label]}</span>
-                                 <span class="font-oswald text-sm uppercase tracking-wider text-gray-400">${label}</span>
+                                 <span class="text-lg font-semibold text-black">${stats[label]}</span>
+                                 <span class="text-sm">${label}</span>
                              </div>
                          `;
                      }
@@ -505,9 +480,9 @@
             racesTbody.innerHTML = ''; // Clear existing rows
             if(driver.recentRaces && driver.recentRaces.length > 0){
                 driver.recentRaces.forEach((race, index) => {
-                    const borderClass = index < driver.recentRaces.length - 1 ? 'border-b border-gray-700' : '';
+                    const borderClass = index < driver.recentRaces.length - 1 ? 'border-b border-gray-600' : '';
                     racesTbody.innerHTML += `
-                        <tr class="${borderClass} hover:bg-gray-700/50 transition-colors">
+                        <tr class="${borderClass}">
                             <td class="px-6 py-4 whitespace-nowrap uppercase">
                                 <div class="flex items-center">
                                     <img src="${race.flag}" alt="${race.gp} Flag" class="h-4 w-auto mr-3 rounded-sm">
@@ -540,13 +515,10 @@
             if (menuItemsContainer) {
                 const menuLinks = menuItemsContainer.querySelectorAll('a');
                 const highlighter = document.getElementById('sliding-highlighter');
-                let activeLink = null; // No active link by default on driver page
+                const activeLink = menuItemsContainer.querySelector('a[aria-current="page"]');
 
                 function setHighlighterToLink(link) {
-                    if (!link) {
-                        highlighter.style.width = '0';
-                        return;
-                    };
+                    if (!link) return;
                     highlighter.style.left = `${link.offsetLeft}px`;
                     highlighter.style.width = `${link.offsetWidth}px`;
                 }
