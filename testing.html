@@ -181,12 +181,13 @@
         /* Style for clickable driver name */
         .driver-name-link {
             color: #ffffff; /* Ensure link color is white */
-            text-decoration: none; /* Remove underline */
+            text-decoration: none; /* Remove underline by default */
             cursor: pointer;
-            transition: color 0.2s ease-in-out;
+            transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out; /* Add text-decoration to transition */
         }
         .driver-name-link:hover {
             color: #cccccc; /* Slightly lighter on hover */
+            text-decoration: underline; /* Underline on hover */
         }
 
     </style>
@@ -396,8 +397,8 @@
         // Function to update driver points and details
         const updateDriverStandings = (results) => {
             results.forEach(result => {
-                let normalizedDriver = result.driver.toUpperCase();
-                let displayDriver = result.driver.toUpperCase();
+                let normalizedDriverName = result.driver.toUpperCase();
+                let displayDriverName = result.driver.toUpperCase();
 
                 if (driverPointsMap.has(normalizedDriverName)) {
                     driverPointsMap.get(normalizedDriverName).points += result.pts;
