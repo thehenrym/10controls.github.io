@@ -151,7 +151,9 @@
                 <h1 id="driver-name" class="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white uppercase"></h1>
                 <p id="driver-details" class="flex items-center justify-center md:justify-start text-sm md:text-base text-white mt-2">
                     <img id="driver-flag" src="" alt="Driver Flag" class="h-4 w-auto mr-2 inline-block">
-                    <span id="driver-country"></span> <span class="mx-2">•</span> <span id="driver-team"></span>
+                    <span id="driver-country"></span> <span class="mx-2">•</span>
+                    <img id="team-icon" src="" alt="Team Icon" class="h-5 w-auto mr-2 inline-block">
+                    <span id="driver-team"></span>
                 </p>
             </div>
             <div class="relative z-10 flex-shrink-0">
@@ -227,6 +229,20 @@
             'KICK SAUBER': '#9146FF',
             'TWITCH SAUBER': '#9146FF',
             'Placeholder Team': '#333333'
+        };
+
+        const teamIcons = {
+            "HOT WHEELS MCLAREN": 'https://cdn.discordapp.com/emojis/1378699086982811679.webp?size=44',
+            "NEWPORT ROLEX RED BULL RACING": 'https://cdn.discordapp.com/emojis/1378696277180813312.webp?size=44',
+            "SCUDERIA FERRARI HP": 'https://cdn.discordapp.com/emojis/1215769617272934440.webp?size=44',
+            "GUINNESS MERCEDES": 'https://cdn.discordapp.com/emojis/1386054950496243732.webp?size=44',
+            "LOCKHEED MARTIN ASTON MARTIN": 'https://cdn.discordapp.com/emojis/1215769484078354483.webp?size=44',
+            "RACING BULLS PEUGEOT SPORT": 'https://cdn.discordapp.com/emojis/1377646844578103346.webp?size=44',
+            "TINDER ALPINE F1 TEAM": 'https://cdn.discordapp.com/emojis/1379862213493260328.webp?size=44',
+            "HAAS ONLYFANS RACING": 'https://cdn.discordapp.com/emojis/1378698433652588645.webp?size=44',
+            "TWITCH SAUBER": 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44',
+            "JOHN DEERE WILLIAMS RACING": 'https://cdn.discordapp.com/emojis/1377791374341963917.webp?size=44',
+            "KICK SAUBER": 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44'
         };
 
         const driverData = {
@@ -421,7 +437,7 @@
         function loadDriverData(driverKey) {
             let driver = driverData[driverKey];
             if (!driver) {
-                driver = driverData['FOCUSER'];
+                driver = driverData['focuser']; // Default to a known driver
             }
 
             // --- Calculate Combined Career Stats ---
@@ -484,6 +500,7 @@
             document.getElementById('driver-flag').src = driver.flagUrl;
             document.getElementById('driver-country').textContent = driver.country;
             document.getElementById('driver-team').textContent = driver.team;
+            document.getElementById('team-icon').src = teamIcons[driver.team] || '';
             document.getElementById('driver-car-img').src = driver.carImageUrl;
             document.getElementById('driver-car-img').alt = driver.team + ' F1 Car';
 
