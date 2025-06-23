@@ -612,7 +612,7 @@
                         <td class="pos-number">${driver.pos}</td>
                         <td>
                             <img src="https://flagsapi.com/${driver.nationality}/flat/16.png" alt="${driver.nationality} Flag" class="inline-block mr-2" onerror="this.onerror=null;this.src='https://placehold.co/16x16/cccccc/000000?text=NF';">
-                            <a href="driverprofile.html?driverName=${encodeURIComponent(driver.name)}" class="driver-name-link">${driver.name}</a>
+                            <a href="driverprofile.html?driver=${encodeURIComponent(driver.name)}" class="driver-name-link">${driver.name}</a>
                         </td>
                         <td class="hidden-mobile">
                             <img src="${getTeamIconSrc(driver.car)}" alt="${driver.car} Icon" class="inline-block h-5 w-5 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/20x20/cccccc/000000?text=NI';">
