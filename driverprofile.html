@@ -6,7 +6,7 @@
 <link rel="shortcut icon" href="favicon/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content="10 Controls" />
-<link rel="manifest" href="favicon/site.webmanifest" /
+<link rel="manifest" href="favicon/site.webmanifest" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>10 Controls</title>
@@ -409,7 +409,12 @@
             // Sort drivers by points to determine season position
             standings.sort((a, b) => b.points - a.points);
             standings.forEach((driver, index) => {
-                driverData[driver.key].seasonStats['Season Position'] = (index + 1) + (['st', 'nd', 'rd'][index] || 'th');
+                const pos = index + 1;
+                let suffix = 'th';
+                if (pos % 10 === 1 && pos % 100 !== 11) suffix = 'st';
+                if (pos % 10 === 2 && pos % 100 !== 12) suffix = 'nd';
+                if (pos % 10 === 3 && pos % 100 !== 13) suffix = 'rd';
+                driverData[driver.key].seasonStats['Season Position'] = pos + suffix;
             });
         }
 
@@ -434,6 +439,42 @@
                 'World Championships': baseCareer['World Championships'] !== undefined ? baseCareer['World Championships'] : 'N/A'
             };
 
+            // --- Calculate additional stats ---
+            const totalRaces = calculatedCareerStats['Grand Prix Entered'];
+            const totalWins = calculatedCareerStats['Wins'];
+            const totalPodiums = calculatedCareerStats['Podiums'];
+
+            // Highest Race Finish
+            let highestFinish = 'N/A';
+            if (totalWins > 0) {
+                highestFinish = '1st';
+            } else if (driver.recentRaces && driver.recentRaces.length > 0) {
+                let bestPos = Infinity;
+                driver.recentRaces.forEach(race => {
+                    const pos = parseInt(race.pos, 10);
+                    if (!isNaN(pos) && pos < bestPos) {
+                        bestPos = pos;
+                    }
+                });
+                if (bestPos !== Infinity) {
+                    let suffix = 'th';
+                    if (bestPos % 10 === 1 && bestPos % 100 !== 11) suffix = 'st';
+                    if (bestPos % 10 === 2 && bestPos % 100 !== 12) suffix = 'nd';
+                    if (bestPos % 10 === 3 && bestPos % 100 !== 13) suffix = 'rd';
+                    highestFinish = bestPos + suffix;
+                }
+            } else if (totalPodiums > 0) {
+                highestFinish = 'Top 3';
+            }
+            calculatedCareerStats['Highest Race Finish'] = highestFinish;
+
+            // Win Percentage
+            calculatedCareerStats['Win Percentage'] = totalRaces > 0 ? ((totalWins / totalRaces) * 100).toFixed(1) + '%' : '0.0%';
+            
+            // Podium Percentage
+            calculatedCareerStats['Podium Percentage'] = totalRaces > 0 ? ((totalPodiums / totalRaces) * 100).toFixed(1) + '%' : '0.0%';
+
+
             // Update banner
             const banner = document.getElementById('driver-banner');
             const teamColor = teamColors[driver.team] || '#FF8000'; // Default to orange
@@ -450,7 +491,7 @@
             const populateStatsGrid = (gridId, stats) => {
                 const grid = document.getElementById(gridId);
                 grid.innerHTML = ''; // Clear existing stats
-                const careerOrder = ['Grand Prix Entered', 'Wins', 'Podiums', 'Career Points', 'Pole Positions', 'DNFs', 'World Championships'];
+                const careerOrder = ['Grand Prix Entered', 'Wins', 'Podiums', 'Career Points', 'Pole Positions', 'DNFs', 'World Championships', 'Highest Race Finish', 'Win Percentage', 'Podium Percentage'];
                 const seasonOrder = ['Season Position', 'Grand Prix Points', 'Grand Prix Races', 'Wins', 'Podiums', 'Pole Positions', 'Grand Prix Top 10s', 'DNFs'];
                 const order = gridId === 'career-stats-grid' ? careerOrder : seasonOrder;
 
