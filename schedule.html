@@ -386,13 +386,13 @@
                     // Logic to set specific href for Bahrain and Australian Grand Prix results buttons, and add Watch button for Australia
                     if (race.round === 1 && race.name === 'Bahrain Grand Prix') {
                         if (currentScheduleData === scheduleDataTier1) {
-                            resultButtonHref = "results/bahrain.html";
+                            resultButtonHref = "results/bahrain-tier1.html";
                         } else { // Tier 2 Bahrain GP
                              resultButtonHref = "soon.html"; // Example tier 2 results page
                         }
                     } else if (race.round === 2 && race.name === 'Australian Grand Prix') {
                         if (currentScheduleData === scheduleDataTier1) {
-                            resultButtonHref = "results/australia.html";
+                            resultButtonHref = "results/australia-tier1.html";
                             watchButtonHtml = `<a href="https://www.youtube.com/watch?v=r5SmINAmQkU" target="_blank" rel="noopener noreferrer" class="bg-[#201C1C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors mr-2">Watch</a>`;
                         } else { // Tier 2 Australian GP
                             resultButtonHref = "soon.html"; // Example tier 2 results page
