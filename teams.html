@@ -6,501 +6,142 @@
 <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content="10 Controls" />
 <link rel="manifest" href="favicon/site.webmanifest" /
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10 Controls</title>
-    <!-- Favicon link (kept from original) -->
-    <link rel="icon" type="image/png" href="images/10c.png">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            /* Updated background gradient */
-            background: linear-gradient(to bottom, #492833, #201C1C);
-            min-height: 100vh;
-        }
-        .footer {
-            /* Updated footer background color */
-            background-color: #492833;
-            color: white;
-            text-align: center;
-            padding: 2rem 1rem;
-        }
-        /* Styles for the staggered fade-in animation of schedule cards (kept for team cards) */
-        .schedule-card {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-        .schedule-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Controls</title>
+        <link rel="icon" type="image/png" href="images/10c.png">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Updated background gradient */
+            background: linear-gradient(to bottom, #492833, #201C1C);
+            min-height: 100vh;
+        }
+        .footer {
+            /* Updated footer background color */
+            background-color: #492833;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        /* Styles for the staggered fade-in animation of schedule cards (kept for team cards) */
+        .schedule-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        .schedule-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-        .schedule-card > div {
-            position: relative;
-            z-index: 1;
-        }
+        .schedule-card > div {
+            position: relative;
+            z-index: 1;
+        }
 
-        /* Styles for smooth hamburger menu transition, matching reference page */
-        #mobile-menu {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-            position: absolute;
-            width: 100%;
-            left: 0;
-            top: 100%;
-            /* Updated background color */
-            background-color: #492833;
-        }
+        /* Styles for smooth hamburger menu transition, matching reference page */
+        #mobile-menu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 100%;
+            /* Updated background color */
+            background-color: #492833;
+        }
 
-        #mobile-menu.menu-open {
-            max-height: 25rem;
-            opacity: 1;
-        }
+        #mobile-menu.menu-open {
+            max-height: 25rem;
+            opacity: 1;
+        }
 
-        /* Styles for the sliding navigation highlighter, matching reference page */
-        #desktop-menu-items {
-            position: relative;
-        }
+        /* Styles for the sliding navigation highlighter, matching reference page */
+        #desktop-menu-items {
+            position: relative;
+        }
 
-        #sliding-highlighter {
-            position: absolute;
-            top: 0;
-            left: 0; /* Will be set by JS */
-            width: 0; /* Will be set by JS */
-            height: 100%;
-            /* Updated background color */
-            background-color: #492833;
-            border-radius: 0.375rem; /* rounded-md */
-            transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
-            z-index: -1; /* Place it behind the text */
-        }
-        
-        /* Styles for Hamburger Icon to "X" Animation */
-        .hamburger-icon span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background-color: white;
-            transition: all 0.3s cubic-bezier(.08,.82,.17,1); /* Updated transition */
-        }
+        #sliding-highlighter {
+            position: absolute;
+            top: 0;
+            left: 0; /* Will be set by JS */
+            width: 0; /* Will be set by JS */
+            height: 100%;
+            /* Updated background color */
+            background-color: #492833;
+            border-radius: 0.375rem; /* rounded-md */
+            transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+            z-index: -1; /* Place it behind the text */
+        }
+        
+        /* Styles for Hamburger Icon to "X" Animation */
+        .hamburger-icon span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s cubic-bezier(.08,.82,.17,1); /* Updated transition */
+        }
 
-        #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
-            transform: translateY(10px) rotate(45deg); /* Updated transformY */
-        }
+        #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
+            transform: translateY(10px) rotate(45deg); /* Updated transformY */
+        }
 
-        #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
-            opacity: 0;
-        }
+        #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
+            opacity: 0;
+        }
 
-        #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
-            transform: translateY(-10px) rotate(-45deg); /* Updated transformY */
-        }
+        #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
+            transform: translateY(-10px) rotate(-45deg); /* Updated transformY */
+        }
 
-        /* Styles for the mobile menu link hover effect */
-        .mobile-menu-link {
-            background-color: #492833; /* The original dark red color */
-            transition: background-color 0.2s ease-in-out;
-        }
-        .mobile-menu-link:hover {
-            background-color: #000000; /* Black */
-        }
-    </style>
+        /* Styles for the mobile menu link hover effect */
+        .mobile-menu-link {
+            background-color: #492833; /* The original dark red color */
+            transition: background-color 0.2s ease-in-out;
+        }
+        .mobile-menu-link:hover {
+            background-color: #000000; /* Black */
+        }
+    </style>
 </head>
 <body class="font-medium">
 
-    <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex-shrink-0">
-                    <a href="latest.html">
-                        <!-- Updated logo image source for consistency -->
-                        <img src="images/10c.png" alt="10 Controls Logo" class="h-10">
-                    </a>
-                </div>
+    <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="latest.html">
+                                                <img src="images/10c.png" alt="10 Controls Logo" class="h-10">
+                    </a>
+                </div>
 
-                <div id="desktop-menu-items" class="hidden md:flex items-center space-x-4">
-                    <div id="sliding-highlighter"></div>
-                    <a href="latest.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Latest</a>
-                    <a href="schedule.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
-                    <a href="standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
-                    <a href="teams.html" class="text-white px-3 py-2 rounded-md text-sm font-medium relative z-10" aria-current="page">Teams</a>
-                    <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
-                </div>
+                <div id="desktop-menu-items" class="hidden md:flex items-center space-x-4">
+                    <div id="sliding-highlighter"></div>
+                    <a href="latest.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Latest</a>
+                    <a href="schedule.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
+                    <a href="standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
+                    <a href="teams.html" class="text-white px-3 py-2 rounded-md text-sm font-medium relative z-10" aria-current="page">Teams</a>
+                    <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
+                </div>
 
-                <div class="-mr-2 flex md:hidden">
-                    <!-- Mobile menu button, updated style -->
-                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833;">
-                        <span class="sr-only">Open main menu</span>
-                        <div class="hamburger-icon space-y-2">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </button>
-                </div>
-            </div>
-        </nav>
-        <div class="md:hidden" id="mobile-menu">
-            <!-- Mobile menu links with new class for hover effect -->
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="latest.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Latest</a>
-                <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
-                <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
-                <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link" aria-current="page">Teams</a>
-                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Sub-Header for Upcoming Race Info and Time. Hidden on mobile. -->
-    <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300 hidden md:flex">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
-            <div class="flex items-center space-x-2 sm:space-x-4">
-                <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
-                </div>
-                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
-                </div>
-            </div>
-            <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-6 sm:h-8 w-auto">
-                <div class="text-right text-xs sm:text-sm">
-                   <p id="client-time" class="font-bold"></p>
-                   <p id="race-time" class="text-gray-300"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        
-        <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
-            </div>
-
-    </div>
-
-    <!-- Social Media Links Footer, updated styling -->
-    <footer class="bg-black text-white text-center py-5 px-2 mt-8">
-        <div class="max-w-7xl mx-auto flex justify-center items-center space-x-6">
-            <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
-            <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
-            <a href="https://www.youtube.com/@10controls24" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
-            <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors hover:text-gray-300 transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
-        </div>
-    </footer>
-
-    <!-- Main Copyright Footer, updated text -->
-    <footer class="footer">
-        <p>© 2022-2025 10 Controls Limited</p>
-    </footer>
-    
-    <script>
-        // Data for F1 Teams (kept from original)
-        const teamData = [
-            { id: 'ferrari-card', name: 'Scuderia Ferrari HP', venue: 'Maranello', drivers: [{ name: 'ALPHAROMEO127', flagCountryCode: 'NL' }, { name: 'ANTONIO BRANCATI', flagCountryCode: 'IT' }], country: 'IT', bgColor: '#821729', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp' },
-            { id: 'mercedes-card', name: 'GUINNESS MERCEDES', venue: 'Brackley', drivers: [{ name: 'SEBEINKRO', flagCountryCode: 'DK' }, { name: 'SHENGEN', flagCountryCode: 'FI' }], country: 'GB', bgColor: '#C8CCCE', textColor: 'text-black', subTextColor: 'text-gray-700', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197571.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp' },
-            { id: 'redbull-card', name: 'NEWPORT ROLEX RED BULL RACING', venue: 'Milton Keynes', drivers: [{ name: 'MAXFAN1982', flagCountryCode: 'EE' }, { name: 'YUKI TSUNODA', flagCountryCode: 'EE' }], country: 'AT', bgColor: '#003773', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp' },
-            { id: 'mclaren-card', name: 'HOT WHEELS MCLAREN', venue: 'Woking', drivers: [{ name: 'FOCUSER', flagCountryCode: 'ES' }, { name: 'ANTON CHEBOTAROV', flagCountryCode: 'UA' }], country: 'GB', bgColor: '#F47600', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp' },
-            { id: 'astonmartin-card', name: 'Lockheed Martin Aston Martin', venue: 'Silverstone', drivers: [{ name: 'STRA', flagCountryCode: 'RU' }, { name: 'LUCA STEVENS', flagCountryCode: 'GB' }], country: 'GB', bgColor: '#037A68', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp' },
-            { id: 'alpine-card', name: 'Tinder Alpine F1 Team', venue: 'Enstone', drivers: [{ name: 'MAX HOUSLEY', flagCountryCode: 'GB' }, { name: 'ASPEC33', flagCountryCode: 'GB' }], country: 'FR', bgColor: '#F282B4', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp' },
-            { id: 'williams-card', name: 'John Deere Williams Racing', venue: 'Grove', drivers: [{ name: 'RABAS', flagCountryCode: 'ES' }, { name: 'LOLER', flagCountryCode: 'EE' }], country: 'GB', bgColor: '#00A0DE', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp' },
-            { id: 'rb-card', name: 'RACING BULLS PEUGEOT SPORT', venue: 'Faenza', drivers: [{ name: 'MORA', flagCountryCode: 'ES' }, { name: 'TSAR', flagCountryCode: 'HU' }], country: 'IT', bgColor: '#bbda0c', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp' },
-            { id: 'sauber-card', name: 'TWITCH SAUBER', venue: 'Hinwil', drivers: [{ name: 'YULIAN KALENANTOVICH', flagCountryCode: 'UA' }, { name: 'C3Z4R', flagCountryCode: 'BE' }], country: 'CH', bgColor: '#9146ff', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp' },
-            { id: 'haas-card', name: 'HAAS ONLYFANS RACING', venue: 'Kannapolis', drivers: [{ name: 'NOJUS GEDVILAS', flagCountryCode: 'PL' }, { name: 'COUNTERFEIT', flagCountryCode: 'GB' }], country: 'USA', bgColor: '#00AFF0', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp' }
-        ];
-
-        // Data for F1 Race Schedule (newly added for sub-header functionality)
-        const raceScheduleData = [
-            { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'March 14-16', winner: 'Anton Chebotarov', country: 'BH' },
-            { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 21-23', winner: 'Maxfan1982', country: 'AU' },
-            { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', winner: '', country: 'IT' },
-            { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', winner: '', country: 'BE' },
-            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', winner: '', country: 'ES' },
-            { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'July 18th', winner: '', country: 'CN' },
-            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'July 25th', winner: '', country: 'JP' },
-            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'August 1st', winner: '', country: 'USA' },
-            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'August 8th', winner: '', country: '' },
-            { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'August 15th', winner: '', country: 'BR' }
-        ];
-
-        // Map for converting venue names to standard IANA time zone identifiers.
-        const timeZoneMap = {
-            'Melbourne': 'Australia/Melbourne',
-            'Shanghai': 'Asia/Shanghai',
-            'Suzuka': 'Asia/Tokyo',
-            'Sakhir': 'Asia/Bahrain',
-            'Jeddah': 'Asia/Riyadh',
-            'Miami': 'America/New_York',
-            'Imola': 'Europe/Rome',
-            'Monaco': 'Europe/Monaco',
-            'Barcelona': 'Europe/Madrid',
-            'Montreal': 'America/Toronto',
-            'Spielberg': 'Europe/Vienna',
-            'Silverstone': 'Europe/London',
-            'Spa': 'Europe/Brussels',
-            'Budapest': 'Europe/Budapest',
-            'Zandvoort': 'Europe/Amsterdam',
-            'Monza': 'Europe/Rome',
-            'Baku': 'Asia/Baku',
-            'Singapore': 'Asia/Singapore',
-            'Austin': 'America/Chicago',
-            'Mexico City': 'America/Mexico_City',
-            'Sao Paulo': 'America/Sao_Paulo',
-            'Las Vegas': 'America/Los_Angeles',
-            'Lusail': 'Asia/Qatar',
-            'Yas Marina': 'Asia/Dubai'
-        };
-
-        // Function to get flag HTML based on country code for drivers
-        function getFlagHtmlForDriver(countryCode) {
-            let flagUrl = '';
-            // Using placeholder image with text 'NF' (No Flag) as a fallback
-            const fallbackFlag = `https://placehold.co/32x32/cccccc/000000?text=NF`; 
-
-            if (countryCode === 'PL') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197612.png`; // Poland (for Nojus Gedvilas)
-            } else if (countryCode === 'UA') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197572.png`; // Ukraine
-            } else if (countryCode === 'DK') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197579.png`; // Denmark (for Sebeinkro)
-            } else if (countryCode === 'JP') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197604.png`; // Japan
-            } else if (countryCode === 'GB') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197374.png`; // United Kingdom (for Counterfeit, Luca Stevens, Max Housley, Aspec33)
-            } else if (countryCode === 'NL') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197441.png`; // Netherlands
-            } else if (countryCode === 'IT') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197626.png`; // Italy (for Antonio Brancati)
-            } else if (countryCode === 'HU') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197584.png`; // Hungary
-            } else if (countryCode === 'LT') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197607.png`; // Lithuania
-            } else if (countryCode === 'FI') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197585.png`; // Finland (for Shengen)
-            } else if (countryCode === 'BE') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197583.png`; // Belgium
-            } else if (countryCode === 'RO') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197587.png`; // Romania
-            } else if (countryCode === 'ES') { 
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197593.png`; // Spain (for Focuser, Rabas, and MORA)
-            } else if (countryCode === 'EE') { 
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197529.png`; // Estonia (for MAXFAN1982, Yuki Tsunoda, and LOLER)
-            } else if (countryCode === 'RU') { 
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197602.png`; // Russia (for STRA)
-            }
-
-            if (flagUrl) {
-                return `<img src="${flagUrl}" alt="${countryCode} Flag" class="h-5 w-auto rounded-md mr-2" onerror="this.onerror=null;this.src='${fallbackFlag}';">`;
-            }
-            return '';
-        }
-        
-        window.onload = function() {
-            // --- Content population script for TEAM cards ---
-            const scheduleGrid = document.getElementById('schedule-grid');
-            if (scheduleGrid) {
-                teamData.forEach(team => {
-                    const card = document.createElement('div');
-                    card.className = 'schedule-card rounded-lg shadow-lg flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300';
-                    
-                    if (team.id) {
-                        card.id = team.id;
-                    }
-
-                    // Apply custom styles if they exist
-                    if (team.bgColor) {
-                        card.style.backgroundColor = team.bgColor;
-                    }
-
-                    const textColor = team.textColor || 'text-gray-900';
-                    const subTextColor = team.subTextColor || 'text-gray-600';
-
-                    let teamFlagHtml = '';
-                    // Conditional flag image based on country (for teams) - kept for main team info
-                    if (team.flagUrl) {
-                        teamFlagHtml = `<img src="${team.flagUrl}" alt="${team.name} Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (team.country === 'USA') {
-                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (team.country === 'GB') {
-                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197374.png" alt="British Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (team.country === 'IT') {
-                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (team.country === 'CH') {
-                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197540.png" alt="Swiss Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (team.country === 'FR') {
-                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197560.png" alt="French Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (team.country === 'AT') {
-                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197447.png" alt="Austrian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    }
-                    
-                    let carImage = '';
-                    if(team.carImageUrl) {
-                        carImage = `
-                        <div class="absolute top-0 right-0 p-2 bg-black/20 rounded-bl-lg">
-                            <img src="${team.carImageUrl}" class="h-12" alt="${team.name} F1 Car" onerror="this.style.display='none'">
-                        </div>
-                        `
-                    }
-                    
-                    // Generate driver flag and name HTML for each driver
-                    const driver1FlagHtml = getFlagHtmlForDriver(team.drivers[0].flagCountryCode);
-                    const driver2FlagHtml = getFlagHtmlForDriver(team.drivers[1].flagCountryCode);
-
-                    // Generate driver profile links
-                    const driver1Name = team.drivers[0].name.toUpperCase();
-                    const driver2Name = team.drivers[1].name.toUpperCase();
-                    const driver1Link = `https://thehenrym.github.io/driverprofile.html?driver=${encodeURIComponent(driver1Name)}`;
-                    const driver2Link = `https://thehenrym.github.io/driverprofile.html?driver=${encodeURIComponent(driver2Name)}`;
-
-                    card.innerHTML = `
-                        <!-- Main Content -->
-                        <div class="p-8 relative">
-                            ${carImage}
-                            ${teamFlagHtml}
-                            <h3 class="text-2xl font-bold ${textColor} mt-2">${team.name.toUpperCase()}</h3>
-                            <p class="text-lg ${subTextColor} mt-2">${team.venue.toUpperCase()}</p>
-                        </div>
-                        <!-- Driver Footer -->
-                        <div class="bg-black/70 backdrop-blur-sm mt-auto">
-                            <div class="flex items-center justify-around text-white">
-                                <div class="w-full text-center py-3 flex items-center justify-center space-x-2">
-                                    ${driver1FlagHtml}
-                                    <a href="${driver1Link}" target="_self" rel="noopener noreferrer" class="font-medium text-sm tracking-wider hover:underline">${driver1Name}</a>
-                                </div>
-                                <div class="h-6 w-px bg-white/30"></div>
-                                <div class="w-full text-center py-3 flex items-center justify-center space-x-2">
-                                    ${driver2FlagHtml}
-                                    <a href="${driver2Link}" target="_self" rel="noopener noreferrer" class="font-medium text-sm tracking-wider hover:underline">${driver2Name}</a>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    scheduleGrid.appendChild(card);
-                });
-                const cards = document.querySelectorAll('.schedule-card');
-                setTimeout(() => {
-                    cards.forEach(card => card.classList.add('visible'));
-                }, 100);
-            }
-
-            // --- Mobile menu toggle script ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('menu-open');
-                mobileMenuButton.classList.toggle('open');
-            });
-            
-            // --- Sliding highlighter script for desktop menu ---
-            const menuItemsContainer = document.getElementById('desktop-menu-items');
-            if (menuItemsContainer) {
-                const menuLinks = menuItemsContainer.querySelectorAll('a');
-                const highlighter = document.getElementById('sliding-highlighter');
-                // Ensure 'Teams' link is the active one for initialization
-                const activeLink = menuItemsContainer.querySelector('a[href="teams.html"]');
-
-                // Function to move the highlighter to a specific link's position
-                function setHighlighterToLink(link) {
-                    if (!link) return;
-                    highlighter.style.left = `${link.offsetLeft}px`;
-                    highlighter.style.width = `${link.offsetWidth}px`;
-                }
-
-                // Initialize highlighter on the 'Teams' link
-                setTimeout(() => setHighlighterToLink(activeLink), 100);
-
-                // Add mouseover event listeners to all links to move the highlighter
-                menuLinks.forEach(link => {
-                    link.addEventListener('mouseenter', () => setHighlighterToLink(link));
-                });
-
-                // When the mouse leaves the menu, return the highlighter to the active 'Teams' link
-                menuItemsContainer.addEventListener('mouseleave', () => {
-                    setHighlighterToLink(activeLink);
-                });
-            }
-
-            // --- Sub-header time and upcoming race script (newly added) ---
-            const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
-            const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
-            const clientTimeEl = document.getElementById('client-time');
-            const raceTimeEl = document.getElementById('race-time');
-            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
-
-            // Helper function to parse various date formats from the race schedule data
-            function parseRaceDate(dateStr) {
-                // Handle date ranges like "March 14-16"
-                let cleanedDateStr = dateStr.split('-')[0].trim();
-                const monthStr = cleanedDateStr.split(' ')[0];
-                let dayStr = cleanedDateStr.split(' ')[1];
-                // Remove ordinal suffixes (st, nd, rd, th) from the day string
-                if (dayStr && (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th'))) {
-                    dayStr = dayStr.substring(0, dayStr.length - 2);
-                }
-                // Return a Date object for the current year (assuming 2025 based on the page title)
-                return new Date(`${monthStr} ${dayStr}, 2025`);
-            }
-
-            // Find the next upcoming race by comparing race dates with the current time
-            const now = new Date();
-            let upcomingRace = null;
-            for (const race of raceScheduleData) { // Using raceScheduleData here
-                const raceDate = parseRaceDate(race.date);
-                // Set race time to a default (e.g., 14:00 local) if not specified, for comparison
-                raceDate.setHours(14, 0, 0, 0); 
-                if (raceDate > now) {
-                    upcomingRace = race;
-                    break; // Stop after finding the first future race
-                }
-            }
-
-            if (upcomingRace) {
-                // Populate the sub-header with the upcoming race details
-                upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
-                upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
-
-                // Get the IANA time zone for the race's venue from our map
-                const raceTimeZone = timeZoneMap[upcomingRace.venue];
-
-                // Function to update client and track times
-                function updateTimes() {
-                    const currentTime = new Date();
-                    clientTimeEl.textContent = `MY TIME ${currentTime.toLocaleTimeString([], timeOptions)}`;
-                    if (raceTimeZone) {
-                        try {
-                            raceTimeEl.textContent = `TRACK TIME ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
-                        } catch (e) {
-                             raceTimeEl.textContent = `TRACK TIME N/A`;
-                        }
-                    } else {
-                        // Display N/A if time zone for the venue is not in our map
-                        raceTimeEl.textContent = `TRACK TIME N/A`;
-                    }
-                }
-                updateTimes(); // Initial call to display times right away
-                setInterval(updateTimes, 1000 * 60); // Update times every minute
-            } else {
-                // If no upcoming races are found, display a season concluded message
-                upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                // Hide the time display elements if no upcoming race
-                if (clientTimeEl && clientTimeEl.parentElement) {
-                    clientTimeEl.parentElement.style.display = 'none';
-                }
-            }
-        };
-    </script>
-</body>
-</html>
+                <div class="-mr-2 flex md:hidden">
+                                        <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833;">
+                        <span class="sr-only">Open main menu</span>
+                        <div class="hamburger-icon space-y-2">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+    _message_truncated_
