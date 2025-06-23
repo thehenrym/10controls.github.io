@@ -245,6 +245,20 @@
             "KICK SAUBER": 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44'
         };
 
+        // Define Tier 1 and Tier 2 driver keys (lowercase, no spaces) globally
+        const tier1DriverKeys = [
+            'focuser', 'maxfan1982', 'antonchebotarov', 'sebeinkro', 'mora', 'tonyseroka',
+            'maxhousley', 'tsar', 'counterfeit', 'alpharomeo127', 'lucastevens', 'stra',
+            'antoniobrancati', 'jstnnl', 'nojusgedvilas', 'aspec33', 'edge', 'shengen',
+            'rabas', 'maxlinxc', 'aruthlessguy', 'loler', 'c3z4r', 'yuliankalenantovich',
+            'theromaniandevil', 'lukas'
+        ];
+        const tier2DriverKeys = [
+            'jayazier', 'machmudmoerwijk', 'manuelrotundo', 'maxammerlaan', 'jarviscoid',
+            'teetoe', 'byronas', 'tuki', 'mark', 'shark', 'daniels', 'spyzer', 'sneeuw',
+            'scorenzy', 'formulaphantom', 'kevinjerling', 'caiomhe', 'phoenix', 'rookie'
+        ];
+
         const driverData = {
             'focuser': {
                 name: 'FOCUSER', team: 'HOT WHEELS MCLAREN', country: 'SPAIN', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197593.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp',
@@ -474,20 +488,25 @@
             }
         };
 
-        // Helper to get points based on position
+        // Helper to get points based on position (MotoGP Sunday Race Points)
         function getPoints(position) {
             switch (position) {
                 case '1': return 25;
-                case '2': return 18;
-                case '3': return 15;
-                case '4': return 12;
-                case '5': return 10;
-                case '6': return 8;
-                case '7': return 6;
-                case '8': return 4;
-                case '9': return 2;
-                case '10': return 1;
-                default: return 0; // For positions > 10, DNF, DNP
+                case '2': return 20;
+                case '3': return 16;
+                case '4': return 13;
+                case '5': return 11;
+                case '6': return 10;
+                case '7': return 9;
+                case '8': return 8;
+                case '9': return 7;
+                case '10': return 6;
+                case '11': return 5;
+                case '12': return 4;
+                case '13': return 3;
+                case '14': return 2;
+                case '15': return 1;
+                default: return 0; // For positions > 15, DNF, DNP
             }
         }
 
@@ -519,20 +538,21 @@
         // Function to process race results from a given array (used for image data)
         function processResultsFromImage(gpName, flagUrl, resultsArray) {
             resultsArray.forEach(result => {
-                const driverKey = result.key.toLowerCase().replace(/[\s_]/g, '');
+                const driverKey = result.key.toLowerCase().replace(/[\s_]/g, ''); // Ensure key matches driverData format
                 let driver = driverData[driverKey];
 
                 // If driver doesn't exist, create a new placeholder entry and assign tier
                 if (!driver) {
                     driver = {
-                        name: result.key.toUpperCase(),
+                        name: result.key.toUpperCase(), // Use original name for display
                         team: 'Placeholder Team',
                         country: 'UNKNOWN',
                         flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?',
                         carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                         baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                         recentRaces: [],
-                        tier: tier2DriverKeys.includes(driverKey) ? 2 : 1 // Assign tier based on lists
+                        // Use the global tier arrays to assign tier
+                        tier: tier1DriverKeys.includes(driverKey) ? 1 : (tier2DriverKeys.includes(driverKey) ? 2 : 1)
                     };
                     driverData[driverKey] = driver;
                 }
@@ -560,7 +580,7 @@
                 "YUKI TSUNODA": "tonyseroka",
                 "LOLER_XD": "loler",
                 "ASPEC": "aspec33", // Ensure this mapping is correct if "Aspec" appears.
-                "SCUDERIA FERRARI": "SCUDERIA FERRARI HP",
+                "SCUDERIA FERRARI": "SCUDERIA FERRARI HP", // Map team name to correct full team name
                 "NEWPORT ROLEX RED BULL": "NEWPORT ROLEX RED BULL RACING",
                 "HAAS ONLYFANS": "HAAS ONLYFANS RACING",
                 "TINDER ALPINE": "TINDER ALPINE F1 TEAM",
@@ -570,13 +590,9 @@
 
             raceData.forEach(entry => {
                 let driverKey = entry.driver.toLowerCase().replace(/[\s_]/g, '');
-                // Apply manual mapping if exists
-                if (driverNameMap[entry.driver]) {
-                    const mappedKey = driverNameMap[entry.driver].toLowerCase().replace(/[\s_]/g, '');
-                    // Check if the mapped name is actually a driver key. If it's a team name, don't use it as driverKey.
-                    if (driverData[mappedKey]) {
-                         driverKey = mappedKey;
-                    }
+                // Apply manual mapping if exists and is a driver key (not a team name for driver lookup)
+                if (driverNameMap[entry.driver] && driverData[driverNameMap[entry.driver].toLowerCase().replace(/[\s_]/g, '')]) {
+                    driverKey = driverNameMap[entry.driver].toLowerCase().replace(/[\s_]/g, '');
                 }
 
                 const driver = driverData[driverKey];
@@ -590,34 +606,20 @@
                         stops: String(entry.stops),
                         // Use time for result, or DNF if applicable
                         result: getResultString(entry.time, String(entry.pos)),
-                        pts: String(entry.pts)
+                        pts: getPoints(String(entry.pos)).toString() // Use MotoGP points
                     };
                     addOrUpdateRace(driver, newRaceEntry);
                 } else if (!driver) {
                     console.warn(`Driver key ${driverKey} derived from "${entry.driver}" not found in driverData, skipping Australian GP update for Tier 1.`);
                 } else if (driver.tier !== 1) {
-                    console.log(`Driver "${entry.driver}" is Tier ${driver.tier}, skipping Australian GP update from Tier 1 results.`);
+                    console.log(`Driver "${entry.driver}" (key: ${driverKey}) is Tier ${driver.tier}, skipping Australian GP update from Tier 1 results.`);
                 }
             });
         }
 
         // --- PAGE LOAD LOGIC ---
         window.onload = function() {
-            // Define Tier 1 and Tier 2 driver keys (lowercase, no spaces)
-            const tier1DriverKeys = [
-                'focuser', 'maxfan1982', 'antonchebotarov', 'sebeinkro', 'mora', 'tonyseroka',
-                'maxhousley', 'tsar', 'counterfeit', 'alpharomeo127', 'lucastevens', 'stra',
-                'antoniobrancati', 'jstnnl', 'nojusgedvilas', 'aspec33', 'edge', 'shengen',
-                'rabas', 'maxlinxc', 'aruthlessguy', 'loler', 'c3z4r', 'yuliankalenantovich',
-                'theromaniandevil', 'lukas'
-            ];
-            const tier2DriverKeys = [
-                'jayazier', 'machmudmoerwijk', 'manuelrotundo', 'maxammerlaan', 'jarviscoid',
-                'teetoe', 'byronas', 'tuki', 'mark', 'shark', 'daniels', 'spyzer', 'sneeuw',
-                'scorenzy', 'formulaphantom', 'kevinjerling', 'caiomhe', 'phoenix', 'rookie'
-            ];
-
-            // Assign tiers to existing drivers
+            // Assign tiers to existing drivers (this block remains as it was)
             for (const key in driverData) {
                 if (tier1DriverKeys.includes(key)) {
                     driverData[key].tier = 1;
