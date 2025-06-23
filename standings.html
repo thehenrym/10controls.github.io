@@ -339,11 +339,11 @@
             { driver: "YUKI TSUNODA", team: "NEWPORT ROLEX RED BULL RACING", pts: 16, flag: "PL" },
             { driver: "MAXFAN1982", team: "NEWPORT ROLEX RED BULL RACING", pts: 13, flag: "PL" }, 
             { driver: "SEBEINKRO", team: "GUINNESS MERCEDES", pts: 10, flag: "NO" }, /* Flag changed to NO */
-            { driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI HP", pts: 11, flag: "NL" },
+            { driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI", pts: 11, flag: "NL" },
             { driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", pts: 9, flag: "RS" },
             { driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", pts: 8, flag: "ES" },
             { driver: "TSAR", team: "RACING BULLS PEUGEOT SPORT", pts: 7, flag: "HU" },
-            { driver: "JSTN NL", team: "SCUDERIA FERRARI HP", pts: 6, flag: "NL" },
+            { driver: "JSTN NL", team: "SCUDERIA FERRARI", pts: 6, flag: "NL" },
             { driver: "ASPEC33", team: "TINDER ALPINE F1 TEAM", pts: 5, flag: "GB" },
             { driver: "COUNTERFEIT", team: "HAAS ONLYFANS RACING", pts: 4, flag: "GB" },
             { driver: "SHENGEN", team: "GUINNESS MERCEDES", pts: 3, flag: "FI" },
@@ -365,7 +365,7 @@
             { driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", pts: 10, flag: "GB" },
             { driver: "COUNTERFEIT", team: "KICK SAUBER", pts: 9, flag: "GB" },
             { driver: "TSAR", team: "RACING BULLS PEUGEOT SPORT", pts: 8, flag: "HU" },
-            { driver: "ANTONIO BRANCATI", team: "SCUDERIA FERRARI HP", pts: 7, flag: "IT" },
+            { driver: "ANTONIO BRANCATI", team: "SCUDERIA FERRARI", pts: 7, flag: "IT" },
             { driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS RACING", pts: 6, flag: "LT" },
             { driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", pts: 5, flag: "UA" },
             { driver: "EDGE", team: "HAAS ONLYFANS RACING", pts: 4, flag: "PL" },
@@ -376,7 +376,7 @@
             { driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", pts: 0, flag: "RS" },
             { driver: "THEROMANIANDEVIL", team: "GUINNESS MERCEDES", pts: 0, flag: "RO" },
             { driver: "LOLER_XD", team: "JOHN DEERE WILLIAMS RACING", pts: 0, flag: "PL" }, 
-            { driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI HP", pts: 0, flag: "NL" }
+            { driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI", pts: 0, flag: "NL" }
         ];
 
         // --- Driver Standings Calculation ---
@@ -393,7 +393,7 @@
                     const existingCar = driverPointsMap.get(normalizedDriverName).car;
                     if (!existingCar || (existingCar.includes('RED BULL RACING') && result.team.toUpperCase() === 'NEWPORT ROLEX RED BULL RACING') ||
                         (existingCar.includes('MCLAREN') && result.team.toUpperCase() === 'HOT WHEELS MCLAREN') ||
-                        (existingCar.includes('FERRARI') && result.team.toUpperCase() === 'SCUDERIA FERRARI HP') ||
+                        (existingCar.includes('FERRARI') && result.team.toUpperCase() === 'SCUDERIA FERRARI') ||
                         (existingCar.includes('MERCEDES') && result.team.toUpperCase() === 'GUINNESS MERCEDES') ||
                         (existingCar.includes('ASTON MARTIN') && result.team.toUpperCase() === 'LOCKHEED MARTIN ASTON MARTIN') ||
                         (existingCar.includes('ALPINE') && result.team.toUpperCase() === 'TINDER ALPINE F1 TEAM') ||
@@ -437,7 +437,7 @@
                 // Standardize casing for new teams
                 if (result.team.includes("HOT WHEELS MCLAREN")) displayTeamName = "HOT WHEELS MCLAREN";
                 else if (result.team.includes("NEWPORT ROLEX RED BULL RACING")) displayTeamName = "NEWPORT ROLEX RED BULL RACING";
-                else if (result.team.includes("SCUDERIA FERRARI HP")) displayTeamName = "SCUDERIA FERRARI HP"; 
+                else if (result.team.includes("SCUDERIA FERRARI")) displayTeamName = "SCUDERIA FERRARI"; 
                 else if (result.team.includes("GUINNESS MERCEDES")) displayTeamName = "GUINNESS MERCEDES"; 
                 else if (result.team.includes("LOCKHEED MARTIN ASTON MARTIN")) displayTeamName = "LOCKHEED MARTIN ASTON MARTIN"; 
                 else if (result.team.includes("RACING BULLS PEUGEOT SPORT")) displayTeamName = "RACING BULLS PEUGEOT SPORT"; 
@@ -569,7 +569,7 @@
                 switch (teamName.toUpperCase()) {
                     case "HOT WHEELS MCLAREN": return 'https://cdn.discordapp.com/emojis/1378699086982811679.webp?size=44';
                     case "NEWPORT ROLEX RED BULL RACING": return 'https://cdn.discordapp.com/emojis/1378696277180813312.webp?size=44';
-                    case "SCUDERIA FERRARI HP": return 'https://cdn.discordapp.com/emojis/1215769617272934440.webp?size=44';
+                    case "SCUDERIA FERRARI": return 'https://cdn.discordapp.com/emojis/1215769617272934440.webp?size=44';
                     case "GUINNESS MERCEDES": return 'https://cdn.discordapp.com/emojis/1386054950496243732.webp?size=44';
                     case "LOCKHEED MARTIN ASTON MARTIN": return 'https://cdn.discordapp.com/emojis/1215769484078354483.webp?size=44';
                     case "RACING BULLS PEUGEOT SPORT": return 'https://cdn.discordapp.com/emojis/1377646844578103346.webp?size=44';
