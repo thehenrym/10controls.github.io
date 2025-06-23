@@ -21,30 +21,15 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* Background gradient matching the reference page */
             background: linear-gradient(to bottom, #492833, #201C1C);
             min-height: 100vh;
         }
         .footer {
-            /* Footer background color matching the reference page */
             background-color: #492833;
             color: white;
             text-align: center;
             padding: 2rem 1rem;
         }
-        /* Styles for the staggered fade-in animation of schedule cards */
-        .schedule-card {
-            /* Removed opacity, transform, and transition for instant appearance */
-            /* opacity: 0; */
-            /* transform: translateY(20px); */
-            /* transition: opacity 0.6s ease-out, transform 0.6s ease-out; */
-        }
-        .schedule-card.visible {
-            /* opacity: 1; */
-            /* transform: translateY(0); */
-        }
-
-        /* Styles for smooth hamburger menu transition, matching reference page */
         #mobile-menu {
             max-height: 0;
             opacity: 0;
@@ -54,34 +39,26 @@
             width: 100%;
             left: 0;
             top: 100%;
-            /* Background color matching the reference page */
             background-color: #492833;
         }
-
         #mobile-menu.menu-open {
             max-height: 25rem;
             opacity: 1;
         }
-
-        /* Styles for the sliding navigation highlighter, matching reference page */
         #desktop-menu-items {
             position: relative;
         }
-
         #sliding-highlighter {
             position: absolute;
             top: 0;
-            left: 0; /* Will be set by JS */
-            width: 0; /* Will be set by JS */
+            left: 0;
+            width: 0;
             height: 100%;
-            /* Background color matching the reference page */
             background-color: #492833;
-            border-radius: 0.375rem; /* rounded-md */
+            border-radius: 0.375rem;
             transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
-            z-index: -1; /* Place it behind the text */
+            z-index: -1;
         }
-        
-        /* Styles for Hamburger Icon to "X" Animation */
         .hamburger-icon span {
             display: block;
             width: 24px;
@@ -89,65 +66,24 @@
             background-color: white;
             transition: all 0.3s cubic-bezier(.08,.82,.17,1);
         }
-
         #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
             transform: translateY(10px) rotate(45deg);
         }
-
         #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
             opacity: 0;
         }
-
         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
             transform: translateY(-10px) rotate(-45deg);
         }
-
-        /* Styles for the mobile menu link hover effect */
         .mobile-menu-link {
-            background-color: #492833; /* The original dark red color */
+            background-color: #492833;
             transition: background-color 0.2s ease-in-out;
         }
         .mobile-menu-link:hover {
-            background-color: #000000; /* Black */
+            background-color: #000000;
         }
-
-        /* Styles for the Tier selection buttons */
-        .tier-button-container { /* Container for the sliding effect */
-            background-color: #e0e0e0; /* Light gray "track" */
-            border-radius: 9999px; /* Fully rounded corners */
-            padding: 3px; /* Reduced padding for smaller size */
-            position: relative; /* Needed for absolute positioning of the slider */
-            display: inline-flex; /* To make it wrap content and allow flex layout */
-            overflow: hidden; /* Hide anything outside the rounded container */
-        }
-
-        #tier-slider-highlighter { /* The actual sliding element */
-            position: absolute;
-            top: 3px; /* Match container padding */
-            height: calc(100% - 6px); /* Full height minus top/bottom padding */
-            background-color: #492833; /* Active background color */
-            border-radius: 9999px; /* Fully rounded */
-            transition: left 0.3s ease-in-out, width 0.3s ease-in-out; /* Smooth transition */
-            z-index: 0; /* Behind the button text */
-        }
-
-        .tier-button { /* The clickable buttons */
-            background-color: transparent; /* No background on buttons themselves */
-            border: none;
-            color: #201C1C; /* Dark text for inactive */
-            padding: 6px 17px; /* Reduced padding for smaller size */
-            border-radius: 9999px;
-            font-weight: 700; /* Inter Bold */
-            position: relative; /* Z-index requires position */
-            z-index: 1; /* Above the slider */
-            transition: color 0.3s ease-in-out; /* Smooth text color transition */
-            cursor: pointer;
-            min-width: 84px; /* Reduced min-width for smaller size */
-            text-align: center;
-        }
-
-        .tier-button.active {
-            color: white; /* White text for active */
+        .font-display {
+            font-family: 'Inter', sans-serif;
         }
     </style>
 </head>
@@ -157,80 +93,116 @@
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
-                    <a href="index.html">
-                        <!-- Updated logo image source for consistency -->
-                        <img src="images/10c.png" alt="10 Controls Logo" class="h-10">
+                    <a href="latest.html">
+                        <img src="images/10c.png" alt="10 Controls Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/100x40/492833/FFFFFF?text=Logo';">
                     </a>
                 </div>
-
                 <div id="desktop-menu-items" class="hidden md:flex items-center space-x-4">
                     <div id="sliding-highlighter"></div>
-                    <a href="index.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Latest</a>
-                    <a href="schedule.html" class="text-white px-3 py-2 rounded-md text-sm font-medium relative z-10" aria-current="page">Schedule</a>
+                    <a href="latest.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Latest</a>
+                    <a href="schedule.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
                     <a href="standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
-                    <!-- New 'Teams' link added for consistency -->
                     <a href="teams.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Teams</a>
                     <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
                 </div>
-
                 <div class="-mr-2 flex md:hidden">
-                    <!-- Mobile menu button -->
-                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833; hover-bg-color: #3a2029;">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833;">
                         <span class="sr-only">Open main menu</span>
                         <div class="hamburger-icon space-y-2">
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <span></span><span></span><span></span>
                         </div>
                     </button>
                 </div>
             </div>
         </nav>
         <div class="md:hidden" id="mobile-menu">
-            <!-- Mobile menu links with new class for hover effect -->
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Latest</a>
+                <a href="latest.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Latest</a>
                 <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
                 <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
                 <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Teams</a>
-                   <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
+                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
             </div>
         </div>
     </header>
 
-    <!-- Sub-Header for Upcoming Race Info and Countdown. Hidden on mobile. -->
+    <!-- Sub-Header for Upcoming Race Info -->
     <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300 hidden md:flex">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
-                </div>
-                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
-                </div>
+                <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate"></div>
+                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block"></div>
             </div>
-            <!-- Countdown Timer Display -->
-            <div id="countdown-display" class="flex items-center flex-shrink-0 text-right text-xs sm:text-sm">
-                <p id="countdown-timer" class="font-bold"></p>
+            <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-6 sm:h-8 w-auto">
+                <div class="text-right text-xs sm:text-sm">
+                   <p id="client-time" class="font-bold"></p>
+                   <p id="race-time" class="text-gray-300"></p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Main Content Area for Schedule Cards -->
-    <div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        <!-- Tier Selection Buttons moved back to their original position -->
-        <div class="flex justify-center mt-8 mb-4">
-            <div class="tier-button-container"> 
-                <div id="tier-slider-highlighter"></div> <!-- The sliding element -->
-                <button id="tier1Btn" class="tier-button active">TIER 1</button>
-                <button id="tier2Btn" class="tier-button">TIER 2</button>
+    <!-- Driver Profile and Stats Section -->
+    <div id="driver-profile-section" style="background: linear-gradient(to bottom, #492833, #201C1C);">
+        <!-- Driver Info Banner -->
+        <div id="driver-banner" class="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-12 overflow-hidden">
+            <div class="relative z-10 text-center md:text-left flex-shrink-0 mb-8 md:mb-0">
+                <h1 id="driver-name" class="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white uppercase"></h1>
+                <p id="driver-details" class="flex items-center justify-center md:justify-start text-sm md:text-base text-white mt-2">
+                    <img id="driver-flag" src="" alt="Driver Flag" class="h-4 w-auto mr-2 inline-block">
+                    <span id="driver-country"></span> <span class="mx-2">•</span>
+                    <img id="team-icon" src="" alt="Team Icon" class="h-5 w-auto mr-2 inline-block">
+                    <span id="driver-team"></span>
+                </p>
+            </div>
+            <div class="relative z-10 flex-shrink-0">
+                <img id="driver-car-img" src="" alt="F1 Car" class="w-56 md:w-80 h-auto rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300">
             </div>
         </div>
 
-        <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+        <!-- Statistics Section -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:p-8 py-12">
+            <h2 class="text-3xl font-bold text-white mb-8 uppercase">Statistics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- 2025 Season Stats -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6 uppercase">2025 Season</h3>
+                    <div id="season-stats-grid" class="grid grid-cols-2 gap-y-4 gap-x-2 text-white"></div>
+                </div>
+                <!-- Career Stats -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6 uppercase">Career Stats</h3>
+                    <div id="career-stats-grid" class="grid grid-cols-2 gap-y-4 gap-x-2 text-white"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Races Table Section -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:p-8 pt-0 pb-24">
+            <h2 class="text-3xl font-bold text-white mb-8 uppercase">Recent Races</h2>
+            <div class="rounded-lg shadow-lg overflow-x-auto" style="background-color: #492833;">
+                <table class="w-full text-white text-sm">
+                    <thead class="border-b border-gray-500">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Grand Prix</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Pos</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Grid</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Stops</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Result</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-races-tbody">
+                        <!-- Race rows will be injected here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
-    <!-- Social Media Links Footer -->
-    <footer class="bg-black text-white text-center py-5 px-2 mt-8">
+    <!-- Social Media Links & Copyright Footer -->
+    <footer class="bg-black text-white text-center py-5 px-2">
         <div class="max-w-7xl mx-auto flex justify-center items-center space-x-6">
             <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
             <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
@@ -238,374 +210,648 @@
             <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
         </div>
     </footer>
-
-    <!-- Main Copyright Footer -->
     <footer class="footer">
         <p>© 2022-2025 10 Controls Limited</p>
     </footer>
     
     <script>
-        // Data for the F1 schedule. Includes race rounds, names, venues, dates, and winners.
-        const scheduleDataTier1 = [
-            { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'March 14-16', winner: 'Anton Chebotarov', country: 'BH' },
-            { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 21-23', winner: 'Maxfan1982', country: 'AU' },
-            { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', winner: '', country: 'IT' },
-            { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', winner: '', country: 'BE' },
-            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', winner: '', country: 'ES' },
-            { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'July 18th', winner: '', country: 'CN' },
-            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'July 25th', winner: '', country: 'JP' },
-            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'August 1st', winner: '', country: 'USA' },
-            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'August 8th', winner: '', country: '' },
-            { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'August 15th', winner: '', country: 'BR' }
-        ];
-
-        // Tier 2 data with same schedule but different driver names
-        const scheduleDataTier2 = [
-            { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'March 14-16', winner: 'Sandro', country: 'BH' }, // Updated winner for Tier 2 Bahrain GP
-            { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 21-23', winner: 'JAY2005_071', country: 'AU' }, // Updated winner for Tier 2 Australian GP
-            { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', winner: '', country: 'IT' },
-            { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', winner: '', country: 'BE' },
-            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', winner: '', country: 'ES' },
-            { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'July 18th', winner: '', country: 'CN' },
-            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'July 25th', winner: '', country: 'JP' },
-            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'August 1st', winner: '', country: 'USA' },
-            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'August 8th', winner: '', country: '' },
-            { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'August 15th', winner: '', country: 'BR' }
-        ];
-
-        // Map for converting venue names to standard IANA time zone identifiers.
-        const timeZoneMap = {
-            'Melbourne': 'Australia/Melbourne',
-            'Shanghai': 'Asia/Shanghai',
-            'Suzuka': 'Asia/Tokyo',
-            'Sakhir': 'Asia/Bahrain',
-            'Jeddah': 'Asia/Riyadh',
-            'Miami': 'America/New_York',
-            'Imola': 'Europe/Rome',
-            'Monaco': 'Europe/Monaco',
-            'Barcelona': 'Europe/Madrid',
-            'Montreal': 'America/Toronto',
-            'Spielberg': 'Europe/Vienna',
-            'Silverstone': 'Europe/London',
-            'Spa': 'Europe/Brussels',
-            'Budapest': 'Europe/Budapest',
-            'Zandvoort': 'Europe/Amsterdam',
-            'Monza': 'Europe/Rome',
-            'Baku': 'Asia/Baku',
-            'Singapore': 'Asia/Singapore',
-            'Austin': 'America/Chicago',
-            'Mexico City': 'America/Mexico_City',
-            'Sao Paulo': 'America/Sao_Paulo',
-            'Las Vegas': 'America/Los_Angeles',
-            'Lusail': 'Asia/Qatar',
-            'Yas Marina': 'Asia/Dubai'
+        // --- DATA STORE ---
+        const teamColors = {
+            'HOT WHEELS MCLAREN': '#FF8000',
+            'NEWPORT ROLEX RED BULL RACING': '#003773',
+            'GUINNESS MERCEDES': '#C8CCCE',
+            'RACING BULLS PEUGEOT SPORT': '#BBDA0C',
+            'SCUDERIA FERRARI HP': '#821729',
+            'LOCKHEED MARTIN ASTON MARTIN': '#037A68',
+            'TINDER ALPINE F1 TEAM': '#F282B4',
+            'HAAS ONLYFANS RACING': '#00AFF0',
+            'JOHN DEERE WILLIAMS RACING': '#00A0DE',
+            'KICK SAUBER': '#9146FF',
+            'TWITCH SAUBER': '#9146FF',
+            'Placeholder Team': '#333333'
         };
-        
-        // This function runs when the entire page has finished loading.
-        window.onload = function() {
-            const scheduleGrid = document.getElementById('schedule-grid');
-            const tier1Btn = document.getElementById('tier1Btn');
-            const tier2Btn = document.getElementById('tier2Btn');
-            const tierSliderHighlighter = document.getElementById('tier-slider-highlighter');
 
-            /**
-             * Updates the position and width of the tier slider highlighter.
-             * @param {HTMLElement} targetButton - The button that is currently active.
-             */
-            function updateTierSlider(targetButton) {
-                if (!targetButton || !tierSliderHighlighter) return;
+        const teamIcons = {
+            "HOT WHEELS MCLAREN": 'https://cdn.discordapp.com/emojis/1378699086982811679.webp?size=44',
+            "NEWPORT ROLEX RED BULL RACING": 'https://cdn.discordapp.com/emojis/1378696277180813312.webp?size=44',
+            "SCUDERIA FERRARI HP": 'https://cdn.discordapp.com/emojis/1215769617272934440.webp?size=44',
+            "GUINNESS MERCEDES": 'https://cdn.discordapp.com/emojis/1386054950496243732.webp?size=44',
+            "LOCKHEED MARTIN ASTON MARTIN": 'https://cdn.discordapp.com/emojis/1215769484078354483.webp?size=44',
+            "RACING BULLS PEUGEOT SPORT": 'https://cdn.discordapp.com/emojis/1377646844578103346.webp?size=44',
+            "TINDER ALPINE F1 TEAM": 'https://cdn.discordapp.com/emojis/1379862213493260328.webp?size=44',
+            "HAAS ONLYFANS RACING": 'https://cdn.discordapp.com/emojis/1378698433652588645.webp?size=44',
+            "TWITCH SAUBER": 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44',
+            "JOHN DEERE WILLIAMS RACING": 'https://cdn.discordapp.com/emojis/1377791374341963917.webp?size=44',
+            "KICK SAUBER": 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44'
+        };
 
-                // Use offsetLeft and offsetWidth which are relative to the offsetParent (tier-button-container)
-                const newLeft = targetButton.offsetLeft;
-                const newWidth = targetButton.offsetWidth;
-
-                tierSliderHighlighter.style.left = `${newLeft}px`;
-                tierSliderHighlighter.style.width = `${newWidth}px`;
+        const driverData = {
+            'focuser': {
+                name: 'FOCUSER', team: 'HOT WHEELS MCLAREN', country: 'SPAIN', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197593.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 55, 'Wins': 0, 'Podiums': 7, 'Career Points': 351, 'Pole Positions': 0, 'DNFs': 1, 'World Championships': 0 },
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '2', grid: '3', stops: '2', result: '+10.026', pts: '20' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '2', grid: '2', stops: '2', result: '+3.552', pts: '20' } ]
+            },
+            'maxfan1982': {
+                name: 'MAXFAN1982', team: 'NEWPORT ROLEX RED BULL RACING', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 29, 'Wins': 1, 'DNFs': 6, 'Pole Positions': 0, 'Career Points': 114, 'Podiums': 1, 'World Championships': 0 },
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '4', grid: '1', stops: '2', result: '+24.353', pts: '13' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '1', grid: '1', stops: '2', result: '46:34.539', pts: '25' }]
+            },
+            'antonchebotarov': {
+                name: 'ANTON CHEBOTAROV', team: 'HOT WHEELS MCLAREN', country: 'UKRAINE', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197572.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 60, 'Wins': 4, 'DNFs': 6, 'Pole Positions': 4, 'Career Points': 410, 'Podiums': 14, 'World Championships': 0 },
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '1', grid: '2', stops: '2', result: '45:15:184', pts: '25' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '11', grid: '4', stops: '2', result: '+25.075', pts: '5' }]
+            },
+            'sebeinkro': {
+                name: 'SEBEINKRO', team: 'GUINNESS MERCEDES', country: 'NORWAY', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197579.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp',
+                baseCareerStats: {'World Championships': 0},
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '6', grid: '2', stops: '2', result: '+28.709', pts: '10' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '4', grid: '7', stops: '2', result: '+6.868', pts: '13' }]
+            },
+            'mora': {
+                name: 'MORA', team: 'RACING BULLS PEUGEOT SPORT', country: 'SPAIN', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197593.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 24, 'Wins': 2, 'DNFs': 6, 'Pole Positions': 5, 'Career Points': 178, 'Podiums': 6, 'World Championships': 0 },
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '8', grid: '2', stops: '2', result: '+32.937', pts: '8' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '5', grid: '6', stops: '2', result: '+7.528', pts: '11' }]
+            },
+            'tonyseroka': {
+                name: 'TONY SEROKA', team: 'NEWPORT ROLEX RED BULL RACING', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 3, 'Wins': 0, 'DNFs': 1, 'Pole Positions': 0, 'Career Points': 1, 'Podiums': 0, 'World Championships': 0 },
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '3', grid: '2', stops: '2', result: '+22.388', pts: '16' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '14', grid: '3', stops: '3', result: '+33.076', pts: '2' }]
+            },
+            'maxhousley': {
+                name: 'MAX HOUSLEY', team: 'TINDER ALPINE F1 TEAM', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 10, 'Wins': 0, 'Podiums': 2, 'Career Points': 72, 'Pole Positions': 0, 'DNFs': 2, 'World Championships': 0 },
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '14', grid: '12', stops: '2', result: '+1:00.196', pts: '2' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '3', grid: '10', stops: '3', result: '+4.530', pts: '16' }]
+            },
+            'tsar': {
+                name: 'TSAR', team: 'RACING BULLS PEUGEOT SPORT', country: 'HUNGARY', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197584.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 4, 'Wins': 0, 'DNFs': 3, 'Pole Positions': 0, 'Career Points': 8, 'Podiums': 0, 'World Championships': 0 },
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '9', grid: '2', stops: '1', result: '+40.504', pts: '7' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '8', grid: '12', stops: '3', result: '+12.665', pts: '8' }]
+            },
+            'counterfeit': {
+                name: 'COUNTERFEIT', team: 'TWITCH SAUBER', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 50, 'Wins': 0, 'DNFs': 11, 'Pole Positions': 0, 'Career Points': 211, 'Podiums': 3, 'World Championships': 0 },
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '12', grid: '16', stops: '1', result: '+54.468', pts: '4' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '7', grid: '13', stops: '3', result: '+12.213', pts: '9' }]
+            },
+            'alpharomeo127': {
+                name: 'ALPHAROMEO127', team: 'SCUDERIA FERRARI HP', country: 'NETHERLANDS', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197441.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 34, 'Wins': 4, 'DNFs': 4, 'Pole Positions': 1, 'Career Points': 297, 'Podiums': 13, 'World Championships': 0 },
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '5', grid: '4', stops: '1', result: '+26.454', pts: '11' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '20', grid: '5', stops: '0', result: 'DNF', pts: '0' }]
+            },
+            'lucastevens': {
+                name: 'LUCA STEVENS', team: 'LOCKHEED MARTIN ASTON MARTIN', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 55, 'Wins': 2, 'Podiums': 12, 'Career Points': 310, 'Pole Positions': 0, 'DNFs': 4, 'World Championships': 0 },
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '15', grid: '15', stops: '2', result: '+1 LAP', pts: '1' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '6', grid: '16', stops: '2', result: '+10.799', pts: '10' }]
+            },
+            'stra': {
+                name: 'STRA', team: 'LOCKHEED MARTIN ASTON MARTIN', country: 'SERBIA', flagUrl: 'https://cdn-icons-png.flaticon.com/512/197/197602.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 28, 'Wins': 0, 'Podiums': 1, 'Career Points': 98, 'Pole Positions': 0, 'DNFs': 7, 'World Championships': 0 },
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '7', grid: '9', stops: '2', result: '+29.581', pts: '9' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '17', grid: '11', stops: '1', result: 'DNF', pts: '0' }]
+            },
+            'antoniobrancati': {
+                name: 'ANTONIO BRANCATI', team: 'SCUDERIA FERRARI HP', country: 'ITALY', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197626.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 48, 'Wins': 4, 'DNFs': 12, 'Pole Positions': 5, 'Career Points': 310, 'Podiums': 13, 'World Championships': 0 },
+                recentRaces: [ { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '9', grid: '9', stops: '2', result: '+14.116', pts: '7' }]
+            },
+            'jstnnl': {
+                name: 'JSTN NL', team: 'SCUDERIA FERRARI HP', country: 'NETHERLANDS', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197441.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 12, 'Wins': 0, 'Podiums': 1, 'Career Points': 67, 'Pole Positions': 0, 'DNFs': 3, 'World Championships': 0 },
+                // Updated Bahrain result
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '12', grid: 'N/A', stops: '2', result: '+1:10.000', pts: '0' }]
+            },
+            'nojusgedvilas': {
+                name: 'NOJUS GEDVILAS', team: 'HAAS ONLYFANS RACING', country: 'LITHUANIA', flagUrl: 'https://cdn-icons-png.flaticon.com/512/197/197612.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp',
+                baseCareerStats: {'World Championships': 0},
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '17', grid: '14', stops: '2', result: '+1 LAP', pts: '0' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '10', grid: '17', stops: '2', result: '+22.685', pts: '6' }]
+            },
+            'aspec33': {
+                name: 'ASPEC33', team: 'TINDER ALPINE F1 TEAM', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
+                baseCareerStats: {'World Championships': 0},
+                // Updated Bahrain result
+                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '7', grid: 'N/A', stops: '2', result: '+30.000', pts: '6' }]
+            },
+            'edge': {
+                name: 'EDGE', team: 'HAAS ONLYFANS RACING', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp',
+                baseCareerStats: {'World Championships': 0},
+                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '12', grid: '20', stops: '2', result: '+26.424', pts: '4' }]
+            },
+            'shengen': {
+                name: 'SHENGEN', team: 'GUINNESS MERCEDES', country: 'FINLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197585.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp',
+                baseCareerStats: {'World Championships': 0},
+                recentRaces: [{ gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '13', grid: '2', stops: '2', result: '+54.789', pts: '3' }]
+            },
+            'rabas': {
+                name: 'RABAS', team: 'JOHN DEERE WILLIAMS RACING', country: 'SPAIN', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197593.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp',
+                baseCareerStats: {'World Championships': 0},
+                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '13', grid: '19', stops: '3', result: '+29.581', pts: '3' }]
+            },
+            'maxlinxc': {
+                name: 'MAXLINXC', team: 'HAAS ONLYFANS RACING', country: 'NETHERLANDS', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197441.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp',
+                baseCareerStats: {'World Championships': 0},
+                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '15', grid: '8', stops: '3', result: '+3 LAPS', pts: '1' }]
+            },
+            'aruthlessguy': {
+                name: 'A RUTHLESS GUY', team: 'TINDER ALPINE F1 TEAM', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
+                baseCareerStats: {'World Championships': 0},
+                recentRaces: [{ gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '16', grid: '17', stops: '2', result: '+1 LAP', pts: '0' }]
+            },
+            'loler': {
+                name: 'LOLER', team: 'JOHN DEERE WILLIAMS RACING', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp',
+                baseCareerStats: {'World Championships': 0},
+                recentRaces: [{ gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '18', grid: '18', stops: '2', result: '+1 LAP', pts: '0' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '19', grid: '18', stops: '0', result: 'DNF', pts: '0' }]
+            },
+            'c3z4r': {
+                name: 'C3Z4R', team: 'TWITCH SAUBER', country: 'BELGIUM', flagUrl: 'https://cdn-icons-png.flaticon.com/512/197/197583.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp',
+                baseCareerStats: {'World Championships': 0},
+                // Updated to DNP as per image
+                recentRaces: []
+            },
+            'yuliankalenantovich': {
+                name: 'YULIAN KALENANTOVICH', team: 'TWITCH SAUBER', country: 'UKRAINE', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197572.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp',
+                baseCareerStats: { 'Grand Prix Entered': 7, 'Wins': 0, 'DNFs': 3, 'Pole Positions': 0, 'Career Points': 4, 'Podiums': 0, 'World Championships': 0 },
+                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '16', grid: '15', stops: '0', result: 'DNF', pts: '0' }]
+            },
+            'theromaniandevil': {
+                name: 'THE ROMANIAN DEVIL', team: 'GUINNESS MERCEDES', country: 'ROMANIA', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197587.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp',
+                baseCareerStats: {'World Championships': 0},
+                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '18', grid: '14', stops: '1', result: 'DNF', pts: '0' }]
+            },
+            'lukas': {
+                name: 'LUKAS', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 21, 'Wins': 1, 'Podiums': 4, 'Career Points': 99, 'Pole Positions': 1, 'DNFs': 9, 'World Championships': 0 },
+                recentRaces: []
+            },
+            // NEW DRIVERS ADDED BELOW
+            'jayazier': {
+                name: 'JAY AZIER', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'machmudmoerwijk': {
+                name: 'MACHMUD MOERWIJK', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'manuelrotundo': {
+                name: 'MANUEL ROTUNDO', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'maxammerlaan': {
+                name: 'MAX AMMERLAAN', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'jarviscoid': {
+                name: 'JARVIS COID', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'teetoe': {
+                name: 'TEETOE', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'byronas': {
+                name: 'BYRONAS', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'lukas19': {
+                name: 'LUKAS19', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'tuki': {
+                name: 'TUKI', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'mark': {
+                name: 'MARK', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'shark': {
+                name: 'SHARK', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'daniels': {
+                name: 'DANIELS', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'spyzer': {
+                name: 'SPYZER', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'sneeuw': {
+                name: 'SNEEUW', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'scorenzy': {
+                name: 'SCORENZY', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'formulaphantom': {
+                name: 'FORMULA PHANTOM', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'kevinjerling': {
+                name: 'KEVIN JERLING', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'caiomhe': {
+                name: 'CAIOMHE', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'phoenix': {
+                name: 'PHOENIX', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
+            },
+            'rookie': {
+                name: 'ROOKIE', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                recentRaces: []
             }
+        };
 
-            /**
-             * Renders the schedule cards based on the provided data.
-             * @param {Array} currentScheduleData - The array of race objects to render.
-             */
-            function renderSchedule(currentScheduleData) {
-                scheduleGrid.innerHTML = ''; // Clear existing cards
-                currentScheduleData.forEach((race, index) => {
-                    const card = document.createElement('div');
-                    // Removed 'opacity', 'transform', 'transition' from here to prevent fade-in on render
-                    card.className = 'schedule-card bg-white rounded-lg shadow-lg p-8 flex flex-col justify-between';
-                    
-                    let flagHtml = '';
-                    // Conditional flag image logic remains the same
-                    if (race.country === 'USA') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'QAT') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197618.png" alt="Qatar Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'GB') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197374.png" alt="British Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'IT') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'JP') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197604.png" alt="Japanese Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'BE') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197583.png" alt="Belgian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'AT') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197447.png" alt="Austrian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'BH') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197521.png" alt="Bahrain Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'HU') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'SG') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" alt="Singapore Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'BR') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197386.png" alt="Brazilian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'NL') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197441.png" alt="Netherlands Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'CN') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197375.png" alt="Chinese Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'ES') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197593.png" alt="Spanish Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'CA') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" alt="Canadian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'MC') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197594.png" alt="Monaco Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'AE') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197569.png" alt="UAE Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'MX') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197397.png" alt="Mexican Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co_32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'AZ') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197512.png" alt="Azerbaijan Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'SA') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197578.png" alt="Saudi Arabian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'AU') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197507.png" alt="Australian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    }
-                    
-                    let resultButtonHref = "#"; // Default href for the results button
-                    let watchButtonHtml = ""; // Initialize watch button HTML as empty
-
-                    // Logic to set specific href for Bahrain and Australian Grand Prix results buttons, and add Watch button for Australia
-                    if (race.round === 1 && race.name === 'Bahrain Grand Prix') {
-                        if (currentScheduleData === scheduleDataTier1) {
-                            resultButtonHref = "results/bahrain.html";
-                        } else { // Tier 2 Bahrain GP
-                             resultButtonHref = "soon.html"; // Example tier 2 results page
-                        }
-                    } else if (race.round === 2 && race.name === 'Australian Grand Prix') {
-                        if (currentScheduleData === scheduleDataTier1) {
-                            resultButtonHref = "results/australia.html";
-                            watchButtonHtml = `<a href="https://www.youtube.com/watch?v=r5SmINAmQkU" target="_blank" rel="noopener noreferrer" class="bg-[#201C1C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors mr-2">Watch</a>`;
-                        } else { // Tier 2 Australian GP
-                            resultButtonHref = "soon.html"; // Example tier 2 results page
-                            watchButtonHtml = `<a href="https://www.youtube.com/watch?v=x1qFXHYMQ60" target="_blank" rel="noopener noreferrer" class="bg-[#201C1C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors mr-2">Watch</a>`;
-                        }
-                    }
-
-                    // Conditionally create the footer HTML based on whether the race has a winner
-                    let footerHtml;
-                    if (race.winner) { // If there's a winner, show winner and buttons
-                        footerHtml = `
-                            <div class="flex justify-between items-center">
-                                <a href="driverprofile.html?driver=${encodeURIComponent(race.winner)}" class="text-base font-semibold text-gray-800 uppercase hover:underline"><span class="font-bold text-[#492833]">WINNER:</span> ${race.winner}</a>
-                                <div>
-                                    ${watchButtonHtml} <!-- Place watch button here -->
-                                    <a href="${resultButtonHref}" class="bg-[#492833] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Results</a>
-                                </div>
-                            </div>
-                        `;
-                    } else {
-                        // For all other rounds, or if no winner is specified, just display the date
-                        footerHtml = `<p class="text-base font-semibold text-gray-800">${race.date.toUpperCase()}</p>`;
-                    }
-
-                    // Set the full inner HTML for the card, combining all the pieces
-                    card.innerHTML = `
-                        <div>
-                            <p class="text-base font-bold text-[#492833]">ROUND ${race.round || race.pos}</p>
-                            ${flagHtml}
-                            <h3 class="text-2xl font-bold text-gray-900 mt-2">${race.name.toUpperCase()}</h3>
-                            <p class="text-lg text-gray-600 mt-2">${race.venue.toUpperCase()}</p>
-                        </div>
-                        <div class="mt-6 pt-6 border-t border-gray-200">
-                            ${footerHtml}
-                        </div>
-                    `;
-                    scheduleGrid.appendChild(card);
-                });
+        // Helper to get points based on position
+        function getPoints(position) {
+            switch (position) {
+                case '1': return 25;
+                case '2': return 18;
+                case '3': return 15;
+                case '4': return 12;
+                case '5': return 10;
+                case '6': return 8;
+                case '7': return 6;
+                case '8': return 4;
+                case '9': return 2;
+                case '10': return 1;
+                default: return 0; // For positions > 10, DNF, DNP
             }
+        }
 
-            // Initial render for Tier 1
-            renderSchedule(scheduleDataTier1);
+        // Helper to get result string based on position
+        function getResultString(position) {
+            if (position === '1') return 'WIN';
+            if (position === 'DNF') return 'DNF';
+            // Placeholder time differences for other positions
+            const times = {
+                '2': '+5.000', '3': '+8.000', '4': '+15.000', '5': '+18.000',
+                '6': '+20.000', '7': '+30.000', '8': '+35.000', '9': '+45.000',
+                '10': '+50.000', '11': '+1:05.000', '12': '+1:10.000'
+            };
+            return times[position] || 'N/A';
+        }
 
-            // Tier button event listeners
-            tier1Btn.addEventListener('click', () => {
-                tier1Btn.classList.add('active');
-                tier2Btn.classList.remove('active');
-                updateTierSlider(tier1Btn); // Update slider position
-                renderSchedule(scheduleDataTier1);
-            });
+        // Helper to add or update a race in the recentRaces array
+        function addOrUpdateRace(driver, newRace) {
+            const existingRaceIndex = driver.recentRaces.findIndex(
+                race => race.gp === newRace.gp
+            );
 
-            tier2Btn.addEventListener('click', () => {
-                tier2Btn.classList.add('active');
-                tier1Btn.classList.remove('active');
-                updateTierSlider(tier2Btn); // Update slider position
-                renderSchedule(scheduleDataTier2); // Load Tier 2 data
-            });
-
-            // Set initial slider position on load
-            if (tier1Btn.classList.contains('active')) {
-                updateTierSlider(tier1Btn);
-            } else if (tier2Btn.classList.contains('active')) {
-                updateTierSlider(tier2Btn);
+            if (existingRaceIndex > -1) {
+                // Update existing race
+                driver.recentRaces[existingRaceIndex] = newRace;
+            } else {
+                // Add new race, ensure it's at the beginning as it's typically the most recent
+                driver.recentRaces.unshift(newRace);
             }
+        }
 
-            // Recalculate slider position on window resize
-            window.addEventListener('resize', () => {
-                if (tier1Btn.classList.contains('active')) {
-                    updateTierSlider(tier1Btn);
-                } else if (tier2Btn.classList.contains('active')) {
-                    updateTierSlider(tier2Btn);
+        // Function to process Bahrain results from the image
+        function processBahrainResultsFromImage() {
+            const bahrainResults = [
+                { key: 'jayazier', pos: '2' },
+                { key: 'machmudmoerwijk', pos: '1' },
+                { key: 'manuelrotundo', pos: '3' },
+                { key: 'maxammerlaan', pos: '11' },
+                { key: 'jarviscoid', pos: '8' },
+                { key: 'jstnnl', pos: '12' }, // Update existing driver
+                { key: 'teetoe', pos: '6' },
+                { key: 'byronas', pos: '10' },
+                { key: 'lukas19', pos: '4' },
+                { key: 'tuki', pos: '5' },
+                { key: 'aspec33', pos: '7' }, // Update existing driver (Aspec)
+                { key: 'mark', pos: 'DNP' },
+                { key: 'shark', pos: '9' },
+                { key: 'daniels', pos: 'DNP' },
+                { key: 'spyzer', pos: 'DNF' },
+                { key: 'sneeuw', pos: 'DNP' },
+                { key: 'scorenzy', pos: 'DNF' },
+                { key: 'formulaphantom', pos: 'DNF' },
+                { key: 'kevinjerling', pos: 'DNP' },
+                { key: 'caiomhe', pos: 'DNP' },
+                { key: 'phoenix', pos: 'DNP' },
+                { key: 'c3z4r', pos: 'DNP' }, // Update existing driver
+                { key: 'rookie', pos: 'DNP' }
+            ];
+
+            bahrainResults.forEach(result => {
+                const driverKey = result.key;
+                let driver = driverData[driverKey];
+
+                // If driver doesn't exist, create a new placeholder entry
+                if (!driver) {
+                    driver = {
+                        name: driverKey.replace(/([A-Z])/g, ' $1').trim().toUpperCase(), // Simple capitalization
+                        team: 'Placeholder Team',
+                        country: 'UNKNOWN',
+                        flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?',
+                        carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                        baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
+                        recentRaces: []
+                    };
+                    driverData[driverKey] = driver;
+                }
+
+                // Handle DNP (Did Not Participate)
+                if (result.pos === 'DNP') {
+                    // Ensure Bahrain GP is not in recentRaces for DNP
+                    driver.recentRaces = driver.recentRaces.filter(race => race.gp !== 'Bahrain Grand Prix');
+                } else {
+                    const newRaceEntry = {
+                        gp: 'Bahrain Grand Prix',
+                        flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png',
+                        pos: result.pos,
+                        grid: 'N/A', // Not specified in image
+                        stops: result.pos === 'DNF' || result.pos === 'DNP' ? '0' : '2', // Assume 2 stops for completed races, 0 for DNF/DNP
+                        result: getResultString(result.pos),
+                        pts: getPoints(result.pos).toString()
+                    };
+                    addOrUpdateRace(driver, newRaceEntry);
                 }
             });
+        }
+
+        // --- PAGE LOAD LOGIC ---
+        window.onload = function() {
+            // Process Bahrain results from image data first
+            processBahrainResultsFromImage();
+
+            // Calculate season stats for all drivers after processing new results
+            calculateAllSeasonStats();
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const driverKey = (urlParams.get('driver') || 'FOCUSER').replace(/[\s_]/g, '').toLowerCase(); // Use toLowerCase for consistent keys
+            const foundKey = Object.keys(driverData).find(k => k.toLowerCase() === driverKey);
+            
+            loadDriverData(foundKey || 'focuser'); // Load the specified driver or default
+            setupMenu();
+            setupSubHeader();
+        };
+        
+        // --- DATA CALCULATION & LOADING FUNCTIONS ---
+        function calculateAllSeasonStats() {
+            const standings = [];
+            for (const key in driverData) {
+                const driver = driverData[key];
+                const recentRaces = driver.recentRaces || [];
+                
+                let seasonPoints = 0;
+                let seasonWins = 0;
+                let seasonPodiums = 0;
+                let seasonPoles = 0;
+                let seasonDNFs = 0;
+                let seasonTop10s = 0;
+
+                recentRaces.forEach(race => {
+                    seasonPoints += parseInt(race.pts || 0);
+                    if (race.pos === '1') seasonWins++;
+                    if (['1', '2', '3'].includes(race.pos)) seasonPodiums++;
+                    // This assumes 'grid' is '1' for pole position, if not, adjust logic
+                    if (race.grid === '1') seasonPoles++; 
+                    if (race.result === 'DNF') seasonDNFs++;
+                    if (!isNaN(parseInt(race.pos)) && parseInt(race.pos) <= 10) seasonTop10s++;
+                });
+
+                driver.seasonStats = {
+                    'Grand Prix Points': seasonPoints,
+                    'Grand Prix Races': recentRaces.length,
+                    'Wins': seasonWins,
+                    'Podiums': seasonPodiums,
+                    'Pole Positions': seasonPoles,
+                    'DNFs': seasonDNFs,
+                    'Grand Prix Top 10s': seasonTop10s
+                };
+                standings.push({ key: key, points: seasonPoints });
+            }
+            
+            // Sort drivers by points to determine season position
+            standings.sort((a, b) => b.points - a.points);
+            standings.forEach((driver, index) => {
+                const pos = index + 1;
+                let suffix = 'th';
+                if (pos % 10 === 1 && pos % 100 !== 11) suffix = 'st';
+                if (pos % 10 === 2 && pos % 100 !== 12) suffix = 'nd';
+                if (pos % 10 === 3 && pos % 100 !== 13) suffix = 'rd';
+                driverData[driver.key].seasonStats['Season Position'] = pos + suffix;
+            });
+        }
+
+        function loadDriverData(driverKey) {
+            let driver = driverData[driverKey];
+            if (!driver) {
+                driver = driverData['focuser']; // Default to a known driver
+            }
+
+            // --- Calculate Combined Career Stats ---
+            const baseCareer = driver.baseCareerStats || {};
+            const season = driver.seasonStats || {};
+            const getStat = (stat) => parseInt(stat || 0, 10);
+
+            const calculatedCareerStats = {
+                'Grand Prix Entered': getStat(baseCareer['Grand Prix Entered']) + getStat(season['Grand Prix Races']),
+                'Wins': getStat(baseCareer['Wins']) + getStat(season['Wins']),
+                'Podiums': getStat(baseCareer['Podiums']) + getStat(season['Podiums']),
+                'Career Points': getStat(baseCareer['Career Points']) + getStat(season['Grand Prix Points']),
+                'Pole Positions': getStat(baseCareer['Pole Positions']) + getStat(season['Pole Positions']),
+                'DNFs': getStat(baseCareer['DNFs']) + getStat(season['DNFs']),
+                'World Championships': baseCareer['World Championships'] !== undefined ? baseCareer['World Championships'] : 'N/A'
+            };
+
+            // --- Calculate additional stats ---
+            const totalRaces = calculatedCareerStats['Grand Prix Entered'];
+            const totalWins = calculatedCareerStats['Wins'];
+            const totalPodiums = calculatedCareerStats['Podiums'];
+
+            // Highest Race Finish
+            let highestFinish = 'N/A';
+            if (totalWins > 0) {
+                highestFinish = '1st';
+            } else if (driver.recentRaces && driver.recentRaces.length > 0) {
+                let bestPos = Infinity;
+                driver.recentRaces.forEach(race => {
+                    // Only consider numeric positions for highest finish
+                    const pos = parseInt(race.pos, 10);
+                    if (!isNaN(pos) && pos < bestPos) {
+                        bestPos = pos;
+                    }
+                });
+                // Also check baseCareerStats for highest finish if no recent races or wins
+                if (baseCareer['Highest Race Finish'] && baseCareer['Highest Race Finish'] !== 'N/A') {
+                    const baseHighest = parseInt(baseCareer['Highest Race Finish'], 10);
+                    if (!isNaN(baseHighest) && baseHighest < bestPos) {
+                        bestPos = baseHighest;
+                    }
+                }
+
+                if (bestPos !== Infinity) {
+                    let suffix = 'th';
+                    if (bestPos % 10 === 1 && bestPos % 100 !== 11) suffix = 'st';
+                    if (bestPos % 10 === 2 && bestPos % 100 !== 12) suffix = 'nd';
+                    if (bestPos % 10 === 3 && bestPos % 100 !== 13) suffix = 'rd';
+                    highestFinish = bestPos + suffix;
+                } else if (totalPodiums > 0) {
+                    highestFinish = 'Top 3'; // Fallback if no specific finish data but has podiums
+                }
+            } else if (totalPodiums > 0) {
+                highestFinish = 'Top 3';
+            }
+            calculatedCareerStats['Highest Race Finish'] = highestFinish;
+
+            // Win Percentage
+            calculatedCareerStats['Win Percentage'] = totalRaces > 0 ? ((totalWins / totalRaces) * 100).toFixed(1) + '%' : '0.0%';
+            
+            // Podium Percentage
+            calculatedCareerStats['Podium Percentage'] = totalRaces > 0 ? ((totalPodiums / totalRaces) * 100).toFixed(1) + '%' : '0.0%';
 
 
-            // --- Mobile menu toggle script ---
+            // Update banner
+            const banner = document.getElementById('driver-banner');
+            const teamColor = teamColors[driver.team] || '#FF8000'; // Default to orange
+            banner.style.backgroundColor = teamColor;
+
+            document.getElementById('driver-name').textContent = driver.name;
+            document.getElementById('driver-flag').src = driver.flagUrl;
+            document.getElementById('driver-country').textContent = driver.country;
+            document.getElementById('driver-team').textContent = driver.team;
+            document.getElementById('team-icon').src = teamIcons[driver.team] || '';
+            document.getElementById('driver-car-img').src = driver.carImageUrl;
+            document.getElementById('driver-car-img').alt = driver.team + ' F1 Car';
+
+            // Helper function to populate a stats grid
+            const populateStatsGrid = (gridId, stats) => {
+                const grid = document.getElementById(gridId);
+                grid.innerHTML = ''; // Clear existing stats
+                const careerOrder = ['Grand Prix Entered', 'Wins', 'Podiums', 'Career Points', 'Pole Positions', 'DNFs', 'World Championships', 'Highest Race Finish', 'Win Percentage', 'Podium Percentage'];
+                const seasonOrder = ['Season Position', 'Grand Prix Points', 'Grand Prix Races', 'Wins', 'Podiums', 'Pole Positions', 'Grand Prix Top 10s', 'DNFs'];
+                const order = gridId === 'career-stats-grid' ? careerOrder : seasonOrder;
+
+                for (const label of order) {
+                    // Only display if the stat exists and is not undefined or null
+                    if (stats[label] !== undefined && stats[label] !== null) {
+                        grid.innerHTML += `
+                            <div class="flex flex-col">
+                                <span class="text-lg font-semibold text-white">${stats[label]}</span>
+                                <span class="text-sm">${label}</span>
+                            </div>
+                        `;
+                    }
+                }
+            };
+            
+            // Populate stats grids
+            populateStatsGrid('season-stats-grid', driver.seasonStats);
+            populateStatsGrid('career-stats-grid', calculatedCareerStats);
+
+            // Populate recent races table
+            const racesTbody = document.getElementById('recent-races-tbody');
+            racesTbody.innerHTML = ''; // Clear existing rows
+            if(driver.recentRaces && driver.recentRaces.length > 0){
+                driver.recentRaces.forEach((race, index) => {
+                    const borderClass = index < driver.recentRaces.length - 1 ? 'border-b border-gray-600' : '';
+                    racesTbody.innerHTML += `
+                        <tr class="${borderClass}">
+                            <td class="px-6 py-4 whitespace-nowrap uppercase">
+                                <div class="flex items-center">
+                                    <img src="${race.flag}" alt="${race.gp} Flag" class="h-4 w-auto mr-3 rounded-sm">
+                                    <span>${race.gp}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap uppercase">${race.pos}</td>
+                            <td class="px-6 py-4 whitespace-nowrap uppercase">${race.grid}</td>
+                            <td class="px-6 py-4 whitespace-nowrap uppercase">${race.stops}</td>
+                            <td class="px-6 py-4 whitespace-nowrap uppercase">${race.result}</td>
+                            <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">${race.pts}</td>
+                        </tr>
+                    `;
+                });
+            } else {
+                racesTbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 uppercase">No recent race data available.</td></tr>`;
+            }
+        }
+
+        // --- UI SETUP FUNCTIONS ---
+        function setupMenu() {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('menu-open');
                 mobileMenuButton.classList.toggle('open');
             });
             
-            // --- Sliding highlighter script for desktop menu ---
             const menuItemsContainer = document.getElementById('desktop-menu-items');
             if (menuItemsContainer) {
                 const menuLinks = menuItemsContainer.querySelectorAll('a');
                 const highlighter = document.getElementById('sliding-highlighter');
                 const activeLink = menuItemsContainer.querySelector('a[aria-current="page"]');
 
-                // Function to move the highlighter to a specific link's position
                 function setHighlighterToLink(link) {
                     if (!link) return;
                     highlighter.style.left = `${link.offsetLeft}px`;
                     highlighter.style.width = `${link.offsetWidth}px`;
                 }
-
-                // Initialize highlighter on the currently active link
                 setHighlighterToLink(activeLink);
-
-                // Add mouseover event listeners to all links to move the highlighter
-                menuLinks.forEach(link => {
-                    link.addEventListener('mouseenter', () => setHighlighterToLink(link));
-                });
-
-                // When the mouse leaves the menu, return the highlighter to the active link
-                menuItemsContainer.addEventListener('mouseleave', () => {
-                    setHighlighterToLink(activeLink);
-                });
+                menuLinks.forEach(link => link.addEventListener('mouseenter', () => setHighlighterToLink(link)));
+                menuItemsContainer.addEventListener('mouseleave', () => setHighlighterToLink(activeLink));
             }
+        }
 
-            // --- Sub-header upcoming race script and Countdown Timer Logic ---
+        function setupSubHeader() {
+            // This data is static for the sub-header example.
+            const subHeaderScheduleData = [
+                { name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th' },
+                { name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th' }
+            ];
+            const timeZoneMap = {'Imola': 'Europe/Rome', 'Spa': 'Europe/Brussels'};
+
             const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
             const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
-            const countdownDisplayEl = document.getElementById('countdown-display'); // Get the countdown display element
-            const countdownTimerEl = document.getElementById('countdown-timer'); // Get the countdown timer paragraph
+            const clientTimeEl = document.getElementById('client-time');
+            const raceTimeEl = document.getElementById('race-time');
 
-            // Helper function to parse various date formats from the schedule data
-            function parseRaceDate(dateStr) {
-                const monthStr = dateStr.split(' ')[0];
-                let dayStr = dateStr.split(' ')[1];
-                // Remove ordinal suffixes (st, nd, rd, th) from the day string
-                if (dayStr && (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th'))) {
-                    dayStr = dayStr.substring(0, dayStr.length - 2);
-                }
-                // Return a Date object for the current year (assuming 2025 based on the page title)
-                return new Date(`${monthStr} ${dayStr}, 2025`);
-            }
-
-            // Find the next upcoming race by comparing race dates with the current time
-            const now = new Date();
-            let upcomingRace = null;
-            // This part needs to consider the currently active tier's data for the countdown
-            // For simplicity, keeping it tied to Tier 1 schedule for now, as countdown logic is global.
-            for (const race of scheduleDataTier1) { // Changed to scheduleDataTier1
-                const raceDate = parseRaceDate(race.date);
-                if (raceDate > now) {
-                    upcomingRace = race;
-                    break; // Stop after finding the first future race
-                }
-            }
-
+            const upcomingRace = subHeaderScheduleData[0]; // Simple example, always shows first race
             if (upcomingRace) {
-                // Populate the sub-header with the upcoming race details
                 upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
                 upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
-                
-                // Function to calculate the next Friday at 2 PM Eastern Time (EDT/EST)
-                // Assuming current period is EDT (UTC-4), so 2 PM EDT is 18:00 UTC.
-                function getNextFriday2PMET() {
+                const raceTimeZone = timeZoneMap[upcomingRace.venue];
+
+                function updateTimes() {
                     const now = new Date();
-                    let target = new Date(now);
-
-                    // Set to 2 PM EDT (18:00 UTC during EDT)
-                    // We'll primarily work with UTC to avoid local timezone issues for the target time.
-                    target.setUTCHours(18, 0, 0, 0);
-
-                    // Calculate days until next Friday (Friday is day 5, Sunday is 0 for getUTCDay())
-                    let daysUntilFriday = (5 - target.getUTCDay() + 7) % 7;
-
-                    // If today is Friday and it's already past 2 PM EDT (18:00 UTC), target next Friday
-                    if (daysUntilFriday === 0 && now.getUTCHours() >= 18) {
-                        daysUntilFriday = 7;
-                    }
-
-                    target.setUTCDate(target.getUTCDate() + daysUntilFriday);
-
-                    return target;
-                }
-
-                let countdownTargetDate = getNextFriday2PMET();
-
-                function updateCountdown() {
-                    const now = new Date();
-                    let difference = countdownTargetDate.getTime() - now.getTime();
-
-                    // If the current target date has passed, calculate the next one
-                    if (difference < 0) {
-                        countdownTargetDate = getNextFriday2PMET();
-                        difference = countdownTargetDate.getTime() - now.getTime(); // Recalculate difference for the new target
-                    }
-                    
-                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                    if (countdownTimerEl) {
-                        if (difference <= 0) {
-                            countdownTimerEl.textContent = "RACE STARTING SOON!"; // Or "RACE LIVE!"
-                        } else if (days > 0) {
-                            countdownTimerEl.textContent = `NEXT RACE IN ${days}D ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
-                        } else {
-                            countdownTimerEl.textContent = `NEXT RACE IN ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
-                        }
+                    const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+                    clientTimeEl.textContent = `MY TIME ${now.toLocaleTimeString([], timeOptions)}`;
+                    if (raceTimeZone) {
+                        raceTimeEl.textContent = `TRACK TIME ${now.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
+                    } else {
+                        raceTimeEl.textContent = `TRACK TIME N/A`;
                     }
                 }
-
-                // Initial call to set up the countdown
-                updateCountdown();
-                // Update the countdown every second
-                setInterval(updateCountdown, 1000);
-
+                updateTimes();
+                setInterval(updateTimes, 60000);
             } else {
-                // If no upcoming races are found, display a season concluded message and hide countdown
                 upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                upcomingRaceDateEl.style.display = 'none'; // Hide the date as well
-                if (countdownDisplayEl) {
-                    countdownDisplayEl.style.display = 'none';
-                }
+                if(clientTimeEl && clientTimeEl.parentElement) clientTimeEl.parentElement.style.display = 'none';
             }
-        };
+        }
     </script>
 </body>
 </html>
