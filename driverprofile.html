@@ -245,271 +245,276 @@
             "KICK SAUBER": 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44'
         };
 
+        // Define Tier 1 and Tier 2 driver keys (lowercase, no spaces) globally
+        const tier1DriverKeys = [
+            'focuser', 'maxfan1982', 'antonchebotarov', 'sebeinkro', 'mora', 'tonyseroka',
+            'maxhousley', 'tsar', 'counterfeit', 'alpharomeo127', 'lucastevens', 'stra',
+            'antoniobrancati', 'jstnnl', 'nojusgedvilas', 'aspec33', 'edge', 'shengen',
+            'rabas', 'maxlinxc', 'aruthlessguy', 'loler', 'c3z4r', 'yuliankalenantovich',
+            'theromaniandevil', 'lukas'
+        ];
+        const tier2DriverKeys = [
+            'jayazier', 'machmudmoerwijk', 'manuelrotundo', 'maxammerlaan', 'jarviscoid',
+            'teetoe', 'byronas', 'tuki', 'mark', 'shark', 'daniels', 'spyzer', 'sneeuw',
+            'scorenzy', 'formulaphantom', 'kevinjerling', 'caiomhe', 'phoenix', 'rookie'
+        ];
+
         const driverData = {
             'focuser': {
                 name: 'FOCUSER', team: 'HOT WHEELS MCLAREN', country: 'SPAIN', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197593.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 55, 'Wins': 0, 'Podiums': 7, 'Career Points': 351, 'Pole Positions': 0, 'DNFs': 1, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '2', grid: '3', stops: '2', result: '+10.026', pts: '20' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '2', grid: '2', stops: '2', result: '+3.552', pts: '20' } ]
+                recentRaces: [], tier: 1
             },
             'maxfan1982': {
                 name: 'MAXFAN1982', team: 'NEWPORT ROLEX RED BULL RACING', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 29, 'Wins': 1, 'DNFs': 6, 'Pole Positions': 0, 'Career Points': 114, 'Podiums': 1, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '4', grid: '1', stops: '2', result: '+24.353', pts: '13' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '1', grid: '1', stops: '2', result: '46:34.539', pts: '25' }]
+                recentRaces: [], tier: 1
             },
             'antonchebotarov': {
                 name: 'ANTON CHEBOTAROV', team: 'HOT WHEELS MCLAREN', country: 'UKRAINE', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197572.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 60, 'Wins': 4, 'DNFs': 6, 'Pole Positions': 4, 'Career Points': 410, 'Podiums': 14, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '1', grid: '2', stops: '2', result: '45:15:184', pts: '25' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '11', grid: '4', stops: '2', result: '+25.075', pts: '5' }]
+                recentRaces: [], tier: 1
             },
             'sebeinkro': {
                 name: 'SEBEINKRO', team: 'GUINNESS MERCEDES', country: 'NORWAY', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197579.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp',
                 baseCareerStats: {'World Championships': 0},
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '6', grid: '2', stops: '2', result: '+28.709', pts: '10' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '4', grid: '7', stops: '2', result: '+6.868', pts: '13' }]
+                recentRaces: [], tier: 1
             },
             'mora': {
                 name: 'MORA', team: 'RACING BULLS PEUGEOT SPORT', country: 'SPAIN', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197593.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 24, 'Wins': 2, 'DNFs': 6, 'Pole Positions': 5, 'Career Points': 178, 'Podiums': 6, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '8', grid: '2', stops: '2', result: '+32.937', pts: '8' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '5', grid: '6', stops: '2', result: '+7.528', pts: '11' }]
+                recentRaces: [], tier: 1
             },
             'tonyseroka': {
                 name: 'TONY SEROKA', team: 'NEWPORT ROLEX RED BULL RACING', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 3, 'Wins': 0, 'DNFs': 1, 'Pole Positions': 0, 'Career Points': 1, 'Podiums': 0, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '3', grid: '2', stops: '2', result: '+22.388', pts: '16' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '14', grid: '3', stops: '3', result: '+33.076', pts: '2' }]
+                recentRaces: [], tier: 1
             },
             'maxhousley': {
                 name: 'MAX HOUSLEY', team: 'TINDER ALPINE F1 TEAM', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 10, 'Wins': 0, 'Podiums': 2, 'Career Points': 72, 'Pole Positions': 0, 'DNFs': 2, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '14', grid: '12', stops: '2', result: '+1:00.196', pts: '2' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '3', grid: '10', stops: '3', result: '+4.530', pts: '16' }]
+                recentRaces: [], tier: 1
             },
             'tsar': {
                 name: 'TSAR', team: 'RACING BULLS PEUGEOT SPORT', country: 'HUNGARY', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197584.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 4, 'Wins': 0, 'DNFs': 3, 'Pole Positions': 0, 'Career Points': 8, 'Podiums': 0, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '9', grid: '2', stops: '1', result: '+40.504', pts: '7' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '8', grid: '12', stops: '3', result: '+12.665', pts: '8' }]
+                recentRaces: [], tier: 1
             },
             'counterfeit': {
                 name: 'COUNTERFEIT', team: 'TWITCH SAUBER', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 50, 'Wins': 0, 'DNFs': 11, 'Pole Positions': 0, 'Career Points': 211, 'Podiums': 3, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '12', grid: '16', stops: '1', result: '+54.468', pts: '4' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '7', grid: '13', stops: '3', result: '+12.213', pts: '9' }]
+                recentRaces: [], tier: 1
             },
             'alpharomeo127': {
                 name: 'ALPHAROMEO127', team: 'SCUDERIA FERRARI HP', country: 'NETHERLANDS', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197441.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 34, 'Wins': 4, 'DNFs': 4, 'Pole Positions': 1, 'Career Points': 297, 'Podiums': 13, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '5', grid: '4', stops: '1', result: '+26.454', pts: '11' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '20', grid: '5', stops: '0', result: 'DNF', pts: '0' }]
+                recentRaces: [], tier: 1
             },
             'lucastevens': {
                 name: 'LUCA STEVENS', team: 'LOCKHEED MARTIN ASTON MARTIN', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 55, 'Wins': 2, 'Podiums': 12, 'Career Points': 310, 'Pole Positions': 0, 'DNFs': 4, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '15', grid: '15', stops: '2', result: '+1 LAP', pts: '1' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '6', grid: '16', stops: '2', result: '+10.799', pts: '10' }]
+                recentRaces: [], tier: 1
             },
             'stra': {
                 name: 'STRA', team: 'LOCKHEED MARTIN ASTON MARTIN', country: 'SERBIA', flagUrl: 'https://cdn-icons-png.flaticon.com/512/197/197602.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 28, 'Wins': 0, 'Podiums': 1, 'Career Points': 98, 'Pole Positions': 0, 'DNFs': 7, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '7', grid: '9', stops: '2', result: '+29.581', pts: '9' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '17', grid: '11', stops: '1', result: 'DNF', pts: '0' }]
+                recentRaces: [], tier: 1
             },
             'antoniobrancati': {
                 name: 'ANTONIO BRANCATI', team: 'SCUDERIA FERRARI HP', country: 'ITALY', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197626.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 48, 'Wins': 4, 'DNFs': 12, 'Pole Positions': 5, 'Career Points': 310, 'Podiums': 13, 'World Championships': 0 },
-                recentRaces: [ { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '9', grid: '9', stops: '2', result: '+14.116', pts: '7' }]
+                recentRaces: [], tier: 1
             },
             'jstnnl': {
                 name: 'JSTN NL', team: 'SCUDERIA FERRARI HP', country: 'NETHERLANDS', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197441.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 12, 'Wins': 0, 'Podiums': 1, 'Career Points': 67, 'Pole Positions': 0, 'DNFs': 3, 'World Championships': 0 },
-                // Updated Bahrain result
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '12', grid: 'N/A', stops: '2', result: '+1:10.000', pts: '0' }]
+                recentRaces: [], tier: 1
             },
             'nojusgedvilas': {
                 name: 'NOJUS GEDVILAS', team: 'HAAS ONLYFANS RACING', country: 'LITHUANIA', flagUrl: 'https://cdn-icons-png.flaticon.com/512/197/197612.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp',
                 baseCareerStats: {'World Championships': 0},
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '17', grid: '14', stops: '2', result: '+1 LAP', pts: '0' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '10', grid: '17', stops: '2', result: '+22.685', pts: '6' }]
+                recentRaces: [], tier: 1
             },
             'aspec33': {
                 name: 'ASPEC33', team: 'TINDER ALPINE F1 TEAM', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197374.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
                 baseCareerStats: {'World Championships': 0},
-                // Updated Bahrain result
-                recentRaces: [ { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '7', grid: 'N/A', stops: '2', result: '+30.000', pts: '6' }]
+                recentRaces: [], tier: 1
             },
             'edge': {
                 name: 'EDGE', team: 'HAAS ONLYFANS RACING', country: 'UNITED KINGDOM', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp',
                 baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '12', grid: '20', stops: '2', result: '+26.424', pts: '4' }]
+                recentRaces: [], tier: 1
             },
             'shengen': {
                 name: 'SHENGEN', team: 'GUINNESS MERCEDES', country: 'FINLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197585.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp',
                 baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '13', grid: '2', stops: '2', result: '+54.789', pts: '3' }]
+                recentRaces: [], tier: 1
             },
             'rabas': {
                 name: 'RABAS', team: 'JOHN DEERE WILLIAMS RACING', country: 'SPAIN', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197593.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp',
                 baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '13', grid: '19', stops: '3', result: '+29.581', pts: '3' }]
+                recentRaces: [], tier: 1
             },
             'maxlinxc': {
                 name: 'MAXLINXC', team: 'HAAS ONLYFANS RACING', country: 'NETHERLANDS', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197441.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp',
                 baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '15', grid: '8', stops: '3', result: '+3 LAPS', pts: '1' }]
+                recentRaces: [], tier: 1
             },
             'aruthlessguy': {
                 name: 'A RUTHLESS GUY', team: 'TINDER ALPINE F1 TEAM', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
                 baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '16', grid: '17', stops: '2', result: '+1 LAP', pts: '0' }]
+                recentRaces: [], tier: 1
             },
             'loler': {
                 name: 'LOLER', team: 'JOHN DEERE WILLIAMS RACING', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp',
                 baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '18', grid: '18', stops: '2', result: '+1 LAP', pts: '0' }, { gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '19', grid: '18', stops: '0', result: 'DNF', pts: '0' }]
+                recentRaces: [], tier: 1
             },
             'c3z4r': {
                 name: 'C3Z4R', team: 'TWITCH SAUBER', country: 'BELGIUM', flagUrl: 'https://cdn-icons-png.flaticon.com/512/197/197583.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp',
                 baseCareerStats: {'World Championships': 0},
-                // Updated to DNP as per image
-                recentRaces: []
+                recentRaces: [], tier: 1
             },
             'yuliankalenantovich': {
                 name: 'YULIAN KALENANTOVICH', team: 'TWITCH SAUBER', country: 'UKRAINE', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197572.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 7, 'Wins': 0, 'DNFs': 3, 'Pole Positions': 0, 'Career Points': 4, 'Podiums': 0, 'World Championships': 0 },
-                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '16', grid: '15', stops: '0', result: 'DNF', pts: '0' }]
+                recentRaces: [], tier: 1
             },
             'theromaniandevil': {
                 name: 'THE ROMANIAN DEVIL', team: 'GUINNESS MERCEDES', country: 'ROMANIA', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197587.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp',
                 baseCareerStats: {'World Championships': 0},
-                recentRaces: [{ gp: 'Australian Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197507.png', pos: '18', grid: '14', stops: '1', result: 'DNF', pts: '0' }]
+                recentRaces: [], tier: 1
             },
             'lukas': {
                 name: 'LUKAS', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 21, 'Wins': 1, 'Podiums': 4, 'Career Points': 99, 'Pole Positions': 1, 'DNFs': 9, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 1
             },
-            // NEW DRIVERS ADDED BELOW
+            // TIER 2 DRIVERS (from previous images)
             'jayazier': {
                 name: 'JAY AZIER', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'machmudmoerwijk': {
                 name: 'MACHMUD MOERWIJK', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'manuelrotundo': {
                 name: 'MANUEL ROTUNDO', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'maxammerlaan': {
                 name: 'MAX AMMERLAAN', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'jarviscoid': {
                 name: 'JARVIS COID', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'teetoe': {
                 name: 'TEETOE', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'byronas': {
                 name: 'BYRONAS', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
-            },
-            'lukas19': {
-                name: 'LUKAS19', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
-                baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'tuki': {
                 name: 'TUKI', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'mark': {
                 name: 'MARK', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'shark': {
                 name: 'SHARK', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'daniels': {
                 name: 'DANIELS', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'spyzer': {
                 name: 'SPYZER', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'sneeuw': {
                 name: 'SNEEUW', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'scorenzy': {
                 name: 'SCORENZY', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'formulaphantom': {
                 name: 'FORMULA PHANTOM', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'kevinjerling': {
                 name: 'KEVIN JERLING', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'caiomhe': {
                 name: 'CAIOMHE', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'phoenix': {
                 name: 'PHOENIX', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             },
             'rookie': {
                 name: 'ROOKIE', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                recentRaces: []
+                recentRaces: [], tier: 2
             }
         };
 
-        // Helper to get points based on position
+        // Helper to get points based on position (MotoGP Sunday Race Points)
         function getPoints(position) {
             switch (position) {
                 case '1': return 25;
-                case '2': return 18;
-                case '3': return 15;
-                case '4': return 12;
-                case '5': return 10;
-                case '6': return 8;
-                case '7': return 6;
-                case '8': return 4;
-                case '9': return 2;
-                case '10': return 1;
-                default: return 0; // For positions > 10, DNF, DNP
+                case '2': return 20;
+                case '3': return 16;
+                case '4': return 13;
+                case '5': return 11;
+                case '6': return 10;
+                case '7': return 9;
+                case '8': return 8;
+                case '9': return 7;
+                case '10': return 6;
+                case '11': return 5;
+                case '12': return 4;
+                case '13': return 3;
+                case '14': return 2;
+                case '15': return 1;
+                default: return 0; // For positions > 15, DNF, DNP
             }
         }
 
         // Helper to get result string based on position
-        function getResultString(position) {
-            if (position === '1') return 'WIN';
-            if (position === 'DNF') return 'DNF';
-            // Placeholder time differences for other positions
-            const times = {
-                '2': '+5.000', '3': '+8.000', '4': '+15.000', '5': '+18.000',
-                '6': '+20.000', '7': '+30.000', '8': '+35.000', '9': '+45.000',
-                '10': '+50.000', '11': '+1:05.000', '12': '+1:10.000'
-            };
-            return times[position] || 'N/A';
+        function getResultString(time, pos) {
+            if (pos === 'DNF') return 'DNF';
+            if (pos === 'DNP') return 'DNP';
+            return time; // Use the provided time string as the result
         }
 
         // Helper to add or update a race in the recentRaces array
@@ -518,7 +523,10 @@
                 race => race.gp === newRace.gp
             );
 
-            if (existingRaceIndex > -1) {
+            if (newRace.pos === 'DNP') {
+                // If DNP, remove this race from the driver's recentRaces if it exists
+                driver.recentRaces = driver.recentRaces.filter(race => race.gp !== newRace.gp);
+            } else if (existingRaceIndex > -1) {
                 // Update existing race
                 driver.recentRaces[existingRaceIndex] = newRace;
             } else {
@@ -527,81 +535,289 @@
             }
         }
 
-        // Function to process Bahrain results from the image
-        function processBahrainResultsFromImage() {
-            const bahrainResults = [
-                { key: 'jayazier', pos: '2' },
-                { key: 'machmudmoerwijk', pos: '1' },
-                { key: 'manuelrotundo', pos: '3' },
-                { key: 'maxammerlaan', pos: '11' },
-                { key: 'jarviscoid', pos: '8' },
-                { key: 'jstnnl', pos: '12' }, // Update existing driver
-                { key: 'teetoe', pos: '6' },
-                { key: 'byronas', pos: '10' },
-                { key: 'lukas19', pos: '4' },
-                { key: 'tuki', pos: '5' },
-                { key: 'aspec33', pos: '7' }, // Update existing driver (Aspec)
-                { key: 'mark', pos: 'DNP' },
-                { key: 'shark', pos: '9' },
-                { key: 'daniels', pos: 'DNP' },
-                { key: 'spyzer', pos: 'DNF' },
-                { key: 'sneeuw', pos: 'DNP' },
-                { key: 'scorenzy', pos: 'DNF' },
-                { key: 'formulaphantom', pos: 'DNF' },
-                { key: 'kevinjerling', pos: 'DNP' },
-                { key: 'caiomhe', pos: 'DNP' },
-                { key: 'phoenix', pos: 'DNP' },
-                { key: 'c3z4r', pos: 'DNP' }, // Update existing driver
-                { key: 'rookie', pos: 'DNP' }
-            ];
+        // Helper function to create a map of qualifying positions for quick lookup
+        function createQualifyingMap(qualifyingResultsArray) {
+            const qMap = {};
+            const driverNameMap = {
+                "YUKI TSUNODA": "tonyseroka",
+                "LOLER_XD": "loler",
+                "ASPEC": "aspec33",
+                "MAX HOUSLEY": "maxhousley", // Handle Max Housley specifically if duplicates exist
+                "MAXLINXC": "maxlinxc", // Handle Maxlinxc specifically if duplicates exist
+            };
 
-            bahrainResults.forEach(result => {
-                const driverKey = result.key;
+            qualifyingResultsArray.forEach(qEntry => {
+                let driverKey = qEntry.driver.toLowerCase().replace(/[\s_]/g, '');
+                if (driverNameMap[qEntry.driver]) {
+                    driverKey = driverNameMap[qEntry.driver].toLowerCase().replace(/[\s_]/g, '');
+                }
+                qMap[driverKey] = String(qEntry.pos);
+            });
+            return qMap;
+        }
+
+        // Function to process race results from a given array (used for image data)
+        function processResultsFromImage(gpName, flagUrl, resultsArray, qualifyingMap = {}) {
+            resultsArray.forEach(result => {
+                const driverKey = result.key.toLowerCase().replace(/[\s_]/g, ''); // Ensure key matches driverData format
                 let driver = driverData[driverKey];
 
-                // If driver doesn't exist, create a new placeholder entry
+                // If driver doesn't exist, create a new placeholder entry and assign tier
                 if (!driver) {
                     driver = {
-                        name: driverKey.replace(/([A-Z])/g, ' $1').trim().toUpperCase(), // Simple capitalization
+                        name: result.key.toUpperCase(), // Use original name for display
                         team: 'Placeholder Team',
                         country: 'UNKNOWN',
                         flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?',
                         carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                         baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
-                        recentRaces: []
+                        recentRaces: [],
+                        // Use the global tier arrays to assign tier
+                        tier: tier1DriverKeys.includes(driverKey) ? 1 : (tier2DriverKeys.includes(driverKey) ? 2 : 1)
                     };
                     driverData[driverKey] = driver;
                 }
 
-                // Handle DNP (Did Not Participate)
-                if (result.pos === 'DNP') {
-                    // Ensure Bahrain GP is not in recentRaces for DNP
-                    driver.recentRaces = driver.recentRaces.filter(race => race.gp !== 'Bahrain Grand Prix');
-                } else {
+                // Determine grid position: prioritize explicit qualifying map, then result.grid, then N/A
+                const gridPosition = qualifyingMap[driverKey] || result.grid || 'N/A';
+
+                const newRaceEntry = {
+                    gp: gpName,
+                    flag: flagUrl,
+                    pos: result.pos,
+                    grid: gridPosition,
+                    stops: (result.pos === 'DNF' || result.pos === 'DNP') ? '0' : (result.stops || '2'), // Use existing stops or default to 2
+                    result: getResultString(result.result || '', result.pos), // Pass original result string if available, otherwise empty
+                    pts: getPoints(result.pos).toString()
+                };
+                addOrUpdateRace(driver, newRaceEntry);
+            });
+        }
+
+        // Function to update Tier 1 Australian GP results from the provided HTML data
+        function updateTier1AustralianGPResults(raceData, qualifyingMap) {
+            const australianGpName = 'Australian Grand Prix';
+            const australianFlagUrl = 'https://cdn-icons-png.flaticon.com/128/197/197507.png';
+
+            // Manual mapping for driver names in the provided data to internal keys
+            const driverNameMap = {
+                "YUKI TSUNODA": "tonyseroka",
+                "LOLER_XD": "loler",
+                "ASPEC": "aspec33",
+                "SCUDERIA FERRARI": "SCUDERIA FERRARI HP", // Map team name to correct full team name
+                "NEWPORT ROLEX RED BULL": "NEWPORT ROLEX RED BULL RACING",
+                "HAAS ONLYFANS": "HAAS ONLYFANS RACING",
+                "TINDER ALPINE": "TINDER ALPINE F1 TEAM",
+                "LOCKHEED MARTIN AM": "LOCKHEED MARTIN ASTON MARTIN",
+                "MERCEDES-AMG PETRONAS": "GUINNESS MERCEDES"
+            };
+
+            raceData.forEach(entry => {
+                let driverKey = entry.driver.toLowerCase().replace(/[\s_]/g, '');
+                // Apply manual mapping if exists and is a driver key (not a team name for driver lookup)
+                if (driverNameMap[entry.driver] && driverData[driverNameMap[entry.driver].toLowerCase().replace(/[\s_]/g, '')]) {
+                    driverKey = driverNameMap[entry.driver].toLowerCase().replace(/[\s_]/g, '');
+                }
+
+                const driver = driverData[driverKey];
+
+                if (driver && driver.tier === 1) {
+                    const qualifyingPos = qualifyingMap[driverKey] || 'N/A'; // Get qualifying pos from map
                     const newRaceEntry = {
-                        gp: 'Bahrain Grand Prix',
-                        flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png',
-                        pos: result.pos,
-                        grid: 'N/A', // Not specified in image
-                        stops: result.pos === 'DNF' || result.pos === 'DNP' ? '0' : '2', // Assume 2 stops for completed races, 0 for DNF/DNP
-                        result: getResultString(result.pos),
-                        pts: getPoints(result.pos).toString()
+                        gp: australianGpName,
+                        flag: australianFlagUrl, // Use Australian flag
+                        pos: String(entry.pos),
+                        grid: qualifyingPos, // Set grid from qualifyingMap
+                        stops: String(entry.stops),
+                        // Use time for result, or DNF if applicable
+                        result: getResultString(entry.time, String(entry.pos)),
+                        pts: getPoints(String(entry.pos)).toString() // Use MotoGP points
                     };
                     addOrUpdateRace(driver, newRaceEntry);
+                } else if (!driver) {
+                    console.warn(`Driver key ${driverKey} derived from "${entry.driver}" not found in driverData, skipping Australian GP update for Tier 1.`);
+                } else if (driver.tier !== 1) {
+                    console.log(`Driver "${entry.driver}" (key: ${driverKey}) is Tier ${driver.tier}, skipping Australian GP update from Tier 1 results.`);
                 }
             });
         }
 
         // --- PAGE LOAD LOGIC ---
         window.onload = function() {
-            // Process Bahrain results from image data first
-            processBahrainResultsFromImage();
+            // Assign tiers to existing drivers (this block remains as it was)
+            for (const key in driverData) {
+                if (tier1DriverKeys.includes(key)) {
+                    driverData[key].tier = 1;
+                } else if (tier2DriverKeys.includes(key)) {
+                    driverData[key].tier = 2;
+                } else {
+                    // Default to Tier 1 if not explicitly listed in provided tiers
+                    driverData[key].tier = 1;
+                }
+            }
 
-            // Calculate season stats for all drivers after processing new results
+            // --- Initial Race Results from Image 1 (Bahrain) & Image 2 (Australian, simplified) ---
+            // These are the results from previous turns, using a simpler structure.
+            // These will be overridden for Tier 1 Australian GP by the more detailed data below.
+            const bahrainResultsInitial = [
+                { key: 'FOCUSER', pos: '2', grid: '3', stops: '2', result: '+10.026', pts: '20' },
+                { key: 'MAXFAN1982', pos: '4', grid: '1', stops: '2', result: '+24.353', pts: '13' },
+                { key: 'ANTON CHEBOTAROV', pos: '1', grid: '2', stops: '2', result: '45:15:184', pts: '25' },
+                { key: 'SEBEINKRO', pos: '6', grid: '2', stops: '2', result: '+28.709', pts: '10' },
+                { key: 'MORA', pos: '8', grid: '2', stops: '2', result: '+32.937', pts: '8' },
+                { key: 'TONY SEROKA', pos: '3', grid: '2', stops: '2', result: '+22.388', pts: '16' },
+                { key: 'MAX HOUSLEY', pos: '14', grid: '12', stops: '2', result: '+1:00.196', pts: '2' },
+                { key: 'TSAR', pos: '9', grid: '2', stops: '1', result: '+40.504', pts: '7' },
+                { key: 'COUNTERFEIT', pos: '12', grid: '16', stops: '1', result: '+54.468', pts: '4' },
+                { key: 'ALPHAROMEO127', pos: '5', grid: '4', stops: '1', result: '+26.454', pts: '11' },
+                { key: 'LUCA STEVENS', pos: '15', grid: '15', stops: '2', result: '+1 LAP', pts: '1' },
+                { key: 'STRA', pos: '7', grid: '9', stops: '2', result: '+29.581', pts: '9' },
+                { key: 'ANTONIO BRANCATI', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // No Bahrain data from image for him
+                { key: 'JSTN NL', pos: '12', grid: 'N/A', stops: '2', result: '+1:10.000', pts: '0' },
+                { key: 'NOJUS GEDVILAS', pos: '17', grid: '14', stops: '2', result: '+1 LAP', pts: '0' },
+                { key: 'ASPEC33', pos: '7', grid: 'N/A', stops: '2', result: '+30.000', pts: '6' },
+                { key: 'EDGE', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // No Bahrain data from image for him
+                { key: 'SHENGEN', pos: '13', grid: '2', stops: '2', result: '+54.789', pts: '3' },
+                { key: 'RABAS', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // No Bahrain data from image for him
+                { key: 'MAXLINXC', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // No Bahrain data from image for him
+                { key: 'A RUTHLESS GUY', pos: '16', grid: '17', stops: '2', result: '+1 LAP', pts: '0' },
+                { key: 'LOLER', pos: '18', grid: '18', stops: '2', result: '+1 LAP', pts: '0' },
+                { key: 'C3Z4R', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' }, // Updated to DNP from image
+                { key: 'YULIAN KALENANTOVICH', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // No Bahrain data from image for him
+                { key: 'THE ROMANIAN DEVIL', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // No Bahrain data from image for him
+                { key: 'LUKAS', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // No Bahrain data from image for him
+                // Tier 2 from image 1
+                { key: 'Jay Azier', pos: '2', grid: 'N/A', stops: '2', result: '+5.000', pts: '18' },
+                { key: 'Machmud Moerwijk', pos: '1', grid: 'N/A', stops: '2', result: 'WIN', pts: '25' },
+                { key: 'Manuel Rotundo', pos: '3', grid: 'N/A', stops: '2', result: '+8.000', pts: '15' },
+                { key: 'Max Ammerlaan', pos: '11', grid: 'N/A', stops: '2', result: '+1:05.000', pts: '0' },
+                { key: 'Jarvis Coid', pos: '8', grid: 'N/A', stops: '2', result: '+35.000', pts: '4' },
+                { key: 'TeeToe', pos: '6', grid: 'N/A', stops: '2', result: '+20.000', pts: '8' },
+                { key: 'Byronas', pos: '10', grid: 'N/A', stops: '2', result: '+50.000', pts: '1' },
+                { key: 'Lukas19', pos: '4', grid: 'N/A', stops: '2', result: '+15.000', pts: '12' },
+                { key: 'Tuki', pos: '5', grid: 'N/A', stops: '2', result: '+18.000', pts: '10' },
+                { key: 'Mark', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Shark', pos: '9', grid: 'N/A', stops: '2', result: '+45.000', pts: '2' },
+                { key: 'Daniels', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Spyzer', pos: 'DNF', grid: 'N/A', stops: '0', result: 'DNF', pts: '0' },
+                { key: 'Sneeuw', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Scorenzy', pos: 'DNF', grid: 'N/A', stops: '0', result: 'DNF', pts: '0' },
+                { key: 'Formula Phantom', pos: 'DNF', grid: 'N/A', stops: '0', result: 'DNF', pts: '0' },
+                { key: 'Kevin Jerling', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Caiomhe', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Phoenix', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Rookie', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' }
+            ];
+            processResultsFromImage('Bahrain Grand Prix', 'https://cdn-icons-png.flaticon.com/128/197/197521.png', bahrainResultsInitial);
+
+            const australianResultsInitial = [
+                { key: 'FOCUSER', pos: '2', grid: '2', stops: '2', result: '+3.552', pts: '20' },
+                { key: 'MAXFAN1982', pos: '1', grid: '1', stops: '2', result: '46:34.539', pts: '25' },
+                { key: 'ANTON CHEBOTAROV', pos: '11', grid: '4', stops: '2', result: '+25.075', pts: '5' },
+                { key: 'SEBEINKRO', pos: '4', grid: '7', stops: '2', result: '+6.868', pts: '13' },
+                { key: 'MORA', pos: '5', grid: '6', stops: '2', result: '+7.528', pts: '11' },
+                { key: 'TONY SEROKA', pos: '14', grid: '3', stops: '3', result: '+33.076', pts: '2' },
+                { key: 'MAX HOUSLEY', pos: '3', grid: '10', stops: '3', result: '+4.530', pts: '16' },
+                { key: 'TSAR', pos: '8', grid: '12', stops: '3', result: '+12.665', pts: '8' },
+                { key: 'COUNTERFEIT', pos: '7', grid: '13', stops: '3', result: '+12.213', pts: '9' },
+                { key: 'ALPHAROMEO127', pos: '20', grid: '5', stops: '0', result: 'DNF', pts: '0' },
+                { key: 'LUCA STEVENS', pos: '6', grid: '16', stops: '2', result: '+10.799', pts: '10' },
+                { key: 'STRA', pos: '17', grid: '11', stops: '1', result: 'DNF', pts: '0' },
+                { key: 'ANTONIO BRANCATI', pos: '9', grid: '9', stops: '2', result: '+14.116', pts: '7' },
+                { key: 'JSTN NL', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // Was not in initial data, now added in new section
+                { key: 'NOJUS GEDVILAS', pos: '10', grid: '17', stops: '2', result: '+22.685', pts: '6' },
+                { key: 'ASPEC33', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // Was not in initial data, now added in new section
+                { key: 'EDGE', pos: '12', grid: '20', stops: '2', result: '+26.424', pts: '4' },
+                { key: 'SHENGEN', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // Was not in initial data
+                { key: 'RABAS', pos: '13', grid: '19', stops: '3', result: '+29.581', pts: '3' },
+                { key: 'MAXLINXC', pos: '15', grid: '8', stops: '3', result: '+3 LAPS', pts: '1' },
+                { key: 'A RUTHLESS GUY', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // Was not in initial data
+                { key: 'LOLER', pos: '19', grid: '18', stops: '0', result: 'DNF', pts: '0' },
+                { key: 'C3Z4R', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // Was not in initial data
+                { key: 'YULIAN KALENANTOVICH', pos: '16', grid: '15', stops: '0', result: 'DNF', pts: '0' },
+                { key: 'THE ROMANIAN DEVIL', pos: '18', grid: '14', stops: '1', result: 'DNF', pts: '0' },
+                { key: 'LUKAS', pos: 'N/A', grid: 'N/A', stops: 'N/A', result: 'N/A', pts: 'N/A' }, // Was not in initial data
+                // Tier 2 from image 2
+                { key: 'Jay Azier', pos: '1', grid: 'N/A', stops: '2', result: 'WIN', pts: '25' },
+                { key: 'Machmud Moerwijk', pos: '6', grid: 'N/A', stops: '2', result: '+20.000', pts: '8' },
+                { key: 'Manuel Rotundo', pos: '5', grid: 'N/A', stops: '2', result: '+18.000', pts: '10' },
+                { key: 'Max Ammerlaan', pos: '2', grid: 'N/A', stops: '2', result: '+5.000', pts: '18' },
+                { key: 'Jarvis Coid', pos: '4', grid: 'N/A', stops: '2', result: '+15.000', pts: '12' },
+                { key: 'TeeToe', pos: '10', grid: 'N/A', stops: '2', result: '+50.000', pts: '1' },
+                { key: 'Byronas', pos: '7', grid: 'N/A', stops: '2', result: '+30.000', pts: '6' },
+                { key: 'Lukas19', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Tuki', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Mark', pos: '8', grid: 'N/A', stops: '2', result: '+35.000', pts: '4' },
+                { key: 'Shark', pos: 'DNF', grid: 'N/A', stops: '0', result: 'DNF', pts: '0' },
+                { key: 'Daniels', pos: '9', grid: 'N/A', stops: '2', result: '+45.000', pts: '2' },
+                { key: 'Spyzer', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Sneeuw', pos: 'DNF', grid: 'N/A', stops: '0', result: 'DNF', pts: '0' },
+                { key: 'Scorenzy', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Formula Phantom', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Kevin Jerling', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Caiomhe', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Phoenix', pos: 'DNP', grid: 'N/A', stops: '0', result: 'DNP', pts: '0' },
+                { key: 'Rookie', pos: 'DNF', grid: 'N/A', stops: '0', result: 'DNF', pts: '0' }
+            ];
+            processResultsFromImage('Australian Grand Prix', 'https://cdn-icons-png.flaticon.com/128/197/197507.png', australianResultsInitial);
+
+
+            // --- Australian Grand Prix Tier 1 Race Results (from the new HTML provided by user) ---
+            // This is the race data from the second HTML provided in this turn.
+            const newAustralianTier1RaceResults = [
+                { pos: 1, driver: "MAXFAN1982", team: "NEWPORT ROLEX RED BULL RACING", grid: 1, stops: 2, bestLap: "1:18.801", time: "46:34.539", pts: 25, flag: "PL" },
+                { pos: 2, driver: "FOCUSER", team: "HOT WHEELS MCLAREN", grid: 2, stops: 2, bestLap: "1:18.282", time: "+3.552", pts: 20, flag: "ES" },
+                { pos: 3, driver: "MAX HOUSLEY", team: "TINDER ALPINE F1 TEAM", grid: 10, stops: 3, bestLap: "1:19.379", time: "+4.530", pts: 16, flag: "GB" },
+                { pos: 4, driver: "SEBEINKRO", team: "GUINNESS MERCEDES", grid: 7, stops: 2, bestLap: "1:19.253", time: "+6.868", pts: 13, flag: "DK" },
+                { pos: 5, driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", grid: 6, stops: 2, bestLap: "1:19.149", time: "+7.528", pts: 11, flag: "ES" },
+                { pos: 6, driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", grid: 16, stops: 2, bestLap: "1:19.881", time: "+10.799", pts: 10, flag: "GB" },
+                { pos: 7, driver: "COUNTERFEIT", team: "TWITCH SAUBER", grid: 13, stops: 3, bestLap: "1:19.903", time: "+12.213", pts: 9, flag: "GB" },
+                { pos: 8, driver: "TSAR", team: "RACING BULLS PEUGEOT SPORT", grid: 12, stops: 3, bestLap: "1:19.031", time: "+12.665", pts: 8, flag: "HU" },
+                { pos: 9, driver: "ANTONIO BRANCATI", team: "SCUDERIA FERRARI", grid: 9, stops: 2, bestLap: "1:19.010", time: "+14.116", pts: 7, flag: "IT" },
+                { pos: 10, driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS RACING", grid: 17, stops: 2, bestLap: "1:19.794", time: "+22.685", pts: 6, flag: "LT" },
+                { pos: 11, driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", grid: 4, stops: 2, bestLap: "1:18.804", time: "+25.075", pts: 5, flag: "UA" },
+                { pos: 12, driver: "EDGE", team: "HAAS ONLYFANS RACING", grid: 20, stops: 2, bestLap: "1:21.998", time: "+26.424", pts: 4, flag: "PL" },
+                { pos: 13, driver: "RABAS", team: "JOHN DEERE WILLIAMS RACING", grid: 19, stops: 3, bestLap: "1:21.094", time: "+29.581", pts: 3, flag: "ES" },
+                { pos: 14, driver: "YUKI TSUNODA", team: "NEWPORT ROLEX RED BULL RACING", grid: 3, stops: 3, bestLap: "1:18.544", time: "+33.076", pts: 2, flag: "PL" },
+                { pos: 15, driver: "MAXLINXC", team: "TINDER ALPINE F1 TEAM", grid: 8, stops: 3, bestLap: "1:19.928", time: "+3 LAPS", pts: 1, flag: "NL" },
+                { pos: 16, driver: "YULIAN KALENANTOVICH", team: "TWITCH SAUBER", grid: 15, stops: 0, bestLap: "1:20.549", time: "DNF", pts: 0, flag: "UA" },
+                { pos: 17, driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", grid: 11, stops: 1, bestLap: "1:21.217", time: "DNF", pts: 0, flag: "RS" },
+                { pos: 18, driver: "THEROMANIANDEVIL", team: "GUINNESS MERCEDES", grid: 14, stops: 1, bestLap: "1:21.940", time: "DNF", pts: 0, flag: "RO" },
+                { pos: 19, driver: "LOLER_XD", team: "JOHN DEERE WILLIAMS RACING", grid: 18, stops: 0, bestLap: "----", time: "DNF", pts: 0, flag: "PL" },
+                { pos: 20, driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI", grid: 5, stops: 0, bestLap: "----", time: "DNF", pts: 0, flag: "NL" }
+            ];
+            const australianQualifyingResultsForTier1 = [
+                { pos: 1, driver: "MAXFAN1982", team: "NEWPORT ROLEX RED BULL RACING", best: "1:15.398", gap: "", flag: "PL" },
+                { pos: 2, driver: "FOCUSER", team: "HOT WHEELS MCLAREN", best: "1:15.544", gap: "+0.146", flag: "ES" },
+                { pos: 3, driver: "MAX HOUSLEY", team: "TINDER ALPINE F1 TEAM", best: "1:15.634", gap: "+0.236", flag: "GB" },
+                { pos: 4, driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", best: "1:15.707", gap: "+0.309", flag: "UA" },
+                { pos: 5, driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI", best: "1:15.778", gap: "+0.380", flag: "NL" },
+                { pos: 6, driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", best: "1:16.104", gap: "+0.706", flag: "ES" },
+                { pos: 7, driver: "SEBEINKRO", team: "GUINNESS MERCEDES", best: "1:16.348", gap: "+0.950", flag: "DK" },
+                { pos: 8, driver: "MAXLINXC", team: "HAAS ONLYFANS RACING", best: "1:16.355", gap: "+0.957", flag: "NL" },
+                { pos: 9, driver: "ANTONIO BRANCATI", team: "SCUDERIA FERRARI", best: "1:16.368", gap: "+0.970", flag: "IT" },
+                { pos: 10, driver: "MAX HOUSLEY", team: "TINDER ALPINE F1 TEAM", best: "1:16.413", gap: "+1.015", flag: "GB" }, // Duplicate driver, but distinct position
+                { pos: 11, driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", best: "1:16.513", gap: "+1.115", flag: "RS" },
+                { pos: 12, driver: "TSAR", team: "RACING BULLS PEUGEOT SPORT", best: "1:16.688", gap: "+1.290", flag: "HU" },
+                { pos: 13, driver: "COUNTERFEIT", team: "TWITCH SAUBER", best: "1:16.773", gap: "+1.375", flag: "GB" },
+                { pos: 14, driver: "THEROMANIANDEVIL", team: "GUINNESS MERCEDES", best: "1:16.947", gap: "+1.549", flag: "RO" },
+                { pos: 15, driver: "YULIAN KALENANTOVICH", team: "TWITCH SAUBER", best: "1:16.978", gap: "+1.580", flag: "UA" },
+                { pos: 16, driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", best: "1:16.994", gap: "+1.596", flag: "GB" },
+                { pos: 17, driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS RACING", best: "1:17.388", gap: "+1.990", flag: "LT" },
+                { pos: 18, driver: "LOLER_XD", team: "JOHN DEERE WILLIAMS RACING", best: "1:19.567", gap: "+4.169", flag: "PL" },
+                { pos: 19, driver: "RABAS", team: "JOHN DEERE WILLIAMS RACING", best: "No Time", gap: "----", flag: "ES" },
+                { pos: 20, driver: "EDGE", team: "HAAS ONLYFANS RACING", best: "----", gap: "----", flag: "PL" }
+            ];
+            const australianQualifyingMap = createQualifyingMap(australianQualifyingResultsForTier1);
+
+            updateTier1AustralianGPResults(newAustralianTier1RaceResults, australianQualifyingMap);
+
+            // Calculate season stats for all drivers after processing all race results
             calculateAllSeasonStats();
             
             const urlParams = new URLSearchParams(window.location.search);
-            const driverKey = (urlParams.get('driver') || 'FOCUSER').replace(/[\s_]/g, '').toLowerCase(); // Use toLowerCase for consistent keys
+            // Ensure the driver key is lowercased and spaces/underscores removed for lookup
+            const driverKey = (urlParams.get('driver') || 'FOCUSER').replace(/[\s_]/g, '').toLowerCase();
             const foundKey = Object.keys(driverData).find(k => k.toLowerCase() === driverKey);
             
             loadDriverData(foundKey || 'focuser'); // Load the specified driver or default
@@ -611,7 +827,9 @@
         
         // --- DATA CALCULATION & LOADING FUNCTIONS ---
         function calculateAllSeasonStats() {
-            const standings = [];
+            const standingsTier1 = [];
+            const standingsTier2 = [];
+
             for (const key in driverData) {
                 const driver = driverData[key];
                 const recentRaces = driver.recentRaces || [];
@@ -642,25 +860,41 @@
                     'DNFs': seasonDNFs,
                     'Grand Prix Top 10s': seasonTop10s
                 };
-                standings.push({ key: key, points: seasonPoints });
+
+                // Add to appropriate tier standings
+                if (driver.tier === 1) {
+                    standingsTier1.push({ key: key, points: seasonPoints });
+                } else if (driver.tier === 2) {
+                    standingsTier2.push({ key: key, points: seasonPoints });
+                }
             }
             
-            // Sort drivers by points to determine season position
-            standings.sort((a, b) => b.points - a.points);
-            standings.forEach((driver, index) => {
+            // Sort each tier's standings independently to determine season position within their tier
+            standingsTier1.sort((a, b) => b.points - a.points);
+            standingsTier1.forEach((driver, index) => {
                 const pos = index + 1;
                 let suffix = 'th';
                 if (pos % 10 === 1 && pos % 100 !== 11) suffix = 'st';
                 if (pos % 10 === 2 && pos % 100 !== 12) suffix = 'nd';
                 if (pos % 10 === 3 && pos % 100 !== 13) suffix = 'rd';
-                driverData[driver.key].seasonStats['Season Position'] = pos + suffix;
+                driverData[driver.key].seasonStats['Season Position'] = `TIER 1: ${pos}${suffix}`; // Made uppercase
+            });
+
+            standingsTier2.sort((a, b) => b.points - a.points);
+            standingsTier2.forEach((driver, index) => {
+                const pos = index + 1;
+                let suffix = 'th';
+                if (pos % 10 === 1 && pos % 100 !== 11) suffix = 'st';
+                if (pos % 10 === 2 && pos % 100 !== 12) suffix = 'nd';
+                if (pos % 10 === 3 && pos % 100 !== 13) suffix = 'rd';
+                driverData[driver.key].seasonStats['Season Position'] = `TIER 2: ${pos}${suffix}`; // Made uppercase
             });
         }
 
         function loadDriverData(driverKey) {
             let driver = driverData[driverKey];
             if (!driver) {
-                driver = driverData['focuser']; // Default to a known driver
+                driver = driverData['focuser']; // Default to a known driver (Tier 1)
             }
 
             // --- Calculate Combined Career Stats ---
@@ -767,8 +1001,15 @@
             const racesTbody = document.getElementById('recent-races-tbody');
             racesTbody.innerHTML = ''; // Clear existing rows
             if(driver.recentRaces && driver.recentRaces.length > 0){
-                driver.recentRaces.forEach((race, index) => {
-                    const borderClass = index < driver.recentRaces.length - 1 ? 'border-b border-gray-600' : '';
+                // Sort recent races by GP name (descending to show most recent first, then by pos)
+                const sortedRaces = [...driver.recentRaces].sort((a, b) => {
+                    const gpCompare = b.gp.localeCompare(a.gp);
+                    if (gpCompare !== 0) return gpCompare;
+                    return parseInt(a.pos) - parseInt(b.pos);
+                });
+
+                sortedRaces.forEach((race, index) => {
+                    const borderClass = index < sortedRaces.length - 1 ? 'border-b border-gray-600' : '';
                     racesTbody.innerHTML += `
                         <tr class="${borderClass}">
                             <td class="px-6 py-4 whitespace-nowrap uppercase">
