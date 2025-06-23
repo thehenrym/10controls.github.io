@@ -6,7 +6,7 @@
 <link rel="shortcut icon" href="favicon/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content="10 Controls" />
-<link rel="manifest" href="favicon/site.webmanifest" /
+<link rel="manifest" href="favicon/site.webmanifest" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>10 Controls</title>
@@ -34,13 +34,14 @@
         }
         /* Styles for the staggered fade-in animation of schedule cards */
         .schedule-card {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            /* Removed opacity, transform, and transition for instant appearance */
+            /* opacity: 0; */
+            /* transform: translateY(20px); */
+            /* transition: opacity 0.6s ease-out, transform 0.6s ease-out; */
         }
         .schedule-card.visible {
-            opacity: 1;
-            transform: translateY(0);
+            /* opacity: 1; */
+            /* transform: translateY(0); */
         }
 
         /* Styles for smooth hamburger menu transition, matching reference page */
@@ -109,6 +110,45 @@
         .mobile-menu-link:hover {
             background-color: #000000; /* Black */
         }
+
+        /* Styles for the Tier selection buttons */
+        .tier-button-container { /* Container for the sliding effect */
+            background-color: #e0e0e0; /* Light gray "track" */
+            border-radius: 9999px; /* Fully rounded corners */
+            padding: 3px; /* Reduced padding for smaller size */
+            position: relative; /* Needed for absolute positioning of the slider */
+            display: inline-flex; /* To make it wrap content and allow flex layout */
+            overflow: hidden; /* Hide anything outside the rounded container */
+        }
+
+        #tier-slider-highlighter { /* The actual sliding element */
+            position: absolute;
+            top: 3px; /* Match container padding */
+            height: calc(100% - 6px); /* Full height minus top/bottom padding */
+            background-color: #492833; /* Active background color */
+            border-radius: 9999px; /* Fully rounded */
+            transition: left 0.3s ease-in-out, width 0.3s ease-in-out; /* Smooth transition */
+            z-index: 0; /* Behind the button text */
+        }
+
+        .tier-button { /* The clickable buttons */
+            background-color: transparent; /* No background on buttons themselves */
+            border: none;
+            color: #201C1C; /* Dark text for inactive */
+            padding: 6px 17px; /* Reduced padding for smaller size */
+            border-radius: 9999px;
+            font-weight: 700; /* Inter Bold */
+            position: relative; /* Z-index requires position */
+            z-index: 1; /* Above the slider */
+            transition: color 0.3s ease-in-out; /* Smooth text color transition */
+            cursor: pointer;
+            min-width: 84px; /* Reduced min-width for smaller size */
+            text-align: center;
+        }
+
+        .tier-button.active {
+            color: white; /* White text for active */
+        }
     </style>
 </head>
 <body class="font-medium">
@@ -153,12 +193,12 @@
                 <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
                 <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
                 <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Teams</a>
-                 <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
+                   <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
             </div>
         </div>
     </header>
 
-    <!-- Sub-Header for Upcoming Race Info and Time. Hidden on mobile. -->
+    <!-- Sub-Header for Upcoming Race Info and Countdown. Hidden on mobile. -->
     <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300 hidden md:flex">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
             <div class="flex items-center space-x-2 sm:space-x-4">
@@ -167,18 +207,24 @@
                 <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
                 </div>
             </div>
-            <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-6 sm:h-8 w-auto">
-                <div class="text-right text-xs sm:text-sm">
-                   <p id="client-time" class="font-bold"></p>
-                   <p id="race-time" class="text-gray-300"></p>
-                </div>
+            <!-- Countdown Timer Display -->
+            <div id="countdown-display" class="flex items-center flex-shrink-0 text-right text-xs sm:text-sm">
+                <p id="countdown-timer" class="font-bold"></p>
             </div>
         </div>
     </div>
 
     <!-- Main Content Area for Schedule Cards -->
     <div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- Tier Selection Buttons moved back to their original position -->
+        <div class="flex justify-center mt-8 mb-4">
+            <div class="tier-button-container"> 
+                <div id="tier-slider-highlighter"></div> <!-- The sliding element -->
+                <button id="tier1Btn" class="tier-button active">TIER 1</button>
+                <button id="tier2Btn" class="tier-button">TIER 2</button>
+            </div>
+        </div>
+
         <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
         </div>
     </div>
@@ -200,9 +246,23 @@
     
     <script>
         // Data for the F1 schedule. Includes race rounds, names, venues, dates, and winners.
-        const scheduleData = [
+        const scheduleDataTier1 = [
             { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'March 14-16', winner: 'Anton Chebotarov', country: 'BH' },
             { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 21-23', winner: 'Maxfan1982', country: 'AU' },
+            { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', winner: '', country: 'IT' },
+            { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', winner: '', country: 'BE' },
+            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', winner: '', country: 'ES' },
+            { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'July 18th', winner: '', country: 'CN' },
+            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'July 25th', winner: '', country: 'JP' },
+            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'August 1st', winner: '', country: 'USA' },
+            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'August 8th', winner: '', country: '' },
+            { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'August 15th', winner: '', country: 'BR' }
+        ];
+
+        // Tier 2 data with same schedule but different driver names
+        const scheduleDataTier2 = [
+            { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'March 14-16', winner: 'Sandro', country: 'BH' }, // Updated winner for Tier 2 Bahrain GP
+            { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 21-23', winner: 'JAY2005_071', country: 'AU' }, // Updated winner for Tier 2 Australian GP
             { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', winner: '', country: 'IT' },
             { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', winner: '', country: 'BE' },
             { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', winner: '', country: 'ES' },
@@ -243,18 +303,39 @@
         
         // This function runs when the entire page has finished loading.
         window.onload = function() {
-            // --- Content population script for schedule cards ---
             const scheduleGrid = document.getElementById('schedule-grid');
-            if (scheduleGrid) {
-                // Loop through each race in the schedule data array
-                scheduleData.forEach((race, index) => {
+            const tier1Btn = document.getElementById('tier1Btn');
+            const tier2Btn = document.getElementById('tier2Btn');
+            const tierSliderHighlighter = document.getElementById('tier-slider-highlighter');
+
+            /**
+             * Updates the position and width of the tier slider highlighter.
+             * @param {HTMLElement} targetButton - The button that is currently active.
+             */
+            function updateTierSlider(targetButton) {
+                if (!targetButton || !tierSliderHighlighter) return;
+
+                // Use offsetLeft and offsetWidth which are relative to the offsetParent (tier-button-container)
+                const newLeft = targetButton.offsetLeft;
+                const newWidth = targetButton.offsetWidth;
+
+                tierSliderHighlighter.style.left = `${newLeft}px`;
+                tierSliderHighlighter.style.width = `${newWidth}px`;
+            }
+
+            /**
+             * Renders the schedule cards based on the provided data.
+             * @param {Array} currentScheduleData - The array of race objects to render.
+             */
+            function renderSchedule(currentScheduleData) {
+                scheduleGrid.innerHTML = ''; // Clear existing cards
+                currentScheduleData.forEach((race, index) => {
                     const card = document.createElement('div');
-                    // Add Tailwind classes for styling, hover effects, and the initial animation state
-                    card.className = 'schedule-card bg-white rounded-lg shadow-lg p-8 flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300';
+                    // Removed 'opacity', 'transform', 'transition' from here to prevent fade-in on render
+                    card.className = 'schedule-card bg-white rounded-lg shadow-lg p-8 flex flex-col justify-between';
                     
                     let flagHtml = '';
-                    // This large block conditionally sets the HTML for the country flag image based on the 'country' code.
-                    // It uses Flaticon URLs and provides a placeholder image if the flag fails to load.
+                    // Conditional flag image logic remains the same
                     if (race.country === 'USA') {
                         flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
                     } else if (race.country === 'QAT') {
@@ -300,21 +381,35 @@
                     }
                     
                     let resultButtonHref = "#"; // Default href for the results button
-                    // Logic to set specific href for Bahrain and Australia Grand Prix results buttons
+                    let watchButtonHtml = ""; // Initialize watch button HTML as empty
+
+                    // Logic to set specific href for Bahrain and Australian Grand Prix results buttons, and add Watch button for Australia
                     if (race.round === 1 && race.name === 'Bahrain Grand Prix') {
-                        resultButtonHref = "results/bahrain.html";
+                        if (currentScheduleData === scheduleDataTier1) {
+                            resultButtonHref = "results/bahrain.html";
+                        } else { // Tier 2 Bahrain GP
+                             resultButtonHref = "results/bahrain-tier2.html"; // Example tier 2 results page
+                        }
                     } else if (race.round === 2 && race.name === 'Australian Grand Prix') {
-                        resultButtonHref = "results/australia.html";
+                        if (currentScheduleData === scheduleDataTier1) {
+                            resultButtonHref = "results/australia.html";
+                            watchButtonHtml = `<a href="https://www.youtube.com/watch?v=r5SmINAmQkU" target="_blank" rel="noopener noreferrer" class="bg-[#201C1C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors mr-2">Watch</a>`;
+                        } else { // Tier 2 Australian GP
+                            resultButtonHref = "results/australia-tier2.html"; // Example tier 2 results page
+                            watchButtonHtml = `<a href="https://www.youtube.com/watch?v=x1qFXHYMQ60" target="_blank" rel="noopener noreferrer" class="bg-[#201C1C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors mr-2">Watch</a>`;
+                        }
                     }
 
                     // Conditionally create the footer HTML based on whether the race has a winner
                     let footerHtml;
-                    if ((race.round === 1 || race.round === 2) && race.winner) {
-                        // Display winner and a "Results" button for completed races
+                    if (race.winner) { // If there's a winner, show winner and buttons
                         footerHtml = `
                             <div class="flex justify-between items-center">
-                                <p class="text-base font-semibold text-gray-800 uppercase"><span class="font-bold text-[#492833]">WINNER:</span> ${race.winner}</p>
-                                <a href="${resultButtonHref}" class="bg-[#492833] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Results</a>
+                                <a href="driverprofile.html?driver=${encodeURIComponent(race.winner)}" class="text-base font-semibold text-gray-800 uppercase hover:underline"><span class="font-bold text-[#492833]">WINNER:</span> ${race.winner}</a>
+                                <div>
+                                    ${watchButtonHtml} <!-- Place watch button here -->
+                                    <a href="${resultButtonHref}" class="bg-[#492833] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Results</a>
+                                </div>
                             </div>
                         `;
                     } else {
@@ -334,20 +429,44 @@
                             ${footerHtml}
                         </div>
                     `;
-                    // Add the newly created card to the grid
                     scheduleGrid.appendChild(card);
                 });
-
-                // --- Simultaneous fade-in animation logic ---
-                const cards = document.querySelectorAll('.schedule-card');
-                // A short delay before starting the animations to ensure all cards are in the DOM
-                setTimeout(() => {
-                    cards.forEach((card) => {
-                        // Add the 'visible' class to all cards at once to make them fade in together
-                        card.classList.add('visible');
-                    });
-                }, 100);
             }
+
+            // Initial render for Tier 1
+            renderSchedule(scheduleDataTier1);
+
+            // Tier button event listeners
+            tier1Btn.addEventListener('click', () => {
+                tier1Btn.classList.add('active');
+                tier2Btn.classList.remove('active');
+                updateTierSlider(tier1Btn); // Update slider position
+                renderSchedule(scheduleDataTier1);
+            });
+
+            tier2Btn.addEventListener('click', () => {
+                tier2Btn.classList.add('active');
+                tier1Btn.classList.remove('active');
+                updateTierSlider(tier2Btn); // Update slider position
+                renderSchedule(scheduleDataTier2); // Load Tier 2 data
+            });
+
+            // Set initial slider position on load
+            if (tier1Btn.classList.contains('active')) {
+                updateTierSlider(tier1Btn);
+            } else if (tier2Btn.classList.contains('active')) {
+                updateTierSlider(tier2Btn);
+            }
+
+            // Recalculate slider position on window resize
+            window.addEventListener('resize', () => {
+                if (tier1Btn.classList.contains('active')) {
+                    updateTierSlider(tier1Btn);
+                } else if (tier2Btn.classList.contains('active')) {
+                    updateTierSlider(tier2Btn);
+                }
+            });
+
 
             // --- Mobile menu toggle script ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -386,12 +505,11 @@
                 });
             }
 
-            // --- Sub-header time and upcoming race script ---
+            // --- Sub-header upcoming race script and Countdown Timer Logic ---
             const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
             const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
-            const clientTimeEl = document.getElementById('client-time');
-            const raceTimeEl = document.getElementById('race-time');
-            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+            const countdownDisplayEl = document.getElementById('countdown-display'); // Get the countdown display element
+            const countdownTimerEl = document.getElementById('countdown-timer'); // Get the countdown timer paragraph
 
             // Helper function to parse various date formats from the schedule data
             function parseRaceDate(dateStr) {
@@ -408,7 +526,9 @@
             // Find the next upcoming race by comparing race dates with the current time
             const now = new Date();
             let upcomingRace = null;
-            for (const race of scheduleData) {
+            // This part needs to consider the currently active tier's data for the countdown
+            // For simplicity, keeping it tied to Tier 1 schedule for now, as countdown logic is global.
+            for (const race of scheduleDataTier1) { // Changed to scheduleDataTier1
                 const raceDate = parseRaceDate(race.date);
                 if (raceDate > now) {
                     upcomingRace = race;
@@ -420,29 +540,69 @@
                 // Populate the sub-header with the upcoming race details
                 upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
                 upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
+                
+                // Function to calculate the next Friday at 2 PM Eastern Time (EDT/EST)
+                // Assuming current period is EDT (UTC-4), so 2 PM EDT is 18:00 UTC.
+                function getNextFriday2PMET() {
+                    const now = new Date();
+                    let target = new Date(now);
 
-                // Get the IANA time zone for the race's venue from our map
-                const raceTimeZone = timeZoneMap[upcomingRace.venue];
+                    // Set to 2 PM EDT (18:00 UTC during EDT)
+                    // We'll primarily work with UTC to avoid local timezone issues for the target time.
+                    target.setUTCHours(18, 0, 0, 0);
 
-                // Function to update client and track times
-                function updateTimes() {
-                    const currentTime = new Date();
-                    clientTimeEl.textContent = `MY TIME ${currentTime.toLocaleTimeString([], timeOptions)}`;
-                    if (raceTimeZone) {
-                        raceTimeEl.textContent = `TRACK TIME ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
-                    } else {
-                        // Display N/A if time zone for the venue is not in our map
-                        raceTimeEl.textContent = `TRACK TIME N/A`;
+                    // Calculate days until next Friday (Friday is day 5, Sunday is 0 for getUTCDay())
+                    let daysUntilFriday = (5 - target.getUTCDay() + 7) % 7;
+
+                    // If today is Friday and it's already past 2 PM EDT (18:00 UTC), target next Friday
+                    if (daysUntilFriday === 0 && now.getUTCHours() >= 18) {
+                        daysUntilFriday = 7;
+                    }
+
+                    target.setUTCDate(target.getUTCDate() + daysUntilFriday);
+
+                    return target;
+                }
+
+                let countdownTargetDate = getNextFriday2PMET();
+
+                function updateCountdown() {
+                    const now = new Date();
+                    let difference = countdownTargetDate.getTime() - now.getTime();
+
+                    // If the current target date has passed, calculate the next one
+                    if (difference < 0) {
+                        countdownTargetDate = getNextFriday2PMET();
+                        difference = countdownTargetDate.getTime() - now.getTime(); // Recalculate difference for the new target
+                    }
+                    
+                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                    if (countdownTimerEl) {
+                        if (difference <= 0) {
+                            countdownTimerEl.textContent = "RACE STARTING SOON!"; // Or "RACE LIVE!"
+                        } else if (days > 0) {
+                            countdownTimerEl.textContent = `NEXT RACE IN ${days}D ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
+                        } else {
+                            countdownTimerEl.textContent = `NEXT RACE IN ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
+                        }
                     }
                 }
-                updateTimes(); // Initial call to display times right away
-                setInterval(updateTimes, 1000 * 60); // Update times every minute
+
+                // Initial call to set up the countdown
+                updateCountdown();
+                // Update the countdown every second
+                setInterval(updateCountdown, 1000);
+
             } else {
-                // If no upcoming races are found, display a season concluded message
+                // If no upcoming races are found, display a season concluded message and hide countdown
                 upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                // Hide the time display elements
-                if (clientTimeEl && clientTimeEl.parentElement) {
-                    clientTimeEl.parentElement.style.display = 'none';
+                upcomingRaceDateEl.style.display = 'none'; // Hide the date as well
+                if (countdownDisplayEl) {
+                    countdownDisplayEl.style.display = 'none';
                 }
             }
         };
