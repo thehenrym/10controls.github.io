@@ -146,12 +146,13 @@
 <body class="font-medium">
 
     <!-- Header section with navigation -->
-    <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
+<header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
                     <a href="/index.html">
-                         <img src="images/10c.png" class="h-10">
+                        <!-- FIX: Changed to a root-relative path for consistency -->
+                        <img src="/images/10c.png" class="h-10" alt="10 Controls Logo" onerror="this.onerror=null;this.src='https://placehold.co/160x40/492833/FFFFFF?text=Logo+Not+Found';">
                     </a>
                 </div>
 
