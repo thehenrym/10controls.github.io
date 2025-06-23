@@ -396,8 +396,8 @@
         // Function to update driver points and details
         const updateDriverStandings = (results) => {
             results.forEach(result => {
-                let normalizedDriverName = result.driver.toUpperCase();
-                let displayDriverName = result.driver.toUpperCase();
+                let normalizedDriver = result.driver.toUpperCase();
+                let displayDriver = result.driver.toUpperCase();
 
                 if (driverPointsMap.has(normalizedDriverName)) {
                     driverPointsMap.get(normalizedDriverName).points += result.pts;
