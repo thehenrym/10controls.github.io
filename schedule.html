@@ -381,9 +381,8 @@
                     }
                     
                     let resultButtonHref = "#"; // Default href for the results button
-                    let watchButtonHtml = ""; // Initialize watch button HTML as empty
 
-                    // Logic to set specific href for Bahrain and Australian Grand Prix results buttons, and add Watch button for Australia
+                    // Logic to set specific href for Bahrain and Australian Grand Prix results buttons
                     if (race.round === 1 && race.name === 'Bahrain Grand Prix') {
                         if (currentScheduleData === scheduleDataTier1) {
                             resultButtonHref = "results/bahrain-tier1.html";
@@ -393,24 +392,21 @@
                     } else if (race.round === 2 && race.name === 'Australian Grand Prix') {
                         if (currentScheduleData === scheduleDataTier1) {
                             resultButtonHref = "results/australia-tier1.html";
-                            watchButtonHtml = `<a href="https://www.youtube.com/watch?v=r5SmINAmQkU" target="_blank" rel="noopener noreferrer" class="bg-[#201C1C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Watch</a>`;
                         } else { // Tier 2 Australian GP
                             resultButtonHref = "results/australia-tier2.html"; // Example tier 2 results page
-                            watchButtonHtml = `<a href="https://www.youtube.com/watch?v=x1qFXHYMQ60" target="_blank" rel="noopener noreferrer" class="bg-[#201C1C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Watch</a>`;
                         }
                     }
 
                     // Conditionally create the footer HTML based on whether the race has a winner
                     let footerHtml;
                     if (race.winner) { // If there's a winner, show winner and buttons
-                        // **FIXED**: This container is now responsive.
+                        // This container is now responsive.
                         // It stacks vertically on mobile (flex-col) and goes horizontal on small screens and up (sm:flex-row).
                         // `truncate` is added to the winner's name to prevent overflow on very small screens.
                         footerHtml = `
                             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
                                 <a href="driverprofile.html?driver=${encodeURIComponent(race.winner)}" class="text-base font-semibold text-gray-800 uppercase hover:underline truncate"><span class="font-bold text-[#492833]">WINNER:</span> ${race.winner}</a>
                                 <div class="flex items-center space-x-2 flex-shrink-0">
-                                    ${watchButtonHtml} <!-- Place watch button here -->
                                     <a href="${resultButtonHref}" class="bg-[#492833] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Results</a>
                                 </div>
                             </div>
