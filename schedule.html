@@ -159,7 +159,7 @@
                 <div class="flex-shrink-0">
                     <a href="index.html">
                         <!-- Updated logo image source for consistency -->
-                        <img src="images/10c.png" alt="10 Controls Logo" class="h-10">
+                        <img src="images/10c.png" alt="10 Controls Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/40x40/492833/ffffff?text=10C';">
                     </a>
                 </div>
 
@@ -193,7 +193,7 @@
                 <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
                 <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
                 <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Teams</a>
-                   <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
+                       <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
             </div>
         </div>
     </header>
@@ -393,20 +393,23 @@
                     } else if (race.round === 2 && race.name === 'Australian Grand Prix') {
                         if (currentScheduleData === scheduleDataTier1) {
                             resultButtonHref = "results/australia-tier1.html";
-                            watchButtonHtml = `<a href="https://www.youtube.com/watch?v=r5SmINAmQkU" target="_blank" rel="noopener noreferrer" class="bg-[#201C1C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors mr-2">Watch</a>`;
+                            watchButtonHtml = `<a href="https://www.youtube.com/watch?v=r5SmINAmQkU" target="_blank" rel="noopener noreferrer" class="bg-[#201C1C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Watch</a>`;
                         } else { // Tier 2 Australian GP
                             resultButtonHref = "results/australia-tier2.html"; // Example tier 2 results page
-                            watchButtonHtml = `<a href="https://www.youtube.com/watch?v=x1qFXHYMQ60" target="_blank" rel="noopener noreferrer" class="bg-[#201C1C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors mr-2">Watch</a>`;
+                            watchButtonHtml = `<a href="https://www.youtube.com/watch?v=x1qFXHYMQ60" target="_blank" rel="noopener noreferrer" class="bg-[#201C1C] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Watch</a>`;
                         }
                     }
 
                     // Conditionally create the footer HTML based on whether the race has a winner
                     let footerHtml;
                     if (race.winner) { // If there's a winner, show winner and buttons
+                        // **FIXED**: This container is now responsive.
+                        // It stacks vertically on mobile (flex-col) and goes horizontal on small screens and up (sm:flex-row).
+                        // `truncate` is added to the winner's name to prevent overflow on very small screens.
                         footerHtml = `
-                            <div class="flex justify-between items-center">
-                                <a href="driverprofile.html?driver=${encodeURIComponent(race.winner)}" class="text-base font-semibold text-gray-800 uppercase hover:underline"><span class="font-bold text-[#492833]">WINNER:</span> ${race.winner}</a>
-                                <div>
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
+                                <a href="driverprofile.html?driver=${encodeURIComponent(race.winner)}" class="text-base font-semibold text-gray-800 uppercase hover:underline truncate"><span class="font-bold text-[#492833]">WINNER:</span> ${race.winner}</a>
+                                <div class="flex items-center space-x-2 flex-shrink-0">
                                     ${watchButtonHtml} <!-- Place watch button here -->
                                     <a href="${resultButtonHref}" class="bg-[#492833] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Results</a>
                                 </div>
