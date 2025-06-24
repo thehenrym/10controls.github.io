@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
@@ -5,7 +6,7 @@
 <link rel="shortcut icon" href="favicon/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content="10 Controls" />
-<link rel="manifest" href="favicon/site.webmanifest" /
+<link rel="manifest" href="favicon/site.webmanifest" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>10 Controls</title>
@@ -165,7 +166,7 @@
         </div>
     </header>
 
-    <!-- Sub-Header for Upcoming Race Info and Time. Hidden on mobile. -->
+    <!-- Sub-Header for Upcoming Race Info and Countdown. Hidden on mobile. -->
     <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300 hidden md:flex">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
             <div class="flex items-center space-x-2 sm:space-x-4">
@@ -174,12 +175,9 @@
                 <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
                 </div>
             </div>
-            <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-6 sm:h-8 w-auto">
-                <div class="text-right text-xs sm:text-sm">
-                   <p id="client-time" class="font-bold"></p>
-                   <p id="race-time" class="text-gray-300"></p>
-                </div>
+            <!-- Countdown Timer -->
+            <div id="countdown-display" class="flex items-center flex-shrink-0 text-right text-xs sm:text-sm">
+                <p id="countdown-timer" class="font-bold"></p>
             </div>
         </div>
     </div>
@@ -221,47 +219,33 @@
             { id: 'haas-card', name: 'HAAS ONLYFANS RACING', venue: 'Kannapolis', drivers: [{ name: 'NOJUS GEDVILAS', flagCountryCode: 'PL' }, { name: 'LUKAS', flagCountryCode: 'GB' }], country: 'USA', bgColor: '#00AFF0', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp' }
         ];
 
-        // Data for F1 Race Schedule (newly added for sub-header functionality)
+        // Data for F1 Race Schedule (updated to match the more extensive scheduleData from index.html)
         const raceScheduleData = [
-            { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'March 14-16', winner: 'Anton Chebotarov', country: 'BH' },
-            { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 21-23', winner: 'Maxfan1982', country: 'AU' },
-            { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', winner: '', country: 'IT' },
-            { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', winner: '', country: 'BE' },
-            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', winner: '', country: 'ES' },
-            { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'July 18th', winner: '', country: 'CN' },
-            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'July 25th', winner: '', country: 'JP' },
-            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'August 1st', winner: '', country: 'USA' },
-            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'August 8th', winner: '', country: '' },
-            { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'August 15th', winner: '', country: 'BR' }
+            { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris', country: 'AU' },
+            { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23', winner: 'Oscar Piastri', country: 'CN' },
+            { round: 3, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'April 4-6', winner: 'Max Verstappen', country: 'JP' },
+            { round: 4, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'April 11-13', winner: 'Oscar Piastri', country: 'BH' },
+            { round: 5, name: 'Saudi Arabian Grand Prix', venue: 'Jeddah', date: 'April 18-20', winner: 'Oscar Piastri', country: 'SA' },
+            { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', winner: 'Oscar Piastri', country: 'USA' },
+            { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen', country: 'IT' },
+            { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'MC' },
+            { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'ES' },
+            { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'CA' },
+            { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
+            { round: 12, name: 'British Grand Prix', venue: 'Silverstone', date: 'July 4-6', country: 'GB' },
+            { round: 13, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 25-27', country: 'BE' },
+            { round: 14, name: 'Hungarian Grand Prix', venue: 'Budapest', date: 'August 1-3', country: 'HU' },
+            { round: 15, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'August 29-31', country: 'NL' },
+            { round: 16, name: 'Italian Grand Prix', venue: 'Monza', date: 'September 5-7', country: 'IT' },
+            { round: 17, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'September 19-21', country: 'AZ' },
+            { pos: 18, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
+            { pos: 19, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19', country: 'USA' },
+            { pos: 20, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26', country: 'MX' },
+            { pos: 21, name: 'Brazilian Grand Prix', date: 'November 7-9', country: 'BR' },
+            { pos: 22, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22', country: 'USA' },
+            { pos: 23, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30', country: 'QAT' },
+            { pos: 24, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7', country: 'AE' }
         ];
-
-        // Map for converting venue names to standard IANA time zone identifiers.
-        const timeZoneMap = {
-            'Melbourne': 'Australia/Melbourne',
-            'Shanghai': 'Asia/Shanghai',
-            'Suzuka': 'Asia/Tokyo',
-            'Sakhir': 'Asia/Bahrain',
-            'Jeddah': 'Asia/Riyadh',
-            'Miami': 'America/New_York',
-            'Imola': 'Europe/Rome',
-            'Monaco': 'Europe/Monaco',
-            'Barcelona': 'Europe/Madrid',
-            'Montreal': 'America/Toronto',
-            'Spielberg': 'Europe/Vienna',
-            'Silverstone': 'Europe/London',
-            'Spa': 'Europe/Brussels',
-            'Budapest': 'Europe/Budapest',
-            'Zandvoort': 'Europe/Amsterdam',
-            'Monza': 'Europe/Rome',
-            'Baku': 'Asia/Baku',
-            'Singapore': 'Asia/Singapore',
-            'Austin': 'America/Chicago',
-            'Mexico City': 'America/Mexico_City',
-            'Sao Paulo': 'America/Sao_Paulo',
-            'Las Vegas': 'America/Los_Angeles',
-            'Lusail': 'Asia/Qatar',
-            'Yas Marina': 'Asia/Dubai'
-        };
 
         // Function to get flag HTML based on country code for drivers
         function getFlagHtmlForDriver(countryCode) {
@@ -433,73 +417,101 @@
                 });
             }
 
-            // --- Sub-header time and upcoming race script (newly added) ---
+            // --- Sub-header upcoming race script (newly added/modified) ---
             const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
             const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
-            const clientTimeEl = document.getElementById('client-time');
-            const raceTimeEl = document.getElementById('race-time');
-            const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
+            const countdownDisplayEl = document.getElementById('countdown-display'); // Get the countdown display element
 
-            // Helper function to parse various date formats from the race schedule data
+            // Helper to parse date strings like "March 14-16" or "August 1st"
             function parseRaceDate(dateStr) {
-                // Handle date ranges like "March 14-16"
-                let cleanedDateStr = dateStr.split('-')[0].trim();
-                const monthStr = cleanedDateStr.split(' ')[0];
-                let dayStr = cleanedDateStr.split(' ')[1];
-                // Remove ordinal suffixes (st, nd, rd, th) from the day string
-                if (dayStr && (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th'))) {
+                const monthStr = dateStr.split(' ')[0];
+                let dayStr = dateStr.split(' ')[1].split('-')[0]; // Handles "14-16"
+                // Handle dates like "August 1st", "June 27th" by removing ordinal suffixes
+                if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
                     dayStr = dayStr.substring(0, dayStr.length - 2);
                 }
-                // Return a Date object for the current year (assuming 2025 based on the page title)
                 return new Date(`${monthStr} ${dayStr}, 2025`);
             }
 
-            // Find the next upcoming race by comparing race dates with the current time
+            // Find the upcoming race
             const now = new Date();
             let upcomingRace = null;
             for (const race of raceScheduleData) { // Using raceScheduleData here
                 const raceDate = parseRaceDate(race.date);
-                // Set race time to a default (e.g., 14:00 local) if not specified, for comparison
-                raceDate.setHours(14, 0, 0, 0); 
                 if (raceDate > now) {
                     upcomingRace = race;
-                    break; // Stop after finding the first future race
+                    break;
                 }
             }
 
             if (upcomingRace) {
-                // Populate the sub-header with the upcoming race details
                 upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
                 upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
-
-                // Get the IANA time zone for the race's venue from our map
-                const raceTimeZone = timeZoneMap[upcomingRace.venue];
-
-                // Function to update client and track times
-                function updateTimes() {
-                    const currentTime = new Date();
-                    clientTimeEl.textContent = `MY TIME ${currentTime.toLocaleTimeString([], timeOptions)}`;
-                    if (raceTimeZone) {
-                        try {
-                            raceTimeEl.textContent = `TRACK TIME ${currentTime.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
-                        } catch (e) {
-                             raceTimeEl.textContent = `TRACK TIME N/A`;
-                        }
-                    } else {
-                        // Display N/A if time zone for the venue is not in our map
-                        raceTimeEl.textContent = `TRACK TIME N/A`;
-                    }
-                }
-                updateTimes(); // Initial call to display times right away
-                setInterval(updateTimes, 1000 * 60); // Update times every minute
             } else {
-                // If no upcoming races are found, display a season concluded message
                 upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                // Hide the time display elements if no upcoming race
-                if (clientTimeEl && clientTimeEl.parentElement) {
-                    clientTimeEl.parentElement.style.display = 'none';
+                // Hide the entire countdown display if season is over
+                if (countdownDisplayEl) {
+                    countdownDisplayEl.style.display = 'none';
                 }
             }
+
+            // --- Countdown Timer Logic ---
+            // Function to calculate the next Friday at 2 PM Eastern Time (EDT/EST)
+            // Assuming current period is EDT (UTC-4), so 2 PM EDT is 18:00 UTC.
+            function getNextFriday2PMET() {
+                const now = new Date();
+                let target = new Date(now);
+
+                // Set to 2 PM EDT (18:00 UTC during EDT)
+                // We'll primarily work with UTC to avoid local timezone issues for the target time.
+                target.setUTCHours(18, 0, 0, 0); 
+
+                // Calculate days until next Friday (Friday is day 5, Sunday is 0 for getUTCDay())
+                let daysUntilFriday = (5 - target.getUTCDay() + 7) % 7;
+
+                // If today is Friday and it's already past 2 PM EDT (18:00 UTC), target next Friday
+                if (daysUntilFriday === 0 && now.getUTCHours() >= 18) { 
+                    daysUntilFriday = 7;
+                }
+
+                target.setUTCDate(target.getUTCDate() + daysUntilFriday);
+
+                return target;
+            }
+
+            let countdownTargetDate = getNextFriday2PMET();
+
+            function updateCountdown() {
+                const now = new Date();
+                let difference = countdownTargetDate.getTime() - now.getTime();
+
+                // If the current target date has passed, calculate the next one
+                if (difference < 0) {
+                    countdownTargetDate = getNextFriday2PMET();
+                    difference = countdownTargetDate.getTime() - now.getTime(); // Recalculate difference for the new target
+                }
+                
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                const countdownEl = document.getElementById('countdown-timer');
+                if (countdownEl) {
+                    if (difference <= 0) {
+                        countdownEl.textContent = "RACE STARTING SOON!"; // Or "RACE LIVE!"
+                    } else if (days > 0) {
+                        countdownEl.textContent = `NEXT RACE IN ${days}D ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
+                    } else {
+                        countdownEl.textContent = `NEXT RACE IN ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
+                    }
+                }
+            }
+
+            // Initial call to set up the countdown
+            updateCountdown();
+            // Update the countdown every second
+            setInterval(updateCountdown, 1000);
         };
     </script>
 </body>
