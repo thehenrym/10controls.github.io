@@ -133,12 +133,9 @@
                 <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate"></div>
                 <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block"></div>
             </div>
-            <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-6 sm:h-8 w-auto">
-                <div class="text-right text-xs sm:text-sm">
-                   <p id="client-time" class="font-bold"></p>
-                   <p id="race-time" class="text-gray-300"></p>
-                </div>
+            <!-- Countdown Timer instead of "MY TIME" and "TRACK TIME" -->
+            <div id="countdown-display" class="flex items-center flex-shrink-0 text-right text-xs sm:text-sm">
+                <p id="countdown-timer" class="font-bold"></p>
             </div>
         </div>
     </div>
@@ -328,7 +325,7 @@
             'jstnnl': {
                 name: 'JSTN NL', team: 'SCUDERIA FERRARI HP', country: 'NETHERLANDS', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197441.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp',
                 baseCareerStats: { 'Grand Prix Entered': 12, 'Wins': 0, 'Podiums': 1, 'Career Points': 67, 'Pole Positions': 0, 'DNFs': 3, 'World Championships': 0 },
-                recentRaces: [], tier: 2
+                recentRaces: [], tier: 1
             },
             'nojusgedvilas': {
                 name: 'NOJUS GEDVILAS', team: 'HAAS ONLYFANS RACING', country: 'LITHUANIA', flagUrl: 'https://cdn-icons-png.flaticon.com/512/197/197612.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp',
@@ -386,103 +383,103 @@
                 recentRaces: [], tier: 1
             },
             'lukas': {
-                name: 'LUKAS', team: 'HAAS ONLYFANS RACING', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'LUKAS', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 21, 'Wins': 1, 'Podiums': 4, 'Career Points': 99, 'Pole Positions': 1, 'DNFs': 9, 'World Championships': 0 },
                 recentRaces: [], tier: 1
             },
             // TIER 2 DRIVERS (from previous images)
             'jayazier': {
-                name: 'JAY AZIER', team: 'HOT WHEELS MCLAREN', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'JAY AZIER', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'machmudmoerwijk': {
-                name: 'MACHMUD MOERWIJK', team: 'HOT WHEELS MCLAREN', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'MACHMUD MOERWIJK', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'manuelrotundo': {
-                name: 'MANUEL ROTUNDO', team: 'SCUDERIA FERRARI HP', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'MANUEL ROTUNDO', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'maxammerlaan': {
-                name: 'MAX AMMERLAAN', team: 'HAAS ONLYFANS RACING', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'MAX AMMERLAAN', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'jarviscoid': {
-                name: 'JARVIS COID', team: 'NEWPORT ROLEX RED BULL RACING', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'JARVIS COID', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'teetoe': {
-                name: 'TEETOE', team: 'NEWPORT ROLEX RED BULL RACING', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'TEETOE', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'byronas': {
-                name: 'BYRONAS', team: 'GUINNESS MERCEDES', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'BYRONAS', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'tuki': {
-                name: 'TUKI', team: 'FREE AGENT', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'TUKI', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'mark': {
-                name: 'MARK', team: 'JOHN DEERE WILLIAMS RACING', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'MARK', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'shark': {
-                name: 'SHARK', team: 'LOCKHEED MARTIN ASTON MARTIN', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'SHARK', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'daniels': {
-                name: 'DANIELS', team: 'RACING BULLS PEUGEOT SPORT', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'DANIELS', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'spyzer': {
-                name: 'SPYZER', team: 'FREE AGENT', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'SPYZER', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'sneeuw': {
-                name: 'SNEEUW', team: 'LOCKHEED MARTIN ASTON MARTIN', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'SNEEUW', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'scorenzy': {
-                name: 'SCORENZY', team: 'FREE AGENT', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'SCORENZY', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'formulaphantom': {
-                name: 'FORMULA PHANTOM', team: 'FREE AGENT', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'FORMULA PHANTOM', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'kevinjerling': {
-                name: 'KEVIN JERLING', team: 'HAAS ONLYFANS RACING', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'KEVIN JERLING', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'caiomhe': {
-                name: 'CAIOMHE', team: 'RACING BULLS PEUGEOT SPORT', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'CAIOMHE', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'phoenix': {
-                name: 'PHOENIX', team: 'JOHN DEERE WILLIAMS RACING', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'PHOENIX', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             },
             'rookie': {
-                name: 'ROOKIE', team: 'FREE AGENT', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
+                name: 'ROOKIE', team: 'Placeholder Team', country: 'UNKNOWN', flagUrl: 'https://placehold.co/32x24/cccccc/000000?text=?', carImageUrl: 'https://placehold.co/600x400/cccccc/000000?text=Car',
                 baseCareerStats: { 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0, 'World Championships': 0 },
                 recentRaces: [], tier: 2
             }
@@ -822,7 +819,7 @@
             
             loadDriverData(foundKey || 'focuser'); // Load the specified driver or default
             setupMenu();
-            setupSubHeader();
+            setupSubHeader(); // Call the updated sub-header setup
         };
         
         // --- DATA CALCULATION & LOADING FUNCTIONS ---
@@ -1058,40 +1055,76 @@
         }
 
         function setupSubHeader() {
-            // This data is static for the sub-header example.
-            const subHeaderScheduleData = [
-                { name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th' },
-                { name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th' }
-            ];
-            const timeZoneMap = {'Imola': 'Europe/Rome', 'Spa': 'Europe/Brussels'};
-
+            // Updated to display a generic upcoming event for countdown
             const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
             const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
-            const clientTimeEl = document.getElementById('client-time');
-            const raceTimeEl = document.getElementById('race-time');
+            const countdownDisplayEl = document.getElementById('countdown-display');
+            const countdownTimerEl = document.getElementById('countdown-timer');
 
-            const upcomingRace = subHeaderScheduleData[0]; // Simple example, always shows first race
-            if (upcomingRace) {
-                upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
-                upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
-                const raceTimeZone = timeZoneMap[upcomingRace.venue];
+            // Default upcoming event text for the countdown purpose
+            upcomingRaceInfoEl.textContent = 'UPCOMING: EMILIA ROMAGNA GRAND PRIX';
+            upcomingRaceDateEl.textContent = 'JUNE 27TH';
 
-                function updateTimes() {
-                    const now = new Date();
-                    const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
-                    clientTimeEl.textContent = `MY TIME ${now.toLocaleTimeString([], timeOptions)}`;
-                    if (raceTimeZone) {
-                        raceTimeEl.textContent = `TRACK TIME ${now.toLocaleTimeString([], { ...timeOptions, timeZone: raceTimeZone })}`;
+            // Function to calculate the next Friday at 2 PM Eastern Time (EDT/EST)
+            // Assumes current period is EDT (UTC-4), so 2 PM EDT is 18:00 UTC.
+            function getNextFriday2PMET() {
+                const now = new Date();
+                let target = new Date(now);
+
+                // Set to 2 PM EDT (18:00 UTC during EDT)
+                // We'll primarily work with UTC to avoid local timezone issues for the target time.
+                target.setUTCHours(18, 0, 0, 0); 
+
+                // Calculate days until next Friday (Friday is day 5, Sunday is 0 for getUTCDay())
+                let daysUntilFriday = (5 - target.getUTCDay() + 7) % 7;
+
+                // If today is Friday and it's already past 2 PM EDT (18:00 UTC), target next Friday
+                if (daysUntilFriday === 0 && now.getUTCHours() >= 18) { 
+                    daysUntilFriday = 7;
+                }
+
+                target.setUTCDate(target.getUTCDate() + daysUntilFriday);
+
+                return target;
+            }
+
+            let countdownTargetDate = getNextFriday2PMET();
+
+            function updateCountdown() {
+                const now = new Date();
+                let difference = countdownTargetDate.getTime() - now.getTime();
+
+                // If the current target date has passed, calculate the next one
+                // This ensures it always points to a future Friday 2 PM ET for the next 8 weeks
+                if (difference < 0) {
+                    countdownTargetDate = getNextFriday2PMET(); // Recalculate for the very next Friday 2 PM ET
+                    // Add 7 days repeatedly if it's still in the past (to account for time differences or if called slightly after passing)
+                    while (countdownTargetDate.getTime() < now.getTime()) {
+                        countdownTargetDate.setUTCDate(countdownTargetDate.getUTCDate() + 7);
+                    }
+                    difference = countdownTargetDate.getTime() - now.getTime(); // Recalculate difference for the new target
+                }
+                
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                if (countdownTimerEl) {
+                    if (difference <= 0) {
+                        countdownTimerEl.textContent = "RACE STARTING SOON!";
+                    } else if (days > 0) {
+                        countdownTimerEl.textContent = `COUNTDOWN: ${days}D ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
                     } else {
-                        raceTimeEl.textContent = `TRACK TIME N/A`;
+                        countdownTimerEl.textContent = `COUNTDOWN: ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
                     }
                 }
-                updateTimes();
-                setInterval(updateTimes, 60000);
-            } else {
-                upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                if(clientTimeEl && clientTimeEl.parentElement) clientTimeEl.parentElement.style.display = 'none';
             }
+
+            // Initial call to set up the countdown
+            updateCountdown();
+            // Update the countdown every second
+            setInterval(updateCountdown, 1000);
         }
     </script>
 </body>
