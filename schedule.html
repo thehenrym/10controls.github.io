@@ -110,45 +110,6 @@
         .mobile-menu-link:hover {
             background-color: #000000; /* Black */
         }
-
-        /* Styles for the Tier selection buttons */
-        .tier-button-container { /* Container for the sliding effect */
-            background-color: #e0e0e0; /* Light gray "track" */
-            border-radius: 9999px; /* Fully rounded corners */
-            padding: 3px; /* Reduced padding for smaller size */
-            position: relative; /* Needed for absolute positioning of the slider */
-            display: inline-flex; /* To make it wrap content and allow flex layout */
-            overflow: hidden; /* Hide anything outside the rounded container */
-        }
-
-        #tier-slider-highlighter { /* The actual sliding element */
-            position: absolute;
-            top: 3px; /* Match container padding */
-            height: calc(100% - 6px); /* Full height minus top/bottom padding */
-            background-color: #492833; /* Active background color */
-            border-radius: 9999px; /* Fully rounded */
-            transition: left 0.3s ease-in-out, width 0.3s ease-in-out; /* Smooth transition */
-            z-index: 0; /* Behind the button text */
-        }
-
-        .tier-button { /* The clickable buttons */
-            background-color: transparent; /* No background on buttons themselves */
-            border: none;
-            color: #201C1C; /* Dark text for inactive */
-            padding: 6px 17px; /* Reduced padding for smaller size */
-            border-radius: 9999px;
-            font-weight: 700; /* Inter Bold */
-            position: relative; /* Z-index requires position */
-            z-index: 1; /* Above the slider */
-            transition: color 0.3s ease-in-out; /* Smooth text color transition */
-            cursor: pointer;
-            min-width: 84px; /* Reduced min-width for smaller size */
-            text-align: center;
-        }
-
-        .tier-button.active {
-            color: white; /* White text for active */
-        }
     </style>
 </head>
 <body class="font-medium">
@@ -193,7 +154,7 @@
                 <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
                 <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
                 <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Teams</a>
-                       <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
+                           <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
             </div>
         </div>
     </header>
@@ -216,16 +177,10 @@
 
     <!-- Main Content Area for Schedule Cards -->
     <div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        <!-- Tier Selection Buttons moved back to their original position -->
-        <div class="flex justify-center mt-8 mb-4">
-            <div class="tier-button-container"> 
-                <div id="tier-slider-highlighter"></div> <!-- The sliding element -->
-                <button id="tier1Btn" class="tier-button active">TIER 1</button>
-                <button id="tier2Btn" class="tier-button">TIER 2</button>
-            </div>
-        </div>
+        <!-- Tier selection buttons have been removed -->
 
         <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+            <!-- Schedule cards will be dynamically inserted here -->
         </div>
     </div>
 
@@ -246,23 +201,9 @@
     
     <script>
         // Data for the F1 schedule. Includes race rounds, names, venues, dates, and winners.
-        const scheduleDataTier1 = [
+        const scheduleData = [
             { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'March 14-16', winner: 'Anton Chebotarov', country: 'BH' },
             { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 21-23', winner: 'Maxfan1982', country: 'AU' },
-            { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', winner: '', country: 'IT' },
-            { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', winner: '', country: 'BE' },
-            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', winner: '', country: 'ES' },
-            { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'July 18th', winner: '', country: 'CN' },
-            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'July 25th', winner: '', country: 'JP' },
-            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'August 1st', winner: '', country: 'USA' },
-            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'August 8th', winner: '', country: '' },
-            { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'August 15th', winner: '', country: 'BR' }
-        ];
-
-        // Tier 2 data with same schedule but different driver names
-        const scheduleDataTier2 = [
-            { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'March 14-16', winner: 'MACHMUD MOERWIJK', country: 'BH' }, // Updated winner for Tier 2 Bahrain GP
-            { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 21-23', winner: 'JAY AZIER', country: 'AU' }, // Updated winner for Tier 2 Australian GP
             { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', winner: '', country: 'IT' },
             { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', winner: '', country: 'BE' },
             { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', winner: '', country: 'ES' },
@@ -304,24 +245,6 @@
         // This function runs when the entire page has finished loading.
         window.onload = function() {
             const scheduleGrid = document.getElementById('schedule-grid');
-            const tier1Btn = document.getElementById('tier1Btn');
-            const tier2Btn = document.getElementById('tier2Btn');
-            const tierSliderHighlighter = document.getElementById('tier-slider-highlighter');
-
-            /**
-             * Updates the position and width of the tier slider highlighter.
-             * @param {HTMLElement} targetButton - The button that is currently active.
-             */
-            function updateTierSlider(targetButton) {
-                if (!targetButton || !tierSliderHighlighter) return;
-
-                // Use offsetLeft and offsetWidth which are relative to the offsetParent (tier-button-container)
-                const newLeft = targetButton.offsetLeft;
-                const newWidth = targetButton.offsetWidth;
-
-                tierSliderHighlighter.style.left = `${newLeft}px`;
-                tierSliderHighlighter.style.width = `${newWidth}px`;
-            }
 
             /**
              * Renders the schedule cards based on the provided data.
@@ -384,17 +307,9 @@
 
                     // Logic to set specific href for Bahrain and Australian Grand Prix results buttons
                     if (race.round === 1 && race.name === 'Bahrain Grand Prix') {
-                        if (currentScheduleData === scheduleDataTier1) {
-                            resultButtonHref = "results/bahrain-tier1.html";
-                        } else { // Tier 2 Bahrain GP
-                             resultButtonHref = "results/bahrain-tier2.html"; // Example tier 2 results page
-                        }
+                        resultButtonHref = "results/bahrain.html";
                     } else if (race.round === 2 && race.name === 'Australian Grand Prix') {
-                        if (currentScheduleData === scheduleDataTier1) {
-                            resultButtonHref = "results/australia-tier1.html";
-                        } else { // Tier 2 Australian GP
-                            resultButtonHref = "results/australia-tier2.html"; // Example tier 2 results page
-                        }
+                        resultButtonHref = "results/australia.html";
                     }
 
                     // Conditionally create the footer HTML based on whether the race has a winner
@@ -432,40 +347,8 @@
                 });
             }
 
-            // Initial render for Tier 1
-            renderSchedule(scheduleDataTier1);
-
-            // Tier button event listeners
-            tier1Btn.addEventListener('click', () => {
-                tier1Btn.classList.add('active');
-                tier2Btn.classList.remove('active');
-                updateTierSlider(tier1Btn); // Update slider position
-                renderSchedule(scheduleDataTier1);
-            });
-
-            tier2Btn.addEventListener('click', () => {
-                tier2Btn.classList.add('active');
-                tier1Btn.classList.remove('active');
-                updateTierSlider(tier2Btn); // Update slider position
-                renderSchedule(scheduleDataTier2); // Load Tier 2 data
-            });
-
-            // Set initial slider position on load
-            if (tier1Btn.classList.contains('active')) {
-                updateTierSlider(tier1Btn);
-            } else if (tier2Btn.classList.contains('active')) {
-                updateTierSlider(tier2Btn);
-            }
-
-            // Recalculate slider position on window resize
-            window.addEventListener('resize', () => {
-                if (tier1Btn.classList.contains('active')) {
-                    updateTierSlider(tier1Btn);
-                } else if (tier2Btn.classList.contains('active')) {
-                    updateTierSlider(tier2Btn);
-                }
-            });
-
+            // Initial render for the schedule
+            renderSchedule(scheduleData);
 
             // --- Mobile menu toggle script ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -525,9 +408,7 @@
             // Find the next upcoming race by comparing race dates with the current time
             const now = new Date();
             let upcomingRace = null;
-            // This part needs to consider the currently active tier's data for the countdown
-            // For simplicity, keeping it tied to Tier 1 schedule for now, as countdown logic is global.
-            for (const race of scheduleDataTier1) { // Changed to scheduleDataTier1
+            for (const race of scheduleData) { 
                 const raceDate = parseRaceDate(race.date);
                 if (raceDate > now) {
                     upcomingRace = race;
