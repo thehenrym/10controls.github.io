@@ -108,38 +108,6 @@
         .race-table .pos-number {
             color: #ffffff;
         }
-        /* Toggle button styles */
-        .toggle-button-container {
-            position: relative;
-            background-color: #e5e7eb;
-            border-radius: 9999px;
-            padding: 4px;
-        }
-        .toggle-button {
-            position: relative;
-            z-index: 1;
-            color: #492833;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: color 0.3s ease-in-out;
-            background-color: transparent;
-        }
-        .toggle-button.active {
-            color: white;
-        }
-        #toggle-slider {
-            position: absolute;
-            top: 4px;
-            height: calc(100% - 8px);
-            width: 50%;
-            background-color: #492833;
-            border-radius: 9999px;
-            transition: left 0.3s ease-in-out;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        }
     </style>
 </head>
 <body class="font-medium">
@@ -209,19 +177,10 @@
     <!-- Main Content Area - Race Result Page Layout -->
     <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         <div class="flex items-center mb-6">
-            <img src="https://cdn-icons-png.flaticon.com/128/197/197507.png" alt="Australian Flag" class="h-12 w-12 mr-4">
-            <h1 id="main-title" class="text-2xl sm:text-3xl font-bold text-white">AUSTRALIAN GRAND PRIX - <br class="sm:hidden">RACE RESULT</h1>
+            <img src="https://cdn-icons-png.flaticon.com/128/197/197521.png" alt="Bahrain Flag" class="h-12 w-12 mr-4">
+            <h1 id="main-title" class="text-2xl sm:text-3xl font-bold text-white">BAHRAIN GRAND PRIX - <br class="sm:hidden">RACE RESULT</h1>
         </div>
-        <p class="text-sm text-white mb-8">JUNE 20TH | ALBERT PARK CIRCUIT, MELBOURNE</p>
-
-        <!-- Race/Qualifying Toggle Button -->
-        <div class="flex justify-end mb-4">
-            <div class="toggle-button-container inline-flex">
-                <div id="toggle-slider"></div>
-                <button id="race-button" class="toggle-button">RACE</button>
-                <button id="qualifying-button" class="toggle-button">QUALIFYING</button>
-            </div>
-        </div>
+        <p class="text-sm text-white mb-8">JUNE 13TH | BAHRAIN INTERNATIONAL CIRCUIT, SAKHIR</p>
 
         <!-- Race Result Table -->
         <div class="overflow-x-auto rounded-lg shadow-lg">
@@ -385,35 +344,20 @@
 
                 // --- Race and Qualifying Data ---
                 const raceResults = [
-                    { pos: 1, driver: "JAY2005_071", team: "HOT WHEELS MCLAREN", grid: 4, stops: 2, bestLap: "---", time: "Leader", pts: 25, flag: "NL" },
-                    { pos: 2, driver: "SANDRO", team: "HOT WHEELS MCLAREN", grid: 1, stops: 2, bestLap: "---", time: "+1.218", pts: 20, flag: "NL" },
-                    { pos: 3, driver: "MAXLINXC", team: "HAAS ONLYFANS RACING", grid: 7, stops: 2, bestLap: "---", time: "+1.854", pts: 16, flag: "NL" },
-                    { pos: 4, driver: "JSTN NL", team: "SCUDERIA FERRARI", grid: 2, stops: 2, bestLap: "---", time: "+3.136", pts: 13, flag: "NL" },
-                    { pos: 5, driver: "JARVIS COID", team: "TWITCH SAUBER", grid: 5, stops: 2, bestLap: "---", time: "+3.297", pts: 11, flag: "GB" },
-                    { pos: 6, driver: "MANUEL ROTUNDO", team: "SCUDERIA FERRARI", grid: 3, stops: 2, bestLap: "---", time: "+5.496", pts: 10, flag: "IT" },
-                    { pos: 7, driver: "BYRONAS", team: "GUINNESS MERCEDES", grid: 10, stops: 1, bestLap: "---", time: "+16.149", pts: 9, flag: "GR" },
-                    { pos: 8, driver: "MARK", team: "JOHN DEERE WILLIAMS RACING", grid: 8, stops: 2, bestLap: "---", time: "+20.872", pts: 8, flag: "US" },
-                    { pos: 9, driver: "DANIELS", team: "RACING BULLS PEUGEOT SPORT", grid: 13, stops: 2, bestLap: "---", time: "+59.070", pts: 7, flag: "ES" },
-                    { pos: 10, driver: "TEEETOE", team: "NEWPORT ROLEX RED BULL RACING", grid: 6, stops: 3, bestLap: "---", time: "+1:15.379", pts: 6, flag: "NL" },
-                    { pos: 11, driver: "SNEEUWZZ", team: "LOCKHEED MARTIN ASTON MARTIN", grid: 12, stops: 0, bestLap: "---", time: "DNF", pts: '-', flag: "NL" },
-                    { pos: 12, driver: "ROOKIE", team: "HAAS ONLYFANS RACING", grid: 11, stops: 1, bestLap: "---", time: "DNF", pts: '-', flag: "GB" },
-                    { pos: 13, driver: "SHARK772", team: "LOCKHEED MARTIN ASTON MARTIN", grid: 9, stops: 1, bestLap: "---", time: "DNF", pts: '-', flag: "US" }
-                ];
-
-                const qualifyingResults = [
-                    { pos: 1, driver: "SANDRO", team: "HOT WHEELS MCLAREN", best: "1:15.731", gap: "", flag: "NL" },
-                    { pos: 2, driver: "JSTN NL", team: "SCUDERIA FERRARI", best: "1:16.140", gap: "+0.409", flag: "NL" },
-                    { pos: 3, driver: "MANUEL ROTUNDO", team: "SCUDERIA FERRARI", best: "1:16.294", gap: "+0.563", flag: "IT" },
-                    { pos: 4, driver: "JAY2005_071", team: "HOT WHEELS MCLAREN", best: "1:16.579", gap: "+0.848", flag: "NL" },
-                    { pos: 5, driver: "JARVIS COID", team: "TWITCH SAUBER", best: "1:16.627", gap: "+0.896", flag: "GB" },
-                    { pos: 6, driver: "TEEETOE", team: "NEWPORT ROLEX RED BULL RACING", best: "1:16.803", gap: "+1.072", flag: "NL" },
-                    { pos: 7, driver: "MAXLINXC", team: "HAAS ONLYFANS RACING", best: "1:17.158", gap: "+1.427", flag: "NL" },
-                    { pos: 8, driver: "MARK", team: "JOHN DEERE WILLIAMS RACING", best: "1:17.741", gap: "+2.010", flag: "US" },
-                    { pos: 9, driver: "SHARK772", team: "LOCKHEED MARTIN ASTON MARTIN", best: "1:17.975", gap: "+2.244", flag: "US" },
-                    { pos: 10, driver: "BYRONAS", team: "GUINNESS MERCEDES", best: "1:18.111", gap: "+2.380", flag: "GR" },
-                    { pos: 11, driver: "ROOKIE", team: "HAAS ONLYFANS RACING", best: "1:18.346", gap: "+2.615", flag: "GB" },
-                    { pos: 12, driver: "SNEEUWZZ", team: "LOCKHEED MARTIN ASTON MARTIN", best: "1:22.731", gap: "+7.000", flag: "NL" },
-                    { pos: 13, driver: "DANIELS", team: "RACING BULLS PEUGEOT SPORT", best: "1:24.186", gap: "+8.455", flag: "ES" }
+                    { pos: 1, driver: "SANDRO", team: "HOT WHEELS MCLAREN", grid: 1, pts: 25, flag: "NL" },
+                    { pos: 2, driver: "JAY2005_071", team: "HOT WHEELS MCLAREN", grid: 4, pts: 20, flag: "NL" },
+                    { pos: 3, driver: "MANUEL ROTUNDO", team: "SCUDERIA FERRARI", grid: 3, pts: 16, flag: "IT" },
+                    { pos: 4, driver: "LUKAS", team: "HAAS ONLYFANS RACING", grid: 8, pts: 13, flag: "PL" },
+                    { pos: 5, driver: "TUKI", team: "TINDER ALPINE F1 TEAM", grid: 7, pts: 11, flag: "FI" },
+                    { pos: 6, driver: "TEEETOE", team: "NEWPORT ROLEX RED BULL RACING", grid: 11, pts: 10, flag: "NL" },
+                    { pos: 7, driver: "ASPEC33", team: "TINDER ALPINE F1 TEAM", grid: 'DNP', pts: 9, flag: "IT" },
+                    { pos: 8, driver: "JARVIS COID", team: "TWITCH SAUBER", grid: 12, pts: 8, flag: "GB" },
+                    { pos: 9, driver: "SHARK772", team: "LOCKHEED MARTIN ASTON MARTIN", grid: 13, pts: 7, flag: "US" },
+                    { pos: 10, driver: "BYRONAS", team: "GUINNESS MERCEDES", grid: 14, pts: 6, flag: "GR" },
+                    { pos: 11, driver: "MAX AMMERLAAN", team: "RACING BULLS PEUGEOT SPORT", grid: 10, pts: 5, flag: "NL" },
+                    { pos: 12, driver: "SPYZER", team: "TWITCH SAUBER", grid: 6, pts: '-', flag: "DE" },
+                    { pos: 13, driver: "SCORENZY", team: "GUINNESS MERCEDES", grid: 9, pts: '-', flag: "FR" },
+                    { pos: 14, driver: "FORMULA PHANTOM", team: "RACING BULLS PEUGEOT SPORT", grid: 'DSQ', pts: '-', flag: "US" }
                 ];
                 
                 const raceHeaders = [
@@ -421,18 +365,7 @@
                     { text: 'DRIVER', key: 'driver', classes: 'px-3 py-3.5 text-left text-sm font-semibold' },
                     { text: 'TEAM', key: 'team', classes: 'px-3 py-3.5 text-left text-sm font-semibold hidden md:table-cell' },
                     { text: 'GRID', key: 'grid', classes: 'px-3 py-3.5 text-left text-sm font-semibold hidden md:table-cell' },
-                    { text: 'STOPS', key: 'stops', classes: 'px-3 py-3.5 text-left text-sm font-semibold hidden md:table-cell' },
-                    { text: 'BEST', key: 'bestLap', classes: 'px-3 py-3.5 text-right text-sm font-semibold hidden md:table-cell' },
-                    { text: 'TIME', key: 'time', classes: 'px-3 py-3.5 text-right text-sm font-semibold' },
                     { text: 'PTS', key: 'pts', classes: 'py-3.5 pl-3 pr-4 text-right text-sm font-semibold' }
-                ];
-
-                const qualifyingHeaders = [
-                    { text: 'POS', key: 'pos', classes: 'py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6' },
-                    { text: 'DRIVER', key: 'driver', classes: 'px-3 py-3.5 text-left text-sm font-semibold' },
-                    { text: 'TEAM', key: 'team', classes: 'px-3 py-3.5 text-left text-sm font-semibold hidden md:table-cell' },
-                    { text: 'BEST', key: 'best', classes: 'px-3 py-3.5 text-left text-sm font-semibold hidden md:table-cell' },
-                    { text: 'GAP', key: 'gap', classes: 'py-3.5 pl-3 pr-4 text-right text-sm font-semibold' }
                 ];
 
                 const teamIcons = {
@@ -447,41 +380,17 @@
                     "GUINNESS MERCEDES": 'https://cdn.discordapp.com/emojis/1386054950496243732.webp?size=44',
                     "LOCKHEED MARTIN ASTON MARTIN": 'https://cdn.discordapp.com/emojis/1215769484078354483.webp?size=44'
                 };
-
-                const toggleSlider = document.getElementById('toggle-slider');
-                const raceButton = document.getElementById('race-button');
-                const qualifyingButton = document.getElementById('qualifying-button');
-                const mainTitle = document.getElementById('main-title');
-                const tableHeadRow = document.querySelector('.race-table thead tr');
-                const tableBody = document.querySelector('.race-table tbody');
-
-                function updateSliderAndActiveButton(activeButton) {
-                    if (!raceButton || !qualifyingButton || !toggleSlider) return;
-                    const targetButton = activeButton === 'race' ? raceButton : qualifyingButton;
-                    const otherButton = activeButton === 'race' ? qualifyingButton : raceButton;
-
-                    if (targetButton.offsetWidth === 0) {
-                        requestAnimationFrame(() => updateSliderAndActiveButton(activeButton));
-                        return;
-                    }
-                    toggleSlider.style.left = `${targetButton.offsetLeft}px`;
-                    toggleSlider.style.width = `${targetButton.offsetWidth}px`;
-                    targetButton.classList.add('active');
-                    otherButton.classList.remove('active');
-                }
                 
-                function renderTable(type) {
-                    if (!tableHeadRow || !tableBody || !mainTitle) return;
-                    const isRace = type === 'race';
-                    const data = isRace ? raceResults : qualifyingResults;
-                    const headers = isRace ? raceHeaders : qualifyingHeaders;
-                    const title = isRace ? 'RACE RESULT' : 'QUALIFYING RESULT';
+                function renderTable() {
+                    const tableHeadRow = document.querySelector('.race-table thead tr');
+                    const tableBody = document.querySelector('.race-table tbody');
 
-                    mainTitle.innerHTML = `AUSTRALIAN GRAND PRIX - <br class="sm:hidden">${title}`;
+                    if (!tableHeadRow || !tableBody) return;
+
                     tableHeadRow.innerHTML = '';
                     tableBody.innerHTML = '';
 
-                    headers.forEach(header => {
+                    raceHeaders.forEach(header => {
                         const th = document.createElement('th');
                         th.scope = 'col';
                         th.className = header.classes;
@@ -489,9 +398,9 @@
                         tableHeadRow.appendChild(th);
                     });
 
-                    data.forEach(rowData => {
+                    raceResults.forEach(rowData => {
                         const tr = document.createElement('tr');
-                        headers.forEach(header => {
+                        raceHeaders.forEach(header => {
                             const td = document.createElement('td');
                             let baseClasses = header.classes.replace('font-semibold', '') + ' whitespace-nowrap';
                             td.className = baseClasses;
@@ -514,13 +423,7 @@
                     });
                 }
 
-                if (raceButton && qualifyingButton) {
-                    raceButton.addEventListener('click', () => { renderTable('race'); updateSliderAndActiveButton('race'); });
-                    qualifyingButton.addEventListener('click', () => { renderTable('qualifying'); updateSliderAndActiveButton('qualifying'); });
-                }
-
-                renderTable('race');
-                updateSliderAndActiveButton('race');
+                renderTable();
             });
         })();
     </script>
