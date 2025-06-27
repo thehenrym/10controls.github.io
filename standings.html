@@ -510,6 +510,7 @@
         // Apply all race results to teams
         updateTeamStandings(raceResultsBahrain);
         updateTeamStandings(raceResultsAustralia);
+         updateTeamStandings(raceResultsImola);
 
         let updatedTeamStandings = Array.from(teamPointsMap.values());
         updatedTeamStandings = updatedTeamStandings.filter(team => team.team.toUpperCase() !== "KICK SAUBER");
