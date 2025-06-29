@@ -118,15 +118,6 @@
 </head>
 <body class="font-medium">
 
-    <!-- Top Header -->
-    <div class="bg-[#492833] text-white text-sm font-bold py-2">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start items-center">
-            <a href="index.html" class="mr-4 text-white hover:text-gray-300 transition-colors">TIER 1</a>
-            <a href="tier2/index.html" class="mr-4 text-white hover:text-gray-300 transition-colors">TIER 2</a>
-            <a href="https://www.youtube.com/@10ControlsTV" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors">WATCH</a>
-        </div>
-    </div>
-
     <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -207,8 +198,7 @@
                 <!-- DRIVERS STANDINGS -->
                 <div class="space-y-4">
                     <h3 class="text-xl font-bold text-white">DRIVERS STANDINGS</h3>
-                    <!-- Added ID to driver standings table -->
-                    <div id="drivers-standings-table" class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-100 w-full transform transition-transform duration-300 hover:-translate-y-2">
+                    <div class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-100 w-full transform transition-transform duration-300 hover:-translate-y-2">
                         <!-- Driver 1 -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
@@ -255,8 +245,7 @@
                 <!-- TEAMS STANDINGS -->
                 <div class="space-y-4">
                     <h3 class="text-xl font-bold text-white">TEAMS STANDINGS</h3>
-                    <!-- Added ID to team standings table -->
-                    <div id="teams-standings-table" class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-200 w-full transform transition-transform duration-300 hover:-translate-y-2">
+                    <div class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-200 w-full transform transition-transform duration-300 hover:-translate-y-2">
                         <!-- Team 1 -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
@@ -329,7 +318,7 @@
                 </a>
                 <!-- New Post Card -->
                 <a href="https://www.instagram.com/10controls/p/C4JimyjoV6c/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-800 snap-center relative transform transition-transform duration-300 hover:scale-115">
-                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385983291907113092/image.png?ex=68580d07&is=6856bb87&hm=eb630bd77f1e8f952884c020bd378e52fbcc3629e52fbcc3629e52fa6df6a301fdec5199522&" alt="New Instagram Post" class="w-full h-full object-cover">
+                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385983291907113092/image.png?ex=68580d07&is=6856bb87&hm=eb630bd77f1e8f952884c020bd378e52fbcc3629e52fa6df6a301fdec5199522&" alt="New Instagram Post" class="w-full h-full object-cover">
                 </a>
             </div>
             <!-- Navigation Arrows -->
@@ -386,7 +375,7 @@
              { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', winner: 'Oscar Piastri', country: 'USA' },
              { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen', country: 'IT' },
              { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'MC' },
-             { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'George Russell', country: 'ES' },
+             { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'ES' },
              { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'CA' },
              { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
              { round: 12, name: 'Belgian Grand Prix', venue: 'Silverstone', date: 'July 4th', country: 'GB' },
@@ -536,9 +525,8 @@
             // --- Dynamically set heights and alignment ---
             const featuredStoryContainer = document.getElementById('featured-story-container');
             const standingsColumn = document.getElementById('standings-column');
-            // Updated selectors to use new IDs
-            const driversStandingsTable = document.getElementById('drivers-standings-table');
-            const teamsStandingsTable = document.getElementById('teams-standings-table');
+            const driversStandingsTable = standingsColumn.querySelector('.bg-[#2a171d].rounded-lg.shadow-lg.p-4.space-y-3.content-fade-in.delay-100');
+            const teamsStandingsTable = standingsColumn.querySelector('.bg-[#2a171d].rounded-lg.shadow-lg.p-4.space-y-3.content-fade-in.delay-200');
 
 
             const adjustLayout = () => {
