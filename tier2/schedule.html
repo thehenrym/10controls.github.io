@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+<link rel="shortcut icon" href="favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="10 Controls" />
+<link rel="manifest" href="favicon/site.webmanifest" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Controls</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Background gradient matching the reference page */
+            background: linear-gradient(to bottom, #492833, #201C1C);
+            min-height: 100vh;
+        }
+        .footer {
+            /* Footer background color matching the reference page */
+            background-color: #492833;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        /* Styles for the staggered fade-in animation of schedule cards */
+        .schedule-card {
+            /* Removed opacity, transform, and transition for instant appearance */
+            /* opacity: 0; */
+            /* transform: translateY(20px); */
+            /* transition: opacity 0.6s ease-out, transform 0.6s ease-out; */
+        }
+        .schedule-card.visible {
+            /* opacity: 1; */
+            /* transform: translateY(0); */
+        }
+
+        /* Styles for smooth hamburger menu transition, matching reference page */
+        #mobile-menu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 100%;
+            /* Background color matching the reference page */
+            background-color: #492833;
+        }
+
+        #mobile-menu.menu-open {
+            max-height: 25rem;
+            opacity: 1;
+        }
+
+        /* Styles for the sliding navigation highlighter, matching reference page */
+        #desktop-menu-items {
+            position: relative;
+        }
+
+        #sliding-highlighter {
+            position: absolute;
+            top: 0;
+            left: 0; /* Will be set by JS */
+            width: 0; /* Will be set by JS */
+            height: 100%;
+            /* Background color matching the reference page */
+            background-color: #492833;
+            border-radius: 0.375rem; /* rounded-md */
+            transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+            z-index: -1; /* Place it behind the text */
+        }
+        
+        /* Styles for Hamburger Icon to "X" Animation */
+        .hamburger-icon span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s cubic-bezier(.08,.82,.17,1);
+        }
+
+        #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
+            transform: translateY(10px) rotate(45deg);
+        }
+
+        #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
+            opacity: 0;
+        }
+
+        #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
+            transform: translateY(-10px) rotate(-45deg);
+        }
+
+        /* Styles for the mobile menu link hover effect */
+        .mobile-menu-link {
+            background-color: #492833; /* The original dark red color */
+            transition: background-color 0.2s ease-in-out;
+        }
+        .mobile-menu-link:hover {
+            background-color: #000000; /* Black */
+        }
+    </style>
+</head>
+<body class="font-medium">
+
+    <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="index.html">
+                        <!-- Updated logo image source for consistency -->
+                        <img src="images/10c.png" alt="10 Controls Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/40x40/492833/ffffff?text=10C';">
+                    </a>
+                </div>
+
+                <div id="desktop-menu-items" class="hidden md:flex items-center space-x-4">
+                    <div id="sliding-highlighter"></div>
+                    <a href="index.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Latest</a>
+                    <a href="schedule.html" class="text-white px-3 py-2 rounded-md text-sm font-medium relative z-10" aria-current="page">Schedule</a>
+                    <a href="standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
+                    <!-- New 'Teams' link added for consistency -->
+                    <a href="teams.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Teams</a>
+                    <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
+                </div>
+
+                <div class="-mr-2 flex md:hidden">
+                    <!-- Mobile menu button -->
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833; hover-bg-color: #3a2029;">
+                        <span class="sr-only">Open main menu</span>
+                        <div class="hamburger-icon space-y-2">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div class="md:hidden" id="mobile-menu">
+            <!-- Mobile menu links with new class for hover effect -->
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Latest</a>
+                <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
+                <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
+                <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Teams</a>
+                           <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-Header for Upcoming Race Info and Countdown. Hidden on mobile. -->
+    <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300 hidden md:flex">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
+                </div>
+                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
+                </div>
+            </div>
+            <!-- Countdown Timer Display -->
+            <div id="countdown-display" class="flex items-center flex-shrink-0 text-right text-xs sm:text-sm">
+                <p id="countdown-timer" class="font-bold"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area for Schedule Cards -->
+    <div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- Tier selection buttons have been removed -->
+
+        <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+            <!-- Schedule cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <!-- Social Media Links Footer -->
+    <footer class="bg-black text-white text-center py-5 px-2 mt-8">
+        <div class="max-w-7xl mx-auto flex justify-center items-center space-x-6">
+            <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
+            <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="https://www.youtube.com/@10controls24" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
+            <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
+        </div>
+    </footer>
+
+    <!-- Main Copyright Footer -->
+    <footer class="footer">
+        <p>© 2022-2025 10 Controls Limited</p>
+    </footer>
+    
+    <script>
+        // Data for the F1 schedule. Includes race rounds, names, venues, dates, and winners.
+        const scheduleData = [
+            { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'March 14-16', winner: 'Anton Chebotarov', country: 'BH' },
+            { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 21-23', winner: 'Maxfan1982', country: 'AU' },
+            { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', winner: 'MaxfaN1982', country: 'IT' },
+            { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', winner: '', country: 'BE' },
+            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', winner: '', country: 'ES' },
+            { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'July 18th', winner: '', country: 'CN' },
+            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'July 25th', winner: '', country: 'JP' },
+            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'August 1st', winner: '', country: 'USA' },
+            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'August 8th', winner: '', country: '' },
+            { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'August 15th', winner: '', country: 'BR' }
+        ];
+
+        // Map for converting venue names to standard IANA time zone identifiers.
+        const timeZoneMap = {
+            'Melbourne': 'Australia/Melbourne',
+            'Shanghai': 'Asia/Shanghai',
+            'Suzuka': 'Asia/Tokyo',
+            'Sakhir': 'Asia/Bahrain',
+            'Jeddah': 'Asia/Riyadh',
+            'Miami': 'America/New_York',
+            'Imola': 'Europe/Rome',
+            'Monaco': 'Europe/Monaco',
+            'Barcelona': 'Europe/Madrid',
+            'Montreal': 'America/Toronto',
+            'Spielberg': 'Europe/Vienna',
+            'Silverstone': 'Europe/London',
+            'Spa': 'Europe/Brussels',
+            'Budapest': 'Europe/Budapest',
+            'Zandvoort': 'Europe/Amsterdam',
+            'Monza': 'Europe/Rome',
+            'Baku': 'Asia/Baku',
+            'Singapore': 'Asia/Singapore',
+            'Austin': 'America/Chicago',
+            'Mexico City': 'America/Mexico_City',
+            'Sao Paulo': 'America/Sao_Paulo',
+            'Las Vegas': 'America/Los_Angeles',
+            'Lusail': 'Asia/Qatar',
+            'Yas Marina': 'Asia/Dubai'
+        };
+        
+        // This function runs when the entire page has finished loading.
+        window.onload = function() {
+            const scheduleGrid = document.getElementById('schedule-grid');
+
+            /**
+             * Renders the schedule cards based on the provided data.
+             * @param {Array} currentScheduleData - The array of race objects to render.
+             */
+            function renderSchedule(currentScheduleData) {
+                scheduleGrid.innerHTML = ''; // Clear existing cards
+                currentScheduleData.forEach((race, index) => {
+                    const card = document.createElement('div');
+                    // Removed 'opacity', 'transform', 'transition' from here to prevent fade-in on render
+                    card.className = 'schedule-card bg-white rounded-lg shadow-lg p-8 flex flex-col justify-between';
+                    
+                    let flagHtml = '';
+                    // Conditional flag image logic remains the same
+                    if (race.country === 'USA') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'QAT') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197618.png" alt="Qatar Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'GB') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197374.png" alt="British Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'IT') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'JP') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197604.png" alt="Japanese Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'BE') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197583.png" alt="Belgian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'AT') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197447.png" alt="Austrian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'BH') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197521.png" alt="Bahrain Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'HU') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'SG') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" alt="Singapore Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'BR') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197386.png" alt="Brazilian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'NL') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197441.png" alt="Netherlands Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'CN') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197375.png" alt="Chinese Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'ES') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197593.png" alt="Spanish Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'CA') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" alt="Canadian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'MC') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197594.png" alt="Monaco Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'AE') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197569.png" alt="UAE Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'MX') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197397.png" alt="Mexican Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co_32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'AZ') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197512.png" alt="Azerbaijan Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'SA') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197578.png" alt="Saudi Arabian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    } else if (race.country === 'AU') {
+                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197507.png" alt="Australian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
+                    }
+                    
+                    let resultButtonHref = "#"; // Default href for the results button
+
+                    // Logic to set specific href for Bahrain and Australian Grand Prix results buttons
+                    if (race.round === 1 && race.name === 'Bahrain Grand Prix') {
+                        resultButtonHref = "results/bahrain.html";
+                    } else if (race.round === 2 && race.name === 'Australian Grand Prix') {
+                        resultButtonHref = "results/australia.html";
+                    } else if (race.round === 3 && race.name === 'Emilia Romagna Grand Prix') {
+                        resultButtonHref = "results/imola.html";
+                    }
+
+                    // Conditionally create the footer HTML based on whether the race has a winner
+                    let footerHtml;
+                    if (race.winner) { // If there's a winner, show winner and buttons
+                        // This container is now responsive.
+                        // It stacks vertically on mobile (flex-col) and goes horizontal on small screens and up (sm:flex-row).
+                        // `truncate` is added to the winner's name to prevent overflow on very small screens.
+                        footerHtml = `
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
+                                <a href="driverprofile.html?driver=${encodeURIComponent(race.winner)}" class="text-base font-semibold text-gray-800 uppercase hover:underline truncate"><span class="font-bold text-[#492833]">WINNER:</span> ${race.winner}</a>
+                                <div class="flex items-center space-x-2 flex-shrink-0">
+                                    <a href="${resultButtonHref}" class="bg-[#492833] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Results</a>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        // For all other rounds, or if no winner is specified, just display the date
+                        footerHtml = `<p class="text-base font-semibold text-gray-800">${race.date.toUpperCase()}</p>`;
+                    }
+
+                    // Set the full inner HTML for the card, combining all the pieces
+                    card.innerHTML = `
+                        <div>
+                            <p class="text-base font-bold text-[#492833]">ROUND ${race.round || race.pos}</p>
+                            ${flagHtml}
+                            <h3 class="text-2xl font-bold text-gray-900 mt-2">${race.name.toUpperCase()}</h3>
+                            <p class="text-lg text-gray-600 mt-2">${race.venue.toUpperCase()}</p>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-gray-200">
+                            ${footerHtml}
+                        </div>
+                    `;
+                    scheduleGrid.appendChild(card);
+                });
+            }
+
+            // Initial render for the schedule
+            renderSchedule(scheduleData);
+
+            // --- Mobile menu toggle script ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('menu-open');
+                mobileMenuButton.classList.toggle('open');
+            });
+            
+            // --- Sliding highlighter script for desktop menu ---
+            const menuItemsContainer = document.getElementById('desktop-menu-items');
+            if (menuItemsContainer) {
+                const menuLinks = menuItemsContainer.querySelectorAll('a');
+                const highlighter = document.getElementById('sliding-highlighter');
+                const activeLink = menuItemsContainer.querySelector('a[aria-current="page"]');
+
+                // Function to move the highlighter to a specific link's position
+                function setHighlighterToLink(link) {
+                    if (!link) return;
+                    highlighter.style.left = `${link.offsetLeft}px`;
+                    highlighter.style.width = `${link.offsetWidth}px`;
+                }
+
+                // Initialize highlighter on the currently active link
+                setHighlighterToLink(activeLink);
+
+                // Add mouseover event listeners to all links to move the highlighter
+                menuLinks.forEach(link => {
+                    link.addEventListener('mouseenter', () => setHighlighterToLink(link));
+                });
+
+                // When the mouse leaves the menu, return the highlighter to the active link
+                menuItemsContainer.addEventListener('mouseleave', () => {
+                    setHighlighterToLink(activeLink);
+                });
+            }
+
+            // --- Sub-header upcoming race script and Countdown Timer Logic ---
+            const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
+            const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
+            const countdownDisplayEl = document.getElementById('countdown-display'); // Get the countdown display element
+            const countdownTimerEl = document.getElementById('countdown-timer'); // Get the countdown timer paragraph
+
+            // Helper function to parse various date formats from the schedule data
+            function parseRaceDate(dateStr) {
+                const monthStr = dateStr.split(' ')[0];
+                let dayStr = dateStr.split(' ')[1];
+                // Remove ordinal suffixes (st, nd, rd, th) from the day string
+                if (dayStr && (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th'))) {
+                    dayStr = dayStr.substring(0, dayStr.length - 2);
+                }
+                // Return a Date object for the current year (assuming 2025 based on the page title)
+                return new Date(`${monthStr} ${dayStr}, 2025`);
+            }
+
+            // Find the next upcoming race by comparing race dates with the current time
+            const now = new Date();
+            let upcomingRace = null;
+            for (const race of scheduleData) { 
+                const raceDate = parseRaceDate(race.date);
+                if (raceDate > now) {
+                    upcomingRace = race;
+                    break; // Stop after finding the first future race
+                }
+            }
+
+            if (upcomingRace) {
+                // Populate the sub-header with the upcoming race details
+                upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
+                upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
+                
+                // Function to calculate the next Friday at 2 PM Eastern Time (EDT/EST)
+                // Assuming current period is EDT (UTC-4), so 2 PM EDT is 18:00 UTC.
+                function getNextFriday2PMET() {
+                    const now = new Date();
+                    let target = new Date(now);
+
+                    // Set to 2 PM EDT (18:00 UTC during EDT)
+                    // We'll primarily work with UTC to avoid local timezone issues for the target time.
+                    target.setUTCHours(18, 0, 0, 0);
+
+                    // Calculate days until next Friday (Friday is day 5, Sunday is 0 for getUTCDay())
+                    let daysUntilFriday = (5 - target.getUTCDay() + 7) % 7;
+
+                    // If today is Friday and it's already past 2 PM EDT (18:00 UTC), target next Friday
+                    if (daysUntilFriday === 0 && now.getUTCHours() >= 18) {
+                        daysUntilFriday = 7;
+                    }
+
+                    target.setUTCDate(target.getUTCDate() + daysUntilFriday);
+
+                    return target;
+                }
+
+                let countdownTargetDate = getNextFriday2PMET();
+
+                function updateCountdown() {
+                    const now = new Date();
+                    let difference = countdownTargetDate.getTime() - now.getTime();
+
+                    // If the current target date has passed, calculate the next one
+                    if (difference < 0) {
+                        countdownTargetDate = getNextFriday2PMET();
+                        difference = countdownTargetDate.getTime() - now.getTime(); // Recalculate difference for the new target
+                    }
+                    
+                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                    if (countdownTimerEl) {
+                        if (difference <= 0) {
+                            countdownTimerEl.textContent = "RACE STARTING SOON!"; // Or "RACE LIVE!"
+                        } else if (days > 0) {
+                            countdownTimerEl.textContent = `NEXT RACE IN ${days}D ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
+                        } else {
+                            countdownTimerEl.textContent = `NEXT RACE IN ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
+                        }
+                    }
+                }
+
+                // Initial call to set up the countdown
+                updateCountdown();
+                // Update the countdown every second
+                setInterval(updateCountdown, 1000);
+
+            } else {
+                // If no upcoming races are found, display a season concluded message and hide countdown
+                upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
+                upcomingRaceDateEl.style.display = 'none'; // Hide the date as well
+                if (countdownDisplayEl) {
+                    countdownDisplayEl.style.display = 'none';
+                }
+            }
+        };
+    </script>
+</body>
+</html>
