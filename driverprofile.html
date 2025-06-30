@@ -150,10 +150,15 @@
                 <h1 id="driver-name" class="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white uppercase"></h1>
                 <p id="driver-details" class="flex items-center justify-center md:justify-start text-sm md:text-base text-white mt-2">
                     <img id="driver-flag" src="" alt="Driver Flag" class="h-4 w-auto mr-2 inline-block">
-                    <span id="driver-country"></span> <span class="mx-2">•</span>
+                    <!-- Full country name (visible on medium and larger screens) -->
+                    <span id="driver-country-full" class="hidden md:inline-block"></span> 
+                    <!-- Abbreviated country name (visible on small screens) -->
+                    <span id="driver-country-abbr" class="md:hidden"></span> 
+                    <span class="mx-2">•</span>
                     <img id="team-icon" src="" alt="Team Icon" class="h-5 w-auto mr-2 inline-block">
                     <span id="driver-team"></span>
-                    <span id="driver-tier" class="ml-4 px-2 py-1 text-xs font-bold rounded-full"></span>
+                    <!-- Driver Tier (hidden on small screens, visible on medium and larger) -->
+                    <span id="driver-tier" class="ml-4 px-2 py-1 text-xs font-bold rounded-full hidden md:inline-block"></span>
                 </p>
             </div>
             <div class="relative z-10 flex-shrink-0">
@@ -167,7 +172,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <!-- 2025 Season Stats -->
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-6 uppercase">Season 6</h3>
+                    <h3 class="text-xl font-bold text-white mb-6 uppercase">2025 Season</h3>
                     <div id="season-stats-grid" class="grid grid-cols-2 gap-y-4 gap-x-2 text-white"></div>
                 </div>
                 <!-- Career Stats -->
@@ -409,7 +414,7 @@
                 ]
             },
             'aruthlessguy': {
-                tier: 'Tier 1', name: 'A RUTHLESS GUY', team: 'TINDER ALPINE F1 TEAM', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197529.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
+                tier: 'Tier 1', name: 'A RUTHLESS GUY', team: 'TINDER ALPINE F1 TEAM', country: 'POLAND', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp',
                 baseCareerStats: {'World Championships': 0, 'Grand Prix Entered': 0, 'Wins': 0, 'Podiums': 0, 'Career Points': 0, 'Pole Positions': 0, 'DNFs': 0},
                 recentRaces: [
                     { gp: 'Bahrain Grand Prix', flag: 'https://cdn-icons-png.flaticon.com/128/197/197521.png', pos: '16', grid: '17', stops: '2', result: '+1 LAP', pts: 0 }
@@ -594,6 +599,47 @@
             });
         }
 
+        /**
+         * Returns an abbreviated country name for display on mobile, or a default truncation.
+         * @param {string} countryName - The full country name.
+         * @returns {string} The abbreviated country name.
+         */
+        function getCountryAbbreviation(countryName) {
+            const abbreviations = {
+                'UNITED KINGDOM': 'UK',
+                'UNITED STATES': 'USA',
+                'NETHERLANDS': 'NLD',
+                'SPAIN': 'ESP',
+                'POLAND': 'POL',
+                'UKRAINE': 'UKR',
+                'NORWAY': 'NOR',
+                'HUNGARY': 'HUN',
+                'SERBIA': 'SRB',
+                'ITALY': 'ITA',
+                'LITHUANIA': 'LTU',
+                'GERMANY': 'GER',
+                'CZECH REPUBLIC': 'CZE',
+                'ROMANIA': 'ROU',
+                'DENMARK': 'DNK',
+                'FINLAND': 'FIN',
+                'AUSTRALIA': 'AUS',
+                'BELGIUM': 'BEL',
+                'CANADA': 'CAN',
+                'FRANCE': 'FRA',
+                'JAPAN': 'JPN',
+                'MEXICO': 'MEX',
+                'MONACO': 'MCO',
+                'BAHRAIN': 'BHR',
+                'SAUDI ARABIA': 'SAU',
+                'AZERBAIJAN': 'AZE',
+                'SINGAPORE': 'SGP',
+                'BRAZIL': 'BRA',
+                'CHINA': 'CHN'
+            };
+            const upperCaseCountryName = countryName.toUpperCase();
+            return abbreviations[upperCaseCountryName] || upperCaseCountryName.substring(0, 3);
+        }
+
         function loadDriverData(driverKey) {
             let driver = driverData[driverKey];
             if (!driver) {
@@ -657,14 +703,18 @@
 
             document.getElementById('driver-name').textContent = driver.name;
             document.getElementById('driver-flag').src = driver.flagUrl;
-            document.getElementById('driver-country').textContent = driver.country;
+            
+            // Update country name elements based on screen size using Tailwind classes
+            document.getElementById('driver-country-full').textContent = driver.country;
+            document.getElementById('driver-country-abbr').textContent = getCountryAbbreviation(driver.country);
+            
             document.getElementById('driver-team').textContent = driver.team;
             
-            // --- NEW: Update Driver Tier ---
+            // --- Update Driver Tier (now controlled by Tailwind classes for mobile visibility) ---
             const tierElement = document.getElementById('driver-tier');
             if (driver.tier) {
                 tierElement.textContent = driver.tier.toUpperCase();
-                tierElement.style.display = 'inline-block';
+                // Tailwind classes 'hidden md:inline-block' already control visibility
                 if (driver.tier === 'Tier 1') {
                     tierElement.style.backgroundColor = '#d4af37'; // Gold
                     tierElement.style.color = '#000000';
@@ -676,7 +726,9 @@
                     tierElement.style.color = '#ffffff';
                 }
             } else {
-                tierElement.style.display = 'none';
+                // If no tier, ensure it's fully hidden regardless of screen size
+                tierElement.classList.add('hidden');
+                tierElement.classList.remove('md:inline-block');
             }
 
             document.getElementById('team-icon').src = teamIcons[driver.team] || '';
