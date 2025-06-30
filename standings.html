@@ -69,7 +69,7 @@
             left: 0; /* Will be set by JS */
             width: 0; /* Will be set by JS */
             height: 100%;
-            background-color: #492833; 
+            background-color: #492833;  
             border-radius: 0.375rem; /* rounded-md */
             transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
             z-index: -1; /* Place it behind the text */
@@ -431,48 +431,57 @@
         ];
 
         // --- Driver Standings Calculation ---
+        // driverPointsMap will now store teamOccurrences to track which team a driver has driven for the most.
         let driverPointsMap = new Map();
 
-        // Function to update driver points and details
+        // Function to update driver points and track team occurrences
         const updateDriverStandings = (results) => {
             results.forEach(result => {
                 let normalizedDriverName = result.driver.toUpperCase();
-                let displayDriverName = result.driver.toUpperCase();
+                let displayDriverName = result.driver; // Use original casing for display
 
-                if (driverPointsMap.has(normalizedDriverName)) {
-                    driverPointsMap.get(normalizedDriverName).points += result.pts;
-                    const existingCar = driverPointsMap.get(normalizedDriverName).car;
-                    if (!existingCar || (existingCar.includes('RED BULL RACING') && result.team.toUpperCase() === 'NEWPORT ROLEX RED BULL RACING') ||
-                        (existingCar.includes('MCLAREN') && result.team.toUpperCase() === 'HOT WHEELS MCLAREN') ||
-                        (existingCar.includes('FERRARI') && result.team.toUpperCase() === 'SCUDERIA FERRARI') ||
-                        (existingCar.includes('MERCEDES') && result.team.toUpperCase() === 'GUINNESS MERCEDES') ||
-                        (existingCar.includes('ASTON MARTIN') && result.team.toUpperCase() === 'LOCKHEED MARTIN ASTON MARTIN') ||
-                        (existingCar.includes('ALPINE') && result.team.toUpperCase() === 'TINDER ALPINE F1 TEAM') ||
-                        (existingCar.includes('HAAS') && result.team.toUpperCase() === 'HAAS ONLYFANS RACING') || 
-                        (existingCar.includes('KICK SAUBER') && result.team.toUpperCase() === 'TWITCH SAUBER') ||
-                        (existingCar.includes('WILLIAMS') && result.team.toUpperCase() === 'JOHN DEERE WILLIAMS RACING') ||
-                        (existingCar.includes('RACING BULLS') && result.team.toUpperCase() === 'RACING BULLS PEUGEOT SPORT')
-                        ) {
-                        driverPointsMap.get(normalizedDriverName).car = result.team.toUpperCase();
-                    }
-                } else {
+                if (!driverPointsMap.has(normalizedDriverName)) {
                     driverPointsMap.set(normalizedDriverName, {
                         pos: 0,
                         name: displayDriverName,
-                        nationality: result.flag,
-                        car: result.team.toUpperCase(),
-                        points: result.pts
+                        nationality: result.flag, // Assuming nationality is consistent or last one seen is fine
+                        points: 0,
+                        teamOccurrences: {} // Object to store team counts for this driver
                     });
                 }
+
+                let driverData = driverPointsMap.get(normalizedDriverName);
+                driverData.points += result.pts;
+
+                // Increment the count for the current team
+                const teamName = result.team.toUpperCase();
+                driverData.teamOccurrences[teamName] = (driverData.teamOccurrences[teamName] || 0) + 1;
             });
         };
 
         // Apply all race results
         updateDriverStandings(raceResultsBahrain);
         updateDriverStandings(raceResultsAustralia);
-         updateDriverStandings(raceResultsImola);
+        updateDriverStandings(raceResultsImola);
 
+        // Convert map values to an array and determine the most frequent team for each driver
         let updatedDriverStandings = Array.from(driverPointsMap.values());
+
+        updatedDriverStandings.forEach(driver => {
+            let mostFrequentTeam = '';
+            let maxCount = 0;
+            // Iterate through teamOccurrences to find the team with the highest count
+            for (const team in driver.teamOccurrences) {
+                if (driver.teamOccurrences[team] > maxCount) {
+                    maxCount = driver.teamOccurrences[team];
+                    mostFrequentTeam = team;
+                }
+            }
+            // Assign the most frequent team to the 'car' property for display
+            driver.car = mostFrequentTeam;
+        });
+
+        // Sort drivers by points in descending order and assign positions
         updatedDriverStandings.sort((a, b) => b.points - a.points);
         updatedDriverStandings.forEach((driver, index) => driver.pos = index + 1);
 
@@ -510,10 +519,14 @@
         // Apply all race results to teams
         updateTeamStandings(raceResultsBahrain);
         updateTeamStandings(raceResultsAustralia);
-         updateTeamStandings(raceResultsImola);
+        updateTeamStandings(raceResultsImola);
 
         let updatedTeamStandings = Array.from(teamPointsMap.values());
+        // Filter out "KICK SAUBER" if "TWITCH SAUBER" is the preferred name for the same entity
+        // Based on the provided getTeamIconSrc, "KICK SAUBER" and "TWITCH SAUBER" map to the same icon.
+        // It's assumed "TWITCH SAUBER" is the canonical name, and "KICK SAUBER" is an alias or old name.
         updatedTeamStandings = updatedTeamStandings.filter(team => team.team.toUpperCase() !== "KICK SAUBER");
+        
         updatedTeamStandings.sort((a, b) => b.points - a.points);
         updatedTeamStandings.forEach((team, index) => team.pos = index + 1);
 
