@@ -10,36 +10,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>10 Controls</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* Updated background gradient from the Schedule page */
-            background: linear-gradient(to bottom, #492833, #201C1C);
+            background: linear-gradient(to bottom, #492833, #201C1C); /* Updated background */
             min-height: 100vh;
         }
         .footer {
-            /* Updated footer background color from the Schedule page */
-            background-color: #492833;
+            background-color: #492833; /* Updated footer background */
             color: white;
             text-align: center;
             padding: 2rem 1rem;
         }
-        /* Styles for the staggered fade-in animation (for future use or content specific animations) */
-        .content-fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        /* Transition for the table containers */
+        .standings-container {
+            /* Removed max-height and overflow as they will be absolutely positioned */
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
         }
-        .content-fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        
         /* Styles for smooth hamburger menu transition */
         #mobile-menu {
             max-height: 0;
@@ -50,8 +50,7 @@
             width: 100%;
             left: 0;
             top: 100%;
-            /* Updated background color from the Schedule page */
-            background-color: #492833;
+            background-color: #492833; /* Updated mobile menu background */
         }
 
         #mobile-menu.menu-open {
@@ -70,95 +69,173 @@
             left: 0; /* Will be set by JS */
             width: 0; /* Will be set by JS */
             height: 100%;
-            /* Updated header selector background color from the Schedule page */
-            background-color: #492833; /* Changed to match the dark red from Schedule page */
+            background-color: #492833;  
             border-radius: 0.375rem; /* rounded-md */
             transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
             z-index: -1; /* Place it behind the text */
         }
         
         /* Hamburger Icon Animation */
+        .hamburger-icon {
+            width: 24px;
+            height: 18px;
+            position: relative;
+        }
+
         .hamburger-icon span {
             display: block;
-            width: 24px;
+            position: absolute;
             height: 2px;
-            background-color: white;
-            transition: all 0.3s cubic-bezier(.08,.82,.17,1);
+            width: 100%;
+            background: white;
+            border-radius: 2px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger-icon span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger-icon span:nth-child(2) {
+            top: 8px;
+        }
+
+        .hamburger-icon span:nth-child(3) {
+            top: 16px;
         }
 
         #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
-            transform: translateY(10px) rotate(45deg); /* Updated transform */
+            top: 8px;
+            transform: rotate(135deg);
         }
+
         #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
             opacity: 0;
+            left: -24px;
         }
+
         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
-            transform: translateY(-10px) rotate(-45deg); /* Updated transform */
+            top: 8px;
+            transform: rotate(-135deg);
+        }
+        
+        /* Mobile table optimization */
+        @media (max-width: 640px) {
+            .hidden-mobile {
+                display: none;
+            }
         }
 
-        /* Custom scrollbar for horizontal carousel */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+        /* Styles for standings tables to match race results table */
+        .standings-table-container {
+            background-color: #492833; /* Main requested dark color for container */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            overflow-x: auto; /* overflow-x-auto */
         }
-        .no-scrollbar {
-            -ms-overflow-style: none;    /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-            scroll-behavior: smooth; /* Smooth scroll for carousel */
+        .standings-table {
+            min-width: 100%; /* min-w-full */
+            border-collapse: collapse; /* Ensure borders collapse for cleaner look */
+        }
+        .standings-table thead {
+            background-color: #382028; /* Slightly darker shade of #492833 for headers */
+        }
+        .standings-table th {
+            color: #ffffff; /* White text for headers */
+            padding: 0.75rem 1.5rem; /* px-6 py-3 adjusted to match race table */
+            text-align: left;
+            font-weight: 600; /* font-bold */
+            font-size: 0.75rem; /* text-xs */
+            text-transform: uppercase; /* uppercase */
+            letter-spacing: 0.05em; /* tracking-wider */
+            border-bottom: 1px solid #4a4a4a; /* Darker border */
+        }
+        .standings-table td {
+            padding: 0.75rem 1.5rem; /* px-6 py-4 adjusted to match race table */
+            color: #ffffff; /* Light grey text for content */
+            border-bottom: 1px solid #554146; /* Adjusted border to complement new background */
+            white-space: nowrap; /* Ensure content stays on one line */
+        }
+        .standings-table tr:nth-child(odd) {
+            background-color: #492833; /* Main requested dark color for odd rows */
+        }
+        .standings-table tr:nth-child(even) {
+            background-color: #3e242d; /* Slightly darker shade for even rows */
+        }
+        .standings-table tr:hover {
+            background-color: #554146; /* Darker hover effect */
+        }
+        .standings-table .pos-number {
+            color: #ffffff; /* White color for position number for better contrast */
+            font-weight: bold;
+        }
+        /* Override specific column text colors that were previously red */
+        .standings-table .points-cell,
+        .standings-table .pos-number {
+            color: #ffffff; /* Ensure points and pos numbers are white */
         }
 
-        /* Styles for the mobile menu link hover effect */
-        .mobile-menu-link {
-            background-color: #492833; /* The original dark red color */
-            transition: background-color 0.2s ease-in-out;
+        /* Style for clickable driver name */
+        .driver-name-link {
+            color: #ffffff; /* Ensure link color is white */
+            text-decoration: none; /* Remove underline by default */
+            cursor: pointer;
+            transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out; /* Add text-decoration to transition */
         }
-        .mobile-menu-link:hover {
-            background-color: #000000; /* Black */
+        .driver-name-link:hover {
+            color: #cccccc; /* Slightly lighter on hover */
+            text-decoration: underline; /* Underline on hover */
         }
+
     </style>
 </head>
 <body class="font-medium">
 
+    <!-- Header Navigation -->
     <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
                 <div class="flex-shrink-0">
                     <a href="index.html">
-                        <!-- Updated logo image source as requested -->
-                        <img src="images/10c.png" alt="10 Controls Logo" class="h-10">
+                        <img src="images/10c.png" alt="10 Controls Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/000000?text=Logo';">
                     </a>
                 </div>
 
+                <!-- Desktop Menu with Sliding Highlighter -->
                 <div id="desktop-menu-items" class="hidden md:flex items-center space-x-4">
                     <div id="sliding-highlighter"></div>
-                    <!-- 'Latest' link is active -->
-                    <a href="index.html" class="text-white px-3 py-2 rounded-md text-sm font-medium relative z-10" aria-current="page">Latest</a>
+                    <a href="index.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Latest</a>
                     <a href="schedule.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
-                    <a href="standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
+                    <a href="standings.html" class="text-white px-3 py-2 rounded-md text-sm font-medium relative z-10" aria-current="page">Standings</a>
                     <a href="teams.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Teams</a>
                     <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
                 </div>
 
+                <!-- Mobile menu button -->
                 <div class="-mr-2 flex md:hidden">
-                    <!-- Updated background and hover background color for mobile menu button -->
-                    <button type="button" id="mobile-menu-button" class="bg-[#492833] inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-[#3a2029] focus:outline-none">
-                        <span class="sr-only">Open main menu</span>
-                        <div class="hamburger-icon space-y-2"> <!-- Changed from space-y-1.5 to space-y-2 -->
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833; hover-bg-color: #3a2029;"> <!-- Updated background style -->
+                            <span class="sr-only">Open main menu</span>
+                                <div class="hamburger-icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
                     </button>
                 </div>
             </div>
         </nav>
+        <!-- Mobile menu -->
         <div class="md:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <!-- 'Latest' link is active in mobile menu -->
-                <a href="index.html" class="bg-[#492833] text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link" aria-current="page">Latest</a>
-                <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
-                <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
-                <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Teams</a>
-                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
+                <a href="index.html" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Latest</a> <!-- Updated hover background -->
+                <a href="schedule.html" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Schedule</a> <!-- Updated hover background -->
+                <a href="standings.html" class="bg-[#492833] text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Standings</a> <!-- Updated active background -->
+                <a href="teams.html" class="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Teams</a> <!-- Updated hover background -->
+                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium">Join Now</a> <!-- Updated hover background -->
             </div>
         </div>
     </header>
@@ -179,177 +256,73 @@
         </div>
     </div>
 
-    <!-- Main Content Area - Latest Page Layout -->
-    <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 text-gray-900">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-            <!-- Featured Story Section (Left/Top) -->
-            <div id="featured-story-container" class="lg:col-span-2 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in transform transition-transform duration-300 hover:-translate-y-2">
-                <div class="relative w-full h-full">
-                    <img src="images/mainphoto.png" alt="F1 Featured Story" class="w-full h-full object-cover rounded-t-lg object-bottom">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                        <h2 class="text-2xl sm:text-3xl font-bold leading-tight mb-2 text-white">MAXFAN1982 AND FOCUSER COLLIDE LAST LAP FOR WIN</h2>
-                        <p class="text-gray-300 text-sm">A POTENTIAL CHAMPIONSHIP BATTLE IN THE MAKING?</p>
-                    </div>
+
+    <!-- Main Container -->
+    <div class="relative max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- Toggle Switches Container -->
+        <div class="flex flex-wrap justify-center my-8 gap-4"> <!-- Added gap for spacing -->
+
+            <!-- Tier Toggle Switch -->
+            <div class="relative w-48 h-10 flex bg-gray-200 rounded-full">
+                <div id="tier-slider" class="absolute top-0 left-0 h-full w-1/2 p-1 transition-transform duration-300 ease-in-out">
+                    <div class="w-full h-full" style="background-color: #492833; border-radius: 9999px;"></div>
                 </div>
+                <button id="show-tier1-btn" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-bold text-white transition-colors duration-300">TIER 1</button>
+                <button id="show-tier2-btn" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-bold text-gray-700 transition-colors duration-300">TIER 2</button>
             </div>
 
-            <!-- DRIVERS STANDINGS & TEAMS STANDINGS -->
-            <div id="standings-column" class="lg:col-span-1 space-y-8 flex flex-col justify-between">
-                <!-- DRIVERS STANDINGS -->
-                <div class="space-y-4">
-                    <h3 class="text-xl font-bold text-white">DRIVERS STANDINGS</h3>
-                    <div id="drivers-standings-table" class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-100 w-full transform transition-transform duration-300 hover:-translate-y-2">
-                        <!-- Driver 1 -->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-sm font-bold text-white">1</span>
-                                <p class="text-sm font-semibold text-white">FOCUSER</p>
-                            </div>
-                            <span class="text-sm font-bold text-white">40 PTS</span>
-                        </div>
-                        <!-- Driver 2 -->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-sm font-bold text-white">2</span>
-                                <p class="text-sm font-semibold text-white">MAXFAN1982</p>
-                            </div>
-                            <span class="text-sm font-bold text-white">38 PTS</span>
-                        </div>
-                        <!-- Driver 3 -->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-sm font-bold text-white">3</span>
-                                <p class="text-sm font-semibold text-white">ANTON CHEBOTAROV</p>
-                            </div>
-                            <span class="text-sm font-bold text-white">30 PTS</span>
-                        </div>
-                        <!-- Driver 4 -->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-sm font-bold text-white">4</span>
-                                <p class="text-sm font-semibold text-white">SEBEINKRO</p>
-                            </div>
-                            <span class="text-sm font-bold text-white">23 PTS</span>
-                        </div>
-                        <!-- Driver 5 -->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-sm font-bold text-white">5</span>
-                                <p class="text-sm font-semibold text-white">MORA</p>
-                            </div>
-                            <span class="text-sm font-bold text-white">19 PTS</span>
-                        </div>
-                    </div>
+            <!-- Standings Type Toggle Switch (Existing) -->
+            <div class="relative w-48 h-10 flex bg-gray-200 rounded-full">
+                <div id="standings-slider" class="absolute top-0 left-0 h-full w-1/2 p-1 transition-transform duration-300 ease-in-out">
+                    <div class="w-full h-full" style="background-color: #492833; border-radius: 9999px;"></div>
                 </div>
-
-                <!-- TEAMS STANDINGS -->
-                <div class="space-y-4">
-                    <h3 class="text-xl font-bold text-white">TEAMS STANDINGS</h3>
-                    <div id="teams-standings-table" class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-200 w-full transform transition-transform duration-300 hover:-translate-y-2">
-                        <!-- Team 1 -->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-sm font-bold text-white">1</span>
-                                <p class="text-sm font-semibold text-white">HOT WHEELS MCLAREN</p>
-                            </div>
-                            <span class="text-sm font-bold text-white">70 PTS</span>
-                        </div>
-                        <!-- Team 2 -->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-sm font-bold text-white">2</span>
-                                <p class="text-sm font-semibold text-white">NEWPORT ROLEX RED BULL</p>
-                            </div>
-                            <span class="text-sm font-bold text-white">56 PTS</span>
-                        </div>
-                        <!-- Team 3 -->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-sm font-bold text-white">3</span>
-                                <p class="text-sm font-semibold text-white">RACING BULLS PEUGEOT SPORT</p>
-                            </div>
-                            <span class="text-sm font-bold text-white">34 PTS</span>
-                        </div>
-                    </div>
-                </div>
+                <button id="show-drivers-btn" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-bold text-white transition-colors duration-300">DRIVERS</button>
+                <button id="show-teams-btn" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-bold text-gray-700 transition-colors duration-300">TEAMS</button>
             </div>
         </div>
 
-        <!-- POSTS Section (Horizontal Carousel) -->
-        <div class="mb-12 relative">
-            <h3 class="text-xl font-bold text-white mb-6">POSTS</h3>
-            <div id="posts-carousel" class="flex overflow-x-auto no-scrollbar snap-x snap-mandatory space-x-4 pb-4">
-                <!-- Post Card 1 -->
-                <a href="https://www.instagram.com/10controls/p/DKczIchtL3c/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-200 snap-center relative transform transition-transform duration-300 hover:scale-115">
-                    <!-- Changed bg-pink-600 to bg-[#ffc0cb] and text-white to text-black -->
-                    <span class="absolute top-2 left-2 bg-[#ffc0cb] text-black text-xs font-bold px-2 py-1 rounded-md z-10">NEW</span>
-                    <img src="images/post1.jpg" alt="Instagram Post 1" class="w-full h-full object-cover">
-                    <!-- Removed caption -->
-                </a>
-                <!-- Post Card 2 -->
-                <a href="https://www.instagram.com/10controls/p/DKNnYnWNVez/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-300 snap-center relative transform transition-transform duration-300 hover:scale-115">
-                    <!-- Removed NEW tag -->
-                    <img src="images/pos2.jpg" alt="Instagram Post 2" class="w-full h-full object-cover">
-                    <!-- Removed caption -->
-                </a>
-                <!-- Post Card 3 -->
-                <a href="https://www.instagram.com/10controls/p/C6jHrqron25/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-400 snap-center relative transform transition-transform duration-300 hover:scale-115">
-                    <!-- Removed NEW tag -->
-                    <img src="images/post3.jpg" alt="Instagram Post 3" class="w-full h-full object-cover">
-                    <!-- Removed caption -->
-                </a>
-                <!-- Post Card 4 -->
-                <a href="https://www.instagram.com/10controls/p/C5G5D89tChN/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-500 snap-center relative transform transition-transform duration-300 hover:scale-115">
-                    <!-- Removed NEW tag -->
-                    <img src="images/post4.jpg" alt="Instagram Post 4" class="w-full h-full object-cover">
-                    <!-- Removed caption -->
-                </a>
-                <!-- Post Card 5 -->
-                <a href="https://www.instagram.com/10controls/p/C4lOAXIoVHM/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-600 snap-center relative transform transition-transform duration-300 hover:scale-115">
-                    <!-- Removed NEW tag -->
-                    <img src="images/post5.jpg" alt="Instagram Post 5" class="w-full h-full object-cover">
-                    <!-- Removed caption -->
-                </a>
-                <!-- Post Card 6 -->
-                <a href="https://www.instagram.com/10controls/p/C4YrxNGow-O/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-700 snap-center relative transform transition-transform duration-300 hover:scale-115">
-                    <!-- Removed NEW tag -->
-                    <img src="images/post6.jpg" alt="Instagram Post 6" class="w-full h-full object-cover">
-                    <!-- Removed caption -->
-                </a>
-                <!-- New Post Card -->
-                <a href="https://www.instagram.com/10controls/p/C4JimyjoV6c/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-800 snap-center relative transform transition-transform duration-300 hover:scale-115">
-                    <img src="https://cdn.discordapp.com/attachments/1323758532432236638/1385983291907113092/image.png?ex=68580d07&is=6856bb87&hm=eb630bd77f1e8f952884c020bd378e52fbcc3629e52fa6df6a301fdec5199522&" alt="New Instagram Post" class="w-full h-full object-cover">
-                </a>
-            </div>
-            <!-- Navigation Arrows -->
-            <button id="scrollLeftBtn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full shadow-lg hover:bg-black/75 focus:outline-none z-20 flex items-center justify-center">
-                <i class="fas fa-chevron-left text-base"></i>
-            </button>
-            <button id="scrollRightBtn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full shadow-lg hover:bg-black/75 focus:outline-none z-20 flex items-center justify-center">
-                <i class="fas fa-chevron-right text-base"></i>
-            </button>
-        </div>
-
-        <!-- RECENT STREAM Section -->
-        <div>
-            <h3 class="text-xl font-bold text-white mb-6">RECENT BROADCAST</h3>
-            <div class="bg-black rounded-lg shadow-lg p-6 content-fade-in delay-800 transform transition-transform duration-300 hover:-translate-y-2">
-                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-                    <!-- Twitch VOD thumbnail updated -->
-                    <img src="https://i.ytimg.com/an_webp/x1qFXHYMQ60/mqdefault_6s.webp?du=3000&sqp=CP6K7cIG&rs=AOn4CLDjd94KV-K-OKjLoJXb6hLBpk-W6w" alt="Twitch Stream Thumbnail" class="w-full sm:w-auto h-32 sm:h-auto object-cover rounded-md">
-                    <div>
-                        <h4 class="text-lg font-bold text-white">Watch the Latest Broadcast from 10 Controls!</h4>
-                        <!-- Updated Watch Stream button color -->
-                        <a href="https://youtu.be/x1qFXHYMQ60?si=uuIVRPE_Z1jAImJg" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-[#492833] hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-md transition-colors">
-                            Watch
-                        </a>
+        <!-- Tables Wrapper to prevent layout shifts -->
+        <div id="tables-wrapper" class="relative"> 
+            <!-- Driver Standings Table -->
+            <div id="driver-standings-container" class="standings-container">
+                    <div class="standings-table-container"> <!-- Added custom class for new styles -->
+                        <table class="standings-table"> <!-- Added custom class for new styles -->
+                            <thead>
+                                <tr>
+                                    <th scope="col">Pos</th>
+                                    <th scope="col">Driver</th>
+                                    <!-- Removed Nationality column header -->
+                                    <th scope="col" class="hidden-mobile">Team</th>
+                                    <th scope="col">Pts</th>
+                                </tr>
+                            </thead>
+                            <tbody id="driver-standings-body">
+                                </tbody>
+                        </table>
                     </div>
-                </div>
             </div>
-        </div>
-    </main>
 
-    <!-- Social Media Links Footer -->
+            <!-- Team Standings Table -->
+            <div id="team-standings-container" class="standings-container">
+                    <div class="standings-table-container"> <!-- Added custom class for new styles -->
+                        <table class="standings-table"> <!-- Added custom class for new styles -->
+                            <thead>
+                                <tr>
+                                    <th scope="col">Pos</th>
+                                    <th scope="col">Team</th>
+                                    <th scope="col">Pts</th>
+                                </tr>
+                            </thead>
+                            <tbody id="team-standings-body">
+                                </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div> <!-- End tables-wrapper -->
+    </div> <!-- End Main Container -->
+    
+      <!-- Pre-Footer -->
     <footer class="bg-black text-white text-center py-5 px-2 mt-8">
         <div class="max-w-7xl mx-auto flex justify-center items-center space-x-6">
             <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
@@ -358,53 +331,201 @@
             <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
         </div>
     </footer>
-    
-    <!-- Main Copyright Footer -->
+
     <footer class="footer">
-        <p>© 2022-2025 10 Controls Limited</p>
+        <p>© 2022-2025 10 Controls Limited</p> <!-- Updated copyright text -->
     </footer>
     
     <script>
-        // Retained the more extensive schedule data from the original Latest page
+        // Helper to get full nationality name from country code (not used for display anymore, but kept for data consistency if needed elsewhere)
+        function getNationalityFromCode(code) {
+            const nationalityMap = {
+                'UA': 'Ukrainian', 'ES': 'Spanish', 'PL': 'Polish', 'NL': 'Dutch', 'DK': 'Danish',
+                'RS': 'Serbian', 'HU': 'Hungarian', 'GB': 'British', 'IN': 'Indian', 'LT': 'Lithuanian',
+                'BE': 'Belgian', 'IT': 'Italian', 'RO': 'Romanian', 'AU': 'Australian', 'CN': 'Chinese',
+                'JP': 'Japanese', 'BH': 'Bahraini', 'SA': 'Saudi Arabian', 'USA': 'American', 'MC': 'Monegasque',
+                'CA': 'Canadian', 'AT': 'Austrian', 'SG': 'Singaporean', 'MX': 'Mexican', 'BR': 'Brazilian',
+                'QAT': 'Qatari', 'AE': 'Emirati', 'NZ': 'New Zealander', 'FR': 'French', 'DE': 'German',
+                'TH': 'Thai', 'FI': 'Finnish',
+                'NO': 'Norwegian' /* Added Norwegian */
+            };
+            return nationalityMap[code] || code; // Return code if not found
+        }
+
+        // Function to get team icon source
+        function getTeamIconSrc(teamName) {
+            switch (teamName.toUpperCase()) {
+                case "HOT WHEELS MCLAREN": return 'https://cdn.discordapp.com/emojis/1378699086982811679.webp?size=44';
+                case "NEWPORT ROLEX RED BULL RACING": return 'https://cdn.discordapp.com/emojis/1378696277180813312.webp?size=44';
+                case "SCUDERIA FERRARI": return 'https://cdn.discordapp.com/emojis/1215769617272934440.webp?size=44';
+                case "GUINNESS MERCEDES": return 'https://cdn.discordapp.com/emojis/1386054950496243732.webp?size=44';
+                case "LOCKHEED MARTIN ASTON MARTIN": return 'https://cdn.discordapp.com/emojis/1215769484078354483.webp?size=44';
+                case "RACING BULLS PEUGEOT SPORT": return 'https://cdn.discordapp.com/emojis/1377646844578103346.webp?size=44';
+                case "TINDER ALPINE F1 TEAM": return 'https://cdn.discordapp.com/emojis/1379862213493260328.webp?size=44';
+                case "HAAS ONLYFANS RACING": return 'https://cdn.discordapp.com/emojis/1378698433652588645.webp?size=44';
+                case "TWITCH SAUBER": return 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44';
+                case "JOHN DEERE WILLIAMS RACING": return 'https://cdn.discordapp.com/emojis/1377791374341963917.webp?size=44';
+                case "KICK SAUBER": return 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44';
+                case "TIER2 TEAM ZETA": return 'https://placehold.co/20x20/cccccc/000000?text=TZ'; // Placeholder for Tier 2 Team Zeta
+                case "TIER2 TEAM GAMMA": return 'https://placehold.co/20x20/cccccc/000000?text=TG'; // Placeholder for Tier 2 Team Gamma
+                case "TIER2 TEAM EPSILON": return 'https://placehold.co/20x20/cccccc/000000?text=TE'; // Placeholder for Tier 2 Team Epsilon
+                case "TIER2 TEAM DELTA": return 'https://placehold.co/20x20/cccccc/000000?text=TD'; // Placeholder for Tier 2 Team Delta
+                case "VISA CASH APP RACING BULLS": return 'https://cdn.discordapp.com/emojis/1377646844578103346.webp?size=44'; // Using Racing Bulls icon
+                default: return '';
+            }
+        }
+
+        // Tier 2 Race Results
+        const motogpPoints = [25, 20, 16, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+        const teamNameMapping = {
+            "Red Bull": "NEWPORT ROLEX RED BULL RACING", // Corrected to match full name
+            "McLaren": "HOT WHEELS MCLAREN",
+            "Mercedes-AMG Petronas": "GUINNESS MERCEDES",
+            "Aston Martin": "LOCKHEED MARTIN ASTON MARTIN",
+            "Haas": "HAAS ONLYFANS RACING",
+            "Williams": "JOHN DEERE WILLIAMS RACING",
+            "Scuderia Ferrari HP": "SCUDERIA FERRARI",
+            "KICK Sauber": "TWITCH SAUBER",
+            "Alpine": "TINDER ALPINE F1 TEAM",
+            "Visa Cash App Racing Bulls": "VISA CASH APP RACING BULLS",
+            // New mappings from image analysis for Tier 2
+            "RB": "VISA CASH APP RACING BULLS", // Alias for Visa Cash App Racing Bulls
+            "Ferrari": "SCUDERIA FERRARI", // Alias for Scuderia Ferrari HP
+            "Mercedes": "GUINNESS MERCEDES", // Alias for Mercedes-AMG Petronas
+        };
+
+        // Function to update or add a driver's race result for a specific race
+        function updateDriverRaceResult(raceResultsArray, driverName, teamNameRaw, points, flag) {
+            const normalizedDriverName = driverName.toUpperCase();
+            // Use teamNameMapping to get the standardized team name
+            const standardizedTeamName = (teamNameMapping[teamNameRaw] || teamNameRaw).toUpperCase();
+
+            let found = false;
+            for (let i = 0; i < raceResultsArray.length; i++) {
+                if (raceResultsArray[i].driver.toUpperCase() === normalizedDriverName) {
+                    raceResultsArray[i].pts = points;
+                    raceResultsArray[i].team = standardizedTeamName; // Use standardized team name
+                    raceResultsArray[i].flag = flag; // Ensure flag is updated
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                raceResultsArray.push({ driver: normalizedDriverName, team: standardizedTeamName, pts: points, flag: flag });
+            }
+        }
+
+        // Function to calculate standings for a given set of race results
+        function calculateStandings(raceResults, teamNameMapping) { // Added teamNameMapping parameter
+            let driverPointsMap = new Map();
+            let teamPointsMap = new Map();
+
+            raceResults.forEach(result => {
+                let normalizedDriverName = result.driver.toUpperCase();
+                let displayDriverName = result.driver;
+
+                if (!driverPointsMap.has(normalizedDriverName)) {
+                    driverPointsMap.set(normalizedDriverName, {
+                        pos: 0,
+                        name: displayDriverName,
+                        nationality: result.flag,
+                        points: 0,
+                        teamOccurrences: {}
+                    });
+                }
+                let driverData = driverPointsMap.get(normalizedDriverName);
+                driverData.points += result.pts;
+                const teamName = result.team.toUpperCase();
+                driverData.teamOccurrences[teamName] = (driverData.teamOccurrences[teamName] || 0) + 1;
+
+                // Team standings
+                let normalizedTeamName = result.team.toUpperCase(); 
+                let displayTeamName = result.team;
+                // Standardize casing for new teams (add Tier 2 specific teams if needed)
+                if (teamNameMapping[result.team]) { // Use teamNameMapping for standardization
+                    displayTeamName = teamNameMapping[result.team];
+                } else if (result.team.includes("HOT WHEELS MCLAREN")) displayTeamName = "HOT WHEELS MCLAREN";
+                else if (result.team.includes("NEWPORT ROLEX RED BULL RACING")) displayTeamName = "NEWPORT ROLEX RED BULL RACING";
+                else if (result.team.includes("SCUDERIA FERRARI")) displayTeamName = "SCUDERIA FERRARI"; 
+                else if (result.team.includes("GUINNESS MERCEDES")) displayTeamName = "GUINNESS MERCEDES"; 
+                else if (result.team.includes("LOCKHEED MARTIN ASTON MARTIN")) displayTeamName = "LOCKHEED MARTIN ASTON MARTIN"; 
+                else if (result.team.includes("RACING BULLS PEUGEOT SPORT")) displayTeamName = "RACING BULLS PEUGEOT SPORT"; 
+                else if (result.team.includes("TINDER ALPINE F1 TEAM")) displayTeamName = "TINDER ALPINE F1 TEAM"; 
+                else if (result.team.includes("HAAS ONLYFANS RACING")) displayTeamName = "HAAS ONLYFANS RACING"; 
+                else if (result.team.includes("TWITCH SAUBER")) displayTeamName = "TWITCH SAUBER"; 
+                else if (result.team.includes("JOHN DEERE WILLIAMS RACING")) displayTeamName = "JOHN DEERE WILLIAMS RACING"; 
+                else if (result.team.includes("KICK SAUBER")) displayTeamName = "KICK SAUBER"; 
+                // Add Tier 2 specific team names here if they have unique icons or display names
+                else if (result.team.includes("TIER2 TEAM ZETA")) displayTeamName = "TIER2 TEAM ZETA";
+                else if (result.team.includes("TIER2 TEAM GAMMA")) displayTeamName = "TIER2 TEAM GAMMA";
+                else if (result.team.includes("TIER2 TEAM EPSILON")) displayTeamName = "TIER2 TEAM EPSILON";
+                else if (result.team.includes("TIER2 TEAM DELTA")) displayTeamName = "TIER2 TEAM DELTA";
+                else if (result.team.includes("VISA CASH APP RACING BULLS")) displayTeamName = "VISA CASH APP RACING BULLS";
+
+
+                if (teamPointsMap.has(normalizedTeamName)) {
+                    teamPointsMap.get(normalizedTeamName).points += result.pts;
+                } else {
+                    teamPointsMap.set(normalizedTeamName, { pos: 0, team: displayTeamName, points: result.pts });
+                }
+            });
+
+            let drivers = Array.from(driverPointsMap.values());
+            drivers.forEach(driver => {
+                let mostFrequentTeam = '';
+                let maxCount = 0;
+                for (const team in driver.teamOccurrences) {
+                    if (driver.teamOccurrences[team] > maxCount) {
+                        maxCount = driver.teamOccurrences[team];
+                        mostFrequentTeam = team;
+                    }
+                }
+                driver.car = mostFrequentTeam;
+            });
+            drivers.sort((a, b) => b.points - a.points);
+            drivers.forEach((driver, index) => driver.pos = index + 1);
+
+            let teams = Array.from(teamPointsMap.values());
+            teams = teams.filter(team => team.team.toUpperCase() !== "KICK SAUBER"); // Filter out alias
+            teams.sort((a, b) => b.points - a.points);
+            teams.forEach((team, index) => team.pos = index + 1);
+
+            return { drivers, teams };
+        }
+
+        // Updated scheduleData from the second HTML
         const scheduleData = [
-            { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris', country: 'AU' },
-            { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23', winner: 'Oscar Piastri', country: 'CN' },
-            { round: 3, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'April 4-6', winner: 'Max Verstappen', country: 'JP' },
-            { round: 4, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'April 11-13', winner: 'Oscar Piastri', country: 'BH' },
-            { round: 5, name: 'Saudi Arabian Grand Prix', venue: 'Jeddah', date: 'April 18-20', winner: 'Oscar Piastri', country: 'SA' },
-            { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', winner: 'Oscar Piastri', country: 'USA' },
-            { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen', country: 'IT' },
-            { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'MC' },
-            { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'ES' },
-            { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'CA' },
-            // *** UPDATED RACE DATA FOR ACCURACY ***
-            { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
-            { round: 12, name: 'Belgian Grand Prix', venue: 'Spa-Francorchamps', date: 'July 4th', country: 'BE' },
-            { round: 13, name: 'British Grand Prix', venue: 'Silverstone', date: 'July 11th', country: 'GB' },
-            { round: 14, name: 'Hungarian Grand Prix', venue: 'Budapest', date: 'August 1-3', country: 'HU' },
-            { round: 15, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'August 29-31', country: 'NL' },
-            { round: 16, name: 'Italian Grand Prix', venue: 'Monza', date: 'September 5-7', country: 'IT' },
-            { round: 17, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'September 19-21', country: 'AZ' },
-            { pos: 18, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
-            { pos: 19, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19', country: 'USA' },
-            { pos: 20, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26', country: 'MX' },
-            { pos: 21, name: 'Brazilian Grand Prix', date: 'November 7-9', country: 'BR' },
-            { pos: 22, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22', country: 'USA' },
-            { pos: 23, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30', country: 'QAT' },
-            { pos: 24, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7', country: 'AE' }
+             { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris', country: 'AU' },
+             { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23', winner: 'Oscar Piastri', country: 'CN' },
+             { round: 3, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'April 4-6', winner: 'Max Verstappen', country: 'JP' },
+             { round: 4, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'April 11-13', winner: 'Oscar Piastri', country: 'BH' },
+             { round: 5, name: 'Saudi Arabian Grand Prix', venue: 'Jeddah', date: 'April 18-20', winner: 'Oscar Piastri', country: 'SA' },
+             { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', winner: 'Oscar Piastri', country: 'USA' },
+             { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen', country: 'IT' },
+             { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'MC' },
+             { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'ES' },
+             { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'CA' },
+             { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
+             { round: 12, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', country: 'BE' },
+             { round: 13, name: 'Hungarian Grand Prix', venue: 'Budapest', date: 'August 1-3', country: 'HU' },
+             { round: 14, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'August 29-31', country: 'NL' },
+             { round: 15, name: 'Italian Grand Prix', venue: 'Monza', date: 'September 5-7', country: 'IT' },
+             { round: 16, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'September 19-21', country: 'AZ' },
+             { pos: 17, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
+             { pos: 18, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19', country: 'USA' },
+             { pos: 19, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26', country: 'MX' },
+             { pos: 20, name: 'Brazilian Grand Prix', date: 'November 7-9', country: 'BR' },
+             { pos: 21, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22', country: 'USA' },
+             { pos: 22, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30', country: 'QAT' },
+             { pos: 23, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7', country: 'AE' }
         ];
-
+        
         window.onload = function() {
-            // --- Content population script (retained for 'Latest' page content, no change) ---
-            const contentElements = document.querySelectorAll('.content-fade-in');
-            setTimeout(() => {
-                contentElements.forEach(el => el.classList.add('visible'));
-            }, 100);
-
             // --- Mobile menu toggle script ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            
+
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('menu-open');
                 mobileMenuButton.classList.toggle('open');
@@ -415,8 +536,7 @@
             if (menuItemsContainer) {
                 const menuLinks = menuItemsContainer.querySelectorAll('a');
                 const highlighter = document.getElementById('sliding-highlighter');
-                // Active link is 'Latest' for this page, keeping consistency with current page
-                const activeLink = menuItemsContainer.querySelector('a[aria-current="page"]'); 
+                const activeLink = menuItemsContainer.querySelector('a[href="standings.html"]'); 
                 function setHighlighterToLink(link) {
                     if (!link) return;
                     highlighter.style.left = `${link.offsetLeft}px`;
@@ -431,7 +551,7 @@
                 });
             }
 
-            // --- Sub-header upcoming race script (remaining part) ---
+            // --- Sub-header upcoming race and countdown script (updated) ---
             const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
             const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
             const countdownDisplayEl = document.getElementById('countdown-display'); // Get the countdown display element
@@ -444,7 +564,7 @@
                 if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
                     dayStr = dayStr.substring(0, dayStr.length - 2);
                 }
-                return new Date(`${monthStr} ${dayStr}, 2025`);
+                return new Date(`${monthStr} ${dayStr}, 2025`); // Assuming current year is 2025 for consistency with original code
             }
 
             // Find the upcoming race
@@ -457,6 +577,8 @@
                     break;
                 }
             }
+            // If no future race found, default to the last one in the schedule (or first, depending on desired fallback)
+            upcomingRace = upcomingRace || scheduleData[scheduleData.length - 1]; 
 
             if (upcomingRace) {
                 upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
@@ -469,8 +591,7 @@
                 }
             }
 
-
-            // --- Countdown Timer Logic ---
+            // --- Countdown Timer Logic (updated) ---
             // Function to calculate the next Friday at 2 PM Eastern Time (EDT/EST)
             // Assuming current period is EDT (UTC-4), so 2 PM EDT is 18:00 UTC.
             function getNextFriday2PMET() {
@@ -527,75 +648,428 @@
             updateCountdown();
             // Update the countdown every second
             setInterval(updateCountdown, 1000);
+            
+            // --- Standings Table Logic ---
+            // Tier 1 Race Results (moved inside window.onload)
+            let tier1RaceResultsBahrain = [
+                { driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", pts: 25, flag: "UA" },
+                { driver: "FOCUSER", team: "HOT WHEELS MCLAREN", pts: 20, flag: "ES" },
+                { driver: "TONY SEROKA", team: "NEWPORT ROLEX RED BULL RACING", pts: 16, flag: "PL" },
+                { driver: "MAXFAN1982", team: "NEWPORT ROLEX RED BULL RACING", pts: 13, flag: "PL" }, 
+                { driver: "SEBEINKRO", team: "GUINNESS MERCEDES", pts: 10, flag: "NO" },
+                { driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI", pts: 11, flag: "NL" },
+                { driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", pts: 9, flag: "RS" },
+                { driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", pts: 8, flag: "ES" },
+                { driver: "TSAR", team: "RACING BULLS PEUGEOT SPORT", pts: 7, flag: "HU" },
+                { driver: "JSTN NL", team: "SCUDERIA FERRARI", pts: 6, flag: "NL" },
+                { driver: "ASPEC33", team: "TINDER ALPINE F1 TEAM", pts: 5, flag: "GB" },
+                { driver: "COUNTERFEIT", team: "TWITCH SAUBER", pts: 4, flag: "GB" },
+                { driver: "SHENGEN", team: "GUINNESS MERCEDES", pts: 3, flag: "FI" },
+                { driver: "MAX HOUSLEY", team: "HAAS ONLYFANS RACING", pts: 2, flag: "GB" },
+                { driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", pts: 1, flag: "GB" },
+                { driver: "ARUTHLESS GUY", team: "TINDER ALPINE F1 TEAM", pts: 0, flag: "IN" },
+                { driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS RACING", pts: 0, flag: "LT" },
+                { driver: "LOLER", team: "JOHN DEERE WILLIAMS RACING", pts: 0, flag: "PL" }, 
+                { driver: "THEROMANIANDEVIL", team: "TWITCH SAUBER", pts: 0, flag: "RO" }
+            ];
 
+            let tier1RaceResultsAustralia = [
+                { driver: "MAXFAN1982", team: "NEWPORT ROLEX RED BULL RACING", pts: 25, flag: "PL" }, 
+                { driver: "FOCUSER", team: "HOT WHEELS MCLAREN", pts: 20, flag: "ES" },
+                { driver: "MAX HOUSLEY", team: "TINDER ALPINE F1 TEAM", pts: 16, flag: "GB" },
+                { driver: "SEBEINKRO", team: "GUINNESS MERCEDES", pts: 13, flag: "NO" },
+                { driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", pts: 11, flag: "ES" },
+                { driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", pts: 10, flag: "GB" },
+                { driver: "COUNTERFEIT", team: "TWITCH SAUBER", pts: 9, flag: "GB" },
+                { driver: "TSAR", team: "RACING BULLS PEUGEOT SPORT", pts: 8, flag: "HU" },
+                { driver: "ANTONIO BRANCATI", team: "SCUDERIA FERRARI", pts: 7, flag: "IT" },
+                { driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS RACING", pts: 6, flag: "LT" },
+                { driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", pts: 5, flag: "UA" },
+                { driver: "EDGE", team: "HAAS ONLYFANS RACING", pts: 4, flag: "GB" },
+                { driver: "RABAS", team: "JOHN DEERE WILLIAMS RACING", pts: 3, flag: "ES" },
+                { driver: "TONY SEROKA", team: "NEWPORT ROLEX RED BULL RACING", pts: 2, flag: "PL" },
+                { driver: "MAXLINXC", team: "TINDER ALPINE F1 TEAM", pts: 1, flag: "NL" },
+                { driver: "YULIAN KALENANTOVICH", team: "TWITCH SAUBER", pts: 0, flag: "UA" }, 
+                { driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", pts: 0, flag: "RS" },
+                { driver: "THEROMANIANDEVIL", team: "GUINNESS MERCEDES", pts: 0, flag: "RO" },
+                { driver: "LOLER", team: "JOHN DEERE WILLIAMS RACING", pts: 0, flag: "PL" }, 
+                { driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI", pts: 0, flag: "NL" }
+            ];
 
-            // --- Dynamically set heights and alignment ---
-            const featuredStoryContainer = document.getElementById('featured-story-container');
-            const standingsColumn = document.getElementById('standings-column');
-            const driversStandingsTable = document.getElementById('drivers-standings-table');
-            const teamsStandingsTable = document.getElementById('teams-standings-table');
+            let tier1RaceResultsImola = [
+                { driver: "MAXFAN1982", team: "NEWPORT ROLEX RED BULL RACING", pts: 25, flag: "PL" }, 
+                { driver: "FOCUSER", team: "HOT WHEELS MCLAREN", pts: 20, flag: "ES" },
+                { driver: "TONY SEROKA", team: "NEWPORT ROLEX RED BULL RACING", pts: 16, flag: "PL" },
+                { driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", pts: 13, flag: "UA" },
+                { driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", pts: 11, flag: "ES" },
+                { driver: "SEBEINKRO", team: "GUINNESS MERCEDES", pts: 10, flag: "NO" },
+                { driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", pts: 9, flag: "GB" },
+                { driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", pts: 8, flag: "RS" },
+                { driver: "JAY2005_071", team: "HAAS ONLYFANS RACING", pts: 7, flag: "NL" }, // Original Tier 1 data
+                { driver: "SHENGEN", team: "GUINNESS MERCEDES", pts: 6, flag: "FI" },
+                { driver: "TOBOB", team: "HAAS ONLYFANS RACING", pts: 5, flag: "DE" },
+                { driver: "LOLER", team: "JOHN DEERE WILLIAMS RACING", pts: 4, flag: "PL" },
+                { driver: "SANDRO", team: "SCUDERIA FERRARI", pts: 3, flag: "NL" },
+                { driver: "MAX HOUSLEY", team: "TINDER ALPINE F1 TEAM", pts: 2, flag: "GB" },
+                { driver: "COUNTERFEIT", team: "TWITCH SAUBER", pts: 1, flag: "GB" },
+                { driver: "EDGE", team: "JOHN DEERE WILLIAMS RACING", pts: 0, flag: "GB" }, 
+                { driver: "THEROMANIANDEVIL", team: "TWITCH SAUBER", pts: 0, flag: "RO" },
+                { driver: "ALFIE", team: "TINDER ALPINE F1 TEAM", pts: 0, flag: "GB" },
+                { driver: "ANTON WEJLEMAND", team: "SCUDERIA FERRARI", pts: 0, flag: "DK" }, 
+                { driver: "FREDERIK WINTHER", team: "RACING BULLS PEUGEOT SPORT", pts: 0, flag: "DK" }
+            ];
 
+            // Combine all Tier 1 race results
+            let allTier1RaceResults = [...tier1RaceResultsBahrain, ...tier1RaceResultsAustralia, ...tier1RaceResultsImola];
 
-            const adjustLayout = () => {
-                if (featuredStoryContainer && standingsColumn && driversStandingsTable && teamsStandingsTable) {
-                    const featuredImage = featuredStoryContainer.querySelector('img');
-
-                    if (featuredImage && (featuredImage.complete || featuredImage.naturalWidth > 0)) {
-                        // Reset heights to allow natural content flow for measurement
-                        featuredStoryContainer.style.height = 'auto';
-                        driversStandingsTable.style.height = 'auto';
-                        teamsStandingsTable.style.height = 'auto';
-                        standingsColumn.style.height = 'auto';
-
-                        // Calculate total height of the standings column
-                        // This includes the h3, padding, and content of both tables, plus space-y-8
-                        const standingsTotalHeight = standingsColumn.offsetHeight;
-
-                        // Apply this total height to the featured story container
-                        featuredStoryContainer.style.height = `${standingsTotalHeight}px`;
-
-                        // Ensure image within featured story container fills its new height
-                        featuredImage.style.height = '100%';
-                        featuredImage.style.objectFit = 'cover';
-                        featuredImage.style.objectPosition = 'bottom'; // Adjusted object-position to "zoom in" and hide top/middle
-
-                        // Ensure the standings column itself takes the measured height
-                        // This might be redundant if the content defines its height, but good for explicit control
-                        standingsColumn.style.height = `${standingsTotalHeight}px`;
-
-                        // Distribute space vertically if there's extra space within standingsColumn
-                        standingsColumn.style.display = 'flex';
-                        standingsColumn.style.flexDirection = 'column';
-                        standingsColumn.style.justifyContent = 'space-between';
-                    } else if (featuredImage) {
-                        // If image not loaded, set onload listener
-                        featuredImage.onload = adjustLayout;
-                    }
+            // Tier 2 Race Results (moved inside window.onload)
+            let tier2RaceResultsBahrain = [
+                { driver: "SANDRO", team: "McLaren", pts: 25, flag: "NL" }, // P1
+                { driver: "JAY2005_071", team: "McLaren", pts: 20, flag: "NL" }, // P2
+                { driver: "Manuel Rotundo", team: "Scuderia Ferrari HP", pts: 16, flag: "IT" }, // P3
+                { driver: "Lukas19", team: "Haas", pts: 13, flag: "NL" }, // P4 - Updated team
+                { driver: "Tuki", team: "RACING BULLS PEUGEOT SPORT", pts: 11, flag: "GR" }, // P5 - Updated team
+                { driver: "Teetoe", team: "Red Bull", pts: 10, flag: "NL" }, // P6 - Updated team
+                { driver: "Aspec", team: "Aston Martin", pts: 9, flag: "US" }, // P7
+                { driver: "Jarvis Coid", team: "Red Bull", pts: 8, flag: "GB" }, // P8 - Updated team
+                { driver: "Shark", team: "Williams", pts: 7, flag: "DK" }, // P9
+                { driver: "Byronas", team: "Mercedes-AMG Petronas", pts: 6, flag: "GR" }, // P10
+                { driver: "Maxlinxc", team: "Haas", pts: 5, flag: "NL" }, // P11
+                { driver: "JSTN_NL", team: "Red Bull", pts: 4, flag: "NL" }, // P12 - Updated team
+                { driver: "Spyzer", team: "Alpine", pts: 3, flag: "FR" }, // P13
+                { driver: "Scorenzy", team: "KICK Sauber", pts: 2, flag: "IT" }, // P14
+                { driver: "Formula Phantom", team: "Visa Cash App Racing Bulls", pts: 1, flag: "NL" } // P15
+            ].map((r, index) => {
+                let currentDriverName = r.driver;
+                if (currentDriverName.toUpperCase() === "MACHMUD MOERWIJK".toUpperCase()) {
+                    currentDriverName = "SANDRO";
+                } else if (currentDriverName.toUpperCase() === "JAY AZIER".toUpperCase()) {
+                    currentDriverName = "JAY2005_071";
+                } else if (currentDriverName.toUpperCase() === "JSTN_NL".toUpperCase()) {
+                    currentDriverName = "JSTN NL";
+                } else if (currentDriverName.toUpperCase() === "ASPEC".toUpperCase()) {
+                    currentDriverName = "ASPEC33";
+                } else if (currentDriverName.toUpperCase() === "LEON4IK".toUpperCase()) {
+                    currentDriverName = "LEON4IK_008";
+                } else if (currentDriverName.toUpperCase() === "DANOTTK".toUpperCase()) {
+                    currentDriverName = "DANOTTK";
+                } else if (currentDriverName.toUpperCase() === "CAOIHMHE".toUpperCase()) {
+                    currentDriverName = "CAOIHMHE";
+                } else if (currentDriverName.toUpperCase() === "LIL SLUGGER".toUpperCase()) {
+                    currentDriverName = "LIL SLUGGER";
                 }
-            };
+                
+                return {
+                    ...r,
+                    driver: currentDriverName.toUpperCase(),
+                    team: (teamNameMapping[r.team] || r.team).toUpperCase(),
+                    pts: motogpPoints[index] || 0 // Ensure points are assigned based on position
+                };
+            });
 
-            // Initial adjustment
-            adjustLayout();
-            // Re-adjust on window resize to maintain responsiveness
-            window.addEventListener('resize', adjustLayout);
+            // Tier 2 Australia Race Results - updated based on user's input
+            let tier2RaceResultsAustralia = [
+                { driver: "JAY2005_071", team: "McLaren", pts: 25, flag: "NL" }, // P1
+                { driver: "MAXLINXC", team: "Haas", pts: 20, flag: "AT" }, // P2 - Updated team
+                { driver: "JSTN NL", team: "Scuderia Ferrari HP", pts: 16, flag: "NL" }, // P3 - Updated team
+                { driver: "Jarvis Coid", team: "Red Bull", pts: 13, flag: "GB" }, // P4 - Updated team
+                { driver: "Manuel Rotundo", team: "Visa Cash App Racing Bulls", pts: 11, flag: "IT" }, // P5
+                { driver: "SANDRO", team: "McLaren", pts: 10, flag: "NL" }, // P6
+                { driver: "ByRoNaS", team: "Mercedes-AMG Petronas", pts: 9, flag: "GR" }, // P7
+                { driver: "Mark", team: "Williams", pts: 8, flag: "US" }, // P8
+                { driver: "FOCUSSSSSSS", team: "McLaren", pts: 7, flag: "ES" }, // P9
+                { driver: "Teetoe", team: "Red Bull", pts: 6, flag: "NL" }, // P10 - Updated team
+                { driver: "SneewwZZ", team: "Aston Martin", pts: 5, flag: "NL" }, // P11
+                { driver: "ROOKIE", team: "Haas", pts: 4, flag: "GB" }, // P12
+                { driver: "shark", team: "Williams", pts: 3, flag: "DK" } // P13
+            ].map((r, index) => {
+                let currentDriverName = r.driver;
+                if (currentDriverName.toUpperCase() === "MACHMUD MOERWIJK".toUpperCase()) {
+                    currentDriverName = "SANDRO";
+                } else if (currentDriverName.toUpperCase() === "JAY AZIER".toUpperCase()) {
+                    currentDriverName = "JAY2005_071";
+                } else if (currentDriverName.toUpperCase() === "JSTN_NL".toUpperCase()) {
+                    currentDriverName = "JSTN NL";
+                } else if (currentDriverName.toUpperCase() === "ASPEC".toUpperCase()) {
+                    currentDriverName = "ASPEC33";
+                }
+                
+                return {
+                    ...r,
+                    pos: index + 1, // Re-assign position based on new sorted order
+                    driver: currentDriverName.toUpperCase(),
+                    team: (teamNameMapping[r.team] || r.team).toUpperCase(),
+                    pts: motogpPoints[index] || 0 // Assign points based on new sorted position
+                };
+            });
 
+            // Tier 2 Imola Race Results - updated based on user's input
+            let tier2RaceResultsImola = [
+                { driver: "SANDRO", team: "McLaren", pts: 25, flag: "NL" }, // P1
+                { driver: "JARVIS COID", team: "NEWPORT ROLEX RED BULL RACING", pts: 20, flag: "GB" }, // P2
+                { driver: "JAY2005_071", team: "HOT WHEELS MCLAREN", pts: 16, flag: "NL" }, // P3 - Updated team
+                { driver: "Tobob", team: "Alpine", pts: 13, flag: "DE" }, // P4
+                { driver: "Krab", team: "RACING BULLS PEUGEOT SPORT", pts: 11, flag: "HU" }, // P5 - Updated team
+                { driver: "Aspec33", team: "GUINNESS MERCEDES", pts: 10, flag: "GB" }, // P6 - Updated team and flag
+                { driver: "TEETOE", team: "NEWPORT ROLEX RED BULL RACING", pts: 9, flag: "NL" }, // P7
+                { driver: "LEON4IK_008", team: "Williams", pts: 8, flag: "UA" }, // P8
+                { driver: "danottok", team: "Haas", pts: 7, flag: "FI" }, // P9
+                { driver: "Mark", team: "Williams", pts: 6, flag: "US" }, // P10
+                { driver: "ByRoNaS", team: "Mercedes-AMG Petronas", pts: 5, flag: "GR" }, // P11
+                { driver: "Liquid_Er031ic", team: "Haas", pts: 4, flag: "NL" }, // P12
+                { driver: "caoihme", team: "Visa Cash App Racing Bulls", pts: 3, flag: "IE" }, // P13
+                { driver: "SNEEUWZ", team: "Aston Martin", pts: 2, flag: "NL" }, // P14 - Updated name
+                { driver: "Generic Leon", team: "Alpine", pts: 1, flag: "AT" }, // P15
+                // Drivers with DNP in Imola, assigned 0 points
+                { driver: "Manuel Rotundo", team: "Scuderia Ferrari HP", pts: 0, flag: "IT" }, // DNP
+                { driver: "Maxlinxc", team: "Haas", pts: 0, flag: "AT" }, // DNP
+                { driver: "JSTN NL", team: "Scuderia Ferrari HP", pts: 0, flag: "NL" }, // DNP
+                { driver: "Lukas19", team: "Haas", pts: 0, flag: "NL" }, // DNP
+                { driver: "FOCUSSSSSSS", team: "McLaren", pts: 0, flag: "ES" }, // DNP
+                { driver: "Shark", team: "Williams", pts: 0, flag: "DK" }, // DNP
+                { driver: "Formula Phantom", team: "Visa Cash App Racing Bulls", pts: 0, flag: "NL" } // DNP
+            ].map((r, index) => {
+                let currentDriverName = r.driver;
+                // Apply name changes if necessary for Imola results
+                if (currentDriverName.toUpperCase() === "MACHMUD MOERWIJK".toUpperCase()) {
+                    currentDriverName = "SANDRO";
+                } else if (currentDriverName.toUpperCase() === "JAY AZIER".toUpperCase()) {
+                    currentDriverName = "JAY2005_071";
+                } else if (currentDriverName.toUpperCase() === "JSTN_NL".toUpperCase()) {
+                    currentDriverName = "JSTN NL";
+                } else if (currentDriverName.toUpperCase() === "ASPEC".toUpperCase()) {
+                    currentDriverName = "ASPEC33";
+                } else if (currentDriverName.toUpperCase() === "SNEEWWZZ".toUpperCase()) {
+                    currentDriverName = "SNEEUWZ";
+                }
 
-            // --- Carousel scroll functionality for POSTS section ---
-            const postsCarousel = document.getElementById('posts-carousel');
-            const scrollLeftBtn = document.getElementById('scrollLeftBtn');
-            const scrollRightBtn = document.getElementById('scrollRightBtn');
+                // Apply flag changes if necessary for Imola results
+                if (currentDriverName.toUpperCase() === "LUKAS19".toUpperCase()) {
+                    r.flag = "CZ";
+                } else if (currentDriverName.toUpperCase() === "ASPEC33".toUpperCase()) {
+                    r.flag = "GB";
+                }
+                
+                return {
+                    ...r,
+                    pos: index + 1,
+                    driver: currentDriverName.toUpperCase(),
+                    team: (teamNameMapping[r.team] || r.team).toUpperCase(),
+                    pts: motogpPoints[index] || 0
+                };
+            });
 
-            if (postsCarousel && scrollLeftBtn && scrollRightBtn) {
-                const scrollAmount = 200; // Adjust scroll distance as needed based on card width
+            // Global variables to store processed standings
+            let driverStandingsTier1 = [];
+            let teamStandingsTier1 = [];
+            let driverStandingsTier2 = []; 
+            let teamStandingsTier2 = []; 
 
-                scrollRightBtn.addEventListener('click', () => {
-                    postsCarousel.scrollLeft += scrollAmount;
-                });
+            // Current active selections
+            let currentTier = 'tier1'; // 'tier1' or 'tier2'
+            let currentStandingsType = 'drivers'; // 'drivers' or 'teams'
 
-                scrollLeftBtn.addEventListener('click', () => {
-                    postsCarousel.scrollLeft -= scrollAmount;
-                });
+            // Function to render the standings tables based on current selections
+            function renderStandings() {
+                const driverStandingsBody = document.getElementById('driver-standings-body');
+                const teamStandingsBody = document.getElementById('team-standings-body');
+                const driverContainer = document.getElementById('driver-standings-container');
+                const teamContainer = document.getElementById('team-standings-container');
+                const tablesWrapper = document.getElementById('tables-wrapper');
+
+                let currentDriversData = currentTier === 'tier1' ? driverStandingsTier1 : driverStandingsTier2;
+                let currentTeamsData = currentTier === 'tier1' ? teamStandingsTier1 : teamStandingsTier2;
+
+                // Populate driver standings table
+                if (driverStandingsBody) {
+                    driverStandingsBody.innerHTML = '';
+                    currentDriversData.forEach(driver => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td class="pos-number">${driver.pos}</td>
+                            <td>
+                                <img src="https://flagsapi.com/${driver.nationality}/flat/16.png" alt="${driver.nationality} Flag" class="inline-block mr-2" onerror="this.onerror=null;this.src='https://placehold.co/16x16/cccccc/000000?text=NF';">
+                                <a href="driverprofile.html?driver=${encodeURIComponent(driver.name)}" class="driver-name-link">${driver.name}</a>
+                            </td>
+                            <td class="hidden-mobile">
+                                <img src="${getTeamIconSrc(driver.car)}" alt="${driver.car} Icon" class="inline-block h-5 w-5 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/20x20/cccccc/000000?text=NI';">
+                                ${driver.car}
+                            </td>
+                            <td class="points-cell">${driver.points}</td>
+                        `;
+                        driverStandingsBody.appendChild(row);
+                    });
+                }
+                
+                // Populate team standings table
+                if (teamStandingsBody) {
+                    teamStandingsBody.innerHTML = '';
+                    currentTeamsData.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td class="pos-number">${item.pos}</td>
+                            <td>
+                                <img src="${getTeamIconSrc(item.team)}" alt="${item.team} Icon" class="inline-block h-5 w-5 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/20x20/cccccc/000000?text=NI';">
+                                ${item.team.toUpperCase()} <!-- Converted team name to uppercase -->
+                            </td>
+                            <td class="points-cell">${item.points}</td>
+                        `;
+                        teamStandingsBody.appendChild(row);
+                    });
+                }
+
+                // Adjust table visibility based on currentStandingsType
+                if (currentStandingsType === 'drivers') {
+                    driverContainer.style.opacity = '1';
+                    driverContainer.style.visibility = 'visible';
+                    teamContainer.style.opacity = '0';
+                    teamContainer.style.visibility = 'hidden';
+                } else {
+                    driverContainer.style.opacity = '0';
+                    driverContainer.style.visibility = 'hidden';
+                    teamContainer.style.opacity = '1';
+                    teamContainer.style.visibility = 'visible';
+                }
+
+                // Adjust wrapper height after content is rendered
+                setTimeout(() => {
+                    const driverTableHeight = driverContainer.scrollHeight;
+                    const teamTableHeight = teamContainer.scrollHeight;
+                    const maxTableHeight = Math.max(driverTableHeight, teamTableHeight);
+                    tablesWrapper.style.minHeight = `${maxTableHeight}px`;
+                }, 50); // Small timeout to ensure elements are rendered
             }
+
+
+            // --- Apply the new results for Tier 2 drivers ---
+            // Points: P9 = 7 points; DNF/DNP/DNS = 0 points
+            
+            // SHARK (Flag: DK, Team: JOHN DEERE WILLIAMS RACING)
+            updateDriverRaceResult(tier2RaceResultsBahrain, "SHARK", "Williams", 7, "DK"); // P9
+            updateDriverRaceResult(tier2RaceResultsAustralia, "SHARK", "Williams", 0, "DK"); // DNF
+            updateDriverRaceResult(tier2RaceResultsImola, "SHARK", "Williams", 0, "DK"); // DNP
+
+            // FOCUSSSSSSS (Flag: ES, Team: RACING BULLS PEUGEOT SPORT)
+            updateDriverRaceResult(tier2RaceResultsBahrain, "FOCUSSSSSSS", "RACING BULLS PEUGEOT SPORT", 0, "ES"); // DNP
+            updateDriverRaceResult(tier2RaceResultsAustralia, "FOCUSSSSSSS", "RACING BULLS PEUGEOT SPORT", 7, "ES"); // P9
+            updateDriverRaceResult(tier2RaceResultsImola, "FOCUSSSSSSS", "RACING BULLS PEUGEOT SPORT", 0, "ES"); // DNP
+
+            // SPYZER (Flag: FR, Team: TINDER ALPINE F1 TEAM)
+            updateDriverRaceResult(tier2RaceResultsBahrain, "SPYZER", "Alpine", 0, "FR"); // DNF
+            updateDriverRaceResult(tier2RaceResultsAustralia, "SPYZER", "Alpine", 0, "FR"); // DNP
+            updateDriverRaceResult(tier2RaceResultsImola, "SPYZER", "Alpine", 0, "FR"); // DNP
+
+            // SNEEUWZ (Flag: NL, Team: LOCKHEED MARTIN ASTON MARTIN)
+            updateDriverRaceResult(tier2RaceResultsBahrain, "SNEEUWZ", "Aston Martin", 0, "NL"); // DNP
+            updateDriverRaceResult(tier2RaceResultsAustralia, "SNEEUWZ", "Aston Martin", 0, "NL"); // DNF
+            updateDriverRaceResult(tier2RaceResultsImola, "SNEEUWZ", "Aston Martin", 0, "NL"); // DNF
+
+            // SCORENZY (Flag: IT, Team: TWITCH SAUBER)
+            updateDriverRaceResult(tier2RaceResultsBahrain, "SCORENZY", "KICK Sauber", 0, "IT"); // DNP
+            updateDriverRaceResult(tier2RaceResultsAustralia, "SCORENZY", "KICK Sauber", 0, "IT"); // DNF
+            updateDriverRaceResult(tier2RaceResultsImola, "SCORENZY", "KICK Sauber", 0, "IT"); // DNF
+
+            // FORMULA PHANTOM (Flag: NL, Team: TINDER ALPINE F1 TEAM) - Changed team name
+            updateDriverRaceResult(tier2RaceResultsBahrain, "FORMULA PHANTOM", "TINDER ALPINE F1 TEAM", 0, "NL"); // DNF
+            updateDriverRaceResult(tier2RaceResultsAustralia, "FORMULA PHANTOM", "TINDER ALPINE F1 TEAM", 0, "NL"); // DNS
+            updateDriverRaceResult(tier2RaceResultsImola, "FORMULA PHANTOM", "TINDER ALPINE F1 TEAM", 0, "NL"); // DNS
+
+            // CAOIHME (Flag: IE, Team: RACING BULLS PEUGEOT SPORT) - Updated team name
+            updateDriverRaceResult(tier2RaceResultsBahrain, "CAOIHMHE", "RACING BULLS PEUGEOT SPORT", 0, "IE"); // DNS
+            updateDriverRaceResult(tier2RaceResultsAustralia, "CAOIHMHE", "RACING BULLS PEUGEOT SPORT", 0, "IE"); // DNS
+            updateDriverRaceResult(tier2RaceResultsImola, "CAOIHMHE", "RACING BULLS PEUGEOT SPORT", 0, "IE"); // DNF
+
+            // ROOKIE (Flag: GB, Team: HAAS ONLYFANS RACING)
+            updateDriverRaceResult(tier2RaceResultsBahrain, "ROOKIE", "Haas", 0, "GB"); // DNP
+            updateDriverRaceResult(tier2RaceResultsAustralia, "ROOKIE", "Haas", 0, "GB"); // DNF
+            updateDriverRaceResult(tier2RaceResultsImola, "ROOKIE", "Haas", 0, "GB"); // DNP
+
+            // LIQUID_ER031IC (Flag: NL, Team: HAAS ONLYFANS RACING)
+            updateDriverRaceResult(tier2RaceResultsBahrain, "LIQUID_ER031IC", "Haas", 0, "NL"); // DNP
+            updateDriverRaceResult(tier2RaceResultsAustralia, "LIQUID_ER031IC", "Haas", 0, "NL"); // DNP
+            updateDriverRaceResult(tier2RaceResultsImola, "LIQUID_ER031IC", "Haas", 0, "NL"); // DNF
+
+            // GENERIC LEON (Flag: AT, Team: TINDER ALPINE F1 TEAM)
+            updateDriverRaceResult(tier2RaceResultsBahrain, "GENERIC LEON", "Alpine", 0, "AT"); // DNP
+            updateDriverRaceResult(tier2RaceResultsAustralia, "GENERIC LEON", "Alpine", 0, "AT"); // DNP
+            updateDriverRaceResult(tier2RaceResultsImola, "GENERIC LEON", "Alpine", 0, "AT"); // DNF
+            // --- End of new results application ---
+
+            // Re-consolidate all Tier 2 race results after updates
+            let allTier2RaceResults = [...tier2RaceResultsBahrain, ...tier2RaceResultsAustralia, ...tier2RaceResultsImola];
+
+            // Calculate standings for Tier 1 
+            const tier1Standings = calculateStandings(allTier1RaceResults, teamNameMapping); // Pass teamNameMapping
+            driverStandingsTier1 = tier1Standings.drivers;
+            teamStandingsTier1 = tier1Standings.teams;
+
+            // Calculate standings for Tier 2 with the updated data
+            const tier2Standings = calculateStandings(allTier2RaceResults, teamNameMapping); // Pass teamNameMapping
+            driverStandingsTier2 = tier2Standings.drivers;
+            teamStandingsTier2 = tier2Standings.teams;
+
+            // Event listeners for the new tier buttons
+            const showTier1Btn = document.getElementById('show-tier1-btn');
+            const showTier2Btn = document.getElementById('show-tier2-btn');
+            const tierSlider = document.getElementById('tier-slider');
+
+            showTier1Btn.addEventListener('click', () => {
+                tierSlider.style.transform = 'translateX(0%)';
+                showTier1Btn.classList.add('text-white');
+                showTier1Btn.classList.remove('text-gray-700');
+                showTier2Btn.classList.add('text-gray-700');
+                showTier2Btn.classList.remove('text-white');
+                currentTier = 'tier1';
+                renderStandings();
+            });
+
+            showTier2Btn.addEventListener('click', () => {
+                tierSlider.style.transform = 'translateX(100%)';
+                showTier2Btn.classList.add('text-white');
+                showTier2Btn.classList.remove('text-gray-700');
+                showTier1Btn.classList.add('text-gray-700');
+                showTier1Btn.classList.remove('text-white');
+                currentTier = 'tier2';
+                renderStandings();
+            });
+
+            // Event listeners for the existing standings type buttons
+            const showDriversBtn = document.getElementById('show-drivers-btn');
+            const showTeamsBtn = document.getElementById('show-teams-btn');
+            const standingsSlider = document.getElementById('standings-slider'); // Renamed ID
+
+            showDriversBtn.addEventListener('click', () => {
+                standingsSlider.style.transform = 'translateX(0%)';
+                showDriversBtn.classList.add('text-white');
+                showDriversBtn.classList.remove('text-gray-700');
+                showTeamsBtn.classList.add('text-gray-700');
+                showTeamsBtn.classList.remove('text-white');
+                currentStandingsType = 'drivers';
+                renderStandings();
+            });
+
+            showTeamsBtn.addEventListener('click', () => {
+                standingsSlider.style.transform = 'translateX(100%)';
+                showTeamsBtn.classList.add('text-white');
+                showTeamsBtn.classList.remove('text-gray-700');
+                showDriversBtn.classList.add('text-gray-700');
+                showDriversBtn.classList.remove('text-white');
+                currentStandingsType = 'teams';
+                renderStandings();
+            });
+
+            // Initial render on load
+            renderStandings();
+
+            // Set initial state for the new tier buttons
+            showTier1Btn.classList.add('text-white');
+            showTier2Btn.classList.remove('text-white');
+            showTier2Btn.classList.add('text-gray-700');
+
+            // Set initial state for the existing standings type buttons
+            showDriversBtn.classList.add('text-white');
+            showTeamsBtn.classList.remove('text-white');
+            showTeamsBtn.classList.add('text-gray-700');
         };
     </script>
 </body>
