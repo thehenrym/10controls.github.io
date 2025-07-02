@@ -194,19 +194,14 @@
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
             <div class="flex items-center space-x-2 sm:space-x-4">
                 <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
-                    <!-- Upcoming race info populated by JavaScript -->
                 </div>
                 <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
-                    <!-- Upcoming race date populated by JavaScript -->
                 </div>
             </div>
-            <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/TAG_Heuer_Logo.svg/1200px-TAG_Heuer_Logo.svg.png" alt="TAG Heuer Logo" class="h-6 sm:h-8 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/100x32/FFFFFF/000000?text=TAG+Heuer';">
-                <div class="text-right text-xs sm:text-sm">
-                   <p id="client-time" class="font-bold"></p>
-                   <p id="race-time" class="text-gray-300"></p>
-               </div>
-           </div>
+            <!-- Countdown Timer -->
+            <div id="countdown-display" class="flex items-center flex-shrink-0 text-right text-xs sm:text-sm">
+                <p id="countdown-timer" class="font-bold"></p>
+            </div>
         </div>
     </div>
 
