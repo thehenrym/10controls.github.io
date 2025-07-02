@@ -158,7 +158,7 @@
                     <img id="team-icon" src="" alt="Team Icon" class="h-5 w-auto mr-2 inline-block">
                     <span id="driver-team"></span>
                     <!-- Driver Tier (hidden on small screens, visible on medium and larger) -->
-                    <span id="driver-tier" class="ml-4 px-2 py-1 text-xs font-bold rounded-full hidden md:inline-block"></span>
+                    <span id="driver-tier" class="ml-4 px-2.5 py-0.5 text-xs font-bold rounded-full hidden md:inline-block"></span>
                 </p>
             </div>
             <div class="relative z-10 flex-shrink-0">
@@ -190,6 +190,7 @@
                 <table class="w-full text-white text-sm">
                     <thead class="border-b border-gray-500">
                         <tr>
+                            <!-- Removed the separate 'Tier' column header -->
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Grand Prix</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Pos</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Pts</th>
@@ -710,16 +711,20 @@
             
             document.getElementById('driver-team').textContent = driver.team;
             
-            // --- Update Driver Tier (now controlled by Tailwind classes for mobile visibility) ---
+            // --- Update Driver Tier ---
             const tierElement = document.getElementById('driver-tier');
             if (driver.tier) {
                 tierElement.textContent = driver.tier.toUpperCase();
-                // Tailwind classes 'hidden md:inline-block' already control visibility
+                // Apply consistent styling for the tier tag
+                tierElement.classList.add('px-2.5', 'py-0.5', 'rounded-full', 'text-xs', 'font-bold');
+                tierElement.classList.remove('hidden', 'md:inline-block'); // Ensure visibility is handled by JS
+                tierElement.classList.add('md:inline-block'); // Re-add for desktop visibility
+
                 if (driver.tier === 'Tier 1') {
-                    tierElement.style.backgroundColor = '#d4af37'; // Gold
+                    tierElement.style.backgroundColor = '#d5ae37'; // Gold-like with specific hex color
                     tierElement.style.color = '#000000';
                 } else if (driver.tier === 'Tier 2') {
-                    tierElement.style.backgroundColor = '#c0c0c0'; // Silver
+                    tierElement.style.backgroundColor = '#c0c0c0'; // Silver-like
                     tierElement.style.color = '#000000';
                 } else {
                     tierElement.style.backgroundColor = '#6a6a6a'; // Default grey
@@ -765,10 +770,22 @@
             if(driver.recentRaces && driver.recentRaces.length > 0){
                 driver.recentRaces.forEach((race, index) => {
                     const borderClass = index < driver.recentRaces.length - 1 ? 'border-b border-gray-600' : '';
+                    // Determine tier styling
+                    let tierClass = '';
+                    let tierText = driver.tier.toUpperCase(); // Use full tier text for the tag
+                    if (driver.tier === 'Tier 1') {
+                        tierClass = 'bg-[#d5ae37] text-black'; // Gold-like for Tier 1 with specific hex color
+                    } else if (driver.tier === 'Tier 2') {
+                        tierClass = 'bg-gray-400 text-black'; // Silver-like for Tier 2
+                    }
+
                     racesTbody.innerHTML += `
                         <tr class="${borderClass}">
                             <td class="px-6 py-4 whitespace-nowrap uppercase">
                                 <div class="flex items-center">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${tierClass} mr-2">
+                                        ${tierText}
+                                    </span>
                                     <img src="${race.flag}" alt="${race.gp} Flag" class="h-4 w-auto mr-3 rounded-sm">
                                     <span>${race.gp}</span>
                                 </div>
@@ -846,9 +863,9 @@
             function getNextFriday2PMET() {
                 const now = new Date();
                 let target = new Date(now);
-                target.setUTCHours(18, 0, 0, 0); 
+                target.setUTCHours(18, 0, 0, 0);  // 2 PM ET is 6 PM UTC
                 let daysUntilFriday = (5 - target.getUTCDay() + 7) % 7;
-                if (daysUntilFriday === 0 && now.getUTCHours() >= 18) { 
+                if (daysUntilFriday === 0 && now.getUTCHours() >= 18) {  // If it's Friday and past 2 PM ET, target next Friday
                     daysUntilFriday = 7;
                 }
                 target.setUTCDate(target.getUTCDate() + daysUntilFriday);
