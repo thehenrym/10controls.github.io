@@ -1,4 +1,4 @@
-# thehenrym.github.io
+# 10controls.github.io
 
 - [Latest](https://thehenrym.github.io/latest.html) – View the latest updates.
 - [Schedule](https://thehenrym.github.io/schedule.html) – View the full 10 Controls race calendar.
