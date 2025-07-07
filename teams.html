@@ -1,40 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
-<link rel="shortcut icon" href="favicon/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="10 Controls" />
-<link rel="manifest" href="favicon/site.webmanifest" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>10 Controls</title>
-    <!-- Favicon link (kept from original) -->
     <link rel="icon" type="image/png" href="images/10c.png">
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* Updated background gradient */
             background: linear-gradient(to bottom, #492833, #201C1C);
             min-height: 100vh;
         }
         .footer {
-            /* Updated footer background color */
             background-color: #492833;
             color: white;
             text-align: center;
             padding: 2rem 1rem;
         }
-        /* Styles for the staggered fade-in animation of schedule cards (kept for team cards) */
         .schedule-card {
             opacity: 0;
             transform: translateY(20px);
@@ -52,7 +39,6 @@
             z-index: 1;
         }
 
-        /* Styles for smooth hamburger menu transition, matching reference page */
         #mobile-menu {
             max-height: 0;
             opacity: 0;
@@ -62,7 +48,6 @@
             width: 100%;
             left: 0;
             top: 100%;
-            /* Updated background color */
             background-color: #492833;
         }
 
@@ -71,7 +56,6 @@
             opacity: 1;
         }
 
-        /* Styles for the sliding navigation highlighter, matching reference page */
         #desktop-menu-items {
             position: relative;
         }
@@ -79,27 +63,25 @@
         #sliding-highlighter {
             position: absolute;
             top: 0;
-            left: 0; /* Will be set by JS */
-            width: 0; /* Will be set by JS */
+            left: 0;
+            width: 0;
             height: 100%;
-            /* Updated background color */
             background-color: #492833;
-            border-radius: 0.375rem; /* rounded-md */
+            border-radius: 0.375rem;
             transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
-            z-index: -1; /* Place it behind the text */
+            z-index: -1;
         }
         
-        /* Styles for Hamburger Icon to "X" Animation */
         .hamburger-icon span {
             display: block;
             width: 24px;
             height: 2px;
             background-color: white;
-            transition: all 0.3s cubic-bezier(.08,.82,.17,1); /* Updated transition */
+            transition: all 0.3s cubic-bezier(.08,.82,.17,1);
         }
 
         #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
-            transform: translateY(10px) rotate(45deg); /* Updated transformY */
+            transform: translateY(10px) rotate(45deg);
         }
 
         #mobile-menu-button.open .hamburger-icon span:nth-child(2) {
@@ -107,16 +89,15 @@
         }
 
         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
-            transform: translateY(-10px) rotate(-45deg); /* Updated transformY */
+            transform: translateY(-10px) rotate(-45deg);
         }
 
-        /* Styles for the mobile menu link hover effect */
         .mobile-menu-link {
-            background-color: #492833; /* The original dark red color */
+            background-color: #492833;
             transition: background-color 0.2s ease-in-out;
         }
         .mobile-menu-link:hover {
-            background-color: #000000; /* Black */
+            background-color: #000000;
         }
     </style>
 </head>
@@ -127,7 +108,6 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
                     <a href="index.html">
-                        <!-- Updated logo image source for consistency -->
                         <img src="images/10c.png" alt="10 Controls Logo" class="h-10">
                     </a>
                 </div>
@@ -141,7 +121,6 @@
                 </div>
 
                 <div class="-mr-2 flex md:hidden">
-                    <!-- Mobile menu button, updated style -->
                     <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-white focus:outline-none" style="background-color: #492833;">
                         <span class="sr-only">Open main menu</span>
                         <div class="hamburger-icon space-y-2">
@@ -154,7 +133,6 @@
             </div>
         </nav>
         <div class="md:hidden" id="mobile-menu">
-            <!-- Mobile menu links with new class for hover effect -->
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="index.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Latest</a>
                 <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
@@ -164,7 +142,6 @@
         </div>
     </header>
 
-    <!-- Sub-Header for Upcoming Race Info and Countdown. Hidden on mobile. -->
     <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300 hidden md:flex">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
             <div class="flex items-center space-x-2 sm:space-x-4">
@@ -173,7 +150,6 @@
                 <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
                 </div>
             </div>
-            <!-- Countdown Timer -->
             <div id="countdown-display" class="flex items-center flex-shrink-0 text-right text-xs sm:text-sm">
                 <p id="countdown-timer" class="font-bold"></p>
             </div>
@@ -181,13 +157,10 @@
     </div>
 
     <div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        
         <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
-            </div>
-
+        </div>
     </div>
 
-    <!-- Social Media Links Footer, updated styling -->
     <footer class="bg-black text-white text-center py-5 px-2 mt-8">
         <div class="max-w-7xl mx-auto flex justify-center items-center space-x-6">
             <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
@@ -196,15 +169,13 @@
         </div>
     </footer>
 
-    <!-- Main Copyright Footer, updated text -->
     <footer class="footer">
         <p>© 2022-2025 10 Controls Limited</p>
     </footer>
     
     <script>
-        // Data for F1 Teams (kept from original)
         const teamData = [
-            { id: 'ferrari-card', name: 'Scuderia Ferrari', venue: 'Maranello', drivers: [{ name: 'ALPHAROMEO127', flagCountryCode: 'NL' }, { name: 'ANTONIO BRANCATI', flagCountryCode: 'IT' }], country: 'IT', bgColor: '#821729', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp' },
+            { id: 'ferrari-card', name: 'Pirelli Ferrari', venue: 'Maranello', drivers: [{ name: 'ALPHAROMEO127', flagCountryCode: 'NL' }, { name: 'ANTONIO BRANCATI', flagCountryCode: 'IT' }], country: 'IT', bgColor: '#821729', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp' },
             { id: 'mercedes-card', name: 'GUINNESS MERCEDES', venue: 'Brackley', drivers: [{ name: 'SEBEINKRO', flagCountryCode: 'DK' }, { name: 'SHENGEN', flagCountryCode: 'FI' }], country: 'GB', bgColor: '#C8CCCE', textColor: 'text-black', subTextColor: 'text-gray-700', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197571.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp' },
             { id: 'redbull-card', name: 'NEWPORT ROLEX RED BULL RACING', venue: 'Milton Keynes', drivers: [{ name: 'MAXFAN1982', flagCountryCode: 'EE' }, { name: 'TONY SEROKA', flagCountryCode: 'EE' }], country: 'AT', bgColor: '#003773', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp' },
             { id: 'mclaren-card', name: 'HOT WHEELS MCLAREN', venue: 'Woking', drivers: [{ name: 'FOCUSER', flagCountryCode: 'ES' }, { name: 'ANTON CHEBOTAROV', flagCountryCode: 'UA' }], country: 'GB', bgColor: '#F47600', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp' },
@@ -216,64 +187,61 @@
             { id: 'haas-card', name: 'HAAS ONLYFANS RACING', venue: 'Kannapolis', drivers: [{ name: 'NOJUS GEDVILAS', flagCountryCode: 'PL' }, { name: 'LUKAS', flagCountryCode: 'CZ' }], country: 'USA', bgColor: '#00AFF0', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp' }
         ];
 
-        // Data for F1 Race Schedule (updated to match the more extensive scheduleData from index.html)
         const raceScheduleData = [
-             { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris', country: 'AU' },
-             { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23', winner: 'Oscar Piastri', country: 'CN' },
-             { round: 3, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'April 4-6', winner: 'Max Verstappen', country: 'JP' },
-             { round: 4, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'April 11-13', winner: 'Oscar Piastri', country: 'BH' },
-             { round: 5, name: 'Saudi Arabian Grand Prix', venue: 'Jeddah', date: 'April 18-20', winner: 'Oscar Piastri', country: 'SA' },
-             { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', winner: 'Oscar Piastri', country: 'USA' },
-             { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen', country: 'IT' },
-             { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'MC' },
-             { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'ES' },
-             { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'CA' },
-             { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
-             { round: 12, name: 'Belgian Grand Prix', venue: 'Silverstone', date: 'July 4th', country: 'GB' },
-             { round: 13, name: 'Spanish Grand Prix', venue: 'Spa', date: 'July 11th', country: 'BE' },
-             { round: 14, name: 'CHINESE GRAND PRIX', venue: 'Budapest', date: 'July 18th', country: 'HU' },
-             { round: 15, name: 'JAPANESE GRAND PRIX', venue: 'Zandvoort', date: 'July 25th', country: 'NL' },
-             { round: 16, name: 'UNITED STATES GRAND PRIX', venue: 'Monza', date: 'August 1st', country: 'IT' },
-             { round: 17, name: 'MYSTERY GRAND PRIX', venue: 'Baku', date: 'August 8th', country: 'AZ' },
-             { round: 18, name: 'BRAZILIAN GRAND PRIX', venue: 'Singapore', date: 'August 15th', country: 'SG' },
+            { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris', country: 'AU' },
+            { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23', winner: 'Oscar Piastri', country: 'CN' },
+            { round: 3, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'April 4-6', winner: 'Max Verstappen', country: 'JP' },
+            { round: 4, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'April 11-13', winner: 'Oscar Piastri', country: 'BH' },
+            { round: 5, name: 'Saudi Arabian Grand Prix', venue: 'Jeddah', date: 'April 18-20', winner: 'Oscar Piastri', country: 'SA' },
+            { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', winner: 'Oscar Piastri', country: 'USA' },
+            { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen', country: 'IT' },
+            { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'MC' },
+            { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'ES' },
+            { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'CA' },
+            { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
+            { round: 12, name: 'Belgian Grand Prix', venue: 'Silverstone', date: 'July 4th', country: 'GB' },
+            { round: 13, name: 'Spanish Grand Prix', venue: 'Spa', date: 'July 11th', country: 'BE' },
+            { round: 14, name: 'CHINESE GRAND PRIX', venue: 'Budapest', date: 'July 18th', country: 'HU' },
+            { round: 15, name: 'JAPANESE GRAND PRIX', venue: 'Zandvoort', date: 'July 25th', country: 'NL' },
+            { round: 16, name: 'UNITED STATES GRAND PRIX', venue: 'Monza', date: 'August 1st', country: 'IT' },
+            { round: 17, name: 'MYSTERY GRAND PRIX', venue: 'Baku', date: 'August 8th', country: 'AZ' },
+            { round: 18, name: 'BRAZILIAN GRAND PRIX', venue: 'Singapore', date: 'August 15th', country: 'SG' },
         ];
 
-        // Function to get flag HTML based on country code for drivers
         function getFlagHtmlForDriver(countryCode) {
             let flagUrl = '';
-            // Using placeholder image with text 'NF' (No Flag) as a fallback
-            const fallbackFlag = `https://placehold.co/32x32/cccccc/000000?text=NF`; 
+            const fallbackFlag = `https://placehold.co/32x32/cccccc/000000?text=NF`;
 
             if (countryCode === 'PL') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197612.png`; // Poland (for Nojus Gedvilas)
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197612.png`;
             } else if (countryCode === 'UA') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197572.png`; // Ukraine
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197572.png`;
             } else if (countryCode === 'DK') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197579.png`; // Denmark (for Sebeinkro)
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197579.png`;
             } else if (countryCode === 'CZ') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197576.png`; // Czech
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197576.png`;
             } else if (countryCode === 'GB') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197374.png`; // United Kingdom (for Counterfeit, Luca Stevens, Max Housley, Aspec33)
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197374.png`;
             } else if (countryCode === 'NL') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197441.png`; // Netherlands
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197441.png`;
             } else if (countryCode === 'IT') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197626.png`; // Italy (for Antonio Brancati)
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197626.png`;
             } else if (countryCode === 'HU') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197584.png`; // Hungary
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197584.png`;
             } else if (countryCode === 'LT') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197607.png`; // Lithuania
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197607.png`;
             } else if (countryCode === 'FI') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197585.png`; // Finland (for Shengen)
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197585.png`;
             } else if (countryCode === 'BE') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197583.png`; // Belgium
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197583.png`;
             } else if (countryCode === 'RO') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197587.png`; // Romania
-            } else if (countryCode === 'ES') { 
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197593.png`; // Spain (for Focuser, Rabas, and MORA)
-            } else if (countryCode === 'EE') { 
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197529.png`; // Estonia (for MAXFAN1982, Yuki Tsunoda, and LOLER)
-            } else if (countryCode === 'RU') { 
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197602.png`; // Russia (for STRA)
+                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197587.png`;
+            } else if (countryCode === 'ES') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197593.png`;
+            } else if (countryCode === 'EE') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197529.png`;
+            } else if (countryCode === 'RU') {
+                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197602.png`;
             }
 
             if (flagUrl) {
@@ -283,7 +251,6 @@
         }
         
         window.onload = function() {
-            // --- Content population script for TEAM cards ---
             const scheduleGrid = document.getElementById('schedule-grid');
             if (scheduleGrid) {
                 teamData.forEach(team => {
@@ -294,7 +261,6 @@
                         card.id = team.id;
                     }
 
-                    // Apply custom styles if they exist
                     if (team.bgColor) {
                         card.style.backgroundColor = team.bgColor;
                     }
@@ -303,7 +269,6 @@
                     const subTextColor = team.subTextColor || 'text-gray-600';
 
                     let teamFlagHtml = '';
-                    // Conditional flag image based on country (for teams) - kept for main team info
                     if (team.flagUrl) {
                         teamFlagHtml = `<img src="${team.flagUrl}" alt="${team.name} Flag" class="h-8 w-auto mt-2 rounded-md">`;
                     } else if (team.country === 'USA') {
@@ -329,25 +294,21 @@
                         `
                     }
                     
-                    // Generate driver flag and name HTML for each driver
                     const driver1FlagHtml = getFlagHtmlForDriver(team.drivers[0].flagCountryCode);
                     const driver2FlagHtml = getFlagHtmlForDriver(team.drivers[1].flagCountryCode);
 
-                    // Generate driver profile links
                     const driver1Name = team.drivers[0].name.toUpperCase();
                     const driver2Name = team.drivers[1].name.toUpperCase();
                     const driver1Link = `https://thehenrym.github.io/driverprofile.html?driver=${encodeURIComponent(driver1Name)}`;
                     const driver2Link = `https://thehenrym.github.io/driverprofile.html?driver=${encodeURIComponent(driver2Name)}`;
 
                     card.innerHTML = `
-                        <!-- Main Content -->
                         <div class="p-8 relative">
                             ${carImage}
                             ${teamFlagHtml}
                             <h3 class="text-2xl font-bold ${textColor} mt-2">${team.name.toUpperCase()}</h3>
                             <p class="text-lg ${subTextColor} mt-2">${team.venue.toUpperCase()}</p>
                         </div>
-                        <!-- Driver Footer -->
                         <div class="bg-black/70 backdrop-blur-sm mt-auto">
                             <div class="flex items-center justify-around text-white">
                                 <div class="w-full text-center py-3 flex items-center justify-center space-x-2">
@@ -370,7 +331,6 @@
                 }, 100);
             }
 
-            // --- Mobile menu toggle script ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
 
@@ -379,55 +339,45 @@
                 mobileMenuButton.classList.toggle('open');
             });
             
-            // --- Sliding highlighter script for desktop menu ---
             const menuItemsContainer = document.getElementById('desktop-menu-items');
             if (menuItemsContainer) {
                 const menuLinks = menuItemsContainer.querySelectorAll('a');
                 const highlighter = document.getElementById('sliding-highlighter');
-                // Ensure 'Teams' link is the active one for initialization
                 const activeLink = menuItemsContainer.querySelector('a[href="teams.html"]');
 
-                // Function to move the highlighter to a specific link's position
                 function setHighlighterToLink(link) {
                     if (!link) return;
                     highlighter.style.left = `${link.offsetLeft}px`;
                     highlighter.style.width = `${link.offsetWidth}px`;
                 }
 
-                // Initialize highlighter on the 'Teams' link
                 setTimeout(() => setHighlighterToLink(activeLink), 100);
 
-                // Add mouseover event listeners to all links to move the highlighter
                 menuLinks.forEach(link => {
                     link.addEventListener('mouseenter', () => setHighlighterToLink(link));
                 });
 
-                // When the mouse leaves the menu, return the highlighter to the active 'Teams' link
                 menuItemsContainer.addEventListener('mouseleave', () => {
                     setHighlighterToLink(activeLink);
                 });
             }
 
-            // --- Sub-header upcoming race script (newly added/modified) ---
             const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
             const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
-            const countdownDisplayEl = document.getElementById('countdown-display'); // Get the countdown display element
+            const countdownDisplayEl = document.getElementById('countdown-display');
 
-            // Helper to parse date strings like "March 14-16" or "August 1st"
             function parseRaceDate(dateStr) {
                 const monthStr = dateStr.split(' ')[0];
-                let dayStr = dateStr.split(' ')[1].split('-')[0]; // Handles "14-16"
-                // Handle dates like "August 1st", "June 27th" by removing ordinal suffixes
+                let dayStr = dateStr.split(' ')[1].split('-')[0];
                 if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
                     dayStr = dayStr.substring(0, dayStr.length - 2);
                 }
                 return new Date(`${monthStr} ${dayStr}, 2025`);
             }
 
-            // Find the upcoming race
             const now = new Date();
             let upcomingRace = null;
-            for (const race of raceScheduleData) { // Using raceScheduleData here
+            for (const race of raceScheduleData) {
                 const raceDate = parseRaceDate(race.date);
                 if (raceDate > now) {
                     upcomingRace = race;
@@ -440,28 +390,20 @@
                 upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
             } else {
                 upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                // Hide the entire countdown display if season is over
                 if (countdownDisplayEl) {
                     countdownDisplayEl.style.display = 'none';
                 }
             }
 
-            // --- Countdown Timer Logic ---
-            // Function to calculate the next Friday at 2 PM Eastern Time (EDT/EST)
-            // Assuming current period is EDT (UTC-4), so 2 PM EDT is 18:00 UTC.
             function getNextFriday2PMET() {
                 const now = new Date();
                 let target = new Date(now);
 
-                // Set to 2 PM EDT (18:00 UTC during EDT)
-                // We'll primarily work with UTC to avoid local timezone issues for the target time.
-                target.setUTCHours(18, 0, 0, 0); 
-
-                // Calculate days until next Friday (Friday is day 5, Sunday is 0 for getUTCDay())
+                target.setUTCHours(18, 0, 0, 0);
+                
                 let daysUntilFriday = (5 - target.getUTCDay() + 7) % 7;
 
-                // If today is Friday and it's already past 2 PM EDT (18:00 UTC), target next Friday
-                if (daysUntilFriday === 0 && now.getUTCHours() >= 18) { 
+                if (daysUntilFriday === 0 && now.getUTCHours() >= 18) {
                     daysUntilFriday = 7;
                 }
 
@@ -476,10 +418,9 @@
                 const now = new Date();
                 let difference = countdownTargetDate.getTime() - now.getTime();
 
-                // If the current target date has passed, calculate the next one
                 if (difference < 0) {
                     countdownTargetDate = getNextFriday2PMET();
-                    difference = countdownTargetDate.getTime() - now.getTime(); // Recalculate difference for the new target
+                    difference = countdownTargetDate.getTime() - now.getTime();
                 }
                 
                 const days = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -490,7 +431,7 @@
                 const countdownEl = document.getElementById('countdown-timer');
                 if (countdownEl) {
                     if (difference <= 0) {
-                        countdownEl.textContent = "RACE STARTING SOON!"; // Or "RACE LIVE!"
+                        countdownEl.textContent = "RACE STARTING SOON!";
                     } else if (days > 0) {
                         countdownEl.textContent = `NEXT RACE IN ${days}D ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
                     } else {
@@ -499,9 +440,7 @@
                 }
             }
 
-            // Initial call to set up the countdown
             updateCountdown();
-            // Update the countdown every second
             setInterval(updateCountdown, 1000);
         };
     </script>
