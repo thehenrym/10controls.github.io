@@ -343,7 +343,7 @@
             switch (teamName.toUpperCase()) {
                 case "HOT WHEELS MCLAREN": return 'https://cdn.discordapp.com/emojis/1378699086982811679.webp?size=44';
                 case "NEWPORT ROLEX RED BULL RACING": return 'https://cdn.discordapp.com/emojis/1378696277180813312.webp?size=44';
-                case "SCUDERIA FERRARI": return 'https://cdn.discordapp.com/emojis/1215769617272934440.webp?size=44';
+                case "PIRELLI FERRARI": return 'https://cdn.discordapp.com/emojis/1390804647492583434.webp?size=96'; // Updated icon for Pirelli Ferrari
                 case "GUINNESS MERCEDES": return 'https://cdn.discordapp.com/emojis/1386054950496243732.webp?size=44';
                 case "LOCKHEED MARTIN ASTON MARTIN": return 'https://cdn.discordapp.com/emojis/1215769484078354483.webp?size=44';
                 case "RACING BULLS PEUGEOT SPORT": return 'https://cdn.discordapp.com/emojis/1377646844578103346.webp?size=44';
@@ -363,11 +363,11 @@
             { driver: "TONY SEROKA", team: "NEWPORT ROLEX RED BULL RACING", pts: 16, flag: "PL" },
             { driver: "MAXFAN1982", team: "NEWPORT ROLEX RED BULL RACING", pts: 13, flag: "PL" }, 
             { driver: "SEBEINKRO", team: "GUINNESS MERCEDES", pts: 10, flag: "NO" },
-            { driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI", pts: 11, flag: "NL" },
+            { driver: "ALPHAROMEO127", team: "PIRELLI FERRARI", pts: 11, flag: "NL" }, // Updated team name
             { driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", pts: 9, flag: "RS" },
             { driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", pts: 8, flag: "ES" },
             { driver: "TSAR", team: "RACING BULLS PEUGEOT SPORT", pts: 7, flag: "HU" },
-            { driver: "JSTN NL", team: "SCUDERIA FERRARI", pts: 6, flag: "NL" },
+            { driver: "JSTN NL", team: "PIRELLI FERRARI", pts: 6, flag: "NL" }, // Updated team name
             { driver: "ASPEC33", team: "TINDER ALPINE F1 TEAM", pts: 5, flag: "GB" },
             { driver: "COUNTERFEIT", team: "TWITCH SAUBER", pts: 4, flag: "GB" },
             { driver: "SHENGEN", team: "GUINNESS MERCEDES", pts: 3, flag: "FI" },
@@ -389,7 +389,7 @@
             { driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", pts: 10, flag: "GB" },
             { driver: "COUNTERFEIT", team: "TWITCH SAUBER", pts: 9, flag: "GB" },
             { driver: "TSAR", team: "RACING BULLS PEUGEOT SPORT", pts: 8, flag: "HU" },
-            { driver: "ANTONIO BRANCATI", team: "SCUDERIA FERRARI", pts: 7, flag: "IT" },
+            { driver: "ANTONIO BRANCATI", team: "PIRELLI FERRARI", pts: 7, flag: "IT" }, // Updated team name
             { driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS RACING", pts: 6, flag: "LT" },
             { driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", pts: 5, flag: "UA" },
             { driver: "EDGE", team: "HAAS ONLYFANS RACING", pts: 4, flag: "GB" },
@@ -400,7 +400,7 @@
             { driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", pts: 0, flag: "RS" },
             { driver: "THEROMANIANDEVIL", team: "GUINNESS MERCEDES", pts: 0, flag: "RO" },
             { driver: "LOLER", team: "JOHN DEERE WILLIAMS RACING", pts: 0, flag: "PL" }, 
-            { driver: "ALPHAROMEO127", team: "SCUDERIA FERRARI", pts: 0, flag: "NL" }
+            { driver: "ALPHAROMEO127", team: "PIRELLI FERRARI", pts: 0, flag: "NL" } // Updated team name
         ];
 
       // Race results from Imola GP
@@ -417,25 +417,115 @@
             { driver: "SHENGEN", team: "GUINNESS MERCEDES", pts: 6, flag: "FI" },
             { driver: "TOBOB", team: "HAAS ONLYFANS RACING", pts: 5, flag: "DE" },
             { driver: "LOLER", team: "JOHN DEERE WILLIAMS RACING", pts: 4, flag: "PL" },
-            { driver: "SANDRO", team: "SCUDERIA FERRARI", pts: 3, flag: "NL" },
+            { driver: "SANDRO", team: "PIRELLI FERRARI", pts: 3, flag: "NL" }, // Updated team name
             { driver: "MAX HOUSLEY", team: "TINDER ALPINE F1 TEAM", pts: 2, flag: "GB" },
             { driver: "COUNTERFEIT", team: "TWITCH SAUBER", pts: 1, flag: "GB" },
             { driver: "EDGE", team: "JOHN DEERE WILLIAMS RACING", pts: 0, flag: "GB" }, 
             { driver: "THEROMANIANDEVIL", team: "TWITCH SAUBER", pts: 0, flag: "RO" },
             { driver: "ALFIE", team: "TINDER ALPINE F1 TEAM", pts: 0, flag: "GB" },
-            { driver: "ANTON WEJLEMAND", team: "SCUDERIA FERRARI", pts: 0, flag: "DK" }, 
+            { driver: "ANTON WEJLEMAND", team: "PIRELLI FERRARI", pts: 0, flag: "DK" }, // Updated team name
             { driver: "FREDERIK WINTHER", team: "RACING BULLS PEUGEOT SPORT", pts: 0, flag: "DK" }
         ];
+
+        // Race results from Belgian GP (newly added)
+        const raceResultsBelgian = [
+            { pos: 1, driver: "MAXFAN1982", team: "NEWPORT ROLEX RED BULL RACING", grid: 1, stops: 2, bestLap: "1:44.356", time: "39:52.489", flag: "PL" },
+            { pos: 2, driver: "SANDROVDREEDE", team: "HOT WHEELS MCLAREN", grid: 2, stops: 1, bestLap: "1:44.567", time: "+1.840", flag: "NL" },
+            { pos: 3, driver: "SHENGEN", team: "GUINNESS MERCEDES", grid: 6, stops: 1, bestLap: "1:45.309", time: "+4.781", flag: "FI" },
+            { pos: 4, driver: "JAY2005_071", team: "HOT WHEELS MCLAREN", grid: 4, stops: 1, bestLap: "1:45.672", time: "+7.404", flag: "NL" },
+            { pos: 5, driver: "ALPHAROMEO127", team: "PIRELLI FERRARI", grid: 5, stops: 2, bestLap: "1:45.511", time: "+8.459", flag: "NL" }, // Updated team name
+            { pos: 6, driver: "MAX HOUSLEY", team: "TINDER ALPINE F1 TEAM", grid: 7, stops: 2, bestLap: "1:45.516", time: "+12.729", flag: "GB" },
+            { pos: 7, driver: "SEBEINKRO", team: "GUINNESS MERCEDES", grid: 3, stops: 1, bestLap: "1:45.282", time: "+0.281", flag: "NO" }, // This driver was moved to pos 7 in the original, so keeping it here.
+            { pos: 8, driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", grid: 10, stops: 2, bestLap: "1:45.603", time: "+19.641", flag: "RS" },
+            { pos: 9, driver: "TSAR", team: "RACING BULLS PEUGEOT SPORT", grid: 13, stops: 1, bestLap: "1:46.878", time: "+26.634", flag: "HU" },
+            { pos: 10, driver: "KRAB", team: "RACING BULLS PEUGEOT SPORT", grid: 11, stops: 1, bestLap: "1:46.753", time: "+27.724", flag: "PL" },
+            { pos: 11, driver: "ALFIE WHITE", team: "TINDER ALPINE F1 TEAM", grid: 12, stops: 2, bestLap: "1:46.028", time: "+28.316", flag: "GB" },
+            { pos: 12, driver: "JSTN NL", team: "PIRELLI FERRARI", grid: 9, stops: 2, bestLap: "1:45.397", time: "+28.808", flag: "NL" }, // Updated team name
+            { pos: 13, driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", grid: 16, stops: 1, bestLap: "1:46.591", time: "+36.042", flag: "GB" },
+            { pos: 14, driver: "LEON4IK_008", team: "JOHN DEERE WILLIAMS RACING", grid: 14, stops: 2, bestLap: "1:46.007", time: "+37.090", flag: "UA" },
+            { pos: 15, driver: "COUNTERFEIT", team: "JOHN DEERE WILLIAMS RACING", grid: 15, stops: 2, bestLap: "1:46.369", time: "+45.886", flag: "GB" }, // Updated team for Counterfeit
+            { pos: 16, driver: "DANOTTOK", team: "HAAS ONLYFANS RACING", grid: 17, stops: 2, bestLap: "1:48.143", time: "+6 secs.", flag: "FI" },
+            { pos: 17, driver: "LOLER_XD", team: "JOHN DEERE WILLIAMS RACING", grid: 18, stops: 2, bestLap: "1:47.973", time: "+3 secs.", flag: "PL" },
+            { pos: 18, driver: "TONY SEROKA", team: "NEWPORT ROLEX RED BULL RACING", grid: 8, stops: 0, bestLap: "1:46.056", time: "DNF", flag: "PL" }
+        ];
+
+        // Points system for races
+        const racePointsSystem = [25, 20, 16, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+
+        // Driver name consistency map for consolidating names from different sources
+        const driverNameConsistencyMap = {
+            "1.9TDI | MAXFAN1...": "MAXFAN1982",
+            "SANDROVDREEDE": "SANDROVDREEDE",
+            "SEBEINKRO": "SEBEINKRO",
+            "JAY2005_071": "JAY2005_071",
+            "ALPHAROMEO127": "ALPHAROMEO127",
+            "PAAVO PELTOMAA": "SHENGEN", // Assuming Paavo Peltomaa is SHENGEN
+            "MAX HOUSLEY": "MAX HOUSLEY",
+            "TONY SEROKA": "TONY SEROKA",
+            "JSTN NL": "JSTN NL",
+            "STRA": "STRA",
+            "KRAB": "KRAB",
+            "ALFIE WHITE": "ALFIE WHITE", // Canonical name
+            "ALFIE": "ALFIE WHITE", // Map "ALFIE" to "ALFIE WHITE"
+            "PM|TSAR": "TSAR",
+            "LEON4IK_008": "LEON4IK_008",
+            "LUCA STEVENS": "LUCA STEVENS",
+            "COUNTERFEIT": "COUNTERFEIT",
+            "DANOTTOK": "DANOTTOK",
+            "LOLER_XD": "LOLER", // Standardizing LOLER_XD to LOLER
+            "ANTONIO BRANCATI": "ANTONIO BRANCATI",
+            "NOJUS GEDVILAS": "NOJUS GEDVILAS",
+            "ARUTHLESS GUY": "ARUTHLESS GUY",
+            "EDGE": "EDGE",
+            "RABAS": "RABAS",
+            "MAXLINXC": "MAXLINXC",
+            "YULIAN KALENANTOVICH": "YULIAN KALENANTOVICH",
+            "THEROMANIANDEVIL": "THEROMANIANDEVIL",
+            "TOBOB": "TOBOB",
+            "SANDRO": "SANDRO",
+            "ANTON WEJLEMAND": "ANTON WEJLEMAND",
+            "FREDERIK WINTHER": "FREDERIK WINTHER",
+            "ANTON CHEBOTAROV": "ANTON CHEBOTAROV", // Ensure Anton Chebotarov is consistent
+            "FOCUSER": "FOCUSER", // Ensure Focuser is consistent
+            "MORA": "MORA" // Ensure Mora is consistent
+        };
+
+        // Team name mapping for standardizing team names from different sources
+        const teamNameMapping = {
+            "Red Bull": "NEWPORT ROLEX RED BULL RACING",
+            "McLaren": "HOT WHEELS MCLAREN",
+            "Mercedes-AMG Petronas": "GUINNESS MERCEDES",
+            "Aston Martin": "LOCKHEED MARTIN ASTON MARTIN",
+            "Haas": "HAAS ONLYFANS RACING",
+            "Williams": "JOHN DEERE WILLIAMS RACING",
+            "Scuderia Ferrari HP": "PIRELLI FERRARI", 
+            "Scuderia Ferrari": "PIRELLI FERRARI", 
+            "KICK Sauber": "TWITCH SAUBER",
+            "Alpine": "TINDER ALPINE F1 TEAM",
+            "Visa Cash App Racing Bulls": "RACING BULLS PEUGEOT SPORT"
+        };
+
 
         // --- Driver Standings Calculation ---
         // driverPointsMap will now store teamOccurrences to track which team a driver has driven for the most.
         let driverPointsMap = new Map();
 
         // Function to update driver points and track team occurrences
-        const updateDriverStandings = (results) => {
-            results.forEach(result => {
-                let normalizedDriverName = result.driver.toUpperCase();
-                let displayDriverName = result.driver; // Use original casing for display
+        const updateDriverStandings = (results, isBelgianGP = false) => {
+            results.forEach((result, index) => {
+                // Apply driver name consistency mapping
+                let normalizedDriverName = driverNameConsistencyMap[result.driver.toUpperCase()] || result.driver.toUpperCase();
+                let displayDriverName = normalizedDriverName; // Use the canonical name for display
+
+                // Apply team name consistency mapping
+                let normalizedTeamName = teamNameMapping[result.team] || result.team;
+                normalizedTeamName = normalizedTeamName.toUpperCase(); // Ensure uppercase for map key
+
+                let pointsToAdd = result.pts;
+                // If it's the Belgian GP results, calculate points based on position
+                if (isBelgianGP) {
+                    pointsToAdd = racePointsSystem[index] || 0;
+                }
 
                 if (!driverPointsMap.has(normalizedDriverName)) {
                     driverPointsMap.set(normalizedDriverName, {
@@ -443,39 +533,33 @@
                         name: displayDriverName,
                         nationality: result.flag, // Assuming nationality is consistent or last one seen is fine
                         points: 0,
-                        teamOccurrences: {} // Object to store team counts for this driver
+                        teamOccurrences: {}, // Object to store team counts for this driver
+                        lastSeenTeam: '' // New property to store the last team the driver raced for
                     });
                 }
 
                 let driverData = driverPointsMap.get(normalizedDriverName);
-                driverData.points += result.pts;
+                driverData.points += pointsToAdd;
 
                 // Increment the count for the current team
-                const teamName = result.team.toUpperCase();
-                driverData.teamOccurrences[teamName] = (driverData.teamOccurrences[teamName] || 0) + 1;
+                driverData.teamOccurrences[normalizedTeamName] = (driverData.teamOccurrences[normalizedTeamName] || 0) + 1;
+                // Update lastSeenTeam with the team from the current race result
+                driverData.lastSeenTeam = normalizedTeamName;
             });
         };
 
-        // Apply all race results
+        // Apply all race results in chronological order
         updateDriverStandings(raceResultsBahrain);
         updateDriverStandings(raceResultsAustralia);
         updateDriverStandings(raceResultsImola);
+        updateDriverStandings(raceResultsBelgian, true); // Pass true for Belgian GP to calculate points based on position
 
-        // Convert map values to an array and determine the most frequent team for each driver
+        // Convert map values to an array and assign the last seen team to 'car'
         let updatedDriverStandings = Array.from(driverPointsMap.values());
 
         updatedDriverStandings.forEach(driver => {
-            let mostFrequentTeam = '';
-            let maxCount = 0;
-            // Iterate through teamOccurrences to find the team with the highest count
-            for (const team in driver.teamOccurrences) {
-                if (driver.teamOccurrences[team] > maxCount) {
-                    maxCount = driver.teamOccurrences[team];
-                    mostFrequentTeam = team;
-                }
-            }
-            // Assign the most frequent team to the 'car' property for display
-            driver.car = mostFrequentTeam;
+            // Assign the last seen team to the 'car' property for display
+            driver.car = driver.lastSeenTeam;
         });
 
         // Sort drivers by points in descending order and assign positions
@@ -487,28 +571,22 @@
         let teamPointsMap = new Map();
 
         // Function to update team points
-        const updateTeamStandings = (results) => {
-            results.forEach(result => {
-                let normalizedTeamName = result.team.toUpperCase();
-                let displayTeamName = result.team;
+        const updateTeamStandings = (results, isBelgianGP = false) => {
+            results.forEach((result, index) => {
+                let normalizedTeamName = teamNameMapping[result.team] || result.team;
+                normalizedTeamName = normalizedTeamName.toUpperCase();
                 
-                // Standardize casing for new teams
-                if (result.team.includes("HOT WHEELS MCLAREN")) displayTeamName = "HOT WHEELS MCLAREN";
-                else if (result.team.includes("NEWPORT ROLEX RED BULL RACING")) displayTeamName = "NEWPORT ROLEX RED BULL RACING";
-                else if (result.team.includes("SCUDERIA FERRARI")) displayTeamName = "SCUDERIA FERRARI"; 
-                else if (result.team.includes("GUINNESS MERCEDES")) displayTeamName = "GUINNESS MERCEDES"; 
-                else if (result.team.includes("LOCKHEED MARTIN ASTON MARTIN")) displayTeamName = "LOCKHEED MARTIN ASTON MARTIN"; 
-                else if (result.team.includes("RACING BULLS PEUGEOT SPORT")) displayTeamName = "RACING BULLS PEUGEOT SPORT"; 
-                else if (result.team.includes("TINDER ALPINE F1 TEAM")) displayTeamName = "TINDER ALPINE F1 TEAM"; 
-                else if (result.team.includes("HAAS ONLYFANS RACING")) displayTeamName = "HAAS ONLYFANS RACING"; 
-                else if (result.team.includes("TWITCH SAUBER")) displayTeamName = "TWITCH SAUBER"; 
-                else if (result.team.includes("JOHN DEERE WILLIAMS RACING")) displayTeamName = "JOHN DEERE WILLIAMS RACING"; 
-                else if (result.team.includes("KICK SAUBER")) displayTeamName = "KICK SAUBER"; 
-
+                let pointsToAdd = result.pts;
+                // If it's the Belgian GP results, calculate points based on position
+                if (isBelgianGP) {
+                    pointsToAdd = racePointsSystem[index] || 0;
+                }
+                
                 if (teamPointsMap.has(normalizedTeamName)) {
-                    teamPointsMap.get(normalizedTeamName).points += result.pts;
+                    teamPointsMap.get(normalizedTeamName).points += pointsToAdd;
                 } else {
-                    teamPointsMap.set(normalizedTeamName, { pos: 0, team: displayTeamName, points: result.pts });
+                    // Crucial fix: Ensure the 'team' property in the map entry is the normalized name
+                    teamPointsMap.set(normalizedTeamName, { pos: 0, team: normalizedTeamName, points: pointsToAdd }); 
                 }
             });
         };
@@ -517,10 +595,10 @@
         updateTeamStandings(raceResultsBahrain);
         updateTeamStandings(raceResultsAustralia);
         updateTeamStandings(raceResultsImola);
+        updateTeamStandings(raceResultsBelgian, true); // Pass true for Belgian GP to calculate points based on position
 
         let updatedTeamStandings = Array.from(teamPointsMap.values());
         // Filter out "KICK SAUBER" if "TWITCH SAUBER" is the preferred name for the same entity
-        // Based on the provided getTeamIconSrc, "KICK SAUBER" and "TWITCH SAUBER" map to the same icon.
         // It's assumed "TWITCH SAUBER" is the canonical name, and "KICK SAUBER" is an alias or old name.
         updatedTeamStandings = updatedTeamStandings.filter(team => team.team.toUpperCase() !== "KICK SAUBER");
         
@@ -537,16 +615,21 @@
              { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', winner: 'Oscar Piastri', country: 'USA' },
              { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen', country: 'IT' },
              { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'MC' },
-             { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'ES' },
+             { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', country: 'ES' }, // Updated date to July 11th
              { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'CA' },
              { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
-             { round: 12, name: 'Belgian Grand Prix', venue: 'Silverstone', date: 'July 4th', country: 'GB' },
-             { round: 13, name: 'Spanish Grand Prix', venue: 'Spa', date: 'July 11th', country: 'BE' },
-             { round: 14, name: 'CHINESE GRAND PRIX', venue: 'Budapest', date: 'July 18th', country: 'HU' },
-             { round: 15, name: 'JAPANESE GRAND PRIX', venue: 'Zandvoort', date: 'July 25th', country: 'NL' },
-             { round: 16, name: 'UNITED STATES GRAND PRIX', venue: 'Monza', date: 'August 1st', country: 'IT' },
-             { round: 17, name: 'MYSTERY GRAND PRIX', venue: 'Baku', date: 'August 8th', country: 'AZ' },
-             { round: 18, name: 'BRAZILIAN GRAND PRIX', venue: 'Singapore', date: 'August 15th', country: 'SG' },
+             { round: 12, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', country: 'BE' }, // Updated venue to Spa
+             { round: 13, name: 'Hungarian Grand Prix', venue: 'Budapest', date: 'July 18th', country: 'HU' }, // Updated date
+             { round: 14, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'July 25th', country: 'NL' }, // Updated date
+             { round: 15, name: 'Italian Grand Prix', venue: 'Monza', date: 'August 1st', country: 'IT' }, // Updated date
+             { round: 16, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'August 8th', country: 'AZ' }, // Updated date
+             { round: 17, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'August 15th', country: 'SG' }, // Updated date
+             { round: 18, name: 'United States Grand Prix', venue: 'Austin', date: 'August 22nd', country: 'USA' }, // Updated date
+             { round: 19, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'August 29th', country: 'MX' }, // Updated date
+             { round: 20, name: 'Brazilian Grand Prix', venue: 'Interlagos', date: 'September 5th', country: 'BR' }, // Updated date and venue
+             { round: 21, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'September 12th', country: 'USA' }, // Updated date
+             { round: 22, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'September 19th', country: 'QAT' }, // Updated date
+             { round: 23, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'September 26th', country: 'AE' } // Updated date
         ];
         
         window.onload = function() {
@@ -684,7 +767,7 @@
             const driverStandingsBody = document.getElementById('driver-standings-body');
             const teamStandingsBody = document.getElementById('team-standings-body');
             const driverContainer = document.getElementById('driver-standings-container');
-            const teamContainer = document.getElementById('team-standings-container');
+            const teamContainer = document = document.getElementById('team-standings-container');
             const tablesWrapper = document.getElementById('tables-wrapper');
 
             // Populate driver standings table
