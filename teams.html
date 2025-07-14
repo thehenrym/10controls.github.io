@@ -25,18 +25,13 @@
         .schedule-card {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.6s ease-out;
             position: relative;
             overflow: hidden;
         }
         .schedule-card.visible {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        .schedule-card > div {
-            position: relative;
-            z-index: 1;
         }
 
         #mobile-menu {
@@ -99,16 +94,30 @@
         .mobile-menu-link:hover {
             background-color: #000000;
         }
+        .driver-flag {
+            width: 20px;
+            height: 16px;
+            border: 1px solid #be8190;
+            border-radius: 2px;
+            object-fit: cover;
+            display: inline-block;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .team-logo {
+            height: 32px;
+            width: auto;
+        }
     </style>
 </head>
-<body class="font-medium">
+<body>
 
     <header class="bg-black/70 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
                     <a href="index.html">
-                        <img src="images/10c.png" alt="10 Controls Logo" class="h-10">
+                        <img src="https://placehold.co/40x40/492833/ffffff?text=10C" alt="10 Controls Logo" class="h-10">
                     </a>
                 </div>
 
@@ -174,17 +183,113 @@
     </footer>
     
     <script>
-        const teamData = [
-            { id: 'ferrari-card', name: 'Pirelli Ferrari', venue: 'Maranello', drivers: [{ name: 'ALPHAROMEO127', flagCountryCode: 'NL' }, { name: 'ANTONIO BRANCATI', flagCountryCode: 'IT' }], country: 'IT', bgColor: '#821729', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp' },
-            { id: 'mercedes-card', name: 'GUINNESS MERCEDES', venue: 'Brackley', drivers: [{ name: 'SEBEINKRO', flagCountryCode: 'DK' }, { name: 'SHENGEN', flagCountryCode: 'FI' }], country: 'GB', bgColor: '#C8CCCE', textColor: 'text-black', subTextColor: 'text-gray-700', flagUrl: 'https://cdn-icons-png.flaticon.com/128/197/197571.png', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp' },
-            { id: 'redbull-card', name: 'NEWPORT ROLEX RED BULL RACING', venue: 'Milton Keynes', drivers: [{ name: 'MAXFAN1982', flagCountryCode: 'EE' }, { name: 'TONY SEROKA', flagCountryCode: 'EE' }], country: 'AT', bgColor: '#003773', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp' },
-            { id: 'mclaren-card', name: 'HOT WHEELS MCLAREN', venue: 'Woking', drivers: [{ name: 'FOCUSER', flagCountryCode: 'ES' }, { name: 'ANTON CHEBOTAROV', flagCountryCode: 'UA' }], country: 'GB', bgColor: '#F47600', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp' },
-            { id: 'astonmartin-card', name: 'Lockheed Martin Aston Martin', venue: 'Silverstone', drivers: [{ name: 'STRA', flagCountryCode: 'RU' }, { name: 'LUCA STEVENS', flagCountryCode: 'GB' }], country: 'GB', bgColor: '#037A68', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp' },
-            { id: 'alpine-card', name: 'Tinder Alpine F1 Team', venue: 'Enstone', drivers: [{ name: 'MAX HOUSLEY', flagCountryCode: 'GB' }, { name: 'ALFIE', flagCountryCode: 'GB' }], country: 'FR', bgColor: '#F282B4', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp' },
-            { id: 'williams-card', name: 'John Deere Williams Racing', venue: 'Grove', drivers: [{ name: 'RABAS', flagCountryCode: 'ES' }, { name: 'LOLER', flagCountryCode: 'EE' }], country: 'GB', bgColor: '#00A0DE', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp' },
-            { id: 'rb-card', name: 'RACING BULLS PEUGEOT SPORT', venue: 'Faenza', drivers: [{ name: 'MORA', flagCountryCode: 'ES' }, { name: 'TSAR', flagCountryCode: 'HU' }], country: 'IT', bgColor: '#bbda0c', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp' },
-            { id: 'sauber-card', name: 'TWITCH SAUBER', venue: 'Hinwil', drivers: [{ name: 'YULIAN KALENANTOVICH', flagCountryCode: 'UA' }, { name: 'COUNTERFEIT', flagCountryCode: 'GB' }], country: 'CH', bgColor: '#9146ff', textColor: 'text-black', subTextColor: 'text-gray-800', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp' },
-            { id: 'haas-card', name: 'HAAS ONLYFANS RACING', venue: 'Kannapolis', drivers: [{ name: 'NOJUS GEDVILAS', flagCountryCode: 'PL' }, { name: 'LUKAS', flagCountryCode: 'CZ' }], country: 'USA', bgColor: '#00AFF0', textColor: 'text-white', subTextColor: 'text-gray-200', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp' }
+        let teamData = [
+            { id: 'ferrari-card', name: 'Pirelli Ferrari', venue: 'Maranello', drivers: [{ name: 'ALPHAROMEO', flagCountryCode: 'NL' }, { name: 'ANTONIO BRANCATI', flagCountryCode: 'IT' }, { name: 'JSTN NL', flagCountryCode: 'NL' }, { name: 'MANUEL ROTUNDO', flagCountryCode: 'IT' }], country: 'IT', bgColor: '#821729', textColor: 'text-white', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp', borderColor: '#A0A0A0', teamPrincipal: 'Manuel Rotundo', teamPrincipalFlagCode: 'IT' },
+            { id: 'mercedes-card', name: 'GUINNESS MERCEDES', venue: 'Brackley', drivers: [{ name: 'TSAR', flagCountryCode: 'HU' }, { name: 'JOKER', flagCountryCode: 'RO' }, { name: 'ASPEC', flagCountryCode: 'GB' }, { name: 'BYRONAS', flagCountryCode: 'GR' }], country: 'GB', bgColor: '#C8CCCE', textColor: 'text-black', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp', borderColor: '#A0A0A0', teamPrincipal: 'CHIZZ', teamPrincipalFlagCode: 'GB' },
+            { id: 'redbull-card', name: 'NEWPORT ROLEX RED BULL RACING', venue: 'Milton Keynes', drivers: [{ name: 'MAXFAN', flagCountryCode: 'PL' }, { name: 'TONY SEROKA', flagCountryCode: 'PL' }, { name: 'JARVIS COID', flagCountryCode: 'GB' }, { name: 'TEETOE', flagCountryCode: 'NL' }], country: 'AT', bgColor: '#003773', textColor: 'text-white', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp', borderColor: '#A0A0A0', teamPrincipal: 'MAURITS', teamPrincipalFlagCode: 'NL' },
+            { id: 'mclaren-card', name: 'HOT WHEELS MCLAREN', venue: 'Woking', drivers: [{ name: 'FOCUSER', flagCountryCode: 'ES' }, { name: 'ANTON CHEBOTAROV', flagCountryCode: 'UA' }, { name: 'SANDRO', flagCountryCode: 'NL' }, { name: 'JAY AZIER', flagCountryCode: 'NL' }], country: 'GB', bgColor: '#F47600', textColor: 'text-black', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp', borderColor: '#A0A0A0', teamPrincipal: 'CAMPINA', teamPrincipalFlagCode: 'GB' },
+            { id: 'astonmartin-card', 
+              name: 'Lockheed Martin Aston Martin', 
+              venue: 'Silverstone', 
+              drivers: [
+                  { name: 'STRA', flagCountryCode: 'RS' }, 
+                  { name: 'LUCA STEVENS', flagCountryCode: 'GB' }, 
+                  { name: 'SHARK', flagCountryCode: 'EU' }, 
+                  { name: 'EDGE', flagCountryCode: 'GB' }  
+              ], 
+              country: 'GB', 
+              bgColor: '#037A68', 
+              textColor: 'text-white', 
+              carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp', 
+              borderColor: '#A0A0A0', 
+              teamPrincipal: 'AKIEUSH', 
+              teamPrincipalFlagCode: 'PL' 
+            },
+            { id: 'alpine-card', 
+              name: 'Tinder Alpine F1 Team', 
+              venue: 'Enstone', 
+              drivers: [
+                  { name: 'MAX HOUSLEY', flagCountryCode: 'GB' }, 
+                  { name: 'ALFIE WHITE', flagCountryCode: 'GB' },
+                  { name: 'GIULIO', flagCountryCode: 'EU' }, 
+                  { name: 'OLIVAW', flagCountryCode: 'GB' }  
+              ], 
+              country: 'FR', 
+              bgColor: '#F282B4', 
+              textColor: 'text-black', 
+              carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp', 
+              borderColor: '#A0A0A0', 
+              teamPrincipal: 'PHOENIX', 
+              teamPrincipalFlagCode: 'US' 
+            },
+            { id: 'williams-card', 
+              name: 'John Deere Williams Racing', 
+              venue: 'Grove', 
+              drivers: [
+                  { name: 'COUNTERFEIT', flagCountryCode: 'GB' }, 
+                  { name: 'LOLER', flagCountryCode: 'PL' },      
+                  { name: 'MARK', flagCountryCode: 'US' },        
+                  { name: 'LEON', flagCountryCode: 'UA' }         
+              ], 
+              country: 'GB', 
+              bgColor: '#00A0DE', 
+              textColor: 'text-white', 
+              carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp', 
+              borderColor: '#A0A0A0', 
+              teamPrincipal: 'HENRY STRADLING', 
+              teamPrincipalFlagCode: 'US' 
+            },
+            { id: 'rb-card', 
+              name: 'RACING BULLS PEUGEOT SPORT', 
+              venue: 'Faenza', 
+              drivers: [
+                  { name: 'MORA', flagCountryCode: 'ES' },      
+                  { name: 'KRAB', flagCountryCode: 'HU' },      
+                  { name: 'DANIELS', flagCountryCode: 'ES' },   
+                  { name: 'ERIC', flagCountryCode: 'DE' }        
+              ], 
+              country: 'IT', 
+              bgColor: '#bbda0c', 
+              textColor: 'text-black', 
+              carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp', 
+              borderColor: '#A0A0A0', 
+              teamPrincipal: 'JAUME GENARO', 
+              teamPrincipalFlagCode: 'NL' 
+            },
+            { id: 'sauber-card', 
+              name: 'TWITCH SAUBER', 
+              venue: 'Hinwil', 
+              drivers: [
+                  { name: 'GENERIC LEON', flagCountryCode: 'EU' }, 
+                  { name: 'TOBOB', flagCountryCode: 'DE' },         
+                  { name: 'LIL SLUGGER', flagCountryCode: 'EU' },  
+                  { name: 'THEROMANIANDEVIL', flagCountryCode: 'RO' } 
+              ], 
+              country: 'CH', 
+              bgColor: '#9146ff', 
+              textColor: 'text-black', 
+              carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp', 
+              borderColor: '#A0A0A0', 
+              teamPrincipal: 'DOPICHU', 
+              teamPrincipalFlagCode: 'FI' 
+            },
+            { id: 'haas-card', 
+              name: 'HAAS ONLYFANS RACING', 
+              venue: 'Kannapolis', 
+              drivers: [
+                  { name: 'NOJUS GEDVILAS', flagCountryCode: 'LT' }, 
+                  { name: 'EMIN', flagCountryCode: 'EU' },          
+                  { name: 'MAXLINXC', flagCountryCode: 'GB' },        
+                  { name: 'DANOTTOK', flagCountryCode: 'FI' }         
+              ], 
+              country: 'USA', 
+              bgColor: '#00AFF0', 
+              textColor: 'text-white', 
+              carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/haas/2025haascarright.webp', 
+              borderColor: '#A0A0A0', 
+              teamPrincipal: 'MAXLINXC', 
+              teamPrincipalFlagCode: 'GB' 
+            }
         ];
 
         const raceScheduleData = [
@@ -196,130 +301,119 @@
             { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', winner: 'Oscar Piastri', country: 'USA' },
             { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen', country: 'IT' },
             { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'MC' },
-            { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'ES' },
+            { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', country: 'ES' },
             { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'CA' },
             { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
-            { round: 12, name: 'Belgian Grand Prix', venue: 'Silverstone', date: 'July 4th', country: 'GB' },
-            { round: 13, name: 'Spanish Grand Prix', venue: 'Spa', date: 'July 11th', country: 'BE' },
-            { round: 14, name: 'CHINESE GRAND PRIX', venue: 'Budapest', date: 'July 18th', country: 'HU' },
-            { round: 15, name: 'JAPANESE GRAND PRIX', venue: 'Zandvoort', date: 'July 25th', country: 'NL' },
-            { round: 16, name: 'UNITED STATES GRAND PRIX', venue: 'Monza', date: 'August 1st', country: 'IT' },
-            { round: 17, name: 'MYSTERY GRAND PRIX', venue: 'Baku', date: 'August 8th', country: 'AZ' },
-            { round: 18, name: 'BRAZILIAN GRAND PRIX', venue: 'Singapore', date: 'August 15th', country: 'SG' },
+            { round: 12, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', country: 'BE' },
+            { round: 13, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'July 18th', country: 'CN' },
+            { round: 14, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'July 25th', country: 'NL' },
+            { round: 15, name: 'Italian Grand Prix', venue: 'Monza', date: 'August 1st', country: 'IT' },
+            { round: 16, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'August 8th', country: 'AZ' },
+            { round: 17, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'August 15th', country: 'SG' },
+            { round: 18, name: 'United States Grand Prix', venue: 'Austin', date: 'August 22nd', country: 'USA' },
+            { round: 19, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'August 29th', country: 'MX' },
+            { round: 20, name: 'Brazilian Grand Prix', venue: 'Interlagos', date: 'September 5th', country: 'BR' },
+            { round: 21, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'September 12th', country: 'USA' },
+            { round: 22, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'September 19th', country: 'QAT' },
+            { round: 23, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'September 26th', country: 'AE' }
         ];
-
+        
         function getFlagHtmlForDriver(countryCode) {
-            let flagUrl = '';
             const fallbackFlag = `https://placehold.co/32x32/cccccc/000000?text=NF`;
-
-            if (countryCode === 'PL') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197612.png`;
-            } else if (countryCode === 'UA') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197572.png`;
-            } else if (countryCode === 'DK') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197579.png`;
-            } else if (countryCode === 'CZ') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197576.png`;
-            } else if (countryCode === 'GB') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197374.png`;
-            } else if (countryCode === 'NL') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197441.png`;
-            } else if (countryCode === 'IT') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197626.png`;
-            } else if (countryCode === 'HU') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197584.png`;
-            } else if (countryCode === 'LT') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197607.png`;
-            } else if (countryCode === 'FI') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197585.png`;
-            } else if (countryCode === 'BE') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197583.png`;
-            } else if (countryCode === 'RO') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/128/197/197587.png`;
-            } else if (countryCode === 'ES') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197593.png`;
-            } else if (countryCode === 'EE') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197529.png`;
-            } else if (countryCode === 'RU') {
-                flagUrl = `https://cdn-icons-png.flaticon.com/512/197/197602.png`;
+            if (countryCode.toUpperCase() === 'EU') {
+                return `<img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" alt="EU Flag" class="driver-flag mr-2" onerror="this.onerror=null;this.src='${fallbackFlag}';">`;
             }
+            const flagUrl = `https://flagcdn.com/w160/${countryCode.toLowerCase()}.png`;
+            return `<img src="${flagUrl}" alt="${countryCode} Flag" class="driver-flag mr-2" onerror="this.onerror=null;this.src='${fallbackFlag}';">`;
+        }
 
-            if (flagUrl) {
-                return `<img src="${flagUrl}" alt="${countryCode} Flag" class="h-5 w-auto rounded-md mr-2" onerror="this.onerror=null;this.src='${fallbackFlag}';">`;
+        function getTeamLogoSrc(teamName) {
+            switch (teamName) {
+                case 'Pirelli Ferrari':
+                    return 'https://cdn.discordapp.com/emojis/1390804647492583434.webp?size=96';
+                case 'GUINNESS MERCEDES':
+                    return 'https://cdn.discordapp.com/emojis/1386054950496243732.webp?size=44';
+                case 'NEWPORT ROLEX RED BULL RACING':
+                    return 'https://cdn.discordapp.com/emojis/1378696277180813312.webp?size=44';
+                case 'HOT WHEELS MCLAREN':
+                    return 'https://cdn.discordapp.com/emojis/1378699086982811679.webp?size=44';
+                case 'Lockheed Martin Aston Martin':
+                    return 'https://cdn.discordapp.com/emojis/1215769484078354483.webp?size=44';
+                case 'Tinder Alpine F1 Team':
+                    return 'https://cdn.discordapp.com/emojis/1379862213493260328.webp?size=44';
+                case 'John Deere Williams Racing':
+                    return 'https://cdn.discordapp.com/emojis/1377791374341963917.webp?size=44';
+                case 'RACING BULLS PEUGEOT SPORT':
+                    return 'https://cdn.discordapp.com/emojis/1377646844578103346.webp?size=44';
+                case 'TWITCH SAUBER':
+                    return 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44';
+                case 'HAAS ONLYFANS RACING':
+                    return 'https://cdn.discordapp.com/emojis/1378698433652588645.webp?size=44';
+                default:
+                    return 'https://placehold.co/32x32/cccccc/000000?text=Logo';
             }
-            return '';
         }
         
         window.onload = function() {
             const scheduleGrid = document.getElementById('schedule-grid');
             if (scheduleGrid) {
+                scheduleGrid.innerHTML = ''; 
+
                 teamData.forEach(team => {
                     const card = document.createElement('div');
-                    card.className = 'schedule-card rounded-lg shadow-lg flex flex-col justify-between transform hover:-translate-y-2 transition-transform duration-300';
-                    
-                    if (team.id) {
-                        card.id = team.id;
-                    }
-
-                    if (team.bgColor) {
-                        card.style.backgroundColor = team.bgColor;
-                    }
+                    card.id = team.id;
+                    card.className = 'schedule-card rounded-lg flex flex-col justify-between transform transition-transform'; 
+                    card.style.backgroundColor = team.bgColor;
+                    card.style.border = `2px solid ${team.borderColor || '#A0A0A0'}`;
 
                     const textColor = team.textColor || 'text-gray-900';
-                    const subTextColor = team.subTextColor || 'text-gray-600';
-
-                    let teamFlagHtml = '';
-                    if (team.flagUrl) {
-                        teamFlagHtml = `<img src="${team.flagUrl}" alt="${team.name} Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (team.country === 'USA') {
-                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (team.country === 'GB') {
-                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197374.png" alt="British Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (team.country === 'IT') {
-                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (team.country === 'CH') {
-                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197540.png" alt="Swiss Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (team.country === 'FR') {
-                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197560.png" alt="French Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    } else if (team.country === 'AT') {
-                        teamFlagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197447.png" alt="Austrian Flag" class="h-8 w-auto mt-2 rounded-md">`;
-                    }
                     
-                    let carImage = '';
-                    if(team.carImageUrl) {
-                        carImage = `
-                        <div class="absolute top-0 right-0 p-2 bg-black/20 rounded-bl-lg">
-                            <img src="${team.carImageUrl}" class="h-12" alt="${team.name} F1 Car" onerror="this.style.display='none'">
+                    const carImageHtml = `
+                        <div class="w-full h-48 flex items-center justify-center overflow-hidden rounded-t-lg" style="background-color: ${team.bgColor};">
+                            <img src="${team.carImageUrl}" alt="${team.name} F1 Car" class="object-contain" style="width: 95%; height: 95%;" onerror="this.onerror=null;this.src='https://placehold.co/400x200/492833/ffffff?text=Car+Image';">
                         </div>
-                        `
-                    }
+                    `;
                     
-                    const driver1FlagHtml = getFlagHtmlForDriver(team.drivers[0].flagCountryCode);
-                    const driver2FlagHtml = getFlagHtmlForDriver(team.drivers[1].flagCountryCode);
+                    let driversHtml = '';
+                    team.drivers.forEach(driver => {
+                        const driverFlagHtml = getFlagHtmlForDriver(driver.flagCountryCode);
+                        driversHtml += `
+                            <div class="flex items-center">
+                                ${driverFlagHtml}
+                                <span class="font-medium text-base ${textColor}">${driver.name.toUpperCase()}</span>
+                            </div>
+                        `;
+                    });
 
-                    const driver1Name = team.drivers[0].name.toUpperCase();
-                    const driver2Name = team.drivers[1].name.toUpperCase();
-                    const driver1Link = `https://thehenrym.github.io/driverprofile.html?driver=${encodeURIComponent(driver1Name)}`;
-                    const driver2Link = `https://thehenrym.github.io/driverprofile.html?driver=${encodeURIComponent(driver2Name)}`;
+                    const teamLogoHtml = `<img src="${getTeamLogoSrc(team.name)}" alt="${team.name} Logo" class="team-logo ml-2" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=Logo';">`;
+
+                    let teamPrincipalFlagHtml = ''; 
+                    if (team.teamPrincipalFlagCode) {
+                        teamPrincipalFlagHtml = getFlagHtmlForDriver(team.teamPrincipalFlagCode);
+                    }
+
+                    const teamPrincipalContent = team.teamPrincipal ? `
+                        <p class="text-sm font-semibold ${textColor} mb-2 mt-4">TEAM PRINCIPAL</p>
+                        <div class="flex items-center">
+                            ${teamPrincipalFlagHtml}
+                            <span class="font-medium text-base ${textColor}">${team.teamPrincipal.toUpperCase()}</span>
+                        </div>
+                    ` : '';
 
                     card.innerHTML = `
-                        <div class="p-8 relative">
-                            ${carImage}
-                            ${teamFlagHtml}
-                            <h3 class="text-2xl font-bold ${textColor} mt-2">${team.name.toUpperCase()}</h3>
-                            <p class="text-lg ${subTextColor} mt-2">${team.venue.toUpperCase()}</p>
-                        </div>
-                        <div class="bg-black/70 backdrop-blur-sm mt-auto">
-                            <div class="flex items-center justify-around text-white">
-                                <div class="w-full text-center py-3 flex items-center justify-center space-x-2">
-                                    ${driver1FlagHtml}
-                                    <a href="${driver1Link}" target="_self" rel="noopener noreferrer" class="font-medium text-sm tracking-wider hover:underline">${driver1Name}</a>
-                                </div>
-                                <div class="h-6 w-px bg-white/30"></div>
-                                <div class="w-full text-center py-3 flex items-center justify-center space-x-2">
-                                    ${driver2FlagHtml}
-                                    <a href="${driver2Link}" target="_self" rel="noopener noreferrer" class="font-medium text-sm tracking-wider hover:underline">${driver2Name}</a>
-                                </div>
+                        ${carImageHtml}
+                        <div style="border-bottom: 2px solid ${team.borderColor || '#A0A0A0'};"></div>
+                        <div class="p-6 min-h-[140px]">
+                            <h3 class="text-2xl font-bold ${textColor} flex items-center justify-between mb-4">
+                                <span>${team.name.toUpperCase()}</span>
+                                ${teamLogoHtml}
+                            </h3>
+                            <p class="text-sm font-semibold ${textColor} mb-2">DRIVERS</p>
+                            <div class="space-y-2">
+                                ${driversHtml}
+                            </div>
+                            <div class="team-principal-section">
+                                ${teamPrincipalContent}
                             </div>
                         </div>
                     `;
@@ -370,7 +464,7 @@
                 const monthStr = dateStr.split(' ')[0];
                 let dayStr = dateStr.split(' ')[1].split('-')[0];
                 if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
-                    dayStr = dayStr.substring(0, dayStr.length - 2);
+                    dayStr = dayStr.substring(0, dayStr.length - 2); 
                 }
                 return new Date(`${monthStr} ${dayStr}, 2025`);
             }
