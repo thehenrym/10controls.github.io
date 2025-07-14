@@ -25,7 +25,7 @@
         .schedule-card {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease-out;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
             position: relative;
             overflow: hidden;
         }
@@ -143,10 +143,10 @@
         </nav>
         <div class="md:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">LATEST</a>
-                <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">SCHEDULE</a>
-                <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">STANDINGS</a>
-                <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link" aria-current="page">TEAMS</a>
+                <a href="index.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Latest</a>
+                <a href="schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
+                <a href="standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
+                <a href="teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link" aria-current="page">Teams</a>
             </div>
         </div>
     </header>
@@ -165,8 +165,19 @@
         </div>
     </div>
 
+    <div class="relative w-full h-72 bg-cover bg-center flex flex-col items-center justify-center text-center" style="background-image: url('https://thehenrym.github.io/images/10.png');">
+        <h1 class="text-white text-7xl font-bold z-10">TEAMS</h1>
+        <p class="text-white text-xl font-semibold z-10 mt-2">10 CONTROLS SEASON 6</p>
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+    </div>
+
     <div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+        <div class="py-8 flex flex-col md:flex-row justify-start items-center gap-4">
+            <input type="text" id="driver-search" placeholder="Search drivers or team principals..." 
+                   class="p-2 rounded-md bg-[#492833] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 w-full md:w-1/3 border-2 border-[#A0A0A0]">
+        </div>
+        
+        <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
         </div>
     </div>
 
@@ -183,7 +194,7 @@
     </footer>
     
     <script>
-        let teamData = [
+        const teamData = [
             { id: 'ferrari-card', name: 'Pirelli Ferrari', venue: 'Maranello', drivers: [{ name: 'ALPHAROMEO', flagCountryCode: 'NL' }, { name: 'ANTONIO BRANCATI', flagCountryCode: 'IT' }, { name: 'JSTN NL', flagCountryCode: 'NL' }, { name: 'MANUEL ROTUNDO', flagCountryCode: 'IT' }], country: 'IT', bgColor: '#821729', textColor: 'text-white', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp', borderColor: '#A0A0A0', teamPrincipal: 'Manuel Rotundo', teamPrincipalFlagCode: 'IT' },
             { id: 'mercedes-card', name: 'GUINNESS MERCEDES', venue: 'Brackley', drivers: [{ name: 'TSAR', flagCountryCode: 'HU' }, { name: 'JOKER', flagCountryCode: 'RO' }, { name: 'ASPEC', flagCountryCode: 'GB' }, { name: 'BYRONAS', flagCountryCode: 'GR' }], country: 'GB', bgColor: '#C8CCCE', textColor: 'text-black', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp', borderColor: '#A0A0A0', teamPrincipal: 'CHIZZ', teamPrincipalFlagCode: 'GB' },
             { id: 'redbull-card', name: 'NEWPORT ROLEX RED BULL RACING', venue: 'Milton Keynes', drivers: [{ name: 'MAXFAN', flagCountryCode: 'PL' }, { name: 'TONY SEROKA', flagCountryCode: 'PL' }, { name: 'JARVIS COID', flagCountryCode: 'GB' }, { name: 'TEETOE', flagCountryCode: 'NL' }], country: 'AT', bgColor: '#003773', textColor: 'text-white', carImageUrl: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp', borderColor: '#A0A0A0', teamPrincipal: 'MAURITS', teamPrincipalFlagCode: 'NL' },
@@ -353,12 +364,19 @@
                     return 'https://placehold.co/32x32/cccccc/000000?text=Logo';
             }
         }
-        
-        window.onload = function() {
-            const scheduleGrid = document.getElementById('schedule-grid');
-            if (scheduleGrid) {
-                scheduleGrid.innerHTML = ''; 
 
+        function highlightText(text, searchTerm) {
+            if (!searchTerm) {
+                return text;
+            }
+            const regex = new RegExp(`(${searchTerm})`, 'gi');
+            return text.replace(regex, `<span class="bg-yellow-300 text-black rounded-sm px-1">$1</span>`);
+        }
+
+        function renderTeams(teamsToRender, currentSearchTerm = '') {
+            const scheduleGrid = document.getElementById('schedule-grid');
+            
+            if (scheduleGrid.children.length === 0) {
                 teamData.forEach(team => {
                     const card = document.createElement('div');
                     card.id = team.id;
@@ -424,6 +442,52 @@
                     cards.forEach(card => card.classList.add('visible'));
                 }, 100);
             }
+
+            const allCards = document.querySelectorAll('.schedule-card');
+            const visibleTeamIds = new Set(teamsToRender.map(team => team.id));
+
+            allCards.forEach(cardElement => {
+                const team = teamData.find(t => t.id === cardElement.id);
+                const textColor = team.textColor || 'text-gray-900';
+
+                const teamNameElement = cardElement.querySelector('h3 span');
+                if (teamNameElement) {
+                    teamNameElement.innerHTML = highlightText(team.name.toUpperCase(), currentSearchTerm);
+                }
+
+                const driverElements = cardElement.querySelectorAll('.space-y-2 .flex');
+                driverElements.forEach((driverDiv, index) => {
+                    if (team.drivers[index]) {
+                        const driverNameSpan = driverDiv.querySelector('span');
+                        if (driverNameSpan) {
+                            driverNameSpan.innerHTML = highlightText(team.drivers[index].name.toUpperCase(), currentSearchTerm);
+                        }
+                    }
+                });
+
+                const teamPrincipalElement = cardElement.querySelector('.team-principal-section .flex');
+                if (teamPrincipalElement && team.teamPrincipal) {
+                    const teamPrincipalNameSpan = teamPrincipalElement.querySelector('span');
+                    if (teamPrincipalNameSpan) {
+                        teamPrincipalNameSpan.innerHTML = highlightText(team.teamPrincipal.toUpperCase(), currentSearchTerm);
+                    }
+                }
+
+
+                if (visibleTeamIds.has(cardElement.id)) {
+                    cardElement.style.display = '';
+                    if (!cardElement.classList.contains('visible')) {
+                        cardElement.classList.add('visible');
+                    }
+                } else {
+                    cardElement.style.display = 'none';
+                    cardElement.classList.remove('visible');
+                }
+            });
+        }
+
+        window.onload = function() {
+            renderTeams(teamData);
 
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -536,6 +600,20 @@
 
             updateCountdown();
             setInterval(updateCountdown, 1000);
+
+            const driverSearchInput = document.getElementById('driver-search');
+            driverSearchInput.addEventListener('input', (event) => {
+                const searchTerm = event.target.value.toLowerCase();
+                const filteredTeams = teamData.filter(team => {
+                    const teamNameMatch = team.name.toLowerCase().includes(searchTerm);
+                    const driverMatch = team.drivers.some(driver => 
+                        driver.name.toLowerCase().includes(searchTerm)
+                    );
+                    const teamPrincipalMatch = team.teamPrincipal && team.teamPrincipal.toLowerCase().includes(searchTerm);
+                    return teamNameMatch || driverMatch || teamPrincipalMatch;
+                });
+                renderTeams(filteredTeams, searchTerm);
+            });
         };
     </script>
 </body>
