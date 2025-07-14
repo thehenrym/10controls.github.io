@@ -185,7 +185,7 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
                     <a href="index.html">
-                        <img src="favicon/favicon-96x96.png" alt="10 Controls Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/000000?text=Logo';">
+                        <img src="images/10c.png" alt="10 Controls Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/000000?text=Logo';">
                     </a>
                 </div>
 
@@ -241,8 +241,11 @@
 
     <div class="relative max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
         
-        <div class="flex justify-center my-8">
-            <div class="relative w-48 h-10 flex bg-gray-200 rounded-full mr-4">
+        <div class="flex flex-col md:flex-row justify-center items-center my-8 gap-4">
+            <input type="text" id="standings-search" placeholder="Search driver..." 
+                   class="p-2 rounded-md bg-[#492833] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 w-full md:w-64 border-2 border-[#A0A0A0]">
+
+            <div class="relative w-48 h-10 flex bg-gray-200 rounded-full">
                 <div id="tier-slider" class="absolute top-0 left-0 h-full w-1/2 p-1 transition-transform duration-300 ease-in-out">
                     <div class="w-full h-full" style="background-color: #492833; border-radius: 9999px;"></div>
                 </div>
@@ -327,6 +330,7 @@
             </div>
 
         </div>
+        <p id="driver-note" class="text-white text-sm mt-4 text-center hidden">*Only full time drivers are included in the driver standings; teams standings will still include reserve driver points.</p>
     </div>
     
     <footer class="bg-black text-white text-center py-5 px-2 mt-8">
@@ -575,6 +579,111 @@
              { round: 23, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'September 26th', country: 'AE' }
         ];
         
+        function highlightText(text, searchTerm) {
+            if (!searchTerm) {
+                return text;
+            }
+            const regex = new RegExp(`(${searchTerm})`, 'gi');
+            return text.replace(regex, `<span class="bg-yellow-300 text-black rounded-sm px-1">$1</span>`);
+        }
+
+        let currentTier = 'tier1';
+        let currentType = 'drivers';
+        let currentSearchTerm = '';
+
+        function getFlagHtmlForDriver(countryCode) {
+            const fallbackFlag = `https://placehold.co/32x32/cccccc/000000?text=NF`;
+            if (countryCode.toUpperCase() === 'EU') {
+                return `<img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" alt="EU Flag" class="driver-flag mr-2" onerror="this.onerror=null;this.src='${fallbackFlag}';">`;
+            }
+            const flagUrl = `https://flagcdn.com/w160/${countryCode.toLowerCase()}.png`;
+            return `<img src="${flagUrl}" alt="${countryCode} Flag" class="driver-flag mr-2" onerror="this.onerror=null;this.src='${fallbackFlag}';">`;
+        }
+
+        function populateDriverStandings(data, bodyElement, searchTerm) {
+            bodyElement.innerHTML = '';
+            data.forEach(driver => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="pos-number">${driver.pos}</td>
+                    <td style="display: flex; align-items: center;">
+                        ${getFlagHtmlForDriver(driver.nationality)}
+                        <span>${highlightText(driver.name, searchTerm)}</span>
+                    </td>
+                    <td class="hidden-mobile">
+                        <img src="${getTeamIconSrc(driver.car)}" alt="${driver.car} Icon" class="inline-block h-5 w-5 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/20x20/cccccc/000000?text=NI';">
+                        ${driver.car}
+                    </td>
+                    <td class="points-cell">${driver.points}</td>
+                `;
+                bodyElement.appendChild(row);
+            });
+        }
+
+        function populateTeamStandings(data, bodyElement) {
+            bodyElement.innerHTML = '';
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="pos-number">${item.pos}</td>
+                    <td>
+                        <img src="${getTeamIconSrc(item.team)}" alt="${item.team} Icon" class="inline-block h-5 w-5 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/20x20/cccccc/000000?text=NI';">
+                        ${item.team.toUpperCase()}
+                    </td>
+                    <td class="points-cell">${item.points}</td>
+                `;
+                bodyElement.appendChild(row);
+            });
+        }
+
+        function applyFiltersAndRender() {
+            currentSearchTerm = document.getElementById('standings-search').value.toLowerCase();
+            const driverNote = document.getElementById('driver-note');
+
+            document.getElementById('tier1-driver-standings-container').style.opacity = '0';
+            document.getElementById('tier1-driver-standings-container').style.visibility = 'hidden';
+            document.getElementById('tier1-team-standings-container').style.opacity = '0';
+            document.getElementById('tier1-team-standings-container').style.visibility = 'hidden';
+            document.getElementById('tier2-driver-standings-container').style.opacity = '0';
+            document.getElementById('tier2-driver-standings-container').style.visibility = 'hidden';
+            document.getElementById('tier2-team-standings-container').style.opacity = '0';
+            document.getElementById('tier2-team-standings-container').style.visibility = 'hidden';
+
+            if (currentType === 'drivers') {
+                driverNote.classList.remove('hidden');
+                if (currentTier === 'tier1') {
+                    const filteredDrivers = updatedTier1DriverStandings.filter(driver =>
+                        driver.name.toLowerCase().includes(currentSearchTerm)
+                    );
+                    populateDriverStandings(filteredDrivers, document.getElementById('tier1-driver-standings-body'), currentSearchTerm);
+                    document.getElementById('tier1-driver-standings-container').style.opacity = '1';
+                    document.getElementById('tier1-driver-standings-container').style.visibility = 'visible';
+                } else {
+                    const filteredDrivers = updatedTier2DriverStandings.filter(driver =>
+                        driver.name.toLowerCase().includes(currentSearchTerm)
+                    );
+                    populateDriverStandings(filteredDrivers, document.getElementById('tier2-driver-standings-body'), currentSearchTerm);
+                    document.getElementById('tier2-driver-standings-container').style.opacity = '1';
+                    document.getElementById('tier2-driver-standings-container').style.visibility = 'visible';
+                }
+            } else {
+                driverNote.classList.add('hidden');
+                document.getElementById('standings-search').value = '';
+                currentSearchTerm = '';
+
+                if (currentTier === 'tier1') {
+                    populateTeamStandings(updatedTier1TeamStandings, document.getElementById('tier1-team-standings-body'));
+                    document.getElementById('tier1-team-standings-container').style.opacity = '1';
+                    document.getElementById('tier1-team-standings-container').style.visibility = 'visible';
+                } else {
+                    populateTeamStandings(updatedTier2TeamStandings, document.getElementById('tier2-team-standings-body'));
+                    document.getElementById('tier2-team-standings-container').style.opacity = '1';
+                    document.getElementById('tier2-team-standings-container').style.visibility = 'visible';
+                }
+            }
+        }
+
+
         window.onload = function() {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -612,7 +721,7 @@
                 const monthStr = dateStr.split(' ')[0];
                 let dayStr = dateStr.split(' ')[1].split('-')[0];
                 if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
-                    dayStr = dayStr.substring(0, dayStr.length - 2);
+                    dayStr = dayStr.substring(0, dayStr.length - 2); 
                 }
                 return new Date(`${monthStr} ${dayStr}, 2025`);
             }
@@ -634,7 +743,7 @@
             } else {
                 upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
                 if (countdownDisplayEl) {
-                    countdownDisplay.style.display = 'none';
+                    countdownDisplayEl.style.display = 'none';
                 }
             }
 
@@ -692,90 +801,10 @@
 
             const tablesWrapper = document.getElementById('tables-wrapper');
 
-            function populateTier1Drivers() {
-                if (tier1DriverStandingsBody) {
-                    tier1DriverStandingsBody.innerHTML = '';
-                    updatedTier1DriverStandings.forEach((driver, index) => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td class="pos-number">${driver.pos}</td>
-                            <td style="display: flex; align-items: center;">
-                                <img src="https://flagcdn.com/w160/${driver.nationality.toLowerCase()}.png" alt="${driver.nationality} Flag" class="driver-flag" onerror="this.onerror=null;this.src='https://placehold.co/16x16/cccccc/000000?text=NF';">
-                                <span>${driver.name}</span>
-                            </td>
-                            <td class="hidden-mobile">
-                                <img src="${getTeamIconSrc(driver.car)}" alt="${driver.car} Icon" class="inline-block h-5 w-5 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/20x20/cccccc/000000?text=NI';">
-                                ${driver.car}
-                            </td>
-                            <td class="points-cell">${driver.points}</td>
-                        `;
-                        tier1DriverStandingsBody.appendChild(row);
-                    });
-                }
-            }
-            
-            function populateTier1Teams() {
-                if (tier1TeamStandingsBody) {
-                    tier1TeamStandingsBody.innerHTML = '';
-                    updatedTier1TeamStandings.forEach((item, index) => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td class="pos-number">${item.pos}</td>
-                            <td>
-                                <img src="${getTeamIconSrc(item.team)}" alt="${item.team} Icon" class="inline-block h-5 w-5 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/20x20/cccccc/000000?text=NI';">
-                                ${item.team.toUpperCase()}
-                            </td>
-                            <td class="points-cell">${item.points}</td>
-                        `;
-                        tier1TeamStandingsBody.appendChild(row);
-                    });
-                }
-            }
-
-            function populateTier2Drivers() {
-                if (tier2DriverStandingsBody) {
-                    tier2DriverStandingsBody.innerHTML = '';
-                    updatedTier2DriverStandings.forEach((driver, index) => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td class="pos-number">${driver.pos}</td>
-                            <td style="display: flex; align-items: center;">
-                                <img src="https://flagcdn.com/w160/${driver.nationality.toLowerCase()}.png" alt="${driver.nationality} Flag" class="driver-flag" onerror="this.onerror=null;this.src='https://placehold.co/16x16/cccccc/000000?text=NF';">
-                                <span>${driver.name}</span>
-                            </td>
-                            <td class="hidden-mobile">
-                                <img src="${getTeamIconSrc(driver.car)}" alt="${driver.car} Icon" class="inline-block h-5 w-5 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/20x20/cccccc/000000?text=NI';">
-                                ${driver.car}
-                            </td>
-                            <td class="points-cell">${driver.points}</td>
-                        `;
-                        tier2DriverStandingsBody.appendChild(row);
-                    });
-                }
-            }
-
-            function populateTier2Teams() {
-                if (tier2TeamStandingsBody) {
-                    tier2TeamStandingsBody.innerHTML = '';
-                    updatedTier2TeamStandings.forEach((item, index) => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td class="pos-number">${item.pos}</td>
-                            <td>
-                                <img src="${getTeamIconSrc(item.team)}" alt="${item.team} Icon" class="inline-block h-5 w-5 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/20x20/cccccc/000000?text=NI';">
-                                ${item.team.toUpperCase()}
-                            </td>
-                            <td class="points-cell">${item.points}</td>
-                        `;
-                        tier2TeamStandingsBody.appendChild(row);
-                    });
-                }
-            }
-
-            populateTier1Drivers();
-            populateTier1Teams();
-            populateTier2Drivers();
-            populateTier2Teams();
+            populateDriverStandings(updatedTier1DriverStandings, tier1DriverStandingsBody, '');
+            populateTeamStandings(updatedTier1TeamStandings, tier1TeamStandingsBody);
+            populateDriverStandings(updatedTier2DriverStandings, tier2DriverStandingsBody, '');
+            populateTeamStandings(updatedTier2TeamStandings, tier2TeamStandingsBody);
             
             setTimeout(() => {
                 const tier1DriverTableHeight = tier1DriverContainer.scrollHeight;
@@ -793,38 +822,6 @@
                 const btnTeams = document.getElementById('btn-teams');
                 const typeSlider = document.getElementById('type-slider');
 
-                let currentTier = 'tier1';
-                let currentType = 'drivers';
-
-                function updateVisibility() {
-                    tier1DriverContainer.style.opacity = '0';
-                    tier1DriverContainer.style.visibility = 'hidden';
-                    tier1TeamContainer.style.opacity = '0';
-                    tier1TeamContainer.style.visibility = 'hidden';
-                    tier2DriverContainer.style.opacity = '0';
-                    tier2DriverContainer.style.visibility = 'hidden';
-                    tier2TeamContainer.style.opacity = '0';
-                    tier2TeamContainer.style.visibility = 'hidden';
-
-                    if (currentTier === 'tier1') {
-                        if (currentType === 'drivers') {
-                            tier1DriverContainer.style.opacity = '1';
-                            tier1DriverContainer.style.visibility = 'visible';
-                        } else {
-                            tier1TeamContainer.style.opacity = '1';
-                            tier1TeamContainer.style.visibility = 'visible';
-                        }
-                    } else {
-                        if (currentType === 'drivers') {
-                            tier2DriverContainer.style.opacity = '1';
-                            tier2DriverContainer.style.visibility = 'visible';
-                        } else {
-                            tier2TeamContainer.style.opacity = '1';
-                            tier2TeamContainer.style.visibility = 'visible';
-                        }
-                    }
-                }
-
                 tierSlider.style.transform = 'translateX(0%)';
                 btnTier1.classList.add('text-white');
                 btnTier1.classList.remove('text-gray-700');
@@ -837,7 +834,7 @@
                 btnTeams.classList.add('text-gray-700');
                 btnTeams.classList.remove('text-white');
 
-                updateVisibility();
+                applyFiltersAndRender();
 
                 btnTier1.addEventListener('click', () => {
                     currentTier = 'tier1';
@@ -846,7 +843,7 @@
                     btnTier1.classList.remove('text-gray-700');
                     btnTier2.classList.add('text-gray-700');
                     btnTier2.classList.remove('text-white');
-                    updateVisibility();
+                    applyFiltersAndRender();
                 });
 
                 btnTier2.addEventListener('click', () => {
@@ -856,7 +853,7 @@
                     btnTier2.classList.remove('text-gray-700');
                     btnTier1.classList.add('text-gray-700');
                     btnTier1.classList.remove('text-white');
-                    updateVisibility();
+                    applyFiltersAndRender();
                 });
 
                 btnDrivers.addEventListener('click', () => {
@@ -866,7 +863,7 @@
                     btnDrivers.classList.remove('text-gray-700');
                     btnTeams.classList.add('text-gray-700');
                     btnTeams.classList.remove('text-white');
-                    updateVisibility();
+                    applyFiltersAndRender();
                 });
 
                 btnTeams.addEventListener('click', () => {
@@ -876,7 +873,12 @@
                     btnTeams.classList.remove('text-gray-700');
                     btnDrivers.classList.add('text-gray-700');
                     btnDrivers.classList.remove('text-white');
-                    updateVisibility();
+                    applyFiltersAndRender();
+                });
+
+                const standingsSearchInput = document.getElementById('standings-search');
+                standingsSearchInput.addEventListener('input', () => {
+                    applyFiltersAndRender();
                 });
 
             }, 100);
