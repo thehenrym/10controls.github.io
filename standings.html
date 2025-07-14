@@ -185,7 +185,7 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
                     <a href="index.html">
-                        <img src="images/10c.png" alt="10 Controls Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/000000?text=Logo';">
+                        <img src="favicon/favicon-96x96.png" alt="10 Controls Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/000000?text=Logo';">
                     </a>
                 </div>
 
@@ -233,6 +233,11 @@
         </div>
     </div>
 
+    <div class="relative w-full h-72 bg-cover bg-center flex flex-col items-center justify-center text-center" style="background-image: url('images/1.png');">
+        <h1 class="text-white text-7xl font-bold z-10">STANDINGS</h1>
+        <p class="text-white text-xl font-semibold z-10 mt-2">10 CONTROLS SEASON 6</p>
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+    </div>
 
     <div class="relative max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
         
@@ -246,7 +251,7 @@
             </div>
 
             <div class="relative w-48 h-10 flex bg-gray-200 rounded-full">
-                <div id="type-slider" class="absolute top-0 left-0 h-full w-1/2 p-1 transition-transform duration-300 ease-in-out">
+                <div id="type-slider" class="absolute top-0 left: 0; h-full w-1/2 p-1 transition-transform duration-300 ease-in-out">
                     <div class="w-full h-full" style="background-color: #492833; border-radius: 9999px;"></div>
                 </div>
                 <button id="btn-drivers" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-bold text-white transition-colors duration-300">DRIVERS</button>
@@ -382,7 +387,7 @@
                 name: driverData.driver,
                 nationality: driverData.flag,
                 points: driverData.points,
-                car: driverData.team 
+                car: driverData.team  
             });
         });
 
@@ -489,7 +494,7 @@
                 name: driverData.driver.toUpperCase(),
                 nationality: driverData.flag,
                 points: driverData.points,
-                car: canonicalTeamName 
+                car: canonicalTeamName  
             });
         });
 
@@ -629,7 +634,7 @@
             } else {
                 upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
                 if (countdownDisplayEl) {
-                    countdownDisplayEl.style.display = 'none';
+                    countdownDisplay.style.display = 'none';
                 }
             }
 
