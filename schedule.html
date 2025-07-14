@@ -28,6 +28,13 @@
             padding: 2rem 1rem;
         }
         .schedule-card {
+            background-color: #2d2d2d;
+            color: #ffffff;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .schedule-card.visible {
         }
@@ -83,6 +90,26 @@
         .mobile-menu-link:hover {
             background-color: #000000;
         }
+        .schedule-card .flag-icon {
+            width: 40px;
+            height: 30px;
+            border: 1px solid #be8190;
+            border-radius: 2px;
+            object-fit: cover;
+            display: inline-block;
+            margin-right: 12px;
+            vertical-align: middle;
+        }
+        .winner-flag-icon {
+            width: 20px;
+            height: 15px;
+            border: 1px solid #be8190;
+            border-radius: 2px;
+            object-fit: cover;
+            display: inline-block;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body class="font-medium">
@@ -135,6 +162,13 @@
             </div>
         </div>
     </div>
+
+    <div class="relative w-full h-72 bg-cover bg-center flex flex-col items-center justify-center text-center" style="background-image: url('images/10c.png');">
+        <h1 class="text-white text-7xl font-bold z-10">SCHEDULE</h1>
+        <p class="text-white text-xl font-semibold z-10 mt-2">10 CONTROLS SEASON 6</p>
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+    </div>
+
     <div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
         </div>
@@ -151,15 +185,15 @@
     </footer>
     <script>
         const scheduleData = [
-            { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'March 14-16', winner: 'Anton Chebotarov', country: 'BH' },
-            { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 21-23', winner: 'Maxfan1982', country: 'AU' },
-            { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', winner: 'MaxfaN1982', country: 'IT' },
-            { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', winner: 'Maxfan1982', country: 'BE' },
-            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', winner: '', country: 'ES' },
+            { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'March 14-16', winner: 'Anton Chebotarov', winnerFlag: 'UA', country: 'BH' },
+            { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 21-23', winner: 'Maxfan', winnerFlag: 'PL', country: 'AU' },
+            { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', winner: 'Maxfan', winnerFlag: 'PL', country: 'IT' },
+            { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', winner: 'Maxfan', winnerFlag: 'PL', country: 'BE' },
+            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', winner: 'Anton Chebotarov', winnerFlag: 'UA', country: 'ES' }, 
             { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'July 18th', winner: '', country: 'CN' },
             { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'July 25th', winner: '', country: 'JP' },
-            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'August 1st', winner: '', country: 'USA' },
-            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'August 8th', winner: '', country: '' },
+            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'August 1st', winner: '', country: 'US' }, 
+            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'August 8th', winner: '', country: 'MC' }, 
             { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'August 15th', winner: '', country: 'BR' }
         ];
         const timeZoneMap = {
@@ -188,57 +222,41 @@
             'Lusail': 'Asia/Qatar',
             'Yas Marina': 'Asia/Dubai'
         };
+
+        function getFlagHtml(countryCode) {
+            const fallbackFlag = `https://placehold.co/32x32/cccccc/000000?text=NF`;
+            if (countryCode.toUpperCase() === 'EU') {
+                return `<img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" alt="EU Flag" class="flag-icon" onerror="this.onerror=null;this.src='${fallbackFlag}';">`;
+            }
+            const flagUrl = `https://flagcdn.com/w160/${countryCode.toLowerCase()}.png`;
+            return `<img src="${flagUrl}" alt="${countryCode} Flag" class="flag-icon" onerror="this.onerror=null;this.src='${fallbackFlag}';">`;
+        }
+
+        function getWinnerFlagHtml(countryCode) {
+            const fallbackFlag = `https://placehold.co/16x16/cccccc/000000?text=NF`;
+            if (countryCode.toUpperCase() === 'EU') {
+                return `<img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" alt="EU Flag" class="winner-flag-icon" onerror="this.onerror=null;this.src='${fallbackFlag}';">`;
+            }
+            const flagUrl = `https://flagcdn.com/w160/${countryCode.toLowerCase()}.png`;
+            return `<img src="${flagUrl}" alt="${countryCode} Flag" class="winner-flag-icon" onerror="this.onerror=null;this.src='${fallbackFlag}';">`;
+        }
+
+
         window.onload = function() {
             const scheduleGrid = document.getElementById('schedule-grid');
+            const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
+            const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
+            const countdownDisplayEl = document.getElementById('countdown-display');
+            const countdownTimerEl = document.getElementById('countdown-timer'); 
+
             function renderSchedule(currentScheduleData) {
                 scheduleGrid.innerHTML = '';
                 currentScheduleData.forEach((race, index) => {
                     const card = document.createElement('div');
-                    card.className = 'schedule-card bg-white rounded-lg shadow-lg p-8 flex flex-col justify-between';
-                    let flagHtml = '';
-                    if (race.country === 'USA') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="USA Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'QAT') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197618.png" alt="Qatar Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'GB') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197374.png" alt="British Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'IT') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197626.png" alt="Italian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'JP') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197604.png" alt="Japanese Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'BE') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197583.png" alt="Belgian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'AT') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197447.png" alt="Austrian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'BH') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197521.png" alt="Bahrain Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'HU') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'SG') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" alt="Singapore Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'BR') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197386.png" alt="Brazilian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'NL') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197441.png" alt="Netherlands Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'CN') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197375.png" alt="Chinese Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'ES') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197593.png" alt="Spanish Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'CA') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" alt="Canadian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'MC') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197594.png" alt="Monaco Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'AE') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197569.png" alt="UAE Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'MX') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197397.png" alt="Mexican Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co_32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'AZ') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/512/197/197512.png" alt="Azerbaijan Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'SA') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197578.png" alt="Saudi Arabian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    } else if (race.country === 'AU') {
-                        flagHtml = `<img src="https://cdn-icons-png.flaticon.com/128/197/197507.png" alt="Australian Flag" class="h-8 w-auto mt-2 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=NF';">`;
-                    }
+                    card.className = 'schedule-card rounded-lg p-8 flex flex-col justify-between';
+                    
+                    const flagHtml = getFlagHtml(race.country);
+                    
                     let resultButtonHref = "#";
                     if (race.round === 1 && race.name === 'Bahrain Grand Prix') {
                         resultButtonHref = "results/bahrain.html";
@@ -246,30 +264,38 @@
                         resultButtonHref = "results/australia.html";
                     } else if (race.round === 3 && race.name === 'Emilia Romagna Grand Prix') {
                         resultButtonHref = "results/imola.html";
-                    } else if (race.round === 4 && race.name === 'Belgian Grand Prix') { // Corrected round number for Belgian Grand Prix
+                    } else if (race.round === 4 && race.name === 'Belgian Grand Prix') {
                         resultButtonHref = "results/belgium.html";
+                    } else if (race.round === 5 && race.name === 'Spanish Grand Prix') { 
+                        resultButtonHref = "results/spain.html";
                     }
                     let footerHtml;
                     if (race.winner) {
+                        const winnerFlagHtml = getWinnerFlagHtml(race.winnerFlag);
                         footerHtml = `
                             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
-                                <a href="driverprofile.html?driver=${encodeURIComponent(race.winner)}" class="text-base font-semibold text-gray-800 uppercase hover:underline truncate"><span class="font-bold text-[#492833]">WINNER:</span> ${race.winner}</a>
+                                <span class="text-base font-semibold text-white uppercase truncate">
+                                    <span class="font-bold text-white">WINNER:</span> 
+                                    <span class="flex items-center">${winnerFlagHtml} ${race.winner}</span>
+                                </span>
                                 <div class="flex items-center space-x-2 flex-shrink-0">
                                     <a href="${resultButtonHref}" class="bg-[#492833] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Results</a>
                                 </div>
                             </div>
                         `;
                     } else {
-                        footerHtml = `<p class="text-base font-semibold text-gray-800">${race.date.toUpperCase()}</p>`;
+                        footerHtml = `<p class="text-base font-semibold text-white">${race.date.toUpperCase()}</p>`;
                     }
                     card.innerHTML = `
                         <div>
-                            <p class="text-base font-bold text-[#492833]">ROUND ${race.round || race.pos}</p>
-                            ${flagHtml}
-                            <h3 class="text-2xl font-bold text-gray-900 mt-2">${race.name.toUpperCase()}</h3>
-                            <p class="text-lg text-gray-600 mt-2">${race.venue.toUpperCase()}</p>
+                            <div class="flex items-center mb-2"> 
+                                ${flagHtml}
+                                <h3 class="text-2xl font-bold text-white">${race.name.toUpperCase()}</h3>
+                            </div>
+                            <p class="text-base font-bold text-white">ROUND ${race.round || race.pos}</p>
+                            <p class="text-lg text-white mt-2">${race.venue.toUpperCase()}</p>
                         </div>
-                        <div class="mt-6 pt-6 border-t border-gray-200">
+                        <div class="mt-6 pt-6 border-t border-gray-600">
                             ${footerHtml}
                         </div>
                     `;
@@ -301,10 +327,7 @@
                     setHighlighterToLink(activeLink);
                 });
             }
-            const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
-            const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
-            const countdownDisplayEl = document.getElementById('countdown-display');
-            const countdownTimerEl = document.getElementById('countdown-timer');
+
             function parseRaceDate(dateStr) {
                 const monthStr = dateStr.split(' ')[0];
                 let dayStr = dateStr.split(' ')[1];
