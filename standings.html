@@ -243,7 +243,7 @@
         
         <div class="flex flex-col md:flex-row justify-center items-center my-8 gap-4">
             <input type="text" id="standings-search" placeholder="Search driver..." 
-                   class="p-2 rounded-md bg-[#492833] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 w-full md:w-64 border-2 border-[#A0A0A0]">
+                    class="p-2 rounded-md bg-[#492833] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 w-full md:w-64 border-2 border-[#A0A0A0]">
 
             <div class="relative w-48 h-10 flex bg-gray-200 rounded-full">
                 <div id="tier-slider" class="absolute top-0 left-0 h-full w-1/2 p-1 transition-transform duration-300 ease-in-out">
@@ -253,16 +253,17 @@
                 <button id="btn-tier2" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-bold text-gray-700 transition-colors duration-300">TIER 2</button>
             </div>
 
-            <div class="relative w-48 h-10 flex bg-gray-200 rounded-full">
-                <div id="type-slider" class="absolute top-0 left: 0; h-full w-1/2 p-1 transition-transform duration-300 ease-in-out">
+            <div class="relative w-72 h-10 flex bg-gray-200 rounded-full">
+                <div id="type-slider" class="absolute top-0 left: 0; h-full w-1/3 p-1 transition-transform duration-300 ease-in-out">
                     <div class="w-full h-full" style="background-color: #492833; border-radius: 9999px;"></div>
                 </div>
-                <button id="btn-drivers" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-bold text-white transition-colors duration-300">DRIVERS</button>
-                <button id="btn-teams" class="relative z-10 w-1/2 h-full flex items-center justify-center text-sm font-bold text-gray-700 transition-colors duration-300">TEAMS</button>
+                <button id="btn-drivers" class="relative z-10 w-1/3 h-full flex items-center justify-center text-sm font-bold text-white transition-colors duration-300">DRIVERS</button>
+                <button id="btn-teams" class="relative z-10 w-1/3 h-full flex items-center justify-center text-sm font-bold text-gray-700 transition-colors duration-300">TEAMS</button>
+                <button id="btn-overall" class="relative z-10 w-1/3 h-full flex items-center justify-center text-sm font-bold text-gray-700 transition-colors duration-300">OVERALL</button>
             </div>
         </div>
 
-        <div id="tables-wrapper" class="relative"> 
+        <div id="tables-wrapper" class="relative">  
             <div id="tier1-driver-standings-container" class="standings-container">
                     <div class="standings-table-container">
                         <table class="standings-table">
@@ -324,6 +325,22 @@
                             </tr>
                         </thead>
                         <tbody id="tier2-team-standings-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="overall-team-standings-container" class="standings-container">
+                <div class="standings-table-container">
+                    <table class="standings-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Pos</th>
+                                <th scope="col">Team</th>
+                                <th scope="col">Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody id="overall-team-standings-body">
                         </tbody>
                     </table>
                 </div>
@@ -553,6 +570,30 @@
         updatedTier2TeamStandings.sort((a, b) => b.points - a.points);
         updatedTier2TeamStandings.forEach((team, index) => team.pos = index + 1);
 
+        let combinedOverallTeamStandings = [];
+        const teamPointsMap = new Map();
+
+        updatedTier1TeamStandings.forEach(team => {
+            teamPointsMap.set(team.team, team.points);
+        });
+
+        updatedTier2TeamStandings.forEach(team => {
+            const currentPoints = teamPointsMap.get(team.team) || 0;
+            teamPointsMap.set(team.team, currentPoints + team.points);
+        });
+
+        teamPointsMap.forEach((points, teamName) => {
+            combinedOverallTeamStandings.push({
+                pos: 0,
+                team: teamName,
+                points: points
+            });
+        });
+
+        combinedOverallTeamStandings.sort((a, b) => b.points - a.points);
+        combinedOverallTeamStandings.forEach((team, index) => team.pos = index + 1);
+
+
         const scheduleData = [
              { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris', country: 'AU' },
              { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23', winner: 'Oscar Piastri', country: 'CN' },
@@ -639,6 +680,10 @@
         function applyFiltersAndRender() {
             currentSearchTerm = document.getElementById('standings-search').value.toLowerCase();
             const driverNote = document.getElementById('driver-note');
+            const btnTier1 = document.getElementById('btn-tier1');
+            const btnTier2 = document.getElementById('btn-tier2');
+            const tierSlider = document.getElementById('tier-slider');
+
 
             document.getElementById('tier1-driver-standings-container').style.opacity = '0';
             document.getElementById('tier1-driver-standings-container').style.visibility = 'hidden';
@@ -648,9 +693,26 @@
             document.getElementById('tier2-driver-standings-container').style.visibility = 'hidden';
             document.getElementById('tier2-team-standings-container').style.opacity = '0';
             document.getElementById('tier2-team-standings-container').style.visibility = 'hidden';
+            document.getElementById('overall-team-standings-container').style.opacity = '0'; 
+            document.getElementById('overall-team-standings-container').style.visibility = 'hidden'; 
+
 
             if (currentType === 'drivers') {
                 driverNote.classList.remove('hidden');
+                if (currentTier === 'tier1') {
+                    tierSlider.style.transform = 'translateX(0%)';
+                    btnTier1.classList.add('text-white');
+                    btnTier1.classList.remove('text-gray-700');
+                    btnTier2.classList.add('text-gray-700');
+                    btnTier2.classList.remove('text-white');
+                } else {
+                    tierSlider.style.transform = 'translateX(100%)';
+                    btnTier2.classList.add('text-white');
+                    btnTier2.classList.remove('text-gray-700');
+                    btnTier1.classList.add('text-gray-700');
+                    btnTier1.classList.remove('text-white');
+                }
+
                 if (currentTier === 'tier1') {
                     const filteredDrivers = updatedTier1DriverStandings.filter(driver =>
                         driver.name.toLowerCase().includes(currentSearchTerm)
@@ -666,10 +728,24 @@
                     document.getElementById('tier2-driver-standings-container').style.opacity = '1';
                     document.getElementById('tier2-driver-standings-container').style.visibility = 'visible';
                 }
-            } else {
+            } else if (currentType === 'teams') {
                 driverNote.classList.add('hidden');
-                document.getElementById('standings-search').value = '';
+                document.getElementById('standings-search').value = ''; 
                 currentSearchTerm = '';
+
+                if (currentTier === 'tier1') {
+                    tierSlider.style.transform = 'translateX(0%)';
+                    btnTier1.classList.add('text-white');
+                    btnTier1.classList.remove('text-gray-700');
+                    btnTier2.classList.add('text-gray-700');
+                    btnTier2.classList.remove('text-white');
+                } else {
+                    tierSlider.style.transform = 'translateX(100%)';
+                    btnTier2.classList.add('text-white');
+                    btnTier2.classList.remove('text-gray-700');
+                    btnTier1.classList.add('text-gray-700');
+                    btnTier1.classList.remove('text-white');
+                }
 
                 if (currentTier === 'tier1') {
                     populateTeamStandings(updatedTier1TeamStandings, document.getElementById('tier1-team-standings-body'));
@@ -680,6 +756,21 @@
                     document.getElementById('tier2-team-standings-container').style.opacity = '1';
                     document.getElementById('tier2-team-standings-container').style.visibility = 'visible';
                 }
+            } else if (currentType === 'overall') { 
+                driverNote.classList.add('hidden');
+                document.getElementById('standings-search').value = ''; 
+                currentSearchTerm = '';
+
+                tierSlider.style.transform = 'translateX(0%)'; 
+                tierSlider.style.width = '100%'; 
+                btnTier1.classList.add('text-white');
+                btnTier1.classList.remove('text-gray-700');
+                btnTier2.classList.add('text-white');
+                btnTier2.classList.remove('text-gray-700');
+
+                populateTeamStandings(combinedOverallTeamStandings, document.getElementById('overall-team-standings-body'));
+                document.getElementById('overall-team-standings-container').style.opacity = '1';
+                document.getElementById('overall-team-standings-container').style.visibility = 'visible';
             }
         }
 
@@ -721,7 +812,7 @@
                 const monthStr = dateStr.split(' ')[0];
                 let dayStr = dateStr.split(' ')[1].split('-')[0];
                 if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
-                    dayStr = dayStr.substring(0, dayStr.length - 2); 
+                    dayStr = dayStr.substring(0, dayStr.length - 2);  
                 }
                 return new Date(`${monthStr} ${dayStr}, 2025`);
             }
@@ -735,7 +826,7 @@
                     break;
                 }
             }
-            upcomingRace = upcomingRace || scheduleData[scheduleData.length - 1]; 
+            upcomingRace = upcomingRace || scheduleData[scheduleData.length - 1];  
 
             if (upcomingRace) {
                 upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
@@ -754,7 +845,7 @@
                 let target = new Date(now);
                 target.setUTCHours(18, 0, 0, 0);
                 let daysUntilFriday = (5 - target.getUTCDay() + 7) % 7;
-                if (daysUntilFriday === 0 && now.getUTCHours() >= 18) { 
+                if (daysUntilFriday === 0 && now.getUTCHours() >= 18) {  
                     daysUntilFriday = 7;
                 }
                 target.setUTCDate(target.getUTCDate() + daysUntilFriday);
@@ -791,13 +882,15 @@
             
             const tier1DriverStandingsBody = document.getElementById('tier1-driver-standings-body');
             const tier1TeamStandingsBody = document.getElementById('tier1-team-standings-body');
-            const tier2DriverStandingsBody = document.getElementById('tier2-driver-standings-body'); 
-            const tier2TeamStandingsBody = document.getElementById('tier2-team-standings-body'); 
+            const tier2DriverStandingsBody = document.getElementById('tier2-driver-standings-body');  
+            const tier2TeamStandingsBody = document.getElementById('tier2-team-standings-body');  
+            const overallTeamStandingsBody = document.getElementById('overall-team-standings-body'); 
 
             const tier1DriverContainer = document.getElementById('tier1-driver-standings-container');
             const tier1TeamContainer = document.getElementById('tier1-team-standings-container');
-            const tier2DriverContainer = document.getElementById('tier2-driver-standings-container'); 
-            const tier2TeamContainer = document.getElementById('tier2-team-standings-container'); 
+            const tier2DriverContainer = document.getElementById('tier2-driver-standings-container');  
+            const tier2TeamContainer = document.getElementById('tier2-team-standings-container');  
+            const overallTeamContainer = document.getElementById('overall-team-standings-container'); 
 
             const tablesWrapper = document.getElementById('tables-wrapper');
 
@@ -805,13 +898,15 @@
             populateTeamStandings(updatedTier1TeamStandings, tier1TeamStandingsBody);
             populateDriverStandings(updatedTier2DriverStandings, tier2DriverStandingsBody, '');
             populateTeamStandings(updatedTier2TeamStandings, tier2TeamStandingsBody);
+            populateTeamStandings(combinedOverallTeamStandings, overallTeamStandingsBody); 
             
             setTimeout(() => {
                 const tier1DriverTableHeight = tier1DriverContainer.scrollHeight;
                 const tier1TeamTableHeight = tier1TeamContainer.scrollHeight;
                 const tier2DriverTableHeight = tier2DriverContainer.scrollHeight;
-                const tier2TeamTableHeight = tier2TeamContainer.scrollHeight; 
-                const maxTableHeight = Math.max(tier1DriverTableHeight, tier1TeamTableHeight, tier2DriverTableHeight, tier2TeamTableHeight); 
+                const tier2TeamTableHeight = tier2TeamContainer.scrollHeight;  
+                const overallTeamTableHeight = overallTeamContainer.scrollHeight; 
+                const maxTableHeight = Math.max(tier1DriverTableHeight, tier1TeamTableHeight, tier2DriverTableHeight, tier2TeamTableHeight, overallTeamTableHeight); 
                 tablesWrapper.style.minHeight = `${maxTableHeight}px`;
 
                 const btnTier1 = document.getElementById('btn-tier1');
@@ -820,6 +915,7 @@
 
                 const btnDrivers = document.getElementById('btn-drivers');
                 const btnTeams = document.getElementById('btn-teams');
+                const btnOverall = document.getElementById('btn-overall'); 
                 const typeSlider = document.getElementById('type-slider');
 
                 tierSlider.style.transform = 'translateX(0%)';
@@ -833,6 +929,8 @@
                 btnDrivers.classList.remove('text-gray-700');
                 btnTeams.classList.add('text-gray-700');
                 btnTeams.classList.remove('text-white');
+                btnOverall.classList.add('text-gray-700'); 
+                btnOverall.classList.remove('text-white');
 
                 applyFiltersAndRender();
 
@@ -863,16 +961,44 @@
                     btnDrivers.classList.remove('text-gray-700');
                     btnTeams.classList.add('text-gray-700');
                     btnTeams.classList.remove('text-white');
+                    btnOverall.classList.add('text-gray-700'); 
+                    btnOverall.classList.remove('text-white');
+                    btnTier1.classList.add('text-white');
+                    btnTier1.classList.remove('text-gray-700');
+                    btnTier2.classList.add('text-gray-700');
+                    btnTier2.classList.remove('text-white');
+                    tierSlider.style.width = '50%'; 
+                    tierSlider.style.transform = 'translateX(0%)'; 
                     applyFiltersAndRender();
                 });
 
                 btnTeams.addEventListener('click', () => {
                     currentType = 'teams';
-                    typeSlider.style.transform = 'translateX(100%)';
+                    typeSlider.style.transform = 'translateX(100%)'; 
                     btnTeams.classList.add('text-white');
                     btnTeams.classList.remove('text-gray-700');
                     btnDrivers.classList.add('text-gray-700');
                     btnDrivers.classList.remove('text-white');
+                    btnOverall.classList.add('text-gray-700'); 
+                    btnOverall.classList.remove('text-white');
+                    btnTier1.classList.add('text-white');
+                    btnTier1.classList.remove('text-gray-700');
+                    btnTier2.classList.add('text-gray-700');
+                    btnTier2.classList.remove('text-white');
+                    tierSlider.style.width = '50%'; 
+                    tierSlider.style.transform = 'translateX(0%)'; 
+                    applyFiltersAndRender();
+                });
+
+                btnOverall.addEventListener('click', () => { 
+                    currentType = 'overall';
+                    typeSlider.style.transform = 'translateX(200%)'; 
+                    btnOverall.classList.add('text-white');
+                    btnOverall.classList.remove('text-gray-700');
+                    btnDrivers.classList.add('text-gray-700');
+                    btnDrivers.classList.remove('text-white');
+                    btnTeams.classList.add('text-gray-700');
+                    btnTeams.classList.remove('text-white');
                     applyFiltersAndRender();
                 });
 
