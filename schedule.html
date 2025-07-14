@@ -163,13 +163,34 @@
         </div>
     </div>
 
-    <div class="relative w-full h-72 bg-cover bg-center flex flex-col items-center justify-center text-center" style="background-image: url('images/2.png');">
+    <div class="relative w-full h-72 bg-cover bg-center flex flex-col items-center justify-center text-center" style="background-image: url('https://placehold.co/1200x288/492833/ffffff?text=10+Controls+Season+6');">
         <h1 class="text-white text-7xl font-bold z-10">SCHEDULE</h1>
         <p class="text-white text-xl font-semibold z-10 mt-2">10 CONTROLS SEASON 6</p>
         <div class="absolute inset-0 bg-black opacity-50"></div>
     </div>
 
     <div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- Search and Filter Controls -->
+        <div class="mb-8 flex flex-col md:flex-row justify-start items-center gap-4">
+            <input type="text" id="schedule-search" placeholder="SEARCH RACE OR VENUE..." 
+                   class="p-2 rounded-md bg-[#492833] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 w-full md:w-1/3 border-2 border-[#A0A0A0]">
+            
+            <select id="season-filter" class="p-2 rounded-md bg-[#492833] text-white border-2 border-[#A0A0A0] focus:outline-none focus:ring-2 focus:ring-gray-400 w-full md:w-48 shadow-md">
+                <option value="season6" selected>SEASON 6</option>
+                <option value="season5">SEASON 5</option>
+                <option value="season4">SEASON 4</option>
+                <option value="season3">SEASON 3</option>
+                <option value="season2">SEASON 2</option>
+                <option value="season1">SEASON 1</option>
+                <option value="season0">SEASON 0</option>
+            </select>
+
+            <select id="tier-filter" class="p-2 rounded-md bg-[#492833] text-white border-2 border-[#A0A0A0] focus:outline-none focus:ring-2 focus:ring-gray-400 w-full md:w-48 shadow-md">
+                <option value="tier1">TIER 1</option>
+                <option value="tier2">TIER 2</option>
+            </select>
+        </div>
+
         <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
         </div>
     </div>
@@ -184,18 +205,32 @@
         <p>© 2022-2025 10 Controls Limited</p>
     </footer>
     <script>
-        const scheduleData = [
-            { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'March 14-16', winner: 'Anton Chebotarov', winnerFlag: 'UA', country: 'BH' },
-            { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 21-23', winner: 'Maxfan', winnerFlag: 'PL', country: 'AU' },
-            { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', winner: 'Maxfan', winnerFlag: 'PL', country: 'IT' },
-            { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', winner: 'Maxfan', winnerFlag: 'PL', country: 'BE' },
-            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'July 11th', winner: 'Anton Chebotarov', winnerFlag: 'UA', country: 'ES' }, 
-            { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'July 18th', winner: '', country: 'CN' },
-            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'July 25th', winner: '', country: 'JP' },
-            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'August 1st', winner: '', country: 'US' }, 
-            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'August 8th', winner: '', country: 'MC' }, 
-            { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'August 15th', winner: '', country: 'BR' }
+        const scheduleDataTier1 = [
+            { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'MARCH 14-16', winner: 'ANTON CHEBOTAROV', winnerFlag: 'UA', country: 'BH', tier: 'tier1' },
+            { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'MARCH 21-23', winner: 'MAXFAN', winnerFlag: 'PL', country: 'AU', tier: 'tier1' },
+            { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'JUNE 27TH', winner: 'MAXFAN', winnerFlag: 'PL', country: 'IT', tier: 'tier1' },
+            { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'JULY 4TH', winner: 'MAXFAN', winnerFlag: 'PL', country: 'BE', tier: 'tier1' },
+            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'JULY 11TH', winner: 'ANTON CHEBOTAROV', winnerFlag: 'UA', country: 'ES', tier: 'tier1' }, 
+            { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'JULY 18TH', winner: '', country: 'CN', tier: 'tier1' },
+            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'JULY 25TH', winner: '', country: 'JP', tier: 'tier1' },
+            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'AUGUST 1ST', winner: '', country: 'US', tier: 'tier1' }, 
+            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'AUGUST 8TH', winner: '', country: 'MC', tier: 'tier1' }, 
+            { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'AUGUST 15TH', winner: '', country: 'BR', tier: 'tier1' }
         ];
+
+        const scheduleDataTier2 = [
+            { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'MARCH 14-16', winner: 'SANDRO', winnerFlag: 'NL', country: 'BH', tier: 'tier2' },
+            { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'MARCH 21-23', winner: 'JAY AZIER', winnerFlag: 'NL', country: 'AU', tier: 'tier2' },
+            { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'JUNE 27TH', winner: 'SANDRO', winnerFlag: 'NL', country: 'IT', tier: 'tier2' },
+            { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'JULY 4TH', winner: 'SANDRO', winnerFlag: 'NL', country: 'BE', tier: 'tier2' },
+            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'JULY 11TH', winner: 'SANDRO', winnerFlag: 'NL', country: 'ES', tier: 'tier2' }, 
+            { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'JULY 18TH', winner: '', country: 'CN', tier: 'tier2' },
+            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'JULY 25TH', winner: '', country: 'JP', tier: 'tier2' },
+            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'AUGUST 1ST', winner: '', country: 'US', tier: 'tier2' }, 
+            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'AUGUST 8TH', winner: '', country: 'MC', tier: 'tier2' }, 
+            { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'AUGUST 15TH', winner: '', country: 'BR', tier: 'tier2' }
+        ];
+
         const timeZoneMap = {
             'Melbourne': 'Australia/Melbourne',
             'Shanghai': 'Asia/Shanghai',
@@ -241,6 +276,87 @@
             return `<img src="${flagUrl}" alt="${countryCode} Flag" class="winner-flag-icon" onerror="this.onerror=null;this.src='${fallbackFlag}';">`;
         }
 
+        function highlightText(text, searchTerm) {
+            if (!searchTerm) {
+                return text;
+            }
+            const regex = new RegExp(`(${searchTerm})`, 'gi');
+            return text.replace(regex, `<span class="bg-yellow-300 text-black rounded-sm px-1">$1</span>`);
+        }
+
+        function renderSchedule(dataToRender, searchTerm = '', selectedSeason = 'season6', selectedTier = 'tier1') {
+            const scheduleGrid = document.getElementById('schedule-grid');
+            scheduleGrid.innerHTML = '';
+
+            const filteredData = dataToRender.filter(race => {
+                const nameMatch = race.name.toLowerCase().includes(searchTerm);
+                const venueMatch = race.venue.toLowerCase().includes(searchTerm);
+                const winnerMatch = race.winner && race.winner.toLowerCase().includes(searchTerm);
+                const searchMatches = nameMatch || venueMatch || winnerMatch;
+
+                const seasonMatches = true; 
+                return searchMatches && seasonMatches;
+            });
+
+
+            filteredData.forEach((race, index) => {
+                const card = document.createElement('div');
+                card.className = 'schedule-card rounded-lg p-8 flex flex-col justify-between';
+                
+                const flagHtml = getFlagHtml(race.country);
+                
+                let resultButtonHref = "#";
+                let baseResultsPath = "results/";
+                if (selectedTier === 'tier2') {
+                    baseResultsPath = "tier2results/";
+                }
+
+                if (race.round === 1 && race.name === 'Bahrain Grand Prix') {
+                    resultButtonHref = baseResultsPath + "bahrain.html";
+                } else if (race.round === 2 && race.name === 'Australian Grand Prix') {
+                    resultButtonHref = baseResultsPath + "australia.html";
+                } else if (race.round === 3 && race.name === 'Emilia Romagna Grand Prix') {
+                    resultButtonHref = baseResultsPath + "imola.html";
+                } else if (race.round === 4 && race.name === 'Belgian Grand Prix') {
+                    resultButtonHref = baseResultsPath + "belgium.html";
+                } else if (race.round === 5 && race.name === 'Spanish Grand Prix') { 
+                    resultButtonHref = baseResultsPath + "spain.html";
+                }
+
+                let footerHtml;
+                if (race.winner) {
+                    const winnerFlagHtml = getWinnerFlagHtml(race.winnerFlag);
+                    footerHtml = `
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
+                            <span class="text-base font-semibold text-white uppercase truncate">
+                                <span class="font-bold text-white">WINNER:</span> 
+                                <span class="flex items-center">${winnerFlagHtml} ${highlightText(race.winner, searchTerm)}</span>
+                            </span>
+                            <div class="flex items-center space-x-2 flex-shrink-0">
+                                <a href="${resultButtonHref}" class="bg-[#492833] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Results</a>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    footerHtml = `<p class="text-base font-semibold text-white">${highlightText(race.date.toUpperCase(), searchTerm)}</p>`;
+                }
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center mb-2"> 
+                            ${flagHtml}
+                            <h3 class="text-2xl font-bold text-white">${highlightText(race.name.toUpperCase(), searchTerm)}</h3>
+                        </div>
+                        <p class="text-base font-bold text-white">ROUND ${race.round || race.pos}</p>
+                        <p class="text-lg text-white mt-2">${highlightText(race.venue.toUpperCase(), searchTerm)}</p>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-gray-600">
+                        ${footerHtml}
+                    </div>
+                `;
+                scheduleGrid.appendChild(card);
+            });
+        }
 
         window.onload = function() {
             const scheduleGrid = document.getElementById('schedule-grid');
@@ -249,66 +365,40 @@
             const countdownDisplayEl = document.getElementById('countdown-display');
             const countdownTimerEl = document.getElementById('countdown-timer'); 
 
-            function renderSchedule(currentScheduleData) {
-                scheduleGrid.innerHTML = '';
-                currentScheduleData.forEach((race, index) => {
-                    const card = document.createElement('div');
-                    card.className = 'schedule-card rounded-lg p-8 flex flex-col justify-between';
-                    
-                    const flagHtml = getFlagHtml(race.country);
-                    
-                    let resultButtonHref = "#";
-                    if (race.round === 1 && race.name === 'Bahrain Grand Prix') {
-                        resultButtonHref = "results/bahrain.html";
-                    } else if (race.round === 2 && race.name === 'Australian Grand Prix') {
-                        resultButtonHref = "results/australia.html";
-                    } else if (race.round === 3 && race.name === 'Emilia Romagna Grand Prix') {
-                        resultButtonHref = "results/imola.html";
-                    } else if (race.round === 4 && race.name === 'Belgian Grand Prix') {
-                        resultButtonHref = "results/belgium.html";
-                    } else if (race.round === 5 && race.name === 'Spanish Grand Prix') { 
-                        resultButtonHref = "results/spain.html";
+            const scheduleSearchInput = document.getElementById('schedule-search');
+            const seasonFilter = document.getElementById('season-filter');
+            const tierFilter = document.getElementById('tier-filter');
+
+            tierFilter.value = 'tier2';
+
+            function applyScheduleFilters() {
+                const searchTerm = scheduleSearchInput.value.toLowerCase();
+                const selectedSeason = seasonFilter.value; 
+                const selectedTier = tierFilter.value;
+                const scheduleGrid = document.getElementById('schedule-grid');
+
+                if (selectedSeason !== 'season6') {
+                    scheduleGrid.innerHTML = '<div class="col-span-full text-center text-white text-4xl font-bold py-20">COMING SOON</div>';
+                } else {
+                    let dataToFilter = [];
+                    if (selectedTier === 'tier1') {
+                        dataToFilter = scheduleDataTier1;
+                    } else if (selectedTier === 'tier2') {
+                        dataToFilter = scheduleDataTier2;
                     }
-                    let footerHtml;
-                    if (race.winner) {
-                        const winnerFlagHtml = getWinnerFlagHtml(race.winnerFlag);
-                        footerHtml = `
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
-                                <span class="text-base font-semibold text-white uppercase truncate">
-                                    <span class="font-bold text-white">WINNER:</span> 
-                                    <span class="flex items-center">${winnerFlagHtml} ${race.winner}</span>
-                                </span>
-                                <div class="flex items-center space-x-2 flex-shrink-0">
-                                    <a href="${resultButtonHref}" class="bg-[#492833] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Results</a>
-                                </div>
-                            </div>
-                        `;
-                    } else {
-                        footerHtml = `<p class="text-base font-semibold text-white">${race.date.toUpperCase()}</p>`;
-                    }
-                    card.innerHTML = `
-                        <div>
-                            <div class="flex items-center mb-2"> 
-                                ${flagHtml}
-                                <h3 class="text-2xl font-bold text-white">${race.name.toUpperCase()}</h3>
-                            </div>
-                            <p class="text-base font-bold text-white">ROUND ${race.round || race.pos}</p>
-                            <p class="text-lg text-white mt-2">${race.venue.toUpperCase()}</p>
-                        </div>
-                        <div class="mt-6 pt-6 border-t border-gray-600">
-                            ${footerHtml}
-                        </div>
-                    `;
-                    scheduleGrid.appendChild(card);
-                });
+                    renderSchedule(dataToFilter, searchTerm, selectedSeason, selectedTier);
+                }
             }
-            renderSchedule(scheduleData);
+
+            applyScheduleFilters();
+
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('menu-open');
                 mobileMenuButton.classList.toggle('open');
             });
+
             const menuItemsContainer = document.getElementById('desktop-menu-items');
             if (menuItemsContainer) {
                 const menuLinks = menuItemsContainer.querySelectorAll('a');
@@ -336,60 +426,82 @@
                 }
                 return new Date(`${monthStr} ${dayStr}, 2025`);
             }
-            const now = new Date();
-            let upcomingRace = null;
-            for (const race of scheduleData) {
-                const raceDate = parseRaceDate(race.date);
-                if (raceDate > now) {
-                    upcomingRace = race;
-                    break;
+
+            const specificUpcomingRace = {
+                name: 'Chinese Grand Prix',
+                date: 'JULY 18TH',
+                venue: 'Shanghai'
+            };
+
+            upcomingRaceInfoEl.textContent = `UPCOMING: ${specificUpcomingRace.name.toUpperCase()}`;
+            upcomingRaceDateEl.textContent = specificUpcomingRace.date.toUpperCase();
+
+            const countdownEndDate = new Date('September 1, 2025 00:00:00 ET');
+
+            function getNextFriday2PMET() {
+                const now = new Date();
+                let target = new Date(now);
+                target.setUTCHours(18, 0, 0, 0);
+
+                let daysUntilFriday = (5 - target.getUTCDay() + 7) % 7;
+                if (daysUntilFriday === 0 && now.getUTCHours() >= 18) {
+                    daysUntilFriday = 7;
                 }
+                target.setUTCDate(target.getUTCDate() + daysUntilFriday);
+
+                if (target > countdownEndDate) {
+                    return null;
+                }
+                return target;
             }
-            if (upcomingRace) {
-                upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
-                upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
-                function getNextFriday2PMET() {
-                    const now = new Date();
-                    let target = new Date(now);
-                    target.setUTCHours(18, 0, 0, 0);
-                    let daysUntilFriday = (5 - target.getUTCDay() + 7) % 7;
-                    if (daysUntilFriday === 0 && now.getUTCHours() >= 18) {
-                        daysUntilFriday = 7;
+
+            let countdownTargetDate = getNextFriday2PMET();
+
+            function updateCountdown() {
+                const now = new Date();
+                let difference = countdownTargetDate ? countdownTargetDate.getTime() - now.getTime() : -1;
+
+                if (countdownTargetDate === null || now > countdownEndDate) {
+                    countdownTimerEl.textContent = "SEASON HAS CONCLUDED";
+                    if (countdownDisplayEl) {
+                        countdownDisplayEl.style.display = 'none';
                     }
-                    target.setUTCDate(target.getUTCDate() + daysUntilFriday);
-                    return target;
+                    return;
                 }
-                let countdownTargetDate = getNextFriday2PMET();
-                function updateCountdown() {
-                    const now = new Date();
-                    let difference = countdownTargetDate.getTime() - now.getTime();
-                    if (difference < 0) {
-                        countdownTargetDate = getNextFriday2PMET();
-                        difference = countdownTargetDate.getTime() - now.getTime();
-                    }
-                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-                    if (countdownTimerEl) {
-                        if (difference <= 0) {
-                            countdownTimerEl.textContent = "RACE STARTING SOON!";
-                        } else if (days > 0) {
-                            countdownTimerEl.textContent = `NEXT RACE IN ${days}D ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
-                        } else {
-                            countdownTimerEl.textContent = `NEXT RACE IN ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
+
+                if (difference < 0) {
+                    countdownTargetDate = getNextFriday2PMET();
+                    if (countdownTargetDate === null) {
+                        countdownTimerEl.textContent = "SEASON HAS CONCLUDED";
+                        if (countdownDisplayEl) {
+                            countdownDisplayEl.style.display = 'none';
                         }
+                        return;
+                    }
+                    difference = countdownTargetDate.getTime() - now.getTime();
+                }
+
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                if (countdownTimerEl) {
+                    if (difference <= 0) {
+                        countdownTimerEl.textContent = "RACE STARTING SOON!";
+                    } else if (days > 0) {
+                        countdownTimerEl.textContent = `NEXT RACE IN ${days}D ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
+                    } else {
+                        countdownTimerEl.textContent = `NEXT RACE IN ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
                     }
                 }
-                updateCountdown();
-                setInterval(updateCountdown, 1000);
-            } else {
-                upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                upcomingRaceDateEl.style.display = 'none';
-                if (countdownDisplayEl) {
-                    countdownDisplayEl.style.display = 'none';
-                }
             }
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            scheduleSearchInput.addEventListener('input', applyScheduleFilters);
+            seasonFilter.addEventListener('change', applyScheduleFilters);
+            tierFilter.addEventListener('change', applyScheduleFilters);
         };
     </script>
 </body>
