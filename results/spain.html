@@ -296,30 +296,12 @@
                 }
 
                 // --- Sub-header and Countdown Logic ---
-                const scheduleData = [
-                    { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris', country: 'AU' },
-                    { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23', winner: 'Oscar Piastri', country: 'CN' },
-                    { round: 3, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'April 4-6', winner: 'Max Verstappen', country: 'JP' },
-                    { round: 4, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'April 11-13', winner: 'Oscar Piastri', country: 'BH' },
-                    { round: 5, name: 'Saudi Arabian Grand Prix', venue: 'Jeddah', date: 'April 18-20', winner: 'Oscar Piastri', country: 'SA' },
-                    { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', winner: 'Oscar Piastri', country: 'USA' },
-                    { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen', country: 'IT' },
-                    { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'MC' },
-                    { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'ES' },
-                    { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'CA' },
-                    { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
-                    { round: 12, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', country: 'BE' },
-                    { round: 13, name: 'Chinese Grand Prix', venue: 'Budapest', date: 'July 18th', country: 'CN' },
-                    { round: 14, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'August 29-31', country: 'NL' },
-                    { round: 15, name: 'Italian Grand Prix', venue: 'Monza', date: 'September 5-7', country: 'IT' },
-                    { round: 16, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'September 19-21', country: 'AZ' },
-                    { pos: 17, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
-                    { pos: 18, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19', country: 'USA' },
-                    { pos: 19, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26', country: 'MX' },
-                    { pos: 20, name: 'Brazilian Grand Prix', date: 'November 7-9', country: 'BR' },
-                    { pos: 21, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22', country: 'USA' },
-                    { pos: 22, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30', country: 'QAT' },
-                    { pos: 23, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7', country: 'AE' }
+                const scheduleData = [,
+                    { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'July 18th', country: 'CN' },
+                    { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'July 25th', country: 'JP' },
+                    { round: 8, name: 'United States Grand Prix', venue: 'Texas', date: 'August 1st', country: 'US' },
+                    { round: 9, name: 'Mystery Grand Prix', venue: 'Mystery', date: 'August 8th', country: 'MS' },
+                    { pos: 10, name: 'Brazilian Grand Prix', venue: 'Brazil', date: 'August 15th', country: 'BR' },
                 ];
 
                 const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
@@ -403,7 +385,7 @@
                     "Aston Martin": "LOCKHEED MARTIN ASTON MARTIN",
                     "Haas": "HAAS ONLYFANS RACING",
                     "Williams": "JOHN DEERE WILLIAMS RACING",
-                    "Scuderia Ferrari HP": "SCUDERIA FERRARI",
+                    "Scuderia Ferrari HP": "PIRELLI FERRARI",
                     "KICK Sauber": "TWITCH SAUBER",
                     "Alpine": "TINDER ALPINE F1 TEAM"
                 };
@@ -450,17 +432,17 @@
                 { pos: 3, driver: "FOCUSER", team: "HOT WHEELS MCLAREN", best: "1:11.731", gap: "+0.313", flag: "ES" },
                 { pos: 4, driver: "MAXFAN", team: "NEWPORT ROLEX RED BULL", best: "1:11.743", gap: "+0.325", flag: "PL" },
                 { pos: 5, driver: "ANTONIO BRANCATI", team: "PIRELLI FERRARI", best: "1:11.947", gap: "+0.529", flag: "IT" },
-                { pos: 6, driver: "TONY SEROKA", team: "RED BULL", best: "1:12.111", gap: "+0.693", flag: "PL" },
+                { pos: 6, driver: "TONY SEROKA", team: "NEWPORT ROLEX RED BULL", best: "1:12.111", gap: "+0.693", flag: "PL" },
                 { pos: 7, driver: "ASPEC", team: "GUINNESS MERCEDES", best: "1:12.137", gap: "+0.719", flag: "GB" },
                 { pos: 8, driver: "ALFIE WHITE", team: "TINDER ALPINE F1 TEAM", best: "1:12.171", gap: "+0.753", flag: "GB" },
                 { pos: 9, driver: "TSAR", team: "GUINNESS MERCEDES", best: "1:12.236", gap: "+0.818", flag: "HU" },
                 { pos: 10, driver: "MAX HOUSLEY", team: "TINDER ALPINE F1 TEAM", best: "1:12.304", gap: "+0.886", flag: "GB" },
                 { pos: 11, driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", best: "1:12.319", gap: "+0.901", flag: "ES" },
-                { pos: 12, driver: "STRA", team: "ASTON MARTIN", best: "1:12.406", gap: "+0.988", flag: "RS" },
+                { pos: 12, driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", best: "1:12.406", gap: "+0.988", flag: "RS" },
                 { pos: 13, driver: "KRAB", team: "RACING BULLS PEUGEOT SPORT", best: "1:12.490", gap: "+1.072", flag: "DE" },
                 { pos: 14, driver: "KISIEL", team: "HAAS ONLYFANS RACING", best: "1:12.556", gap: "+1.138", flag: "PL" },
                 { pos: 15, driver: "COUNTERFEIT", team: "JOHN DEERE WILLIAMS RACING", best: "1:12.632", gap: "+1.214", flag: "GB" },
-                { pos: 16, driver: "LUCA STEVENS", team: "ASTON MARTIN", best: "1:12.641", gap: "+1.223", flag: "GB" },
+                { pos: 16, driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", best: "1:12.641", gap: "+1.223", flag: "GB" },
                 { pos: 17, driver: "TOBOB", team: "TWITCH SAUBER", best: "1:12.805", gap: "+1.387", flag: "DE" },
                 { pos: 18, driver: "LOLER", team: "JOHN DEERE WILLIAMS RACING", best: "1:14.357", gap: "+2.939", flag: "PL" },
                 { pos: 19, driver: "GENERIC LEON", team: "TWITCH SAUBER", best: "1:14.479", gap: "+3.061", flag: "AT" },
