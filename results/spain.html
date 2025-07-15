@@ -448,28 +448,27 @@
 
 
                 const qualifyingResults = [
-const qualifyingResults = [
-    { pos: 1, driver: "ANTON CHEBOTAROV", team: "MCLAREN", best: "1:11.418", gap: "", flag: "UA" },
-    { pos: 2, driver: "ALPHAROMEO", team: "SCUDERIA FERRARI", best: "1:11.683", gap: "+0.265", flag: "NL" },
-    { pos: 3, driver: "FOCUSER", team: "MCLAREN", best: "1:11.731", gap: "+0.313", flag: "ES" },
-    { pos: 4, driver: "MAXFAN", team: "RED BULL", best: "1:11.743", gap: "+0.325", flag: "PL" },
-    { pos: 5, driver: "ANTONIO BRANCATI", team: "SCUDERIA FERRARI", best: "1:11.947", gap: "+0.529", flag: "IT" },
-    { pos: 6, driver: "TONY SEROKA", team: "RED BULL", best: "1:12.111", gap: "+0.693", flag: "PL" },
-    { pos: 7, driver: "ASPEC", team: "MERCEDES-AMG PETRONAS", best: "1:12.137", gap: "+0.719", flag: "GB" },
-    { pos: 8, driver: "ALFIE WHITE", team: "ALPINE", best: "1:12.171", gap: "+0.753", flag: "GB" },
-    { pos: 9, driver: "TSAR", team: "MERCEDES-AMG PETRONAS", best: "1:12.236", gap: "+0.818", flag: "HU" },
-    { pos: 10, driver: "MAX HOUSLEY", team: "ALPINE", best: "1:12.304", gap: "+0.886", flag: "GB" },
-    { pos: 11, driver: "MORA", team: "VISA CASH APP RACING BULLS", best: "1:12.319", gap: "+0.901", flag: "ES" },
-    { pos: 12, driver: "STRA", team: "ASTON MARTIN", best: "1:12.406", gap: "+0.988", flag: "RS" },
-    { pos: 13, driver: "KRAB", team: "VISA CASH APP RACING BULLS", best: "1:12.490", gap: "+1.072", flag: "DE" },
-    { pos: 14, driver: "KISIEL", team: "HAAS", best: "1:12.556", gap: "+1.138", flag: "PL" },
-    { pos: 15, driver: "COUNTERFEIT", team: "WILLIAMS", best: "1:12.632", gap: "+1.214", flag: "GB" },
-    { pos: 16, driver: "LUCA STEVENS", team: "ASTON MARTIN", best: "1:12.641", gap: "+1.223", flag: "GB" },
-    { pos: 17, driver: "TOBOB", team: "KICK SAUBER", best: "1:12.805", gap: "+1.387", flag: "DE" },
-    { pos: 18, driver: "LOLER", team: "WILLIAMS", best: "1:14.357", gap: "+2.939", flag: "PL" },
-    { pos: 19, driver: "GENERIC LEON", team: "KICK SAUBER", best: "1:14.479", gap: "+3.061", flag: "AT" },
-    { pos: 20, driver: "NOJUS GEDVILAS", team: "HAAS", best: "1:14.647", gap: "+3.229", flag: "LT" }
-].map(r => ({...r, driver: r.driver.toUpperCase(), team: (teamNameMapping[r.team] || r.team).toUpperCase() }));
+                { pos: 1, driver: "ANTON CHEBOTAROV", team: "MCLAREN", best: "1:11.418", gap: "", flag: "UA" },
+                { pos: 2, driver: "ALPHAROMEO", team: "SCUDERIA FERRARI", best: "1:11.683", gap: "+0.265", flag: "NL" },
+                { pos: 3, driver: "FOCUSER", team: "MCLAREN", best: "1:11.731", gap: "+0.313", flag: "ES" },
+                { pos: 4, driver: "MAXFAN", team: "RED BULL", best: "1:11.743", gap: "+0.325", flag: "PL" },
+                { pos: 5, driver: "ANTONIO BRANCATI", team: "SCUDERIA FERRARI", best: "1:11.947", gap: "+0.529", flag: "IT" },
+                { pos: 6, driver: "TONY SEROKA", team: "RED BULL", best: "1:12.111", gap: "+0.693", flag: "PL" },
+                { pos: 7, driver: "ASPEC", team: "MERCEDES-AMG PETRONAS", best: "1:12.137", gap: "+0.719", flag: "GB" },
+                { pos: 8, driver: "ALFIE WHITE", team: "ALPINE", best: "1:12.171", gap: "+0.753", flag: "GB" },
+                { pos: 9, driver: "TSAR", team: "MERCEDES-AMG PETRONAS", best: "1:12.236", gap: "+0.818", flag: "HU" },
+                { pos: 10, driver: "MAX HOUSLEY", team: "ALPINE", best: "1:12.304", gap: "+0.886", flag: "GB" },
+                { pos: 11, driver: "MORA", team: "VISA CASH APP RACING BULLS", best: "1:12.319", gap: "+0.901", flag: "ES" },
+                { pos: 12, driver: "STRA", team: "ASTON MARTIN", best: "1:12.406", gap: "+0.988", flag: "RS" },
+                { pos: 13, driver: "KRAB", team: "VISA CASH APP RACING BULLS", best: "1:12.490", gap: "+1.072", flag: "DE" },
+                { pos: 14, driver: "KISIEL", team: "HAAS", best: "1:12.556", gap: "+1.138", flag: "PL" },
+                { pos: 15, driver: "COUNTERFEIT", team: "WILLIAMS", best: "1:12.632", gap: "+1.214", flag: "GB" },
+                { pos: 16, driver: "LUCA STEVENS", team: "ASTON MARTIN", best: "1:12.641", gap: "+1.223", flag: "GB" },
+                { pos: 17, driver: "TOBOB", team: "KICK SAUBER", best: "1:12.805", gap: "+1.387", flag: "DE" },
+                { pos: 18, driver: "LOLER", team: "WILLIAMS", best: "1:14.357", gap: "+2.939", flag: "PL" },
+                { pos: 19, driver: "GENERIC LEON", team: "KICK SAUBER", best: "1:14.479", gap: "+3.061", flag: "AT" },
+                { pos: 20, driver: "NOJUS GEDVILAS", team: "HAAS", best: "1:14.647", gap: "+3.229", flag: "LT" }
+                ].map(r => ({...r, driver: r.driver.toUpperCase(), team: (teamNameMapping[r.team] || r.team).toUpperCase() }));
                 
                 const raceHeaders = [
                     { text: 'POS', key: 'pos', classes: 'py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6' },
