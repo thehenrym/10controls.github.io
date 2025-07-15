@@ -162,7 +162,6 @@
                     <a href="/schedule.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
                     <a href="/standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
                     <a href="/teams.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Teams</a>
-                    <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
                 </div>
 
                 <!-- Mobile menu button (hamburger icon) -->
@@ -185,26 +184,9 @@
                 <a href="/schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
                 <a href="/standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
                 <a href="/teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Teams</a>
-                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
             </div>
         </div>
     </header>
-
-    <!-- Sub-Header for Upcoming Race Info and Countdown. Hidden on mobile. -->
-    <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300 hidden md:flex">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
-            <div class="flex items-center space-x-2 sm:space-x-4">
-                <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
-                </div>
-                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
-                </div>
-            </div>
-            <!-- Countdown Timer -->
-            <div id="countdown-display" class="flex items-center flex-shrink-0 text-right text-xs sm:text-sm">
-                <p id="countdown-timer" class="font-bold"></p>
-            </div>
-        </div>
-    </div>
 
     <!-- Main Content Area - Race Result Page Layout -->
     <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
@@ -244,7 +226,6 @@
             <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
             <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
             <a href="https://www.youtube.com/@10controls24" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
-            <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
         </div>
     </footer>
     
@@ -406,10 +387,10 @@
                     "Aston Martin": "LOCKHEED MARTIN ASTON MARTIN",
                     "Haas": "HAAS ONLYFANS RACING",
                     "Williams": "JOHN DEERE WILLIAMS RACING",
-                    "Scuderia Ferrari HP": "SCUDERIA FERRARI",
+                    "Scuderia Ferrari HP": "PIRELLI FERRARI",
                     "KICK Sauber": "TWITCH SAUBER",
                     "Alpine": "TINDER ALPINE F1 TEAM",
-                    "Visa Cash App Racing Bulls": "VISA CASH APP RACING BULLS" 
+                    "Visa Cash App Racing Bulls": "RACING BULLS PEUGEOT SPORT" 
                 };
                 
                 // MotoGP points system
@@ -417,7 +398,7 @@
 
                 // --- Updated Race and Qualifying Data ---
                 let raceResults = [
-                    { pos: 1, driver: "jay2005_071", team: "McLaren", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "Leader", pts: 0, flag: "NL" },
+                    { pos: 1, driver: "JAY AZIER", team: "McLaren", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "Leader", pts: 0, flag: "NL" },
                     { pos: 2, driver: "SANDRO", team: "McLaren", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "+1.218", pts: 0, flag: "NL" },
                     { pos: 3, driver: "maxlinxc", team: "Mercedes-AMG Petronas", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "+1.854", pts: 0, flag: "AT" },
                     { pos: 4, driver: "JSTN NL", team: "Red Bull", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "+3.136", pts: 0, flag: "NL" },
@@ -425,7 +406,7 @@
                     { pos: 6, driver: "Manuel Rotundo", team: "Visa Cash App Racing Bulls", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "+5.496", pts: 0, flag: "IT" },
                     { pos: 7, driver: "ByRoNaS", team: "Mercedes-AMG Petronas", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "+16.149", pts: 0, flag: "GR" },
                     { pos: 8, driver: "Mark", team: "Williams", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "+20.872", pts: 0, flag: "US" },
-                    { pos: 9, driver: "FOCUSSSSSSS", team: "McLaren", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "+59.070", pts: 0, flag: "ES" },
+                    { pos: 9, driver: "DANIELS", team: "Visa Cash App Racing Bulls", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "+59.070", pts: 0, flag: "ES" },
                     { pos: 10, driver: "Teetoe", team: "Red Bull", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "+1:15.379", pts: 0, flag: "NL" },
                     { pos: 11, driver: "SneewwZZ", team: "Aston Martin", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "DNF", pts: 0, flag: "NL" },
                     { pos: 12, driver: "ROOKIE", team: "Haas", grid: "N/A", stops: "N/A", bestLap: "N/A", time: "DNF", pts: 0, flag: "GB" }, 
@@ -445,16 +426,16 @@
                     { pos: 1, driver: "SANDRO", team: "McLaren", flag: "NL" },
                     { pos: 2, driver: "JSTN NL", team: "Red Bull", flag: "NL" },
                     { pos: 3, driver: "Manuel Rotundo", team: "Scuderia Ferrari HP", flag: "IT" },
-                    { pos: 4, driver: "jay2005_071", team: "McLaren", flag: "NL" },
+                    { pos: 4, driver: "JAY AZIER", team: "McLaren", flag: "NL" },
                     { pos: 5, driver: "Jarvis Coid", team: "Red Bull", flag: "GB" },
                     { pos: 6, driver: "Teeetoe", team: "Red Bull", flag: "NL" },
                     { pos: 7, driver: "maxlinxc", team: "Mercedes-AMG Petronas", flag: "AT" },
                     { pos: 8, driver: "Mark", team: "Williams", flag: "US" },
-                    { pos: 9, driver: "shark772", team: "Williams", flag: "DK" },
+                    { pos: 9, driver: "shark", team: "Williams", flag: "DK" },
                     { pos: 10, driver: "ByRoNaS", team: "Mercedes-AMG Petronas", flag: "GR" },
                     { pos: 11, driver: "ROOKIE", team: "Haas", flag: "GB" }, 
                     { pos: 12, driver: "SneewwZZ", team: "Aston Martin", flag: "NL" },
-                    { pos: 13, driver: "FOCUSSSSSSS", team: "McLaren", flag: "ES" }
+                    { pos: 13, driver: "DANIELS", team: "Visa Cash App Racing Bulls", flag: "ES" }
                 ].map(r => ({...r, driver: r.driver.toUpperCase(), team: (teamNameMapping[r.team] || r.team).toUpperCase() }));
                 
                 const raceHeaders = [
@@ -480,11 +461,11 @@
                     "LOCKHEED MARTIN ASTON MARTIN": 'https://cdn.discordapp.com/emojis/1215769484078354483.webp?size=44',
                     "HAAS ONLYFANS RACING": 'https://cdn.discordapp.com/emojis/1378698433652588645.webp?size=44',
                     "JOHN DEERE WILLIAMS RACING": 'https://cdn.discordapp.com/emojis/1377791374341963917.webp?size=44',
-                    "SCUDERIA FERRARI": 'https://cdn.discordapp.com/emojis/1215769617272934440.webp?size=44',
+                    "PIRELLI FERRARI": 'https://cdn.discordapp.com/emojis/1390804647492583434.webp?size=96',
                     "TWITCH SAUBER": 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44',
                     "RACING BULLS PEUGEOT SPORT": 'https://cdn.discordapp.com/emojis/1377646844578103346.webp?size=44',
                     "TINDER ALPINE F1 TEAM": 'https://cdn.discordapp.com/emojis/1379862213493260328.webp?size=44',
-                    "VISA CASH APP RACING BULLS": 'https://cdn.discordapp.com/emojis/1377646844578103346.webp?size=44' 
+                    "RACING BULLS PEUGEOT SPORT": 'https://cdn.discordapp.com/emojis/1377646844578103346.webp?size=44' 
                 };
 
                 const toggleSlider = document.getElementById('toggle-slider');
