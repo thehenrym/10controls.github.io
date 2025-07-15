@@ -236,7 +236,7 @@
             
             const motogpPoints = [25, 20, 16, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
-            let raceResults = [
+ let raceResults = [
     { pos: 1, driver: "SANDRO", team: "HOT WHEELS MCLAREN", grid: 1, stops: 2, bestLap: "1:44.294", time: "39:48.896", pts: 25, flag: "NL" },
     { pos: 2, driver: "JSTN NL", team: "PIRELLI FERRARI", grid: 6, stops: 2, bestLap: "1:45.483", time: "+5.077", pts: 18, flag: "NL" },
     { pos: 3, driver: "JARVIS COID", team: "NEWPORT ROLEX RED BULL", grid: 5, stops: 2, bestLap: "1:45.528", time: "+8.739", pts: 15, flag: "GB" },
@@ -286,6 +286,7 @@
     { pos: 15, driver: "BYRONAS", team: "GUINNESS MERCEDES", best: "1:44.844", gap: "+3.040", flag: "GR" },
     { pos: 16, driver: "SNEEUWZZ", team: "LOCKHEED MARTIN ASTON MARTIN", best: "1:49.869", gap: "+8.065", flag: "NL" }
 ].map(r => ({...r, driver: r.driver.toUpperCase(), team: (teamNameMapping[r.team] || r.team).toUpperCase() }));
+            
             ];
 
             const driverNameConsistencyMap = {
