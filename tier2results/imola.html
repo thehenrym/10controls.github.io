@@ -190,22 +190,6 @@
         </div>
     </header>
 
-    <!-- Sub-Header for Upcoming Race Info and Countdown. Hidden on mobile. -->
-    <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300 hidden md:flex">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
-            <div class="flex items-center space-x-2 sm:space-x-4">
-                <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
-                </div>
-                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
-                </div>
-            </div>
-            <!-- Countdown Timer -->
-            <div id="countdown-display" class="flex items-center flex-shrink-0 text-right text-xs sm:text-sm">
-                <p id="countdown-timer" class="font-bold"></p>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Content Area - Race Result Page Layout -->
     <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         <div class="flex items-center mb-6">
@@ -406,10 +390,10 @@
                     "Aston Martin": "LOCKHEED MARTIN ASTON MARTIN",
                     "Haas": "HAAS ONLYFANS RACING",
                     "Williams": "JOHN DEERE WILLIAMS RACING",
-                    "Scuderia Ferrari HP": "SCUDERIA FERRARI",
+                    "Scuderia Ferrari HP": "PIRELLI FERRARI",
                     "KICK Sauber": "TWITCH SAUBER",
                     "Alpine": "TINDER ALPINE F1 TEAM",
-                    "Visa Cash App Racing Bulls": "VISA CASH APP RACING BULLS" // Added new team mapping
+                    "Visa Cash App Racing Bulls": "RACING BULLS PEUGEOT SPORT" // Added new team mapping
                 };
                 
                 // MotoGP points system
@@ -417,19 +401,19 @@
 
                 // --- Updated Race and Qualifying Data ---
                 let raceResults = [
-                    { pos: 1, driver: "SANDRO", team: "McLaren", grid: 1, stops: 1, bestLap: "1:17.065", time: "42:56.393", pts: 0, flag: "NL" }, // Driver name changed
+                    { pos: 1, driver: "SANDRO", team: "McLaren", grid: 1, stops: 1, bestLap: "1:17.065", time: "42:56.393", pts: 0, flag: "NL" },
                     { pos: 2, driver: "Jarvis Coid", team: "Red Bull", grid: 2, stops: 1, bestLap: "1:17.491", time: "+12.185", pts: 0, flag: "GB" },
-                    { pos: 3, driver: "jay2005_071", team: "McLaren", grid: 4, stops: 1, bestLap: "1:17.336", time: "+12.562", pts: 0, flag: "NL" }, // Flag changed
+                    { pos: 3, driver: "JAY AZIER", team: "McLaren", grid: 4, stops: 1, bestLap: "1:17.336", time: "+12.562", pts: 0, flag: "NL" },
                     { pos: 4, driver: "Tobob", team: "Alpine", grid: 3, stops: 1, bestLap: "1:17.808", time: "+14.849", pts: 0, flag: "DE" },
                     { pos: 5, driver: "Krab", team: "Visa Cash App Racing Bulls", grid: 6, stops: 1, bestLap: "1:17.921", time: "+15.693", pts: 0, flag: "HU" },
-                    { pos: 6, driver: "Aspec33", team: "Mercedes-AMG Petronas", grid: 5, stops: 1, bestLap: "1:16.849", time: "+16.378", pts: 0, flag: "NL" }, // Flag changed
-                    { pos: 7, driver: "Teetoe", team: "Red Bull", grid: 8, stops: 1, bestLap: "1:18.942", time: "+1:03.129", pts: 0, flag: "NL" }, // Flag changed
-                    { pos: 8, driver: "LEON4IK_008", team: "Williams", grid: 9, stops: 2, bestLap: "1:18.617", time: "+1:16.687", pts: 0, flag: "UA" },
+                    { pos: 6, driver: "Aspec33", team: "Mercedes-AMG Petronas", grid: 5, stops: 1, bestLap: "1:16.849", time: "+16.378", pts: 0, flag: "NL" },
+                    { pos: 7, driver: "Teetoe", team: "Red Bull", grid: 8, stops: 1, bestLap: "1:18.942", time: "+1:03.129", pts: 0, flag: "NL" },
+                    { pos: 8, driver: "LEON", team: "Williams", grid: 9, stops: 2, bestLap: "1:18.617", time: "+1:16.687", pts: 0, flag: "UA" },
                     { pos: 9, driver: "danottok", team: "Haas", grid: 11, stops: 2, bestLap: "1:18.893", time: "+1:27.705", pts: 0, flag: "FI" },
                     { pos: 10, driver: "Mark", team: "Williams", grid: 12, stops: 2, bestLap: "1:19.528", time: "+1 Lap", pts: 0, flag: "US" },
                     { pos: 11, driver: "ByRoNaS", team: "Mercedes-AMG Petronas", grid: 10, stops: 1, bestLap: "1:20.462", time: "+1 Lap", pts: 0, flag: "GR" },
-                    { pos: 12, driver: "Liquid_Er031ic", team: "Haas", grid: 13, stops: 3, bestLap: "1:20.789", time: "+4 Laps", pts: 0, flag: "NL" },
-                    { pos: 13, driver: "caoihme", team: "Visa Cash App Racing Bulls", grid: 14, stops: 2, bestLap: "1:21.919", time: "DNF", pts: 0, flag: "IE" }, // Driver name changed
+                    { pos: 12, driver: "ERIC", team: "Haas", grid: 13, stops: 3, bestLap: "1:20.789", time: "+4 Laps", pts: 0, flag: "DE" },
+                    { pos: 13, driver: "caoihme", team: "Visa Cash App Racing Bulls", grid: 14, stops: 2, bestLap: "1:21.919", time: "DNF", pts: 0, flag: "IE" },
                     { pos: 14, driver: "SneewwZZ", team: "Aston Martin", grid: 15, stops: 1, bestLap: "1:22.255", time: "DNF", pts: 0, flag: "NL" },
                     { pos: 15, driver: "Generic Leon", team: "Alpine", grid: 7, stops: 0, bestLap: "1:18.841", time: "DNF", pts: 0, flag: "AT" }
                 ];
@@ -444,20 +428,20 @@
 
 
                 const qualifyingResults = [
-                    { pos: 1, driver: "SANDRO", team: "McLaren", best: "1:14.103", gap: "", flag: "NL" }, // Driver name changed
+                    { pos: 1, driver: "SANDRO", team: "McLaren", best: "1:14.103", gap: "", flag: "NL" },
                     { pos: 2, driver: "Jarvis Coid", team: "Red Bull", best: "1:14.460", gap: "+0.357", flag: "GB" },
                     { pos: 3, driver: "Tobob", team: "Alpine", best: "1:14.577", gap: "+0.474", flag: "DE" },
-                    { pos: 4, driver: "jay2005_071", team: "McLaren", best: "1:14.640", gap: "+0.537", flag: "NL" },
-                    { pos: 5, driver: "Aspec33", team: "Mercedes-AMG Petronas", best: "1:14.774", gap: "+0.671", flag: "NL" },
+                    { pos: 4, driver: "JAY AZIER", team: "McLaren", best: "1:14.640", gap: "+0.537", flag: "NL" },
+                    { pos: 5, driver: "Aspec", team: "Mercedes-AMG Petronas", best: "1:14.774", gap: "+0.671", flag: "NL" },
                     { pos: 6, driver: "Krab", team: "Visa Cash App Racing Bulls", best: "1:14.980", gap: "+0.877", flag: "HU" },
                     { pos: 7, driver: "Generic Leon", team: "Alpine", best: "1:15.285", gap: "+1.182", flag: "AT" },
                     { pos: 8, driver: "Teeetoe", team: "Red Bull", best: "1:15.705", gap: "+1.602", flag: "NL" },
-                    { pos: 9, driver: "LEON4IK_008", team: "Williams", best: "1:15.931", gap: "+1.828", flag: "UA" },
+                    { pos: 9, driver: "LEON", team: "Williams", best: "1:15.931", gap: "+1.828", flag: "UA" },
                     { pos: 10, driver: "ByRoNaS", team: "Mercedes-AMG Petronas", best: "1:16.233", gap: "+2.130", flag: "GR" },
                     { pos: 11, driver: "danottok", team: "Haas", best: "1:16.435", gap: "+2.332", flag: "FI" },
                     { pos: 12, driver: "Mark", team: "Williams", best: "1:16.864", gap: "+2.761", flag: "US" },
-                    { pos: 13, driver: "Liquid_Er031ic", team: "Haas", best: "1:17.968", gap: "+3.865", flag: "NL" },
-                    { pos: 14, driver: "caoihme", team: "Visa Cash App Racing Bulls", best: "1:18.770", gap: "+4.667", flag: "IE" }, // Driver name changed
+                    { pos: 13, driver: "ERIC", team: "Haas", best: "1:17.968", gap: "+3.865", flag: "DE" },
+                    { pos: 14, driver: "caoihme", team: "Visa Cash App Racing Bulls", best: "1:18.770", gap: "+4.667", flag: "IE" },
                     { pos: 15, driver: "SneewwZZ", team: "Aston Martin", best: "DNP", gap: "DNP", flag: "NL" }
                 ].map(r => ({...r, driver: r.driver.toUpperCase(), team: (teamNameMapping[r.team] || r.team).toUpperCase() }));
                 
@@ -487,7 +471,7 @@
                     "LOCKHEED MARTIN ASTON MARTIN": 'https://cdn.discordapp.com/emojis/1215769484078354483.webp?size=44',
                     "HAAS ONLYFANS RACING": 'https://cdn.discordapp.com/emojis/1378698433652588645.webp?size=44',
                     "JOHN DEERE WILLIAMS RACING": 'https://cdn.discordapp.com/emojis/1377791374341963917.webp?size=44',
-                    "SCUDERIA FERRARI": 'https://cdn.discordapp.com/emojis/1215769617272934440.webp?size=44',
+                    "PIRELLI FERRARI": 'https://cdn.discordapp.com/emojis/1390804647492583434.webp?size=96',
                     "TWITCH SAUBER": 'https://cdn.discordapp.com/emojis/1379957079900688515.webp?size=44',
                     "RACING BULLS PEUGEOT SPORT": 'https://cdn.discordapp.com/emojis/1377646844578103346.webp?size=44',
                     "TINDER ALPINE F1 TEAM": 'https://cdn.discordapp.com/emojis/1379862213493260328.webp?size=44',
