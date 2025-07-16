@@ -9,7 +9,7 @@
     <link rel="manifest" href="favicon/site.webmanifest" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10 Controls</title>
+    <title>AKI'S CHANCE SLOT MACHINE</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -436,21 +436,21 @@
         }
 
         function onPlayerReady(event) {
-            // Player is ready, but we won't autoplay here due to browser restrictions.
-            // Playback will be initiated by the musicToggleButton click.
+            // Set volume to 30% when player is ready
+            player.setVolume(30);
             console.log('YOUTUBE PLAYER READY');
         }
 
         function onPlayerStateChange(event) {
             const musicToggleButton = document.getElementById('musicToggleButton');
+            console.log('PLAYER STATE CHANGE:', event.data); // Log state changes for debugging
+
             if (event.data === YT.PlayerState.PLAYING) {
                 isMusicPlaying = true;
                 musicToggleButton.textContent = "MUSIC: ON";
             } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED || event.data === YT.PlayerState.BUFFERING) {
                 isMusicPlaying = false;
                 musicToggleButton.textContent = "MUSIC: OFF";
-                // If video ends and is set to loop, it will eventually go back to playing state
-                // No explicit action needed here for looping, as playerVars handles it.
             }
         }
 
@@ -461,20 +461,6 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     </script>
 
-    <!-- Social Media Links Footer -->
-    <footer class="bg-black text-white text-center py-5 px-2 mt-8">
-        <div class="max-w-7xl mx-auto flex justify-center items-center space-x-6">
-            <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
-            <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
-            <a href="https://www.youtube.com/@10controls24" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
-        </div>
-    </footer>
-    
-    <!-- Main Copyright Footer -->
-    <footer class="footer">
-        <p>© 2022-2025 10 CONTROLS LIMITED</p>
-    </footer>
-    
     <script>
         // --- Self-invoking function to encapsulate all the logic ---
         (function() {
@@ -544,7 +530,6 @@
                 const messageBox = document.getElementById('messageBox');
                 const musicToggleButton = document.getElementById('musicToggleButton'); // Music toggle button
                 const sfxToggleButton = document.getElementById('sfxToggleButton');     // SFX toggle button
-                // const backgroundMusic = document.getElementById('backgroundMusic'); // Removed, now using YouTube player
 
                 // Modal elements
                 const messageModalOverlay = document.getElementById('messageModalOverlay');
@@ -554,7 +539,7 @@
                 const modalOkButton = document.getElementById('modalOkButton');
 
                 // Initialize Tone.js for sound effects
-                let spinSynth, winSynth, loseSynth;
+                let spinSynth, winSynth, loseSynth, reelSpinningNoise;
 
                 async function initAudioContext() {
                     // Tone.start() is necessary to start the audio context on user interaction
@@ -563,7 +548,7 @@
                         console.log('AUDIOCONTEXT STARTED');
                     }
 
-                    // Spin sound: a short, sharp, percussive tone for a "lever pull" feel
+                    // Spin sound (lever pull)
                     spinSynth = new Tone.MembraneSynth({
                         pitchDecay: 0.05,
                         octaves: 2,
@@ -583,6 +568,19 @@
                     // Lose sound: a short, descending, slightly dissonant tone
                     loseSynth = new Tone.Synth().toDestination();
                     loseSynth.envelope.release = 0.3; // Make the lose sound slightly longer
+
+                    // Reel spinning sound: a low-frequency noise with a slight filter
+                    reelSpinningNoise = new Tone.NoiseSynth({
+                        noise: {
+                            type: 'brown' // Brown noise for a deeper, rumbling sound
+                        },
+                        envelope: {
+                            attack: 0.01,
+                            decay: 0.2,
+                            sustain: 1, // Sustain as long as spinning
+                            release: 0.2
+                        }
+                    }).connect(new Tone.Filter(200, 'lowpass')).toDestination(); // Lowpass filter to muffle it
                 }
 
                 // Call initAudioContext on first user interaction (e.g., spin button click)
@@ -594,11 +592,15 @@
                 const symbolData = [
                     { name: 'cherry', imageUrl: 'https://web-assests.monsterenergy.com/mnst/5587a01b-3c83-42f7-a741-b29a1d534409.png' },
                     { name: 'cherry', imageUrl: 'https://web-assests.monsterenergy.com/mnst/5587a01b-3c83-42f7-a741-b29a1d534409.png' },
+                    { name: 'cherry', imageUrl: 'https://web-assests.monsterenergy.com/mnst/5587a01b-3c83-42f7-a741-b29a1d534409.png' },
                     { name: 'cherry', imageUrl: 'https://web-assests.monsterenergy.com/mnst/5587a01b-3c83-42f7-a741-b29a1d534409.png' }, // More cherries
+                    { name: 'lemon', imageUrl: 'https://orlandocigarstogo.com/cdn/shop/files/68786b85-7b8f-47f2-96dc-4bac3ce9330e.webp?v=1704161104' },
                     { name: 'lemon', imageUrl: 'https://orlandocigarstogo.com/cdn/shop/files/68786b85-7b8f-47f2-96dc-4bac3ce9330e.webp?v=1704161104' },
                     { name: 'lemon', imageUrl: 'https://orlandocigarstogo.com/cdn/shop/files/68786b85-7b8f-47f2-96dc-4bac3ce9330e.webp?v=1704161104' }, // More lemons
                     { name: 'orange', imageUrl: 'https://png.pngtree.com/png-vector/20220710/ourmid/pngtree-vape-icon-illustration-png-png-image_5837016.png' },
+                    { name: 'orange', imageUrl: 'https://png.pngtree.com/png-vector/20220710/ourmid/pngtree-vape-icon-illustration-png-png-image_5837016.png' },
                     { name: 'orange', imageUrl: 'https://png.pngtree.com/png-vector/20220710/ourmid/pngtree-vape-icon-illustration-png-png-image_5837016.png' }, // More oranges
+                    { name: 'grape', imageUrl: 'https://sml-uncorked.com/cdn/shop/products/372231cb145ac6d176945a88054fd962_1250x.png?v=1745851627' },
                     { name: 'grape', imageUrl: 'https://sml-uncorked.com/cdn/shop/products/372231cb145ac6d176945a88054fd962_1250x.png?v=1745851627' },
                     { name: 'grape', imageUrl: 'https://sml-uncorked.com/cdn/shop/products/372231cb145ac6d176945a88054fd962_1250x.png?v=1745851627' }, // More grapes
                     { name: 'bell', imageUrl: 'https://cdn.discordapp.com/attachments/1323758532432236638/1394942070753460325/23.png?ex=6878a48a&is=6877530a&hm=505197be035e2a4d947c754b085952424c29b421575a37e60301beda1550fa04&' },
@@ -695,6 +697,7 @@
                  * Hides the custom modal.
                  */
                 function hideModal() {
+                    modalMessage.textContent = ""; // Clear message when closing
                     messageModalOverlay.classList.remove('show');
                 }
 
@@ -754,6 +757,10 @@
                     if (isSfxEnabled && spinSynth) {
                         spinSynth.triggerAttackRelease("C2", "0.2"); // Play a low, short tone for spin
                     }
+                    if (isSfxEnabled && reelSpinningNoise) {
+                        reelSpinningNoise.triggerAttack(); // Start continuous spinning noise
+                    }
+
 
                     const finalSymbolNames = [];
                     const spinPromises = reelElements.map((reel, index) => {
@@ -797,6 +804,9 @@
                     await Promise.all(spinPromises);
 
                     isSpinning = false;
+                    if (isSfxEnabled && reelSpinningNoise) {
+                        reelSpinningNoise.triggerRelease(); // Stop continuous spinning noise
+                    }
                     updateDisplay();
 
                     const { payout, winMessage } = checkWin(finalSymbolNames);
@@ -862,12 +872,13 @@
                         return;
                     }
 
-                    if (isMusicPlaying) {
+                    // Check player state to determine if it's currently playing
+                    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
                         player.pauseVideo();
                     } else {
                         player.playVideo();
                     }
-                    // isMusicPlaying state is now updated by onPlayerStateChange event
+                    // The onPlayerStateChange event will update isMusicPlaying and button text
                 }
 
                 /**
@@ -879,6 +890,9 @@
                     if (isSfxEnabled) {
                         // Ensure audio context is running when SFX is enabled
                         initAudioContext();
+                    } else {
+                        // Stop any currently playing SFX when disabled
+                        if (reelSpinningNoise) reelSpinningNoise.triggerRelease();
                     }
                 }
 
