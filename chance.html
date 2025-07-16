@@ -422,10 +422,10 @@
                     'loop': 1,     // Loop the video
                     'playlist': '69Km895ntNc', // Required for looping a single video
                     'disablekb': 1, // Disable keyboard controls
-                    'fs': 0,        // Disable fullscreen button
+                    'fs': 0,         // Disable fullscreen button
                     'modestbranding': 1, // Remove YouTube logo
-                    'rel': 0,       // Do not show related videos
-                    'showinfo': 0,  // Hide video title and uploader info
+                    'rel': 0,        // Do not show related videos
+                    'showinfo': 0,   // Hide video title and uploader info
                     'iv_load_policy': 3 // Hide video annotations
                 },
                 events: {
@@ -511,7 +511,7 @@
                 let bet = 1;
                 let isSpinning = false;
                 let isMusicPlaying = false; // Track music state
-                let isSfxEnabled = false;   // Track SFX state
+                let isSfxEnabled = false;    // Track SFX state
 
                 // DOM elements
                 const balanceDisplay = document.getElementById('balance');
@@ -529,7 +529,7 @@
                 const cashOutButton = document.getElementById('cashOutButton');
                 const messageBox = document.getElementById('messageBox');
                 const musicToggleButton = document.getElementById('musicToggleButton'); // Music toggle button
-                const sfxToggleButton = document.getElementById('sfxToggleButton');     // SFX toggle button
+                const sfxToggleButton = document.getElementById('sfxToggleButton');      // SFX toggle button
 
                 // Modal elements
                 const messageModalOverlay = document.getElementById('messageModalOverlay');
@@ -539,7 +539,7 @@
                 const modalOkButton = document.getElementById('modalOkButton');
 
                 // Initialize Tone.js for sound effects
-                let spinSynth, winSynth, loseSynth, reelSpinningNoise;
+                let spinSynth, winSynth, loseSynth; // Removed reelSpinningNoise
 
                 async function initAudioContext() {
                     // Tone.start() is necessary to start the audio context on user interaction
@@ -568,6 +568,7 @@
                     // Lose sound: a short, descending, slightly dissonant tone
                     loseSynth = new Tone.Synth().toDestination();
                     loseSynth.envelope.release = 0.3; // Make the lose sound slightly longer
+                }
 
                 // Call initAudioContext on first user interaction (e.g., spin button click)
                 document.addEventListener('click', initAudioContext, { once: true });
@@ -591,7 +592,7 @@
                     { name: 'grape', imageUrl: 'https://sml-uncorked.com/cdn/shop/products/372231cb145ac6d176945a88054fd962_1250x.png?v=1745851627' }, // More grapes
                     { name: 'bell', imageUrl: 'https://cdn.discordapp.com/attachments/1323758532432236638/1394942070753460325/23.png?ex=6878a48a&is=6877530a&hm=505197be035e2a4d947c754b085952424c29b421575a37e60301beda1550fa04&' },
                     { name: 'diamond', imageUrl: 'https://a.espncdn.com/combiner/i?img=/i/headshots/rpm/players/full/836.png' },
-                    { name: 'clover', imageUrl: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b538e535-b519-48e1-85c7-26a5896a7e0a/despnni-074431d6-88aa-45ef-a9ee-4fb95249dc9e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I1MzhlNTM1LWI1MTktNDhlMS04NWM3LTI2YTU4OTZhN2UwYVwvZGVzcG5uaS0wNzQ0MzFkNi04OGFhLTQ1ZWYtYTllZS00ZmI5NTI0OWRjOWUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xbki5e5kD-8Dl0tIX3jbyuHNOgGlJGgTsJZ8jr6KIro' },
+                    { name: 'clover', imageUrl: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b538e535-b519-48e1-85c7-26a5896a7e0a/despnni-074431d6-88aa-45ef-a9ee-4fb95249dc9e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzEzYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I1MzhlNTM1LWI1MTktNDhlMS04NWM3LTI2YTU4OTZhN2UwYVwvZGVzcG5uaS0wNzQ0MzFkNi04OGFhLTQ1ZWYtYTllZS00ZmI5NTI0OWRjOWUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xbki5e5kD-8Dl0tIX3jbyuHNOgGlJGgTsJZ8jr6KIro' },
                     { name: 'moneybag', imageUrl: 'https://static.vecteezy.com/system/resources/thumbnails/024/724/482/small_2x/railroad-track-isolated-on-transparent-background-generative-ai-railway-track-png.png' },
                     { name: 'star', imageUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Flag_of_Poland.svg/1200px-Flag_of_Poland.svg.png' }
                 ];
@@ -743,9 +744,7 @@
                     if (isSfxEnabled && spinSynth) {
                         spinSynth.triggerAttackRelease("C2", "0.2"); // Play a low, short tone for spin
                     }
-                    if (isSfxEnabled && reelSpinningNoise) {
-                        reelSpinningNoise.triggerAttack(); // Start continuous spinning noise
-                    }
+                    // Removed: if (isSfxEnabled && reelSpinningNoise) { reelSpinningNoise.triggerAttack(); }
 
 
                     const finalSymbolNames = [];
@@ -790,9 +789,7 @@
                     await Promise.all(spinPromises);
 
                     isSpinning = false;
-                    if (isSfxEnabled && reelSpinningNoise) {
-                        reelSpinningNoise.triggerRelease(); // Stop continuous spinning noise
-                    }
+                    // Removed: if (isSfxEnabled && reelSpinningNoise) { reelSpinningNoise.triggerRelease(); }
                     updateDisplay();
 
                     const { payout, winMessage } = checkWin(finalSymbolNames);
@@ -844,7 +841,7 @@
 
                     showModal("CASH OUT", `YOU CASHED OUT WITH $${balance}. THANKS FOR PLAYING AKI'S CHANCE!`);
                     balance = 100; // Reset balance for a new game
-                    bet = 1;      // Reset bet
+                    bet = 1;     // Reset bet
                     updateDisplay();
                     displayGameMessage("GAME RESET. WELCOME BACK!", 'info');
                 }
@@ -878,7 +875,7 @@
                         initAudioContext();
                     } else {
                         // Stop any currently playing SFX when disabled
-                        if (reelSpinningNoise) reelSpinningNoise.triggerRelease();
+                        // Removed: if (reelSpinningNoise) reelSpinningNoise.triggerRelease();
                     }
                 }
 
