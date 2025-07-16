@@ -112,7 +112,27 @@
             transition: background-color 0.2s ease-in-out;
         }
         .mobile-menu-link:hover {
-            background-color: #000000; /* Black */
+            background-color: #2d2d2d; /* Changed from black to #2d2d2d */
+        }
+
+        /* Custom styles for driver flags and team icons */
+        .flag-icon {
+            width: 20px;
+            height: 15px; /* Standard flag aspect ratio */
+            border-radius: 2px; /* Slightly rounded corners for flags */
+            object-fit: cover;
+            flex-shrink: 0; /* Prevent shrinking in flex container */
+            margin-right: 8px; /* Space between flag and name */
+            border: 1px solid #ffc0cb; /* Changed border color to match the 'NEW' tag */
+            margin-top: -2px; /* Adjusted to align better with text baseline */
+        }
+        .team-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 9999px; /* rounded-full */
+            flex-shrink: 0;
+            margin-right: 8px; /* Space between icon and name */
+            object-fit: contain; /* Ensure logo fits within the circle */
         }
     </style>
 </head>
@@ -162,11 +182,12 @@
     </header>
 
     <!-- Sub-Header for Upcoming Race Info and Countdown. Hidden on mobile. -->
-    <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300 hidden md:flex">
+    <div id="sub-header" class="bg-[#2d2d2d] text-white h-12 transition-opacity duration-300 hidden md:flex">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
             <div class="flex items-center space-x-2 sm:space-x-4">
                 <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
                 </div>
+                <!-- Reverted background and text color for upcoming-race-date -->
                 <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
                 </div>
             </div>
@@ -184,7 +205,7 @@
             <div id="featured-story-container" class="lg:col-span-2 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in transform transition-transform duration-300 hover:-translate-y-2">
                 <div class="relative w-full h-full">
                     <img src="images/3.png" alt="F1 Featured Story" class="w-full h-full object-cover rounded-t-lg object-bottom">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#2d2d2d]/80 to-transparent">
                         <h2 class="text-2xl sm:text-3xl font-bold leading-tight mb-2 text-white">CHEBOTAROV RESPONDS WITH DOMINANT WIN IN SPAIN</h2>
                         <p class="text-gray-300 text-sm">IS RED BULL FALLING OFF?</p>
                     </div>
@@ -196,43 +217,48 @@
                 <!-- DRIVERS STANDINGS -->
                 <div class="space-y-4">
                     <h3 class="text-xl font-bold text-white">DRIVERS STANDINGS</h3>
-                    <div class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-100 w-full transform transition-transform duration-300 hover:-translate-y-2">
-                        <!-- Driver 1 -->
+                    <div id="drivers-standings-table" class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-100 w-full transform transition-transform duration-300 hover:-translate-y-2">
+                        <!-- Driver 1: MAXFAN (Polish) -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-white">1</span>
+                                <img src="https://flagcdn.com/w20/pl.png" alt="Poland Flag" class="flag-icon">
                                 <p class="text-sm font-semibold text-white">MAXFAN</p>
                             </div>
                             <span class="text-sm font-bold text-white">99 PTS</span>
                         </div>
-                        <!-- Driver 2 -->
+                        <!-- Driver 2: FOCUSER (Spanish) -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-white">2</span>
+                                <img src="https://flagcdn.com/w20/es.png" alt="Spain Flag" class="flag-icon">
                                 <p class="text-sm font-semibold text-white">FOCUSER</p>
                             </div>
                             <span class="text-sm font-bold text-white">80 PTS</span>
                         </div>
-                        <!-- Driver 3 -->
+                        <!-- Driver 3: ANTON CHEBOTAROV (Ukrainian) -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-white">3</span>
+                                <img src="https://flagcdn.com/w20/ua.png" alt="Ukraine Flag" class="flag-icon">
                                 <p class="text-sm font-semibold text-white">ANTON CHEBOTAROV</p>
                             </div>
                             <span class="text-sm font-bold text-white">68 PTS</span>
                         </div>
-                        <!-- Driver 4 -->
+                        <!-- Driver 4: TONY SEROKA (Polish) -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-white">4</span>
+                                <img src="https://flagcdn.com/w20/pl.png" alt="Poland Flag" class="flag-icon">
                                 <p class="text-sm font-semibold text-white">TONY SEROKA</p>
                             </div>
                             <span class="text-sm font-bold text-white">44 PTS</span>
                         </div>
-                        <!-- Driver 5 -->
+                        <!-- Driver 5: MAX HOUSLEY (Great Britain) -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-white">5</span>
+                                <img src="https://flagcdn.com/w20/gb.png" alt="Great Britain Flag" class="flag-icon">
                                 <p class="text-sm font-semibold text-white">MAX HOUSLEY</p>
                             </div>
                             <span class="text-sm font-bold text-white">38 PTS</span>
@@ -243,27 +269,30 @@
                 <!-- TEAMS STANDINGS -->
                 <div class="space-y-4">
                     <h3 class="text-xl font-bold text-white">TEAMS STANDINGS</h3>
-                    <div class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-200 w-full transform transition-transform duration-300 hover:-translate-y-2">
-                        <!-- Team 1 -->
+                    <div id="teams-standings-table" class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-200 w-full transform transition-transform duration-300 hover:-translate-y-2">
+                        <!-- Team 1: HOT WHEELS MCLAREN -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-white">1</span>
+                                <img src="https://cdn.discordapp.com/emojis/1378699086982811679.webp?size=44" alt="McLaren Logo" class="team-icon"> 
                                 <p class="text-sm font-semibold text-white">HOT WHEELS MCLAREN</p>
                             </div>
                             <span class="text-sm font-bold text-white">181 PTS</span>
                         </div>
-                        <!-- Team 2 -->
+                        <!-- Team 2: NEWPORT ROLEX RED BULL -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-white">2</span>
+                                <img src="https://cdn.discordapp.com/emojis/1378696277180813312.webp?size=44" alt="Red Bull Logo" class="team-icon">
                                 <p class="text-sm font-semibold text-white">NEWPORT ROLEX RED BULL</p>
                             </div>
                             <span class="text-sm font-bold text-white">143 PTS</span>
                         </div>
-                        <!-- Team 3 -->
+                        <!-- Team 3: GUINNESS MERCEDES -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
                                 <span class="text-sm font-bold text-white">3</span>
+                                <img src="https://cdn.discordapp.com/emojis/1386054950496243732.webp?size=44" alt="Mercedes Logo" class="team-icon">
                                 <p class="text-sm font-semibold text-white">GUINNESS MERCEDES</p>
                             </div>
                             <span class="text-sm font-bold text-white">83 PTS</span>
@@ -312,7 +341,6 @@
                 <a href="https://www.instagram.com/10controls/p/C4YrxNGow-O/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-700 snap-center relative transform transition-transform duration-300 hover:scale-115">
                     <!-- Removed NEW tag -->
                     <img src="images/post6.jpg" alt="Instagram Post 6" class="w-full h-full object-cover">
-                    <!-- Removed caption -->
                 </a>
                 <!-- New Post Card -->
                 <a href="https://www.instagram.com/10controls/p/C4JimyjoV6c/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-800 snap-center relative transform transition-transform duration-300 hover:scale-115">
@@ -320,10 +348,10 @@
                 </a>
             </div>
             <!-- Navigation Arrows -->
-            <button id="scrollLeftBtn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full shadow-lg hover:bg-black/75 focus:outline-none z-20 flex items-center justify-center">
+            <button id="scrollLeftBtn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-[#2d2d2d]/50 text-white w-8 h-8 rounded-full shadow-lg hover:bg-[#2d2d2d]/75 focus:outline-none z-20 flex items-center justify-center">
                 <i class="fas fa-chevron-left text-base"></i>
             </button>
-            <button id="scrollRightBtn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full shadow-lg hover:bg-black/75 focus:outline-none z-20 flex items-center justify-center">
+            <button id="scrollRightBtn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-[#2d2d2d]/50 text-white w-8 h-8 rounded-full shadow-lg hover:bg-[#2d2d2d]/75 focus:outline-none z-20 flex items-center justify- Regjustify-center">
                 <i class="fas fa-chevron-right text-base"></i>
             </button>
         </div>
@@ -331,7 +359,7 @@
         <!-- RECENT STREAM Section -->
         <div>
             <h3 class="text-xl font-bold text-white mb-6">RECENT BROADCAST</h3>
-            <div class="bg-black rounded-lg shadow-lg p-6 content-fade-in delay-800 transform transition-transform duration-300 hover:-translate-y-2">
+            <div class="bg-[#2d2d2d] rounded-lg shadow-lg p-6 content-fade-in delay-800 transform transition-transform duration-300 hover:-translate-y-2">
                 <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
                     <!-- Twitch VOD thumbnail updated -->
                     <img src="images/mqdefault_6s.webp" alt="Twitch Stream Thumbnail" class="w-full sm:w-auto h-32 sm:h-auto object-cover rounded-md">
@@ -348,7 +376,7 @@
     </main>
 
     <!-- Social Media Links Footer -->
-    <footer class="bg-black text-white text-center py-5 px-2 mt-8">
+    <footer class="bg-[#2d2d2d] text-white text-center py-5 px-2 mt-8">
         <div class="max-w-7xl mx-auto flex justify-center items-center space-x-6">
             <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
             <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
@@ -522,8 +550,9 @@
             // --- Dynamically set heights and alignment ---
             const featuredStoryContainer = document.getElementById('featured-story-container');
             const standingsColumn = document.getElementById('standings-column');
-            const driversStandingsTable = standingsColumn.querySelector('.bg-[#2a171d].rounded-lg.shadow-lg.p-4.space-y-3.content-fade-in.delay-100');
-            const teamsStandingsTable = standingsColumn.querySelector('.bg-[#2a171d].rounded-lg.shadow-lg.p-4.space-y-3.content-fade-in.delay-200');
+            // Updated selectors to use the new IDs
+            const driversStandingsTable = document.getElementById('drivers-standings-table');
+            const teamsStandingsTable = document.getElementById('teams-standings-table');
 
 
             const adjustLayout = () => {
