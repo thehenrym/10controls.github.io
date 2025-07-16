@@ -9,7 +9,7 @@
     <link rel="manifest" href="favicon/site.webmanifest" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10 Controls</title>
+    <title>Aki's Chance</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,20 +19,22 @@
     <!-- Tone.js CDN for sound effects -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
     <style>
+        /* Base styles for the body */
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(to bottom right, #8B0000, #000000); /* Slot machine theme background */
-            min-height: 100vh; /* Ensure full height */
+            min-height: 100vh; /* Ensure full height for background */
             color: white;
-            overflow-x: hidden; /* Prevent horizontal scrollbars from header/footer */
+            overflow-x: hidden; /* Prevent horizontal scrollbars */
             display: flex; /* Use flexbox for overall page layout */
             flex-direction: column; /* Stack header, main, footer vertically */
         }
-        /* Apply uppercase selectively */
+
+        /* Apply uppercase selectively for a consistent game aesthetic */
         .slot-container,
         .slot-title,
-        .text-xl, /* For balance */
-        .text-lg, /* For bet */
+        .text-xl, /* For balance display */
+        .text-lg, /* For bet display */
         .game-button,
         .message-box,
         .modal-content h2,
@@ -41,14 +43,15 @@
             text-transform: uppercase;
         }
 
+        /* Slot Machine Container Styling */
         .slot-container {
             background-color: rgba(0, 0, 0, 0.7);
             border: 8px solid #FFD700; /* Gold border */
             border-radius: 20px;
             padding: 2rem;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.5); /* Gold glow */
-            max-width: 95%; /* Increased max-width */
-            width: 700px; /* Increased width */
+            max-width: 700px; /* Set a max-width for larger screens */
+            width: 95%; /* Make it responsive, taking 95% of parent width */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -57,23 +60,31 @@
             z-index: 1;
             margin: auto; /* Center it within its flex parent (main) */
         }
+
+        /* Slot Title Styling */
         .slot-title {
-            font-size: 2.5rem;
+            font-size: 2.5rem; /* Large font size for title */
             font-weight: 700;
             color: #FFD700; /* Gold color */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             margin-bottom: 1rem;
         }
+
+        /* Reel Container Layout */
         .reel-container {
             display: flex;
-            gap: 1rem; /* Adjusted gap for wider layout */
+            gap: 1rem; /* Gap between reels */
+            justify-content: center; /* Center reels horizontally */
+            flex-wrap: wrap; /* Allow reels to wrap on very small screens */
         }
+
+        /* Individual Reel Styling */
         .reel {
             background-color: #1a1a1a; /* Dark background for reels */
             border: 2px solid #555;
             border-radius: 10px;
-            width: 150px; /* Increased reel width */
-            height: 150px; /* Increased reel height */
+            width: 150px; /* Base width for reels */
+            height: 150px; /* Base height for reels */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -81,21 +92,18 @@
             overflow: hidden;
             position: relative;
             box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
-            transition: transform 0.1s ease-out; /* For slight bounce */
+            transition: transform 0.1s ease-out; /* For slight bounce effect */
         }
-        .reel-symbol {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: transform 0.2s ease-out; /* For symbol snap */
-        }
-        .reel-image { /* Style for the actual image inside the reel */
+
+        /* Style for the image inside the reel */
+        .reel-image {
             width: 80%; /* Adjust as needed */
             height: 80%; /* Adjust as needed */
             object-fit: contain; /* Ensures image fits without distortion */
             transition: transform 0.2s ease-out;
         }
+
+        /* Spinning animation for the reel image */
         .spinning .reel-image {
             animation: spin-image-animation 0.1s linear infinite; /* Faster spin during animation */
         }
@@ -105,8 +113,9 @@
             100% { transform: rotateY(360deg); }
         }
 
+        /* Visual effect for the reel itself during spin */
         .reel.spinning {
-            animation: reel-spin-effect 0.1s linear infinite; /* Visual effect for the reel itself */
+            animation: reel-spin-effect 0.1s linear infinite;
         }
 
         @keyframes reel-spin-effect {
@@ -115,12 +124,16 @@
             100% { transform: translateY(0); }
         }
 
+        /* Button Group Layout */
         .button-group {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
+            gap: 1rem; /* Spacing between buttons */
+            flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+            justify-content: center; /* Center buttons horizontally */
+            width: 100%; /* Ensure button group takes full width */
         }
+
+        /* Game Button Styling */
         .game-button {
             background: linear-gradient(to right, #FFD700, #FFA500); /* Gold to Orange gradient */
             color: #8B0000; /* Dark Red text */
@@ -132,6 +145,8 @@
             border: none;
             cursor: pointer;
             outline: none;
+            flex-grow: 1; /* Allow buttons to grow and fill space */
+            min-width: 120px; /* Minimum width for buttons to prevent squishing */
         }
         .game-button:hover {
             transform: translateY(-3px) scale(1.02);
@@ -149,6 +164,8 @@
             box-shadow: none;
             transform: none;
         }
+
+        /* Message Box Styling */
         .message-box {
             background-color: rgba(0, 0, 0, 0.8);
             border: 2px solid #FFD700;
@@ -165,7 +182,7 @@
             word-wrap: break-word;
         }
 
-        /* Modal Styles */
+        /* Modal Overlay Styles */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -185,6 +202,8 @@
             opacity: 1;
             visibility: visible;
         }
+
+        /* Modal Content Styling */
         .modal-content {
             background-color: #1a1a1a;
             border: 5px solid #FFD700;
@@ -192,10 +211,12 @@
             padding: 2rem;
             text-align: center;
             box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
-            max-width: 400px;
-            width: 90%;
+            max-width: 400px; /* Max width for the modal */
+            width: 90%; /* Responsive width */
             position: relative;
         }
+
+        /* Modal Close Button */
         .modal-close-button {
             position: absolute;
             top: 10px;
@@ -229,13 +250,16 @@
             }
         }
 
-        /* Header/Footer Specific Styles from provided HTML */
+        /* Header/Footer Specific Styles */
         .footer {
             background-color: #492833; /* Specific footer background */
             color: white;
             text-align: center;
             padding: 2rem 1rem;
+            margin-top: auto; /* Pushes footer to the bottom */
         }
+
+        /* Mobile Menu Animation */
         #mobile-menu {
             max-height: 0;
             opacity: 0;
@@ -244,13 +268,15 @@
             position: absolute;
             width: 100%;
             left: 0;
-            top: 100%;
+            top: 100%; /* Position below the header */
             background-color: #492833;
         }
         #mobile-menu.menu-open {
-            max-height: 25rem;
+            max-height: 25rem; /* Sufficient height for menu items */
             opacity: 1;
         }
+
+        /* Desktop Menu Highlighter */
         #desktop-menu-items {
             position: relative;
         }
@@ -265,6 +291,8 @@
             transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
             z-index: -1;
         }
+
+        /* Hamburger Icon Animation */
         .hamburger-icon span {
             display: block;
             width: 24px;
@@ -272,7 +300,6 @@
             background-color: white;
             transition: all 0.3s cubic-bezier(.08,.82,.17,1);
         }
-        /* Updated hamburger to 'X' animation */
         #mobile-menu-button.open .hamburger-icon span:nth-child(1) {
             transform: translateY(10px) rotate(45deg);
         }
@@ -282,6 +309,7 @@
         #mobile-menu-button.open .hamburger-icon span:nth-child(3) {
             transform: translateY(-10px) rotate(-45deg);
         }
+
         /* Mobile menu link hover effect */
         .mobile-menu-link {
             background-color: #492833;
@@ -290,29 +318,51 @@
         .mobile-menu-link:hover {
             background-color: #000000;
         }
-        /* Responsive adjustments */
-        @media (max-width: 768px) { /* Adjusted breakpoint for wider layout */
+
+        /* Responsive adjustments for smaller screens (e.g., mobile) */
+        @media (max-width: 768px) {
             .slot-title {
-                font-size: 2rem;
+                font-size: 2rem; /* Smaller title on mobile */
             }
             .reel {
-                width: 100px; /* Smaller reels on smaller screens */
+                width: 100px; /* Smaller reels on mobile */
                 height: 120px;
-                font-size: 3rem;
+                font-size: 3rem; /* Smaller symbol font size */
             }
             .reel-container {
-                gap: 0.5rem;
+                gap: 0.5rem; /* Reduced gap between reels on mobile */
             }
             .game-button {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem; /* Smaller padding for buttons */
+                font-size: 0.9rem; /* Smaller font size for buttons */
+                min-width: unset; /* Remove min-width to allow more flexible wrapping */
+                flex-basis: calc(50% - 0.5rem); /* Two buttons per row with gap */
+            }
+            .button-group {
+                gap: 0.5rem; /* Smaller gap for button group on mobile */
             }
             .slot-container {
-                padding: 1.5rem;
-                gap: 1rem;
+                padding: 1.5rem; /* Reduced padding for the main container */
+                gap: 1rem; /* Reduced gap inside the container */
             }
             .message-box {
-                font-size: 1rem;
+                font-size: 1rem; /* Smaller font size for message box */
+            }
+        }
+
+        /* Adjust for even smaller screens if necessary (e.g., very narrow phones) */
+        @media (max-width: 480px) {
+            .reel {
+                width: 80px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+            .reel-container {
+                flex-direction: row; /* Keep reels in a row, but they will wrap */
+                gap: 0.25rem;
+            }
+            .game-button {
+                flex-basis: 100%; /* One button per row on very small screens */
             }
         }
     </style>
@@ -375,9 +425,9 @@
             </div>
 
             <div class="reel-container">
-                <div class="reel" id="reel1"><img src="https://web-assests.monsterenergy.com/mnst/5587a01b-3c83-42f7-a741-b29a1d534409.png" class="reel-image"></div>
-                <div class="reel" id="reel2"><img src="https://orlandocigarstogo.com/cdn/shop/files/68786b85-7b8f-47f2-96dc-4bac3ce9330e.webp?v=1704161104" class="reel-image"></div>
-                <div class="reel" id="reel3"><img src="https://png.pngtree.com/png-vector/20220710/ourmid/pngtree-vape-icon-illustration-png-png-image_5837016.png" class="reel-image"></div>
+                <div class="reel" id="reel1"><img src="https://web-assests.monsterenergy.com/mnst/5587a01b-3c83-42f7-a741-b29a1d534409.png" class="reel-image" alt="Reel 1 Symbol"></div>
+                <div class="reel" id="reel2"><img src="https://orlandocigarstogo.com/cdn/shop/files/68786b85-7b8f-47f2-96dc-4bac3ce9330e.webp?v=1704161104" class="reel-image" alt="Reel 2 Symbol"></div>
+                <div class="reel" id="reel3"><img src="https://png.pngtree.com/png-vector/20220710/ourmid/pngtree-vape-icon-illustration-png-png-image_5837016.png" class="reel-image" alt="Reel 3 Symbol"></div>
             </div>
 
             <div class="button-group">
@@ -422,10 +472,10 @@
                     'loop': 1,     // Loop the video
                     'playlist': '69Km895ntNc', // Required for looping a single video
                     'disablekb': 1, // Disable keyboard controls
-                    'fs': 0,         // Disable fullscreen button
+                    'fs': 0,           // Disable fullscreen button
                     'modestbranding': 1, // Remove YouTube logo
-                    'rel': 0,        // Do not show related videos
-                    'showinfo': 0,   // Hide video title and uploader info
+                    'rel': 0,          // Do not show related videos
+                    'showinfo': 0,     // Hide video title and uploader info
                     'iv_load_policy': 3 // Hide video annotations
                 },
                 events: {
@@ -482,7 +532,17 @@
                 if (menuItemsContainer) {
                     const menuLinks = menuItemsContainer.querySelectorAll('a');
                     const highlighter = document.getElementById('sliding-highlighter');
-                    const activeLink = menuItemsContainer.querySelector('a[aria-current="page"]');
+                    // Determine the active link based on the current URL path
+                    const currentPath = window.location.pathname;
+                    let activeLink = null;
+                    menuLinks.forEach(link => {
+                        if (link.getAttribute('href') === currentPath) {
+                            activeLink = link;
+                            link.setAttribute('aria-current', 'page'); // Mark active link for accessibility
+                        } else {
+                            link.removeAttribute('aria-current');
+                        }
+                    });
 
                     function setHighlighterToLink(link) {
                         if (!link) {
@@ -495,13 +555,21 @@
                         }
                     }
                     
+                    // Set initial position of highlighter
                     setHighlighterToLink(activeLink);
 
+                    // Add event listeners for hover effect
                     menuLinks.forEach(link => {
                         link.addEventListener('mouseenter', () => setHighlighterToLink(link));
                     });
                     
+                    // Reset highlighter when mouse leaves the menu area
                     menuItemsContainer.addEventListener('mouseleave', () => {
+                        setHighlighterToLink(activeLink);
+                    });
+
+                    // Recalculate highlighter position on window resize
+                    window.addEventListener('resize', () => {
                         setHighlighterToLink(activeLink);
                     });
                 }
@@ -522,14 +590,14 @@
                     document.getElementById('reel3')
                 ];
                 const spinButton = document.getElementById('spinButton');
-                const bet1Button = document.getElementById('bet1Button'); // New bet button
-                const bet5Button = document.getElementById('bet5Button'); // New bet button
-                const bet10Button = document.getElementById('bet10Button'); // New bet button
+                const bet1Button = document.getElementById('bet1Button');
+                const bet5Button = document.getElementById('bet5Button');
+                const bet10Button = document.getElementById('bet10Button');
                 const maxBetButton = document.getElementById('maxBetButton');
                 const cashOutButton = document.getElementById('cashOutButton');
                 const messageBox = document.getElementById('messageBox');
-                const musicToggleButton = document.getElementById('musicToggleButton'); // Music toggle button
-                const sfxToggleButton = document.getElementById('sfxToggleButton');      // SFX toggle button
+                const musicToggleButton = document.getElementById('musicToggleButton');
+                const sfxToggleButton = document.getElementById('sfxToggleButton');
 
                 // Modal elements
                 const messageModalOverlay = document.getElementById('messageModalOverlay');
@@ -539,16 +607,20 @@
                 const modalOkButton = document.getElementById('modalOkButton');
 
                 // Initialize Tone.js for sound effects
-                let spinSynth, winSynth, loseSynth; // Removed reelSpinningNoise
+                let spinSynth, winSynth, loseSynth;
 
+                /**
+                 * Initializes the Tone.js audio context and synthesizers.
+                 * This function is called on the first user interaction to
+                 * ensure audio playback is allowed by browsers.
+                 */
                 async function initAudioContext() {
-                    // Tone.start() is necessary to start the audio context on user interaction
                     if (Tone.context.state !== 'running') {
                         await Tone.start();
                         console.log('AUDIOCONTEXT STARTED');
                     }
 
-                    // Spin sound (lever pull)
+                    // Spin sound (lever pull) - MembraneSynth for a percussive sound
                     spinSynth = new Tone.MembraneSynth({
                         pitchDecay: 0.05,
                         octaves: 2,
@@ -561,16 +633,17 @@
                         }
                     }).toDestination();
 
-                    // Win sound: a cheerful ascending arpeggio
+                    // Win sound: a cheerful ascending arpeggio - simple Synth
                     winSynth = new Tone.Synth().toDestination();
                     winSynth.envelope.release = 0.5; // Make the win sound slightly longer
 
-                    // Lose sound: a short, descending, slightly dissonant tone
+                    // Lose sound: a short, descending, slightly dissonant tone - simple Synth
                     loseSynth = new Tone.Synth().toDestination();
                     loseSynth.envelope.release = 0.3; // Make the lose sound slightly longer
                 }
 
                 // Call initAudioContext on first user interaction (e.g., spin button click)
+                // This ensures the audio context starts only after user gesture.
                 document.addEventListener('click', initAudioContext, { once: true });
 
 
@@ -592,7 +665,7 @@
                     { name: 'grape', imageUrl: 'https://sml-uncorked.com/cdn/shop/products/372231cb145ac6d176945a88054fd962_1250x.png?v=1745851627' }, // More grapes
                     { name: 'bell', imageUrl: 'https://eforms.com/images/2018/03/Employment-Job-Application.png' },
                     { name: 'diamond', imageUrl: 'https://a.espncdn.com/combiner/i?img=/i/headshots/rpm/players/full/836.png' },
-                    { name: 'clover', imageUrl: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b538e535-b519-48e1-85c7-26a5896a7e0a/despnni-074431d6-88aa-45ef-a9ee-4fb95249dc9e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzEzYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I1MzhlNTM1LWI1MTktNDhlMS04NWM3LTI2YTU4OTZhN2UwYVwvZGVzcG5uaS0wNzQ0MzFkNi04OGFhLTQ1ZWYtYTllZS00ZmI5NTI0OWRjOWUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xbki5e5kD-8Dl0tIX3jbyuHNOgGlJGgTsJZ8jr6KIro' },
+                    { name: 'clover', imageUrl: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b538e535-b519-48e1-85c7-26a5896a7e0a/despnni-074431d6-88aa-45ef-a9ee-4fb95249dc9e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzEzYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I1MzhlNTM1LWI1MTktNDhlMS04NWM3LTI2YTU4OTZhN2UwYVwvZGVzcG5uaS0wNzQ0MzFkNi04OGFhLTQ1ZWYtYTllZS00ZmI5NTI0OWRjOWUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQudXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzEzYTVmMGQ0MTVlYTBkMjZlMCIsInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQifV19.xbki5e5kD-8Dl0tIX3jbyuHNOgGlJGgTsJZ8jr6KIro' },
                     { name: 'moneybag', imageUrl: 'https://static.vecteezy.com/system/resources/thumbnails/024/724/482/small_2x/railroad-track-isolated-on-transparent-background-generative-ai-railway-track-png.png' },
                     { name: 'star', imageUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Flag_of_Poland.svg/1200px-Flag_of_Poland.svg.png' }
                 ];
@@ -625,6 +698,7 @@
 
                 /**
                  * Updates the display of balance and bet.
+                 * Also manages the disabled state of buttons based on game state.
                  */
                 function updateDisplay() {
                     balanceDisplay.textContent = balance;
@@ -641,7 +715,7 @@
                 /**
                  * Displays a message in the game's message box.
                  * @param {string} msg - The message to display.
-                 * @param {string} type - 'win', 'lose', or 'info'.
+                 * @param {string} type - 'win', 'lose', or 'info'. Determines text color.
                  */
                 function displayGameMessage(msg, type = 'info') {
                     messageBox.textContent = msg;
@@ -659,7 +733,7 @@
                  * Shows a custom modal with a title and message.
                  * @param {string} title - The title for the modal.
                  * @param {string} message - The message content.
-                 * @param {boolean} isWin - True if it's a win message, false otherwise.
+                 * @param {boolean} isWin - True if it's a win message, false otherwise, to trigger confetti.
                  */
                 function showModal(title, message, isWin = false) {
                     modalTitle.textContent = title;
@@ -667,7 +741,7 @@
                     messageModalOverlay.classList.add('show');
 
                     if (isWin) {
-                        // Add confetti effect
+                        // Add confetti effect for wins
                         for (let i = 0; i < 50; i++) {
                             const confetti = document.createElement('div');
                             confetti.classList.add('confetti-piece');
@@ -675,7 +749,7 @@
                             confetti.style.animationDelay = `${Math.random() * 0.5}s`;
                             confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`; // Random color
                             document.body.appendChild(confetti);
-                            confetti.addEventListener('animationend', () => confetti.remove());
+                            confetti.addEventListener('animationend', () => confetti.remove()); // Clean up confetti
                         }
                     }
                 }
@@ -705,7 +779,7 @@
                     let payout = 0;
                     let winMessage = '';
 
-                    // Check for specific payout rules first (e.g., three of a kind)
+                    // Check for specific payout rules (e.g., three of a kind, two of a kind)
                     for (const rule of payoutRules) {
                         const [s1, s2, s3] = rule.combo;
 
@@ -733,38 +807,38 @@
                         if (balance < bet) {
                             showModal("INSUFFICIENT FUNDS", `YOU NEED AT LEAST $${bet} TO SPIN. YOUR CURRENT BALANCE IS $${balance}.`);
                         }
-                        return;
+                        return; // Exit if already spinning or insufficient funds
                     }
 
                     isSpinning = true;
-                    balance -= bet;
+                    balance -= bet; // Deduct bet before spin
                     updateDisplay();
                     displayGameMessage("SPINNING...");
 
                     if (isSfxEnabled && spinSynth) {
                         spinSynth.triggerAttackRelease("C2", "0.2"); // Play a low, short tone for spin
                     }
-                    // Removed: if (isSfxEnabled && reelSpinningNoise) { reelSpinningNoise.triggerAttack(); }
-
-
+                    
                     const finalSymbolNames = [];
                     const spinPromises = reelElements.map((reel, index) => {
                         return new Promise(resolve => {
-                            // Clear existing content and add an image element if not already present
-                            if (!reel.querySelector('.reel-image')) {
-                                reel.innerHTML = '<img src="" class="reel-image">';
+                            // Ensure an image element exists inside the reel
+                            let symbolImageElement = reel.querySelector('.reel-image');
+                            if (!symbolImageElement) {
+                                symbolImageElement = document.createElement('img');
+                                symbolImageElement.classList.add('reel-image');
+                                reel.appendChild(symbolImageElement);
                             }
-                            const symbolImageElement = reel.querySelector('.reel-image');
 
                             reel.classList.add('spinning'); // Add spinning animation class
 
                             // Simulate multiple spins before landing on final symbol
                             let spinCount = 0;
-                            const totalSpins = 20 + (index * 5); // Staggered stop
+                            const totalSpins = 20 + (index * 5); // Staggered stop for visual effect
                             const spinInterval = setInterval(() => {
                                 const randomSymbol = getRandomSymbol();
                                 symbolImageElement.src = randomSymbol.imageUrl;
-                                // Add onerror to handle broken image links
+                                // Add onerror to handle broken image links during spin
                                 symbolImageElement.onerror = () => {
                                     symbolImageElement.src = 'https://placehold.co/100x100/CCCCCC/000000?text=ERROR'; // Fallback image
                                 };
@@ -779,18 +853,17 @@
                                         symbolImageElement.src = 'https://placehold.co/100x100/CCCCCC/000000?text=ERROR'; // Fallback image
                                     };
                                     finalSymbolNames[index] = finalSymbol.name; // Store the name for win checking
-                                    resolve();
+                                    resolve(); // Resolve the promise for this reel
                                 }
-                            }, 50); // Faster spin visual
+                            }, 50); // Faster spin visual interval
                         });
                     });
 
-                    // Wait for all reels to stop
+                    // Wait for all reels to stop spinning
                     await Promise.all(spinPromises);
 
                     isSpinning = false;
-                    // Removed: if (isSfxEnabled && reelSpinningNoise) { reelSpinningNoise.triggerRelease(); }
-                    updateDisplay();
+                    updateDisplay(); // Update display after reels stop
 
                     const { payout, winMessage } = checkWin(finalSymbolNames);
 
@@ -800,24 +873,23 @@
                         showModal("YOU WIN!", `${winMessage} YOU WON $${payout}!`, true);
                         displayGameMessage(`YOU WON $${payout}!`, 'win');
                         if (isSfxEnabled && winSynth) {
-                            // Play ascending chime notes sequentially
+                            // Play ascending chime notes sequentially for win
                             const winNotes = ["C5", "E5", "G5", "C6"];
                             winNotes.forEach((note, i) => {
                                 winSynth.triggerAttackRelease(note, "8n", Tone.context.currentTime + i * 0.1);
                             });
                         }
                     } else {
-                        // No win pop-up removed, message displayed in message box
                         displayGameMessage("NO WIN. TRY AGAIN!", 'lose');
                         if (isSfxEnabled && loseSynth) {
-                            // Play descending tone notes sequentially
+                            // Play descending tone notes sequentially for lose
                             const loseNotes = ["C3", "A2"];
                             loseNotes.forEach((note, i) => {
                                 loseSynth.triggerAttackRelease(note, "8n", Tone.context.currentTime + i * 0.1);
                             });
                         }
                     }
-                    updateDisplay(); // Update display again after showing modal in case balance changed
+                    updateDisplay(); // Final display update in case balance changed
                 }
 
                 /**
@@ -837,11 +909,11 @@
                  * Cashes out the current balance and resets the game.
                  */
                 function cashOut() {
-                    if (isSpinning) return;
+                    if (isSpinning) return; // Prevent cash out during spin
 
                     showModal("CASH OUT", `YOU CASHED OUT WITH $${balance}. THANKS FOR PLAYING AKI'S CHANCE!`);
                     balance = 100; // Reset balance for a new game
-                    bet = 1;     // Reset bet
+                    bet = 1;       // Reset bet
                     updateDisplay();
                     displayGameMessage("GAME RESET. WELCOME BACK!", 'info');
                 }
@@ -873,22 +945,19 @@
                     if (isSfxEnabled) {
                         // Ensure audio context is running when SFX is enabled
                         initAudioContext();
-                    } else {
-                        // Stop any currently playing SFX when disabled
-                        // Removed: if (reelSpinningNoise) reelSpinningNoise.triggerRelease();
                     }
                 }
 
 
-                // Event Listeners
+                // --- Event Listeners ---
                 spinButton.addEventListener('click', spin);
-                bet1Button.addEventListener('click', () => setBet(1)); // Event listener for BET $1
-                bet5Button.addEventListener('click', () => setBet(5)); // Event listener for BET $5
-                bet10Button.addEventListener('click', () => setBet(10)); // Event listener for BET $10
+                bet1Button.addEventListener('click', () => setBet(1));
+                bet5Button.addEventListener('click', () => setBet(5));
+                bet10Button.addEventListener('click', () => setBet(10));
                 maxBetButton.addEventListener('click', maxBet);
                 cashOutButton.addEventListener('click', cashOut);
                 musicToggleButton.addEventListener('click', toggleMusic);
-                sfxToggleButton.addEventListener('click', toggleSfx); // SFX toggle button listener
+                sfxToggleButton.addEventListener('click', toggleSfx);
                 modalCloseButton.addEventListener('click', hideModal);
                 modalOkButton.addEventListener('click', hideModal);
 
