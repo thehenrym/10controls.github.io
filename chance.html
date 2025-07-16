@@ -405,11 +405,61 @@
         </div>
     </div>
 
-    <!-- Background Music Audio Element -->
-    <audio id="backgroundMusic" loop>
-        <source src="https://www.youtube.com/watch?v=69Km895ntNc&list=RD69Km895ntNc&start_radio=1" type="audio/mp4">
-        YOUR BROWSER DOES NOT SUPPORT THE AUDIO ELEMENT.
-    </audio>
+    <!-- YouTube Player Container (hidden) -->
+    <div id="youtubePlayer" style="width: 1px; height: 1px; overflow: hidden; position: absolute; top: -100px; left: -100px;"></div>
+
+    <!-- YouTube IFrame Player API script -->
+    <script>
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtubePlayer', {
+                height: '1', // Make it very small
+                width: '1',  // Make it very small
+                videoId: '69Km895ntNc', // Your YouTube video ID
+                playerVars: {
+                    'autoplay': 0, // Autoplay is handled by button click
+                    'controls': 0, // No controls visible
+                    'loop': 1,     // Loop the video
+                    'playlist': '69Km895ntNc', // Required for looping a single video
+                    'disablekb': 1, // Disable keyboard controls
+                    'fs': 0,        // Disable fullscreen button
+                    'modestbranding': 1, // Remove YouTube logo
+                    'rel': 0,       // Do not show related videos
+                    'showinfo': 0,  // Hide video title and uploader info
+                    'iv_load_policy': 3 // Hide video annotations
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Player is ready, but we won't autoplay here due to browser restrictions.
+            // Playback will be initiated by the musicToggleButton click.
+            console.log('YOUTUBE PLAYER READY');
+        }
+
+        function onPlayerStateChange(event) {
+            const musicToggleButton = document.getElementById('musicToggleButton');
+            if (event.data === YT.PlayerState.PLAYING) {
+                isMusicPlaying = true;
+                musicToggleButton.textContent = "MUSIC: ON";
+            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED || event.data === YT.PlayerState.BUFFERING) {
+                isMusicPlaying = false;
+                musicToggleButton.textContent = "MUSIC: OFF";
+                // If video ends and is set to loop, it will eventually go back to playing state
+                // No explicit action needed here for looping, as playerVars handles it.
+            }
+        }
+
+        // Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    </script>
 
     <!-- Social Media Links Footer -->
     <footer class="bg-black text-white text-center py-5 px-2 mt-8">
@@ -494,7 +544,7 @@
                 const messageBox = document.getElementById('messageBox');
                 const musicToggleButton = document.getElementById('musicToggleButton'); // Music toggle button
                 const sfxToggleButton = document.getElementById('sfxToggleButton');     // SFX toggle button
-                const backgroundMusic = document.getElementById('backgroundMusic');     // Audio element
+                // const backgroundMusic = document.getElementById('backgroundMusic'); // Removed, now using YouTube player
 
                 // Modal elements
                 const messageModalOverlay = document.getElementById('messageModalOverlay');
@@ -560,16 +610,16 @@
 
                 // Payout rules: now using symbol names
                 const payoutRules = [
-                    { combo: ['diamond', 'diamond', 'diamond'], multiplier: 100, message: "JACKPOT! THREE KUBICAS!" },
-                    { combo: ['bell', 'bell', 'bell'], multiplier: 50, message: "BIG WIN! THREE PASSPORTS!" },
-                    { combo: ['moneybag', 'moneybag', 'moneybag'], multiplier: 30, message: "LUCKY! THREE TRAIN TRACKS!" },
-                    { combo: ['clover', 'clover', 'clover'], multiplier: 20, message: "FORTUNE! THREE FEMBOYS!" },
-                    { combo: ['cherry', 'cherry', 'cherry'], multiplier: 15, message: "SWEET! THREE WHITE MONSTERS!" },
-                    { combo: ['star', 'star', 'star'], multiplier: 10, message: "SHINY! THREE FLAGS!" },
-                    { combo: ['grape', 'grape', 'grape'], multiplier: 8, message: "JUICY! THREE MARLBORO REDS!" },
-                    { combo: ['orange', 'orange', 'orange'], multiplier: 7, message: "TANGY! THREE VAPES!" },
-                    { combo: ['lemon', 'lemon', 'lemon'], multiplier: 6, message: "ZINGY! THREE NEWPORTS!" },
-                    { combo: ['cherry', 'cherry', null], multiplier: 3, message: "TWO MONSTERS!" } // Any two cherries on first two reels
+                    { combo: ['diamond', 'diamond', 'diamond'], multiplier: 100, message: "JACKPOT! THREE DIAMONDS!" },
+                    { combo: ['bell', 'bell', 'bell'], multiplier: 50, message: "BIG WIN! THREE BELLS!" },
+                    { combo: ['moneybag', 'moneybag', 'moneybag'], multiplier: 30, message: "LUCKY! THREE MONEY BAGS!" },
+                    { combo: ['clover', 'clover', 'clover'], multiplier: 20, message: "FORTUNE! THREE CLOVERS!" },
+                    { combo: ['cherry', 'cherry', 'cherry'], multiplier: 15, message: "SWEET! THREE CHERRIES!" },
+                    { combo: ['star', 'star', 'star'], multiplier: 10, message: "SHINY! THREE STARS!" },
+                    { combo: ['grape', 'grape', 'grape'], multiplier: 8, message: "JUICY! THREE GRAPES!" },
+                    { combo: ['orange', 'orange', 'orange'], multiplier: 7, message: "TANGY! THREE ORANGES!" },
+                    { combo: ['lemon', 'lemon', 'lemon'], multiplier: 6, message: "ZINGY! THREE LEMONS!" },
+                    { combo: ['cherry', 'cherry', null], multiplier: 3, message: "TWO CHERRIES!" } // Any two cherries on first two reels
                 ];
 
                 /**
@@ -804,26 +854,20 @@
                 }
 
                 /**
-                 * Toggles the background music on and off.
+                 * Toggles the background music on and off using the YouTube player.
                  */
                 function toggleMusic() {
-                    // Check if a music source is actually set
-                    if (!backgroundMusic.src || backgroundMusic.src === window.location.href) { // window.location.href check handles empty src
-                        showModal("MUSIC NOT LOADED", "PLEASE PROVIDE A VALID MUSIC LINK IN THE CODE FOR THE BACKGROUND MUSIC TO PLAY.");
+                    if (!player) {
+                        showModal("MUSIC PLAYER NOT READY", "YOUTUBE PLAYER IS STILL LOADING. PLEASE TRY AGAIN IN A MOMENT.");
                         return;
                     }
 
                     if (isMusicPlaying) {
-                        backgroundMusic.pause();
-                        musicToggleButton.textContent = "MUSIC: OFF";
+                        player.pauseVideo();
                     } else {
-                        backgroundMusic.play().catch(error => {
-                            console.error("MUSIC AUTOPLAY PREVENTED:", error);
-                            showModal("AUTOPLAY BLOCKED", "YOUR BROWSER PREVENTED MUSIC FROM PLAYING AUTOMATICALLY. PLEASE CLICK 'OK' TO TRY AGAIN, OR CLICK THE 'MUSIC: OFF' BUTTON.");
-                        });
-                        musicToggleButton.textContent = "MUSIC: ON";
+                        player.playVideo();
                     }
-                    isMusicPlaying = !isMusicPlaying;
+                    // isMusicPlaying state is now updated by onPlayerStateChange event
                 }
 
                 /**
