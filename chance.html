@@ -569,20 +569,6 @@
                     loseSynth = new Tone.Synth().toDestination();
                     loseSynth.envelope.release = 0.3; // Make the lose sound slightly longer
 
-                    // Reel spinning sound: a low-frequency noise with a slight filter
-                    reelSpinningNoise = new Tone.NoiseSynth({
-                        noise: {
-                            type: 'brown' // Brown noise for a deeper, rumbling sound
-                        },
-                        envelope: {
-                            attack: 0.01,
-                            decay: 0.2,
-                            sustain: 1, // Sustain as long as spinning
-                            release: 0.2
-                        }
-                    }).connect(new Tone.Filter(200, 'lowpass')).toDestination(); // Lowpass filter to muffle it
-                }
-
                 // Call initAudioContext on first user interaction (e.g., spin button click)
                 document.addEventListener('click', initAudioContext, { once: true });
 
