@@ -9,7 +9,7 @@
     <link rel="manifest" href="favicon/site.webmanifest" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AKI'S CHANCE SLOT MACHINE</title>
+    <title>10 Controls</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -368,7 +368,7 @@
             <h1 class="slot-title">AKI'S CHANCE</h1>
 
             <div class="text-xl font-bold text-yellow-400">
-                BALANCE: $<span id="balance">100</span>
+                BALANCE: $<span id="balance">1000</span>
             </div>
             <div class="text-lg font-semibold text-yellow-300">
                 BET: $<span id="bet">1</span>
@@ -382,9 +382,9 @@
 
             <div class="button-group">
                 <button class="game-button" id="spinButton">SPIN</button>
-                <button class="game-button" id="bet1Button">BET $1</button>
-                <button class="game-button" id="bet5Button">BET $5</button>
                 <button class="game-button" id="bet10Button">BET $10</button>
+                <button class="game-button" id="bet50Button">BET $50</button>
+                <button class="game-button" id="bet100Button">BET $100</button>
                 <button class="game-button" id="maxBetButton">MAX BET</button>
                 <button class="game-button" id="cashOutButton">CASH OUT</button>
                 <button class="game-button" id="musicToggleButton">MUSIC: OFF</button>
@@ -590,7 +590,7 @@
                     { name: 'grape', imageUrl: 'https://sml-uncorked.com/cdn/shop/products/372231cb145ac6d176945a88054fd962_1250x.png?v=1745851627' },
                     { name: 'grape', imageUrl: 'https://sml-uncorked.com/cdn/shop/products/372231cb145ac6d176945a88054fd962_1250x.png?v=1745851627' },
                     { name: 'grape', imageUrl: 'https://sml-uncorked.com/cdn/shop/products/372231cb145ac6d176945a88054fd962_1250x.png?v=1745851627' }, // More grapes
-                    { name: 'bell', imageUrl: 'https://cdn.discordapp.com/attachments/1323758532432236638/1394942070753460325/23.png?ex=6878a48a&is=6877530a&hm=505197be035e2a4d947c754b085952424c29b421575a37e60301beda1550fa04&' },
+                    { name: 'bell', imageUrl: 'https://eforms.com/images/2018/03/Employment-Job-Application.png' },
                     { name: 'diamond', imageUrl: 'https://a.espncdn.com/combiner/i?img=/i/headshots/rpm/players/full/836.png' },
                     { name: 'clover', imageUrl: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b538e535-b519-48e1-85c7-26a5896a7e0a/despnni-074431d6-88aa-45ef-a9ee-4fb95249dc9e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzEzYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I1MzhlNTM1LWI1MTktNDhlMS04NWM3LTI2YTU4OTZhN2UwYVwvZGVzcG5uaS0wNzQ0MzFkNi04OGFhLTQ1ZWYtYTllZS00ZmI5NTI0OWRjOWUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xbki5e5kD-8Dl0tIX3jbyuHNOgGlJGgTsJZ8jr6KIro' },
                     { name: 'moneybag', imageUrl: 'https://static.vecteezy.com/system/resources/thumbnails/024/724/482/small_2x/railroad-track-isolated-on-transparent-background-generative-ai-railway-track-png.png' },
@@ -599,16 +599,16 @@
 
                 // Payout rules: now using symbol names
                 const payoutRules = [
-                    { combo: ['diamond', 'diamond', 'diamond'], multiplier: 100, message: "JACKPOT! THREE DIAMONDS!" },
-                    { combo: ['bell', 'bell', 'bell'], multiplier: 50, message: "BIG WIN! THREE BELLS!" },
-                    { combo: ['moneybag', 'moneybag', 'moneybag'], multiplier: 30, message: "LUCKY! THREE MONEY BAGS!" },
-                    { combo: ['clover', 'clover', 'clover'], multiplier: 20, message: "FORTUNE! THREE CLOVERS!" },
-                    { combo: ['cherry', 'cherry', 'cherry'], multiplier: 15, message: "SWEET! THREE CHERRIES!" },
-                    { combo: ['star', 'star', 'star'], multiplier: 10, message: "SHINY! THREE STARS!" },
-                    { combo: ['grape', 'grape', 'grape'], multiplier: 8, message: "JUICY! THREE GRAPES!" },
-                    { combo: ['orange', 'orange', 'orange'], multiplier: 7, message: "TANGY! THREE ORANGES!" },
-                    { combo: ['lemon', 'lemon', 'lemon'], multiplier: 6, message: "ZINGY! THREE LEMONS!" },
-                    { combo: ['cherry', 'cherry', null], multiplier: 3, message: "TWO CHERRIES!" } // Any two cherries on first two reels
+                    { combo: ['diamond', 'diamond', 'diamond'], multiplier: 100, message: "JACKPOT! THREE KUBICAS!" },
+                    { combo: ['bell', 'bell', 'bell'], multiplier: 50, message: "BIG WIN! THREE JOB APPLICATIONS!" },
+                    { combo: ['moneybag', 'moneybag', 'moneybag'], multiplier: 30, message: "LUCKY! TRAIN TRACKS!" },
+                    { combo: ['clover', 'clover', 'clover'], multiplier: 20, message: "FORTUNE! THREE FEMBOYS!" },
+                    { combo: ['cherry', 'cherry', 'cherry'], multiplier: 15, message: "SWEET! THREE WHITE MONSTERS!" },
+                    { combo: ['star', 'star', 'star'], multiplier: 10, message: "SHINY! THREE FLAGS!" },
+                    { combo: ['grape', 'grape', 'grape'], multiplier: 8, message: "JUICY! THREE MARLBORO REDS!" },
+                    { combo: ['orange', 'orange', 'orange'], multiplier: 7, message: "TANGY! THREE VAPES!" },
+                    { combo: ['lemon', 'lemon', 'lemon'], multiplier: 6, message: "ZINGY! THREE NEWPORTS!" },
+                    { combo: ['cherry', 'cherry', null], multiplier: 3, message: "TWO WHITE MONSTERS!" } // Any two cherries on first two reels
                 ];
 
                 /**
