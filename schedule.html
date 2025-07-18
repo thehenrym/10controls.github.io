@@ -211,7 +211,7 @@
             { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'JUNE 27TH', winner: 'MAXFAN', winnerFlag: 'PL', country: 'IT', tier: 'tier1' },
             { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'JULY 4TH', winner: 'MAXFAN', winnerFlag: 'PL', country: 'BE', tier: 'tier1' },
             { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'JULY 11TH', winner: 'ANTON CHEBOTAROV', winnerFlag: 'UA', country: 'ES', tier: 'tier1' }, 
-            { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'JULY 18TH', winner: '', country: 'CN', tier: 'tier1' },
+            { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'JULY 18TH', winner: 'ANTON CHEBOTAROV', winnerFlag: 'UA', country: 'CN', tier: 'tier1' },
             { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'JULY 25TH', winner: '', country: 'JP', tier: 'tier1' },
             { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'AUGUST 1ST', winner: '', country: 'US', tier: 'tier1' }, 
             { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'AUGUST 8TH', winner: '', country: 'MC', tier: 'tier1' }, 
@@ -321,6 +321,8 @@
                     resultButtonHref = baseResultsPath + "belgium.html";
                 } else if (race.round === 5 && race.name === 'Spanish Grand Prix') { 
                     resultButtonHref = baseResultsPath + "spain.html";
+                } else if (race.round === 5 && race.name === 'Spanish Grand Prix') { 
+                    resultButtonHref = baseResultsPath + "china.html";
                 }
 
                 let footerHtml;
