@@ -415,53 +415,28 @@
         updatedTier1DriverStandings.sort((a, b) => b.points - a.points);
         updatedTier1DriverStandings.forEach((driver, index) => driver.pos = index + 1);
 
-        const tier1Teams = [
-            { team: "McLaren", points: 181 },
-            { team: "Red Bull", points: 143 },
-            { team: "Mercedes", points: 83 },
-            { team: "Ferrari", points: 64 },
-            { team: "RB", points: 63 },
-            { team: "Aston Martin", points: 58 },
-            { team: "Alpine", points: 47 },
-            { team: "Haas", points: 26 },
-            { team: "KICK Sauber", points: 21 },
-            { team: "Williams", points: 14 }
-        ];
-
-        let updatedTier1TeamStandings = [];
-        tier1Teams.forEach(teamData => {
-            let canonicalTeamName = teamData.team.toUpperCase();
-            if (canonicalTeamName === "RB") {
-                canonicalTeamName = "RACING BULLS PEUGEOT SPORT";
-            } else if (canonicalTeamName === "KICK SAUBER") {
-                canonicalTeamName = "TWITCH SAUBER";
-            } else if (canonicalTeamName === "MCLAREN") {
-                canonicalTeamName = "HOT WHEELS MCLAREN";
-            } else if (canonicalTeamName === "RED BULL") {
-                canonicalTeamName = "NEWPORT ROLEX RED BULL RACING";
-            } else if (canonicalTeamName === "MERCEDES") {
-                canonicalTeamName = "GUINNESS MERCEDES";
-            } else if (canonicalTeamName === "FERRARI") {
-                canonicalTeamName = "PIRELLI FERRARI";
-            } else if (canonicalTeamName === "ASTON MARTIN") {
-                canonicalTeamName = "LOCKHEED MARTIN ASTON MARTIN";
-            } else if (canonicalTeamName === "ALPINE") {
-                canonicalTeamName = "TINDER ALPINE F1 TEAM";
-            } else if (canonicalTeamName === "HAAS") {
-                canonicalTeamName = "HAAS ONLYFANS RACING";
-            } else if (canonicalTeamName === "WILLIAMS") {
-                canonicalTeamName = "JOHN DEERE WILLIAMS RACING";
+        // Calculate Tier 1 Team Standings from Tier 1 Driver Standings
+        let tier1TeamsCalculated = {};
+        tier1Drivers.forEach(driver => {
+            const teamName = driver.team;
+            if (tier1TeamsCalculated[teamName]) {
+                tier1TeamsCalculated[teamName] += driver.points;
+            } else {
+                tier1TeamsCalculated[teamName] = driver.points;
             }
-
-            updatedTier1TeamStandings.push({
-                pos: 0,
-                team: canonicalTeamName,
-                points: teamData.points
-            });
         });
 
+        let updatedTier1TeamStandings = [];
+        for (const teamName in tier1TeamsCalculated) {
+            updatedTier1TeamStandings.push({
+                pos: 0,
+                team: teamName,
+                points: tier1TeamsCalculated[teamName]
+            });
+        }
         updatedTier1TeamStandings.sort((a, b) => b.points - a.points);
         updatedTier1TeamStandings.forEach((team, index) => team.pos = index + 1);
+
 
         const tier2Drivers = [
             { driver: "SANDRO", points: 110, team: "MCLAREN", flag: "NL" },
@@ -522,22 +497,20 @@
         updatedTier2DriverStandings.sort((a, b) => b.points - a.points);
         updatedTier2DriverStandings.forEach((driver, index) => driver.pos = index + 1);
 
-        const tier2Teams = [
-            { team: "McLaren", points: 200 },
-            { team: "Ferrari", points: 96 },
-            { team: "Red Bull", points: 79 },
-            { team: "Haas", points: 69 },
-            { team: "Mercedes", points: 59 },
-            { team: "RB", points: 37 },
-            { team: "Williams", points: 37 },
-            { team: "Alpine", points: 36 },
-            { team: "Aston Martin", points: 29 },
-            { team: "KICK Sauber", points: 23 }
-        ];
+        // Calculate Tier 2 Team Standings from Tier 2 Driver Standings
+        let tier2TeamsCalculated = {};
+        tier2Drivers.forEach(driver => {
+            const teamName = driver.team;
+            if (tier2TeamsCalculated[teamName]) {
+                tier2TeamsCalculated[teamName] += driver.points;
+            } else {
+                tier2TeamsCalculated[teamName] = driver.points;
+            }
+        });
 
         let updatedTier2TeamStandings = [];
-        tier2Teams.forEach(teamData => {
-            let canonicalTeamName = teamData.team.toUpperCase();
+        for (const teamName in tier2TeamsCalculated) {
+            let canonicalTeamName = teamName.toUpperCase();
             if (canonicalTeamName === "RB") {
                 canonicalTeamName = "RACING BULLS PEUGEOT SPORT";
             } else if (canonicalTeamName === "KICK SAUBER") {
@@ -559,29 +532,30 @@
             } else if (canonicalTeamName === "WILLIAMS") {
                 canonicalTeamName = "JOHN DEERE WILLIAMS RACING";
             }
-
             updatedTier2TeamStandings.push({
                 pos: 0,
                 team: canonicalTeamName,
-                points: teamData.points
+                points: tier2TeamsCalculated[teamName]
             });
-        });
-
+        }
         updatedTier2TeamStandings.sort((a, b) => b.points - a.points);
         updatedTier2TeamStandings.forEach((team, index) => team.pos = index + 1);
 
         let combinedOverallTeamStandings = [];
         const teamPointsMap = new Map();
 
+        // Populate map with Tier 1 team points
         updatedTier1TeamStandings.forEach(team => {
             teamPointsMap.set(team.team, team.points);
         });
 
+        // Add Tier 2 team points to existing or new entries
         updatedTier2TeamStandings.forEach(team => {
             const currentPoints = teamPointsMap.get(team.team) || 0;
             teamPointsMap.set(team.team, currentPoints + team.points);
         });
 
+        // Convert map back to array for overall standings
         teamPointsMap.forEach((points, teamName) => {
             combinedOverallTeamStandings.push({
                 pos: 0,
@@ -608,10 +582,10 @@
              { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
              { round: 12, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', country: 'BE' },
              { round: 13, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'July 18th', country: 'CN' },
-             { round: 14, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'July 25th', country: 'NL' },
-             { round: 15, name: 'Italian Grand Prix', venue: 'Monza', date: 'August 1st', country: 'IT' },
-             { round: 16, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'August 8th', country: 'AZ' },
-             { round: 17, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'August 15th', country: 'SG' },
+             { round: 14, name: 'Japanese Grand Prix', venue: 'Zandvoort', date: 'July 25th', country: 'NL' },
+             { round: 15, name: 'United States Grand Prix', venue: 'Monza', date: 'August 1st', country: 'IT' },
+             { round: 16, name: 'Mystery Grand Prix', venue: 'Baku', date: 'August 8th', country: 'AZ' },
+             { round: 17, name: 'Brazilian Grand Prix', venue: 'Singapore', date: 'August 15th', country: 'SG' },
              { round: 18, name: 'United States Grand Prix', venue: 'Austin', date: 'August 22nd', country: 'USA' },
              { round: 19, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'August 29th', country: 'MX' },
              { round: 20, name: 'Brazilian Grand Prix', venue: 'Interlagos', date: 'September 5th', country: 'BR' },
@@ -789,7 +763,7 @@
             if (menuItemsContainer) {
                 const menuLinks = menuItemsContainer.querySelectorAll('a');
                 const highlighter = document.getElementById('sliding-highlighter');
-                const activeLink = menuItemsContainer.querySelector('a[href="standings.html"]'); 
+                const activeLink = menuItemsContainer.querySelector('a[href="standings.html"]');  
                 function setHighlighterToLink(link) {
                     if (!link) return;
                     highlighter.style.left = `${link.offsetLeft}px`;
@@ -884,13 +858,13 @@
             const tier1TeamStandingsBody = document.getElementById('tier1-team-standings-body');
             const tier2DriverStandingsBody = document.getElementById('tier2-driver-standings-body');  
             const tier2TeamStandingsBody = document.getElementById('tier2-team-standings-body');  
-            const overallTeamStandingsBody = document.getElementById('overall-team-standings-body'); 
+            const overallTeamStandingsBody = document.getElementById('overall-team-standings-body');  
 
             const tier1DriverContainer = document.getElementById('tier1-driver-standings-container');
             const tier1TeamContainer = document.getElementById('tier1-team-standings-container');
             const tier2DriverContainer = document.getElementById('tier2-driver-standings-container');  
             const tier2TeamContainer = document.getElementById('tier2-team-standings-container');  
-            const overallTeamContainer = document.getElementById('overall-team-standings-container'); 
+            const overallTeamContainer = document.getElementById('overall-team-standings-container');  
 
             const tablesWrapper = document.getElementById('tables-wrapper');
 
@@ -898,15 +872,15 @@
             populateTeamStandings(updatedTier1TeamStandings, tier1TeamStandingsBody);
             populateDriverStandings(updatedTier2DriverStandings, tier2DriverStandingsBody, '');
             populateTeamStandings(updatedTier2TeamStandings, tier2TeamStandingsBody);
-            populateTeamStandings(combinedOverallTeamStandings, overallTeamStandingsBody); 
+            populateTeamStandings(combinedOverallTeamStandings, overallTeamStandingsBody);  
             
             setTimeout(() => {
                 const tier1DriverTableHeight = tier1DriverContainer.scrollHeight;
                 const tier1TeamTableHeight = tier1TeamContainer.scrollHeight;
                 const tier2DriverTableHeight = tier2DriverContainer.scrollHeight;
                 const tier2TeamTableHeight = tier2TeamContainer.scrollHeight;  
-                const overallTeamTableHeight = overallTeamContainer.scrollHeight; 
-                const maxTableHeight = Math.max(tier1DriverTableHeight, tier1TeamTableHeight, tier2DriverTableHeight, tier2TeamTableHeight, overallTeamTableHeight); 
+                const overallTeamTableHeight = overallTeamContainer.scrollHeight;  
+                const maxTableHeight = Math.max(tier1DriverTableHeight, tier1TeamTableHeight, tier2DriverTableHeight, tier2TeamTableHeight, overallTeamTableHeight);  
                 tablesWrapper.style.minHeight = `${maxTableHeight}px`;
 
                 const btnTier1 = document.getElementById('btn-tier1');
@@ -915,7 +889,7 @@
 
                 const btnDrivers = document.getElementById('btn-drivers');
                 const btnTeams = document.getElementById('btn-teams');
-                const btnOverall = document.getElementById('btn-overall'); 
+                const btnOverall = document.getElementById('btn-overall');  
                 const typeSlider = document.getElementById('type-slider');
 
                 tierSlider.style.transform = 'translateX(0%)';
@@ -929,7 +903,7 @@
                 btnDrivers.classList.remove('text-gray-700');
                 btnTeams.classList.add('text-gray-700');
                 btnTeams.classList.remove('text-white');
-                btnOverall.classList.add('text-gray-700'); 
+                btnOverall.classList.add('text-gray-700');  
                 btnOverall.classList.remove('text-white');
 
                 applyFiltersAndRender();
@@ -961,38 +935,38 @@
                     btnDrivers.classList.remove('text-gray-700');
                     btnTeams.classList.add('text-gray-700');
                     btnTeams.classList.remove('text-white');
-                    btnOverall.classList.add('text-gray-700'); 
+                    btnOverall.classList.add('text-gray-700');  
                     btnOverall.classList.remove('text-white');
                     btnTier1.classList.add('text-white');
                     btnTier1.classList.remove('text-gray-700');
                     btnTier2.classList.add('text-gray-700');
                     btnTier2.classList.remove('text-white');
-                    tierSlider.style.width = '50%'; 
-                    tierSlider.style.transform = 'translateX(0%)'; 
+                    tierSlider.style.width = '50%';  
+                    tierSlider.style.transform = 'translateX(0%)';  
                     applyFiltersAndRender();
                 });
 
                 btnTeams.addEventListener('click', () => {
                     currentType = 'teams';
-                    typeSlider.style.transform = 'translateX(100%)'; 
+                    typeSlider.style.transform = 'translateX(100%)';  
                     btnTeams.classList.add('text-white');
                     btnTeams.classList.remove('text-gray-700');
                     btnDrivers.classList.add('text-gray-700');
                     btnDrivers.classList.remove('text-white');
-                    btnOverall.classList.add('text-gray-700'); 
+                    btnOverall.classList.add('text-gray-700');  
                     btnOverall.classList.remove('text-white');
                     btnTier1.classList.add('text-white');
                     btnTier1.classList.remove('text-gray-700');
                     btnTier2.classList.add('text-gray-700');
                     btnTier2.classList.remove('text-white');
-                    tierSlider.style.width = '50%'; 
-                    tierSlider.style.transform = 'translateX(0%)'; 
+                    tierSlider.style.width = '50%';  
+                    tierSlider.style.transform = 'translateX(0%)';  
                     applyFiltersAndRender();
                 });
 
-                btnOverall.addEventListener('click', () => { 
+                btnOverall.addEventListener('click', () => {  
                     currentType = 'overall';
-                    typeSlider.style.transform = 'translateX(200%)'; 
+                    typeSlider.style.transform = 'translateX(200%)';  
                     btnOverall.classList.add('text-white');
                     btnOverall.classList.remove('text-gray-700');
                     btnDrivers.classList.add('text-gray-700');
