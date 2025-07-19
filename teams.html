@@ -118,6 +118,22 @@
         .driver-name-link:hover {
             color: #d1d5db; /* Light gray on hover */
         }
+        /* New style for tier group headings */
+        .tier-group-heading {
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 600; /* font-semibold */
+            padding: 0.25rem 0.75rem; /* px-3 py-1 */
+            border-radius: 9999px; /* rounded-full */
+            color: white;
+            display: inline-block; /* Allows background to wrap content snugly */
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+        /* Style for the championship icon */
+        .championship-icon {
+            width: 32px; /* Increased size */
+            height: 32px; /* Increased size */
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -257,8 +273,8 @@
               drivers: [
                   { name: 'COUNTERFEIT', flagCountryCode: 'GB' }, 
                   { name: 'LOLER', flagCountryCode: 'PL' },  
-                  { name: 'MARK', flagCountryCode: 'US' },    
-                  { name: 'LEON', flagCountryCode: 'UA' }    
+                  { name: 'MARK', flagCountryCode: 'US' },   
+                  { name: 'LEON', flagCountryCode: 'UA' }   
               ], 
               country: 'GB', 
               bgColor: '#00A0DE', 
@@ -272,8 +288,8 @@
               name: 'RACING BULLS PEUGEOT SPORT', 
               venue: 'Faenza', 
               drivers: [
-                  { name: 'MORA', flagCountryCode: 'ES' },    
-                  { name: 'KRAB', flagCountryCode: 'HU' },    
+                  { name: 'MORA', flagCountryCode: 'ES' },   
+                  { name: 'KRAB', flagCountryCode: 'HU' },   
                   { name: 'DANIELS', flagCountryCode: 'ES' },  
                   { name: 'ERIC', flagCountryCode: 'DE' }      
               ], 
@@ -308,7 +324,7 @@
               drivers: [
                   { name: 'NOJUS GEDVILAS', flagCountryCode: 'LT' }, 
                   { name: 'EMIN', flagCountryCode: 'EU' },      
-                  { name: 'MAXLINXC', flagCountryCode: 'GB' },    
+                  { name: 'MAXLINXC', flagCountryCode: 'GB' },   
                   { name: 'DANOTTOK', flagCountryCode: 'FI' }      
               ], 
               country: 'USA', 
@@ -763,11 +779,24 @@
                 `;
                 
                 let driversHtml = '';
-                team.drivers.forEach(driver => {
-                    // Get the driver's full data including tier and updated nationality
+                // Add TIER 1 heading
+                driversHtml += `<p class="tier-group-heading" style="background-color: #e64747;">TIER 1</p>`;
+                team.drivers.slice(0, 2).forEach(driver => {
                     const fullDriverData = allDriversData[driver.name.toUpperCase()];
                     const driverFlagHtml = getFlagHtmlForDriver(fullDriverData ? fullDriverData.flagCountryCode : driver.flagCountryCode);
+                    driversHtml += `
+                        <div class="flex items-center">
+                            ${driverFlagHtml}
+                            <span class="font-medium text-base ${textColor} driver-name-link" onclick="showDriverProfile('${driver.name}')">${highlightText(driver.name.toUpperCase(), currentSearchTerm)}</span>
+                        </div>
+                    `;
+                });
 
+                // Add TIER 2 heading
+                driversHtml += `<p class="tier-group-heading mt-4" style="background-color: #4dbad8;">TIER 2</p>`;
+                team.drivers.slice(2, 4).forEach(driver => {
+                    const fullDriverData = allDriversData[driver.name.toUpperCase()];
+                    const driverFlagHtml = getFlagHtmlForDriver(fullDriverData ? fullDriverData.flagCountryCode : driver.flagCountryCode);
                     driversHtml += `
                         <div class="flex items-center">
                             ${driverFlagHtml}
@@ -862,8 +891,12 @@
             const winPercentage = driver.stats.racesStarted > 0 ? ((driver.stats.wins / driver.stats.racesStarted) * 100).toFixed(1) : '0.0';
             const podiumPercentage = driver.podiums > 0 && driver.stats.racesStarted > 0 ? ((driver.podiums / driver.stats.racesStarted) * 100).toFixed(1) : '0.0';
 
-            // Determine tier tag background color
+            // Determine tier tag background color (not directly used here, but kept for consistency if needed elsewhere)
             const tierBgColor = driver.tier === 'TIER 1' ? '#e64747' : '#4dbad8';
+
+            // Generate championship icon HTML conditionally
+            const championshipIconHtml = driver.championships > 0 ? 
+                `<img src="https://cdn.discordapp.com/emojis/1396228433654186094.webp?size=96" alt="Championship Icon" class="championship-icon">` : '';
 
             // Clear the dynamic controls container (where the search bar was)
             document.getElementById('dynamic-controls-container').innerHTML = '';
@@ -903,6 +936,7 @@
                         <p class="text-xl font-semibold mb-2 flex items-center justify-center md:justify-start">
                             <img src="${teamLogoForProfile}" alt="${driver.team} LOGO" class="team-logo mr-2" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=LOGO';">
                             <span class="${profileTextColor}">${driver.team.toUpperCase()}</span>
+                            <!-- Tier tag in profile is still individual, as per previous request -->
                             <span class="ml-4 px-3 py-1 rounded-full text-sm font-semibold text-white" style="background-color: ${tierBgColor};">${driver.tier}</span>
                         </p>
                         <p class="text-lg mb-4 flex items-center justify-center md:justify-start">
@@ -921,8 +955,13 @@
                             <h3 class="text-2xl font-semibold mb-2">STATISTICS</h3>
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="flex flex-col items-center md:items-start p-3 rounded-lg bg-[#2d2d2d] text-white">
-                                    <span class="text-xl font-bold">${driver.championships}</span>
-                                    <span class="text-sm">CHAMPIONSHIPS</span>
+                                    <div class="flex justify-between items-center w-full">
+                                        <div class="flex flex-col items-center md:items-start">
+                                            <span class="text-xl font-bold">${driver.championships}</span>
+                                            <span class="text-sm">CHAMPIONSHIPS</span>
+                                        </div>
+                                        ${championshipIconHtml} <!-- Championship icon added here -->
+                                    </div>
                                 </div>
                                 <div class="flex flex-col items-center md:items-start p-3 rounded-lg bg-[#2d2d2d] text-white">
                                     <span class="text-xl font-bold">${driver.podiums}</span>
