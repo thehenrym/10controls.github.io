@@ -603,14 +603,14 @@
                 flagCountryCode: 'GB'
             },
             'AKIEUSH': {
-                name: 'AKIEUSH', team: 'Lockheed Martin Aston Martin', carNumber: 'TP', country: 'POLAND', // Updated to full country name
-                podiums: 0, championships: 0, // Assuming these are driver stats, not principal stats
+                name: 'AKIEUSH', team: 'Lockheed Martin Aston Martin', carNumber: 'TP', country: 'POLAND',
+                podiums: 0, championships: 0,
                 image: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp', // Aston Martin car image
                 bio: '',
-                stats: { racesStarted: 3, wins: 0, poles: 0, dnfs: 0 }, // Assuming these are driver stats, not principal stats
-                tier: 'TEAM PRINCIPAL', // Set as principal tier
+                stats: { racesStarted: 4, wins: 0, poles: 0, dnfs: 0 },
+                tier: 'TEAM PRINCIPAL',
                 flagCountryCode: 'PL',
-                isTeamPrincipal: true // Mark as principal
+                isTeamPrincipal: true
             },
             'MAX HOUSLEY': {
                 name: 'MAX HOUSLEY', team: 'Tinder Alpine F1 Team', carNumber: 21, country: 'UNITED KINGDOM',
@@ -721,7 +721,7 @@
                 flagCountryCode: 'ES'
             },
             'BABY YODA': {
-                name: 'ERIC', team: 'RACING BULLS PEUGEOT SPORT', carNumber: 32, country: 'GERMANY',
+                name: 'BABY YODA', team: 'RACING BULLS PEUGEOT SPORT', carNumber: 32, country: 'GERMANY',
                 podiums: 1, championships: 0,
                 image: 'https://placehold.co/400x400/bbda0c/000000?text=ERIC',
                 bio: '',
@@ -1231,7 +1231,7 @@
 
             function parseRaceDate(dateStr) {
                 const monthStr = dateStr.split(' ')[0];
-                let dayStr = dateStr.SPlit(' ')[1].split('-')[0];
+                let dayStr = dateStr.split(' ')[1].split('-')[0]; // Corrected SPlit to split
                 if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
                     dayStr = dayStr.substring(0, dayStr.length - 2);
                 }
