@@ -191,9 +191,12 @@
     <!-- Main Content Area - Race Result Page Layout -->
     <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         <div class="flex items-center mb-6">
+            <!-- Reverted flag to Chinese Flag -->
             <img src="https://cdn-icons-png.flaticon.com/512/197/197375.png" alt="Chinese Flag" class="h-12 w-12 mr-4">
+            <!-- Reverted title to Chinese Grand Prix -->
             <h1 id="main-title" class="text-2xl sm:text-3xl font-bold text-white">CHINESE GRAND PRIX - <br class="sm:hidden">RACE RESULT</h1>
         </div>
+        <!-- Reverted date and venue -->
         <p class="text-sm text-white mb-8">JULY 19TH | SHANGHAI INTERNATIONAL CIRCUIT, SHANGHAI</p>
 
         <!-- Race/Qualifying Toggle Button -->
@@ -300,7 +303,7 @@
                     { pos: 17, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
                     { pos: 18, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19', country: 'USA' },
                     { pos: 19, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26', country: 'MX' },
-                    { pos: 20, name: 'Brazilian Grand Prix', date: 'November 7-9', country: 'BR' },
+                    { pos: 20, name: 'Brazilian Grand Prix', venue: 'Belo Horizonte', date: 'November 7-9', country: 'BR' },
                     { pos: 21, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22', country: 'USA' },
                     { pos: 22, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30', country: 'QAT' },
                     { pos: 23, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7', country: 'AE' }
@@ -387,68 +390,54 @@
                     "Aston Martin": "LOCKHEED MARTIN ASTON MARTIN",
                     "Haas": "HAAS ONLYFANS RACING",
                     "Williams": "JOHN DEERE WILLIAMS RACING",
-                    "Scuderia Ferrari HP": "PIRELLI FERRARI",
+                    "Scuderia Ferrari HP": "PIRELLI FERRARI", // Mapped based on existing Ferrari entry
                     "KICK Sauber": "TWITCH SAUBER",
-                    "Alpine": "TINDER ALPINE F1 TEAM"
+                    "Alpine": "TINDER ALPINE F1 TEAM",
+                    "Visa Cash App Racing Bulls": "RACING BULLS PEUGEOT SPORT" // Mapped based on existing Racing Bulls entry
                 };
                 
                 // MotoGP points system
-                const motogpPoints = [25, 20, 16, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+                const motogpPoints = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]; // Updated to reflect common F1 points for top 10
 
-                // --- Updated Race and Qualifying Data ---
-               let raceResults = [
-                { pos: 1, driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", grid: 1, stops: 1, bestLap: "1:14.498", time: "42:10.291", pts: 25, flag: "UA" },
-                { pos: 2, driver: "FOCUSER", team: "HOT WHEELS MCLAREN", grid: 3, stops: 1, bestLap: "1:15.264", time: "+7.594", pts: 18, flag: "ES" },
-                { pos: 3, driver: "TSAR", team: "GUINNESS MERCEDES", grid: 9, stops: 1, bestLap: "1:15.413", time: "+14.936", pts: 15, flag: "HU" },
-                { pos: 4, driver: "ALPHAROMEO", team: "PIRELLI FERRARI", grid: 2, stops: 2, bestLap: "1:14.356", time: "+16.319", pts: 12, flag: "NL" },
-                { pos: 5, driver: "MAXFAN", team: "NEWPORT ROLEX RED BULL", grid: 4, stops: 2, bestLap: "1:14.816", time: "+18.605", pts: 10, flag: "PL" },
-                { pos: 6, driver: "TONY SEROKA", team: "NEWPORT ROLEX RED BULL", grid: 6, stops: 1, bestLap: "1:15.371", time: "+21.723", pts: 8, flag: "PL" },
-                { pos: 7, driver: "ANTONIO BRANCATI", team: "PIRELLI FERRARI", grid: 5, stops: 1, bestLap: "1:15.283", time: "+22.737", pts: 6, flag: "IT" },
-                { pos: 8, driver: "MAX HOUSLEY", team: "TINDER ALPINE F1 TEAM", grid: 10, stops: 2, bestLap: "1:14.522", time: "+35.395", pts: 4, flag: "GB" },
-                { pos: 9, driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", grid: 12, stops: 2, bestLap: "1:14.865", time: "+37.139", pts: 2, flag: "RS" },
-                { pos: 10, driver: "TOBOB", team: "TWITCH SAUBER", grid: 17, stops: 1, bestLap: "1:16.195", time: "+45.007", pts: 1, flag: "DE" },
-                { pos: 11, driver: "KRAB", team: "RACING BULLS PEUGEOT SPORT", grid: 13, stops: 2, bestLap: "1:15.186", time: "+45.347", pts: 0, flag: "DE" },
-                { pos: 12, driver: "COUNTERFEIT", team: "JOHN DEERE WILLIAMS RACING", grid: 15, stops: 1, bestLap: "1:16.095", time: "+47.507", pts: 0, flag: "GB" },
-                { pos: 13, driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", grid: 16, stops: 2, bestLap: "1:15.050", time: "+47.960", pts: 0, flag: "GB" },
-                { pos: 14, driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS RACING", grid: 20, stops: 2, bestLap: "1:15.709", time: "+1 Lap", pts: 0, flag: "LT" },
-                { pos: 15, driver: "ASPEC33", team: "GUINNESS MERCEDES", grid: 7, stops: 1, bestLap: "1:16.137", time: "+1 Lap", pts: 0, flag: "GB" },
-                { pos: 16, driver: "LOLER", team: "JOHN DEERE WILLIAMS RACING", grid: 18, stops: 1, bestLap: "1:17.365", time: "+1 Lap", pts: 0, flag: "PL" },
-                { pos: 17, driver: "KISIEL", team: "HAAS ONLYFANS RACING", grid: 14, stops: 2, bestLap: "1:16.252", time: "DNF", pts: 0, flag: "GB" },
-                { pos: 18, driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", grid: 11, stops: 2, bestLap: "1:15.698", time: "DNF", pts: 0, flag: "ES" },
-                { pos: 19, driver: "ALFIE WHITE", team: "TINDER ALPINE F1 TEAM", grid: 8, stops: 2, bestLap: "1:15.744", time: "DNF", pts: 0, flag: "GB" },
-                { pos: 20, driver: "GENERIC LEON", team: "TWITCH SAUBER", grid: 19, stops: 1, bestLap: "1:17.360", time: "DNF", pts: 0, flag: "AT" }
+                // --- Updated Race Data from image {DED252D1-51A8-481C-B089-36A1E1099837}.jpg ---
+                let raceResults = [
+                    { pos: 1, driver: "ASPEC33", team: "Mercedes-AMG Petronas", grid: 2, stops: 1, bestLap: "1:35.995", time: "48:16.635", pts: 25, flag: "NL" },
+                    { pos: 2, driver: "SANDRO", team: "McLaren", grid: 1, stops: 2, bestLap: "1:35.600", time: "+0.178", pts: 18, flag: "NL" },
+                    { pos: 3, driver: "BABY YODA", team: "Visa Cash App Racing Bulls", grid: 6, stops: 2, bestLap: "1:36.484", time: "+7.371", pts: 15, flag: "GB" },
+                    { pos: 4, driver: "JSTN NL", team: "Scuderia Ferrari HP", grid: 3, stops: 2, bestLap: "1:36.461", time: "+9.283", pts: 12, flag: "NL" },
+                    { pos: 5, driver: "TEETOE", team: "Red Bull", grid: 9, stops: 1, bestLap: "1:36.137", time: "+20.369", pts: 10, flag: "PL" },
+                    { pos: 6, driver: "EDGE", team: "Aston Martin", grid: 10, stops: 2, bestLap: "1:37.187", time: "+22.227", pts: 8, flag: "GB" },
+                    { pos: 7, driver: "MANUEL ROTUNDO", team: "Scuderia Ferrari HP", grid: 4, stops: 1, bestLap: "1:36.866", time: "+22.953", pts: 6, flag: "IT" },
+                    { pos: 8, driver: "SHARK", team: "Aston Martin", grid: 12, stops: 1, bestLap: "1:38.585", time: "+26.771", pts: 4, flag: "GB" },
+                    { pos: 9, driver: "LEON", team: "Williams", grid: 5, stops: 2, bestLap: "1:35.780", time: "+43.353", pts: 2, flag: "UA" },
+                    { pos: 10, driver: "MARK", team: "Williams", grid: 13, stops: 1, bestLap: "1:37.429", time: "+44.742", pts: 1, flag: "US" },
+                    { pos: 11, driver: "JARVIS COID", team: "Red Bull", grid: 7, stops: 2, bestLap: "1:36.670", time: "+55.171", pts: 0, flag: "GB" },
+                    { pos: 12, driver: "HAILEE", team: "Alpine", grid: 8, stops: 1, bestLap: "1:36.739", time: "+46.966", pts: 0, flag: "NL" },
+                    { pos: 13, driver: "DANIELS", team: "Visa Cash App Racing Bulls", grid: 11, stops: 2, bestLap: "1:46.768", time: "+2 Laps", pts: 0, flag: "GB" }
                 ];
 
                 raceResults = raceResults.map((r, index) => ({
                     ...r,
-                    pos: index + 1, // Re-assign position based on new order
                     driver: r.driver.toUpperCase(),
                     team: (teamNameMapping[r.team] || r.team).toUpperCase(),
-                    pts: motogpPoints[index] || 0
+                    pts: motogpPoints[index] || 0 // Apply points based on position
                 }));
 
-
+                // --- Updated Qualifying Data from image {98B4DF5C-D87C-4F7B-828F-44AF03D6E3E9}.jpg ---
                 const qualifyingResults = [
-                { pos: 1, driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", best: "1:11.418", gap: "", flag: "UA" },
-                { pos: 2, driver: "ALPHAROMEO", team: "PIRELLI FERRARI", best: "1:11.683", gap: "+0.265", flag: "NL" },
-                { pos: 3, driver: "FOCUSER", team: "HOT WHEELS MCLAREN", best: "1:11.731", gap: "+0.313", flag: "ES" },
-                { pos: 4, driver: "MAXFAN", team: "NEWPORT ROLEX RED BULL", best: "1:11.743", gap: "+0.325", flag: "PL" },
-                { pos: 5, driver: "ANTONIO BRANCATI", team: "PIRELLI FERRARI", best: "1:11.947", gap: "+0.529", flag: "IT" },
-                { pos: 6, driver: "TONY SEROKA", team: "NEWPORT ROLEX RED BULL", best: "1:12.111", gap: "+0.693", flag: "PL" },
-                { pos: 7, driver: "ASPEC", team: "GUINNESS MERCEDES", best: "1:12.137", gap: "+0.719", flag: "GB" },
-                { pos: 8, driver: "ALFIE WHITE", team: "TINDER ALPINE F1 TEAM", best: "1:12.171", gap: "+0.753", flag: "GB" },
-                { pos: 9, driver: "TSAR", team: "GUINNESS MERCEDES", best: "1:12.236", gap: "+0.818", flag: "HU" },
-                { pos: 10, driver: "MAX HOUSLEY", team: "TINDER ALPINE F1 TEAM", best: "1:12.304", gap: "+0.886", flag: "GB" },
-                { pos: 11, driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", best: "1:12.319", gap: "+0.901", flag: "ES" },
-                { pos: 12, driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", best: "1:12.406", gap: "+0.988", flag: "RS" },
-                { pos: 13, driver: "KRAB", team: "RACING BULLS PEUGEOT SPORT", best: "1:12.490", gap: "+1.072", flag: "DE" },
-                { pos: 14, driver: "KISIEL", team: "HAAS ONLYFANS RACING", best: "1:12.556", gap: "+1.138", flag: "PL" },
-                { pos: 15, driver: "COUNTERFEIT", team: "JOHN DEERE WILLIAMS RACING", best: "1:12.632", gap: "+1.214", flag: "GB" },
-                { pos: 16, driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", best: "1:12.641", gap: "+1.223", flag: "GB" },
-                { pos: 17, driver: "TOBOB", team: "TWITCH SAUBER", best: "1:12.805", gap: "+1.387", flag: "DE" },
-                { pos: 18, driver: "LOLER", team: "JOHN DEERE WILLIAMS RACING", best: "1:14.357", gap: "+2.939", flag: "PL" },
-                { pos: 19, driver: "GENERIC LEON", team: "TWITCH SAUBER", best: "1:14.479", gap: "+3.061", flag: "AT" },
-                { pos: 20, driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS RACING", best: "1:14.647", gap: "+3.229", flag: "LT" }
+                    { pos: 1, driver: "SANDRO", team: "McLaren", best: "1:31.720", gap: "", flag: "NL" },
+                    { pos: 2, driver: "ASPEC33", team: "Mercedes-AMG Petronas", best: "1:32.428", gap: "+0.708", flag: "NL" },
+                    { pos: 3, driver: "JSTN NL", team: "Scuderia Ferrari HP", best: "1:32.770", gap: "+1.050", flag: "NL" },
+                    { pos: 4, driver: "MANUEL ROTUNDO", team: "Scuderia Ferrari HP", best: "1:32.832", gap: "+1.112", flag: "IT" },
+                    { pos: 5, driver: "LEON", team: "Williams", best: "1:32.856", gap: "+1.136", flag: "UA" },
+                    { pos: 6, driver: "BABY YODA", team: "Visa Cash App Racing Bulls", best: "1:32.948", gap: "+1.228", flag: "GB" },
+                    { pos: 7, driver: "JARVIS COID", team: "Red Bull", best: "1:32.971", gap: "+1.251", flag: "GB" },
+                    { pos: 8, driver: "HAILEE", team: "Alpine", best: "1:33.219", gap: "+1.499", flag: "NL" },
+                    { pos: 9, driver: "TEETOE", team: "Red Bull", best: "1:33.513", gap: "+1.793", flag: "PL" },
+                    { pos: 10, driver: "EDGE", team: "Aston Martin", best: "1:33.566", gap: "+1.846", flag: "GB" },
+                    { pos: 11, driver: "DANIELS", team: "Visa Cash App Racing Bulls", best: "1:42.909", gap: "+11.189", flag: "GB" },
+                    { pos: 12, driver: "SHARK", team: "Aston Martin", best: "---", gap: "---", flag: "GB" },
+                    { pos: 13, driver: "MARK", team: "Williams", best: "---", gap: "---", flag: "US" }
                 ].map(r => ({...r, driver: r.driver.toUpperCase(), team: (teamNameMapping[r.team] || r.team).toUpperCase() }));
                 
                 const raceHeaders = [
@@ -509,7 +498,15 @@
                     if (!tableHeadRow || !tableBody || !mainTitle) return;
                     const { data, headers, title } = type === 'race' ? { data: raceResults, headers: raceHeaders, title: 'RACE RESULT' } : { data: qualifyingResults, headers: qualifyingHeaders, title: 'QUALIFYING RESULT' };
 
-                    mainTitle.innerHTML = `SPANISH GRAND PRIX - <br class="sm:hidden">${title}`;
+                    // Update the main title and date/venue based on the current context
+                    const currentGrandPrix = "CHINESE GRAND PRIX"; // Reverted to Chinese Grand Prix
+                    const currentCircuit = "SHANGHAI INTERNATIONAL CIRCUIT, SHANGHAI"; // Reverted to original venue
+                    const currentDate = "JULY 19TH"; // Reverted to original date
+
+                    mainTitle.innerHTML = `${currentGrandPrix} - <br class="sm:hidden">${title}`;
+                    document.querySelector('.text-sm.text-white.mb-8').textContent = `${currentDate} | ${currentCircuit}`;
+
+
                     tableHeadRow.innerHTML = '';
                     tableBody.innerHTML = '';
 
@@ -530,7 +527,8 @@
                             if (header.key === 'pos') td.classList.add('pos-number');
 
                             if (type === 'qualifying' && header.key === 'gap' && rowData.pos === 1) {
-                                td.innerHTML = `<span class="hidden md:inline-block">${rowData['gap']}</span><span class="md:hidden">${rowData['best']}</span>`;
+                                // For the first position in qualifying, display empty for gap
+                                td.textContent = rowData['gap'];
                             } else {
                                 const cellValue = rowData[header.key];
                                 if (cellValue !== undefined) {
@@ -554,6 +552,7 @@
                     qualifyingButton.addEventListener('click', () => { renderTable('qualifying'); updateSliderAndActiveButton('qualifying'); });
                 }
 
+                // Initial render
                 renderTable('race');
                 updateSliderAndActiveButton('race');
             });
