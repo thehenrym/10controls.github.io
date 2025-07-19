@@ -228,7 +228,7 @@
             <a href="https://www.youtube.com/@10controls24" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
         </div>
     </footer>
-
+    
     <footer class="footer">
         <p>© 2022-2025 10 Controls Limited</p>
     </footer>
@@ -281,7 +281,7 @@
                   { name: 'COUNTERFEIT', flagCountryCode: 'GB' }, 
                   { name: 'LOLER', flagCountryCode: 'PL' },  
                   { name: 'MARK', flagCountryCode: 'US' },   
-                  { name: 'LEON', flagCountryCode: 'UA' }   
+                  { name: 'LEON', flagCountryCode: 'UA' }    
               ], 
               country: 'GB', 
               bgColor: '#00A0DE', 
@@ -295,8 +295,8 @@
               name: 'RACING BULLS PEUGEOT SPORT', 
               venue: 'Faenza', 
               drivers: [
-                  { name: 'MORA', flagCountryCode: 'ES' },   
-                  { name: 'KRAB', flagCountryCode: 'HU' },   
+                  { name: 'MORA', flagCountryCode: 'ES' },    
+                  { name: 'KRAB', flagCountryCode: 'HU' },    
                   { name: 'DANIELS', flagCountryCode: 'ES' },  
                   { name: 'ERIC', flagCountryCode: 'DE' }      
               ], 
@@ -370,328 +370,491 @@
             { round: 23, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'September 26th', country: 'AE' }
         ];
         
-        // Comprehensive data for individual drivers
+        // Mapping from country codes to full country names
+        const countryCodeToFullNameMap = {
+            'NL': 'NETHERLANDS',
+            'IT': 'ITALY',
+            'HU': 'HUNGARY',
+            'RO': 'ROMANIA',
+            'GB': 'UNITED KINGDOM',
+            'GR': 'GREECE',
+            'PL': 'POLAND',
+            'ES': 'SPAIN',
+            'UA': 'UKRAINE',
+            'RS': 'SERBIA',
+            'PK': 'PAKISTAN',
+            'EU': 'EUROPE',
+            'AT': 'AUSTRIA',
+            'DE': 'GERMANY',
+            'LT': 'LITHUANIA',
+            'FI': 'FINLAND',
+            'US': 'UNITED STATES',
+            'CH': 'SWITZERLAND',
+            'FR': 'FRANCE',
+            'BR': 'BRAZIL',
+            'CA': 'CANADA',
+            'MX': 'MEXICO',
+            'QAT': 'QATAR',
+            'AE': 'UNITED ARAB EMIRATES',
+            'AU': 'AUSTRALIA',
+            'CN': 'CHINA',
+            'JP': 'JAPAN',
+            'BH': 'BAHRAIN',
+            'SA': 'SAUDI ARABIA',
+            'MC': 'MONACO',
+            'AZ': 'AZERBAIJAN',
+            'SG': 'SINGAPORE',
+            'BE': 'BELGIUM',
+            'USA': 'UNITED STATES'
+        };
+
+        // Comprehensive data for individual drivers and team principals
         const allDriversData = {
             'ALPHAROMEO': {
-                name: 'ALPHAROMEO', team: 'Pirelli Ferrari', carNumber: 1, nationality: 'Dutch',
-                podiums: 27, championships: 1, // Updated from image
+                name: 'ALPHAROMEO', team: 'Pirelli Ferrari', carNumber: 1, country: 'NETHERLANDS',
+                podiums: 27, championships: 1,
                 image: 'https://placehold.co/400x400/821729/FFFFFF?text=ALPHAROMEO',
                 bio: '',
-                stats: { racesStarted: 60, wins: 10, poles: 6, dnfs: 5 } // Updated from image
+                stats: { racesStarted: 60, wins: 10, poles: 6, dnfs: 5 },
+                flagCountryCode: 'NL'
             },
             'ANTONIO BRANCATI': {
-                name: 'ANTONIO BRANCATI', team: 'Pirelli Ferrari', carNumber: 2, nationality: 'Italian',
-                podiums: 13, championships: 0, // Updated from image
+                name: 'ANTONIO BRANCATI', team: 'Pirelli Ferrari', carNumber: 2, country: 'ITALY',
+                podiums: 13, championships: 0,
                 image: 'https://placehold.co/400x400/821729/FFFFFF?text=ANTONIO+BRANCATI',
                 bio: '',
-                stats: { racesStarted: 50, wins: 4, poles: 5, dnfs: 12 } // Updated from image
+                stats: { racesStarted: 50, wins: 4, poles: 5, dnfs: 12 },
+                flagCountryCode: 'IT'
             },
             'JSTN NL': {
-                name: 'JSTN NL', team: 'Pirelli Ferrari', carNumber: 3, nationality: 'Dutch',
-                podiums: 18, championships: 0, // Updated from image
+                name: 'JSTN NL', team: 'Pirelli Ferrari', carNumber: 3, country: 'NETHERLANDS',
+                podiums: 18, championships: 0,
                 image: 'https://placehold.co/400x400/821729/FFFFFF?text=JSTN+NL',
                 bio: '',
-                stats: { racesStarted: 47, wins: 5, poles: 5, dnfs: 14 } // Updated from image
+                stats: { racesStarted: 47, wins: 5, poles: 5, dnfs: 14 },
+                flagCountryCode: 'NL'
             },
             'MANUEL ROTUNDO': {
-                name: 'MANUEL ROTUNDO', team: 'Pirelli Ferrari', carNumber: 4, nationality: 'Italian',
-                podiums: 2, championships: 0,
-                image: 'https://placehold.co/400x400/821729/FFFFFF?text=MANUEL+ROTUNDO',
+                name: 'MANUEL ROTUNDO', team: 'Pirelli Ferrari', carNumber: 'TP', country: 'ITALY',
+                podiums: 0, championships: 0,
+                image: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/ferrari/2025ferraricarright.webp', // Ferrari car image
                 bio: '',
-                stats: { racesStarted: 23, wins: 0, poles: 0, dnfs: 2 }
+                stats: { racesStarted: 0, wins: 0, poles: 0, dnfs: 0 },
+                tier: 'TEAM PRINCIPAL',
+                flagCountryCode: 'IT',
+                isTeamPrincipal: true
             },
             'TSAR': {
-                name: 'TSAR', team: 'GUINNESS MERCEDES', carNumber: 5, nationality: 'Hungarian',
-                podiums: 1, championships: 0, // Updated from image
+                name: 'TSAR', team: 'GUINNESS MERCEDES', carNumber: 5, country: 'HUNGARY',
+                podiums: 1, championships: 0,
                 image: 'https://placehold.co/400x400/C8CCCE/000000?text=TSAR',
                 bio: '',
-                stats: { racesStarted: 12, wins: 1, poles: 0, dnfs: 5 } // Updated from image
+                stats: { racesStarted: 12, wins: 1, poles: 0, dnfs: 5 },
+                flagCountryCode: 'HU'
             },
             'JOKER': {
-                name: 'JOKER', team: 'GUINNESS MERCEDES', carNumber: 6, nationality: 'Romanian',
+                name: 'JOKER', team: 'GUINNESS MERCEDES', carNumber: 6, country: 'ROMANIA',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/C8CCCE/000000?text=JOKER',
                 bio: '',
-                stats: { racesStarted: 1, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 1, wins: 0, poles: 0, dnfs: 0 },
+                flagCountryCode: 'RO'
             },
             'ASPEC': {
-                name: 'ASPEC', team: 'GUINNESS MERCEDES', carNumber: 7, nationality: 'British',
+                name: 'ASPEC', team: 'GUINNESS MERCEDES', carNumber: 7, country: 'UNITED KINGDOM',
                 podiums: 1, championships: 0,
                 image: 'https://placehold.co/400x400/C8CCCE/000000?text=ASPEC',
                 bio: '',
-                stats: { racesStarted: 7, wins: 1, poles: 0, dnfs: 1 }
+                stats: { racesStarted: 7, wins: 1, poles: 0, dnfs: 1 },
+                flagCountryCode: 'GB'
             },
             'BYRONAS': {
-                name: 'BYRONAS', team: 'GUINNESS MERCEDES', carNumber: 8, nationality: 'Greek',
+                name: 'BYRONAS', team: 'GUINNESS MERCEDES', carNumber: 8, country: 'GREECE',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/C8CCCE/000000?text=BYRONAS',
                 bio: '',
-                stats: { racesStarted: 4, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 4, wins: 0, poles: 0, dnfs: 0 },
+                flagCountryCode: 'GR'
+            },
+            'CHIZZ': {
+                name: 'CHIZZ', team: 'GUINNESS MERCEDES', carNumber: 'TP', country: 'UNITED KINGDOM',
+                podiums: 0, championships: 0,
+                image: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mercedes/2025mercedescarright.webp', // Mercedes car image
+                bio: '',
+                stats: { racesStarted: 0, wins: 0, poles: 0, dnfs: 0 },
+                tier: 'TEAM PRINCIPAL',
+                flagCountryCode: 'GB',
+                isTeamPrincipal: true
             },
             'MAXFAN': {
-                name: 'MAXFAN', team: 'NEWPORT ROLEX RED BULL RACING', carNumber: 9, nationality: 'Polish',
-                podiums: 8, championships: 0, // Updated from image
+                name: 'MAXFAN', team: 'NEWPORT ROLEX RED BULL RACING', carNumber: 9, country: 'POLAND',
+                podiums: 8, championships: 0,
                 image: 'https://placehold.co/400x400/003773/FFFFFF?text=MAXFAN',
                 bio: '',
-                stats: { racesStarted: 74, wins: 6, poles: 5, dnfs: 15 } // Updated from image
+                stats: { racesStarted: 74, wins: 6, poles: 5, dnfs: 15 },
+                flagCountryCode: 'PL'
             },
             'TONY SEROKA': {
-                name: 'TONY SEROKA', team: 'NEWPORT ROLEX RED BULL RACING', carNumber: 10, nationality: 'Polish',
+                name: 'TONY SEROKA', team: 'NEWPORT ROLEX RED BULL RACING', carNumber: 10, country: 'POLAND',
                 podiums: 2, championships: 0,
                 image: 'https://placehold.co/400x400/003773/FFFFFF?text=TONY+SEROKA',
                 bio: '',
-                stats: { racesStarted: 15, wins: 1, poles: 2, dnfs: 3 }
+                stats: { racesStarted: 15, wins: 1, poles: 2, dnfs: 3 },
+                flagCountryCode: 'PL'
             },
             'JARVIS COID': {
-                name: 'JARVIS COID', team: 'NEWPORT ROLEX RED BULL RACING', carNumber: 11, nationality: 'British',
+                name: 'JARVIS COID', team: 'NEWPORT ROLEX RED BULL RACING', carNumber: 11, country: 'UNITED KINGDOM',
                 podiums: 2, championships: 0,
                 image: 'https://placehold.co/400x400/003773/FFFFFF?text=JARVIS+COID',
                 bio: '',
-                stats: { racesStarted: 6, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 6, wins: 0, poles: 0, dnfs: 0 },
+                flagCountryCode: 'GB'
             },
             'TEETOE': {
-                name: 'TEETOE', team: 'NEWPORT ROLEX RED BULL RACING', carNumber: 12, nationality: 'Dutch',
+                name: 'TEETOE', team: 'NEWPORT ROLEX RED BULL RACING', carNumber: 12, country: 'NETHERLANDS',
                 podiums: 6, championships: 0,
                 image: 'https://placehold.co/400x400/003773/FFFFFF?text=TEETOE',
                 bio: '',
-                stats: { racesStarted: 37, wins: 1, poles: 1, dnfs: 2 }
+                stats: { racesStarted: 37, wins: 1, poles: 1, dnfs: 2 },
+                flagCountryCode: 'NL'
+            },
+            'MAURITS': {
+                name: 'MAURITS', team: 'NEWPORT ROLEX RED BULL RACING', carNumber: 'TP', country: 'NETHERLANDS',
+                podiums: 0, championships: 0,
+                image: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/redbullracing/2025redbullracingcarright.webp', // Red Bull car image
+                bio: '',
+                stats: { racesStarted: 0, wins: 0, poles: 0, dnfs: 0 },
+                tier: 'TEAM PRINCIPAL',
+                flagCountryCode: 'NL',
+                isTeamPrincipal: true
             },
             'FOCUSER': {
-                name: 'FOCUSER', team: 'HOT WHEELS MCLAREN', carNumber: 13, nationality: 'Spanish',
-                podiums: 18, championships: 1, // Updated from image
+                name: 'FOCUSER', team: 'HOT WHEELS MCLAREN', carNumber: 13, country: 'SPAIN',
+                podiums: 18, championships: 1,
                 image: 'https://placehold.co/400x400/F47600/000000?text=FOCUSER',
                 bio: '',
-                stats: { racesStarted: 68, wins: 2, poles: 5, dnfs: 1 } // Updated from image
+                stats: { racesStarted: 68, wins: 2, poles: 5, dnfs: 1 },
+                flagCountryCode: 'ES'
             },
             'ANTON CHEBOTAROV': {
-                name: 'ANTON CHEBOTAROV', team: 'HOT WHEELS MCLAREN', carNumber: 14, nationality: 'Ukrainian',
-                podiums: 17, championships: 0, // Updated from image
+                name: 'ANTON CHEBOTAROV', team: 'HOT WHEELS MCLAREN', carNumber: 14, country: 'UKRAINE',
+                podiums: 17, championships: 0,
                 image: 'https://placehold.co/400x400/F47600/000000?text=ANTON+CHEBOTAROV',
                 bio: '',
-                stats: { racesStarted: 61, wins: 7, poles: 6, dnfs: 6 } // Updated from image
+                stats: { racesStarted: 61, wins: 7, poles: 6, dnfs: 6 },
+                flagCountryCode: 'UA'
             },
             'SANDRO': {
-                name: 'SANDRO', team: 'HOT WHEELS MCLAREN', carNumber: 15, nationality: 'Dutch',
+                name: 'SANDRO', team: 'HOT WHEELS MCLAREN', carNumber: 15, country: 'NETHERLANDS',
                 podiums: 5, championships: 0,
                 image: 'https://placehold.co/400x400/F47600/000000?text=SANDRO',
                 bio: '',
-                stats: { racesStarted: 15, wins: 8, poles: 12, dnfs: 0 }
+                stats: { racesStarted: 15, wins: 8, poles: 12, dnfs: 0 },
+                flagCountryCode: 'NL'
             },
             'JAY AZIER': {
-                name: 'JAY AZIER', team: 'HOT WHEELS MCLAREN', carNumber: 16, nationality: 'Dutch',
+                name: 'JAY AZIER', team: 'HOT WHEELS MCLAREN', carNumber: 16, country: 'NETHERLANDS',
                 podiums: 11, championships: 1,
                 image: 'https://placehold.co/400x400/F47600/000000?text=JAY+AZIER',
                 bio: '',
-                stats: { racesStarted: 21, wins: 4, poles: 1, dnfs: 4 }
+                stats: { racesStarted: 21, wins: 4, poles: 1, dnfs: 4 },
+                flagCountryCode: 'NL'
+            },
+            'CAMPINA': {
+                name: 'CAMPINA', team: 'HOT WHEELS MCLAREN', carNumber: 'TP', country: 'UNITED KINGDOM',
+                podiums: 0, championships: 0,
+                image: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/mclaren/2025mclarencarright.webp', // McLaren car image
+                bio: '',
+                stats: { racesStarted: 0, wins: 0, poles: 0, dnfs: 0 },
+                tier: 'TEAM PRINCIPAL',
+                flagCountryCode: 'GB',
+                isTeamPrincipal: true
             },
             'STRA': {
-                name: 'STRA', team: 'Lockheed Martin Aston Martin', carNumber: 17, nationality: 'Serbian',
-                podiums: 3, championships: 0, // Updated from image
+                name: 'STRA', team: 'Lockheed Martin Aston Martin', carNumber: 17, country: 'SERBIA',
+                podiums: 3, championships: 0,
                 image: 'https://placehold.co/400x400/037A68/FFFFFF?text=STRA',
                 bio: '',
-                stats: { racesStarted: 51, wins: 0, poles: 0, dnfs: 14 } // Updated from image
+                stats: { racesStarted: 51, wins: 0, poles: 0, dnfs: 14 },
+                flagCountryCode: 'RS'
             },
             'LUCA STEVENS': {
-                name: 'LUCA STEVENS', team: 'Lockheed Martin Aston Martin', carNumber: 18, nationality: 'British',
-                podiums: 21, championships: 0, // Updated from image
-                image: 'https://https://placehold.co/400x400/037A68/FFFFFF?text=LUCA+STEVENS',
+                name: 'LUCA STEVENS', team: 'Lockheed Martin Aston Martin', carNumber: 18, country: 'UNITED KINGDOM',
+                podiums: 21, championships: 0,
+                image: 'https://placehold.co/400x400/037A68/FFFFFF?text=LUCA+STEVENS',
                 bio: '',
-                stats: { racesStarted: 76, wins: 4, poles: 2, dnfs: 6 } // Updated from image
+                stats: { racesStarted: 76, wins: 4, poles: 2, dnfs: 6 },
+                flagCountryCode: 'GB'
             },
             'SHARK': {
-                name: 'SHARK', team: 'Lockheed Martin Aston Martin', carNumber: 19, nationality: 'European',
+                name: 'SHARK', team: 'Lockheed Martin Aston Martin', carNumber: 19, country: 'PAKISTAN',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/037A68/FFFFFF?text=SHARK',
                 bio: '',
-                stats: { racesStarted: 5, wins: 0, poles: 0, dnfs: 1 }
+                stats: { racesStarted: 5, wins: 0, poles: 0, dnfs: 1 },
+                flagCountryCode: 'PK'
             },
             'EDGE': {
-                name: 'EDGE', team: 'Lockheed Martin Aston Martin', carNumber: 20, nationality: 'British',
+                name: 'EDGE', team: 'Lockheed Martin Aston Martin', carNumber: 20, country: 'UNITED KINGDOM',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/037A68/FFFFFF?text=EDGE',
                 bio: '',
-                stats: { racesStarted: 4, wins: 0, poles: 0, dnfs: 1 }
+                stats: { racesStarted: 4, wins: 0, poles: 0, dnfs: 1 },
+                flagCountryCode: 'GB'
+            },
+            'AKIEUSH': {
+                name: 'AKIEUSH', team: 'Lockheed Martin Aston Martin', carNumber: 'TP', country: 'POLAND', // Updated to full country name
+                podiums: 0, championships: 0, // Assuming these are driver stats, not principal stats
+                image: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/astonmartin/2025astonmartincarright.webp', // Aston Martin car image
+                bio: '',
+                stats: { racesStarted: 3, wins: 0, poles: 0, dnfs: 0 }, // Assuming these are driver stats, not principal stats
+                tier: 'TEAM PRINCIPAL', // Set as principal tier
+                flagCountryCode: 'PL',
+                isTeamPrincipal: true // Mark as principal
             },
             'MAX HOUSLEY': {
-                name: 'MAX HOUSLEY', team: 'Tinder Alpine F1 Team', carNumber: 21, nationality: 'British',
-                podiums: 7, championships: 0, // Updated from image
+                name: 'MAX HOUSLEY', team: 'Tinder Alpine F1 Team', carNumber: 21, country: 'UNITED KINGDOM',
+                podiums: 7, championships: 0,
                 image: 'https://placehold.co/400x400/F282B4/000000?text=MAX+HOUSLEY',
                 bio: '',
-                stats: { racesStarted: 21, wins: 2, poles: 0, dnfs: 2 } // Updated from image
+                stats: { racesStarted: 21, wins: 2, poles: 0, dnfs: 2 },
+                flagCountryCode: 'GB'
             },
             'ALFIE WHITE': {
-                name: 'ALFIE WHITE', team: 'Tinder Alpine F1 Team', carNumber: 22, nationality: 'British',
+                name: 'ALFIE WHITE', team: 'Tinder Alpine F1 Team', carNumber: 22, country: 'UNITED KINGDOM',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/F282B4/000000?text=ALFIE+WHITE',
                 bio: '',
-                stats: { racesStarted: 3, wins: 0, poles: 0, dnfs: 1 }
+                stats: { racesStarted: 3, wins: 0, poles: 0, dnfs: 1 },
+                flagCountryCode: 'GB'
             },
             'GIULIO': {
-                name: 'GIULIO', team: 'Tinder Alpine F1 Team', carNumber: 23, nationality: 'European',
+                name: 'GIULIO', team: 'Tinder Alpine F1 Team', carNumber: 23, country: 'ITALY',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/F282B4/000000?text=GIULIO',
                 bio: '',
-                stats: { racesStarted: 2, wins: 0, poles: 0, dnfs: 1 }
+                stats: { racesStarted: 2, wins: 0, poles: 0, dnfs: 1 },
+                flagCountryCode: 'IT'
             },
             'OLIVAW': {
-                name: 'OLIVAW', team: 'Tinder Alpine F1 Team', carNumber: 24, nationality: 'British',
+                name: 'OLIVAW', team: 'Tinder Alpine F1 Team', carNumber: 24, country: 'UNITED KINGDOM',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/F282B4/000000?text=OLIVAW',
                 bio: '',
-                stats: { racesStarted: 1, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 1, wins: 0, poles: 0, dnfs: 0 },
+                flagCountryCode: 'GB'
+            },
+            'PHOENIX': {
+                name: 'PHOENIX', team: 'Tinder Alpine F1 Team', carNumber: 'TP', country: 'UNITED STATES',
+                podiums: 0, championships: 0,
+                image: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/alpine/2025alpinecarright.webp', // Alpine car image
+                bio: '',
+                stats: { racesStarted: 0, wins: 0, poles: 0, dnfs: 0 },
+                tier: 'TEAM PRINCIPAL',
+                flagCountryCode: 'US',
+                isTeamPrincipal: true
             },
             'COUNTERFEIT': {
-                name: 'COUNTERFEIT', team: 'John Deere Williams Racing', carNumber: 25, nationality: 'British',
-                podiums: 6, championships: 0, // Updated from image
+                name: 'COUNTERFEIT', team: 'John Deere Williams Racing', carNumber: 25, country: 'UNITED KINGDOM',
+                podiums: 6, championships: 0,
                 image: 'https://placehold.co/400x400/00A0DE/FFFFFF?text=COUNTERFEIT',
                 bio: '',
-                stats: { racesStarted: 67, wins: 0, poles: 2, dnfs: 11 } // Updated from image
+                stats: { racesStarted: 67, wins: 0, poles: 2, dnfs: 11 },
+                flagCountryCode: 'GB'
             },
             'LOLER': {
-                name: 'LOLER', team: 'John Deere Williams Racing', carNumber: 26, nationality: 'Polish',
+                name: 'LOLER', team: 'John Deere Williams Racing', carNumber: 26, country: 'POLAND',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/00A0DE/FFFFFF?text=LOLER',
                 bio: '',
-                stats: { racesStarted: 5, wins: 0, poles: 0, dnfs: 1 }
+                stats: { racesStarted: 5, wins: 0, poles: 0, dnfs: 1 },
+                flagCountryCode: 'PL'
             },
             'MARK': {
-                name: 'MARK', team: 'John Deere Williams Racing', carNumber: 27, nationality: 'American',
+                name: 'MARK', team: 'John Deere Williams Racing', carNumber: 27, country: 'UNITED STATES',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/00A0DE/FFFFFF?text=MARK',
                 bio: '',
-                stats: { racesStarted: 4, wins: 0, poles: 0, dnfs: 1 }
+                stats: { racesStarted: 4, wins: 0, poles: 0, dnfs: 1 },
+                flagCountryCode: 'US'
             },
             'LEON': {
-                name: 'LEON', team: 'John Deere Williams Racing', carNumber: 28, nationality: 'Ukrainian',
+                name: 'LEON', team: 'John Deere Williams Racing', carNumber: 28, country: 'UKRAINE',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/00A0DE/FFFFFF?text=LEON',
                 bio: '',
-                stats: { racesStarted: 5, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 5, wins: 0, poles: 0, dnfs: 0 },
+                flagCountryCode: 'UA'
+            },
+            'HENRY STRADLING': {
+                name: 'HENRY STRADLING', team: 'John Deere Williams Racing', carNumber: 'TP', country: 'UNITED STATES',
+                podiums: 2, championships: 0,
+                image: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/williams/2025williamscarright.webp', // Williams car image
+                bio: '',
+                stats: { racesStarted: 4, wins: 1, poles: 0, dnfs: 0 },
+                tier: 'TEAM PRINCIPAL',
+                flagCountryCode: 'US',
+                isTeamPrincipal: true
             },
             'MORA': {
-                name: 'MORA', team: 'RACING BULLS PEUGEOT SPORT', carNumber: 29, nationality: 'Spanish',
-                podiums: 10, championships: 0, // Updated from image
+                name: 'MORA', team: 'RACING BULLS PEUGEOT SPORT', carNumber: 29, country: 'SPAIN',
+                podiums: 10, championships: 0,
                 image: 'https://placehold.co/400x400/bbda0c/000000?text=MORA',
                 bio: '',
-                stats: { racesStarted: 34, wins: 5, poles: 5, dnfs: 7 } // Updated from image
+                stats: { racesStarted: 34, wins: 5, poles: 5, dnfs: 7 },
+                flagCountryCode: 'ES'
             },
             'KRAB': {
-                name: 'KRAB', team: 'RACING BULLS PEUGEOT SPORT', carNumber: 30, nationality: 'Hungarian',
+                name: 'KRAB', team: 'RACING BULLS PEUGEOT SPORT', carNumber: 30, country: 'HUNGARY',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/bbda0c/000000?text=KRAB',
                 bio: '',
-                stats: { racesStarted: 3, wins: 0, poles: 0, dnfs: 1 }
+                stats: { racesStarted: 3, wins: 0, poles: 0, dnfs: 1 },
+                flagCountryCode: 'HU'
             },
             'DANIELS': {
-                name: 'DANIELS', team: 'RACING BULLS PEUGEOT SPORT', carNumber: 31, nationality: 'Spanish',
+                name: 'DANIELS', team: 'RACING BULLS PEUGEOT SPORT', carNumber: 31, country: 'SPAIN',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/bbda0c/000000?text=DANIELS',
                 bio: '',
-                stats: { racesStarted: 2, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 2, wins: 0, poles: 0, dnfs: 0 },
+                flagCountryCode: 'ES'
             },
-            'ERIC': {
-                name: 'ERIC', team: 'RACING BULLS PEUGEOT SPORT', carNumber: 32, nationality: 'German',
-                podiums: 0, championships: 0,
+            'BABY YODA': {
+                name: 'ERIC', team: 'RACING BULLS PEUGEOT SPORT', carNumber: 32, country: 'GERMANY',
+                podiums: 1, championships: 0,
                 image: 'https://placehold.co/400x400/bbda0c/000000?text=ERIC',
                 bio: '',
-                stats: { racesStarted: 1, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 1, wins: 0, poles: 0, dnfs: 0 },
+                flagCountryCode: 'GB'
+            },
+            'JAUME GENARO': {
+                name: 'JAUME GENARO', team: 'RACING BULLS PEUGEOT SPORT', carNumber: 'TP', country: 'NETHERLANDS',
+                podiums: 0, championships: 0,
+                image: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/racingbulls/2025racingbullscarright.webp', // Racing Bulls car image
+                bio: '',
+                stats: { racesStarted: 1, wins: 0, poles: 0, dnfs: 0 },
+                tier: 'TEAM PRINCIPAL',
+                flagCountryCode: 'NL',
+                isTeamPrincipal: true
             },
             'GENERIC LEON': {
-                name: 'GENERIC LEON', team: 'TWITCH SAUBER', carNumber: 33, nationality: 'Austrian',
+                name: 'GENERIC LEON', team: 'TWITCH SAUBER', carNumber: 33, country: 'AUSTRIA',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/9146ff/000000?text=GENERIC+LEON',
                 bio: '',
-                stats: { racesStarted: 1, wins: 0, poles: 0, dnfs: 1 }
+                stats: { racesStarted: 1, wins: 0, poles: 0, dnfs: 1 },
+                flagCountryCode: 'AT'
             },
             'TOBOB': {
-                name: 'TOBOB', team: 'TWITCH SAUBER', carNumber: 34, nationality: 'German',
+                name: 'TOBOB', team: 'TWITCH SAUBER', carNumber: 34, country: 'GERMANY',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/9146ff/000000?text=TOBOB',
                 bio: '',
-                stats: { racesStarted: 3, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 3, wins: 0, poles: 0, dnfs: 0 },
+                flagCountryCode: 'DE'
             },
             'LIL SLUGGER': {
-                name: 'LIL SLUGGER', team: 'TWITCH SAUBER', carNumber: 35, nationality: 'European',
+                name: 'LIL SLUGGER', team: 'TWITCH SAUBER', carNumber: 35, country: 'EUROPE',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/9146ff/000000?text=LIL+SLUGGER',
                 bio: '',
-                stats: { racesStarted: 0, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 0, wins: 0, poles: 0, dnfs: 0 },
+                flagCountryCode: 'EU'
             },
             'THEROMANIANDEVIL': {
-                name: 'THEROMANIANDEVIL', team: 'TWITCH SAUBER', carNumber: 36, nationality: 'Romanian',
+                name: 'THEROMANIANDEVIL', team: 'TWITCH SAUBER', carNumber: 36, country: 'ROMANIA',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/9146ff/000000?text=THEROMANIANDEVIL',
                 bio: '',
-                stats: { racesStarted: 1, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 1, wins: 0, poles: 0, dnfs: 0 },
+                flagCountryCode: 'RO'
+            },
+            'DOPICHU': {
+                name: 'DOPICHU', team: 'TWITCH SAUBER', carNumber: 'TP', country: 'FINLAND',
+                podiums: 0, championships: 0,
+                image: 'https://media.formula1.com/image/upload/c_lfill,h_224/q_auto/d_common:f1:2025:fallback:car:2025fallbackcarright.webp/v1740000000/common/f1/2025/kicksauber/2025kicksaubercarright.webp', // Sauber car image
+                bio: '',
+                stats: { racesStarted: 0, wins: 0, poles: 0, dnfs: 0 },
+                tier: 'TEAM PRINCIPAL',
+                flagCountryCode: 'FI',
+                isTeamPrincipal: true
             },
             'NOJUS GEDVILAS': {
-                name: 'NOJUS GEDVILAS', team: 'HAAS ONLYFANS RACING', carNumber: 37, nationality: 'Lithuanian',
+                name: 'NOJUS GEDVILAS', team: 'HAAS ONLYFANS RACING', carNumber: 37, country: 'LITHUANIA',
                 podiums: 1, championships: 0,
                 image: 'https://placehold.co/400x400/00AFF0/FFFFFF?text=NOJUS+GEDVILAS',
                 bio: '',
-                stats: { racesStarted: 18, wins: 0, poles: 0, dnfs: 5 }
+                stats: { racesStarted: 18, wins: 0, poles: 0, dnfs: 5 },
+                flagCountryCode: 'LT'
             },
             'EMIN': {
-                name: 'EMIN', team: 'HAAS ONLYFANS RACING', carNumber: 38, nationality: 'European',
+                name: 'EMIN', team: 'HAAS ONLYFANS RACING', carNumber: 38, country: 'EUROPE',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/00AFF0/FFFFFF?text=EMIN',
                 bio: '',
-                stats: { racesStarted: 0, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 0, wins: 0, poles: 0, dnfs: 0 },
+                flagCountryCode: 'EU'
             },
             'MAXLINXC': {
-                name: 'MAXLINXC', team: 'HAAS ONLYFANS RACING', carNumber: 39, nationality: 'British',
+                name: 'MAXLINXC', team: 'HAAS ONLYFANS RACING', carNumber: 39, country: 'UNITED KINGDOM',
                 podiums: 2, championships: 0,
                 image: 'https://placehold.co/400x400/00AFF0/FFFFFF?text=MAXLINXC',
                 bio: '',
-                stats: { racesStarted: 3, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 3, wins: 0, poles: 0, dnfs: 0 },
+                tier: 'TEAM PRINCIPAL', // Set as principal tier
+                flagCountryCode: 'GB',
+                isTeamPrincipal: true // Mark as principal
             },
             'DANOTTOK': {
-                name: 'DANOTTOK', team: 'HAAS ONLYFANS RACING', carNumber: 40, nationality: 'Finnish',
+                name: 'DANOTTOK', team: 'HAAS ONLYFANS RACING', carNumber: 40, country: 'FINLAND',
                 podiums: 0, championships: 0,
                 image: 'https://placehold.co/400x400/00AFF0/FFFFFF?text=DANOTTOK',
                 bio: '',
-                stats: { racesStarted: 3, wins: 0, poles: 0, dnfs: 0 }
+                stats: { racesStarted: 3, wins: 0, poles: 0, dnfs: 0 },
+                flagCountryCode: 'FI'
             }
         };
 
-        // Helper function to initialize allDriversData with tiers and full country names
-        // This function will modify the global allDriversData object
+
+        // Helper function to initialize allDriversData with tiers and flag country codes
         function initializeAllDriversDataWithTiersAndFlags() {
-            const nationalityMap = {
-                'Dutch': 'NETHERLANDS',
-                'Italian': 'ITALY',
-                'Hungarian': 'HUNGARY',
-                'Romanian': 'ROMANIA',
-                'British': 'UNITED KINGDOM',
-                'Greek': 'GREECE',
-                'Polish': 'POLAND',
-                'Spanish': 'SPAIN',
-                'Ukrainian': 'UKRAINE',
-                'Serbian': 'SERBIA',
-                'European': 'EUROPE',
-                'Austrian': 'AUSTRIA',
-                'German': 'GERMANY',
-                'Lithuanian': 'LITHUANIA',
-                'Finnish': 'FINLAND',
-                'American': 'UNITED STATES'
-            };
-
-            // First, update nationalities in existing allDriversData
-            for (const key in allDriversData) {
-                if (nationalityMap[allDriversData[key].nationality]) {
-                    allDriversData[key].nationality = nationalityMap[allDriversData[key].nationality];
-                }
-            }
-
-            // Then, assign tiers and add flagCountryCode based on teamData
+            // This function now primarily assigns tiers and ensures flagCountryCode consistency.
+            // Full country names are now directly in allDriversData.
             teamData.forEach(team => {
                 team.drivers.forEach((driver, index) => {
                     const driverNameKey = driver.name.toUpperCase();
                     if (allDriversData[driverNameKey]) {
                         allDriversData[driverNameKey].tier = (index < 2) ? 'TIER 1' : 'TIER 2';
+                        // Ensure flagCountryCode is consistent with teamData
                         allDriversData[driverNameKey].flagCountryCode = driver.flagCountryCode;
                     }
                 });
+            });
+
+            // Explicitly set Shark's country and flagCountryCode for consistency
+            if (allDriversData['SHARK']) {
+                allDriversData['SHARK'].country = 'PAKISTAN';
+                allDriversData['SHARK'].flagCountryCode = 'PK';
+            }
+        }
+
+        // This function is now simplified as most principal data is in allDriversData
+        function addTeamPrincipalsToAllDriversData() {
+            teamData.forEach(team => {
+                if (team.teamPrincipal) {
+                    const principalNameKey = team.teamPrincipal.toUpperCase();
+                    if (allDriversData[principalNameKey]) {
+                        // If principal exists in allDriversData (either as driver or pre-defined principal)
+                        allDriversData[principalNameKey].isTeamPrincipal = true;
+                        allDriversData[principalNameKey].teamPrincipalOf = team.name;
+                        allDriversData[principalNameKey].tier = 'TEAM PRINCIPAL'; // Ensure tier is set
+                        allDriversData[principalNameKey].flagCountryCode = team.teamPrincipalFlagCode; // Ensure flag is set
+                        // Image and country are now expected to be defined directly in allDriversData
+                    }
+                    // No else block: if a principal is NOT in allDriversData, they won't be added dynamically here.
+                    // They MUST be explicitly added to allDriversData if they are a principal.
+                }
             });
         }
 
@@ -765,6 +928,9 @@
                 });
                 renderTeams(filteredTeams, searchTerm);
             });
+            // Set the search input value back if there was a search term
+            document.getElementById('driver-search').value = currentSearchTerm;
+
 
             // Show the teams banner
             document.getElementById('teams-banner').style.display = 'flex';
@@ -803,7 +969,6 @@
                 });
                 driversHtml += `</div>`; 
 
-
                 const teamLogoHtml = `<img src="${getTeamLogoSrc(team.name)}" alt="${team.name} Logo" class="team-logo ml-2" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=Logo';">`;
 
                 let teamPrincipalFlagHtml = '';
@@ -813,9 +978,10 @@
 
                 let teamPrincipalContent = '';
                 if (team.teamPrincipal) {
-                    const isAkieush = team.teamPrincipal.toUpperCase() === 'AKIEUSH';
-                    const principalNameHtml = isAkieush
-                        ? `<a href="chance.html" class="font-medium text-base ${textColor} driver-name-link">${highlightText(team.teamPrincipal.toUpperCase(), currentSearchTerm)}</a>`
+                    // Check if the team principal is also a driver to determine if they have a profile
+                    const principalHasProfile = allDriversData[team.teamPrincipal.toUpperCase()];
+                    const principalNameHtml = principalHasProfile
+                        ? `<span class="font-medium text-base ${textColor} driver-name-link" onclick="showDriverProfile('${team.teamPrincipal}')">${highlightText(team.teamPrincipal.toUpperCase(), currentSearchTerm)}</span>`
                         : `<span class="font-medium text-base ${textColor}">${highlightText(team.teamPrincipal.toUpperCase(), currentSearchTerm)}</span>`;
 
                     teamPrincipalContent = `
@@ -863,20 +1029,23 @@
                 name: driverName,
                 team: 'Unknown Team',
                 carNumber: 'N/A',
-                nationality: 'UNKNOWN',
+                country: 'UNKNOWN', // Default to unknown country name
                 podiums: 0,
                 championships: 0,
                 image: `https://placehold.co/400x400/CCCCCC/000000?text=${driverName.replace(/\s/g, '+')}`,
                 bio: '',
                 stats: { racesStarted: 0, wins: 0, poles: 0, dnfs: 0 },
                 tier: 'N/A',
-                flagCountryCode: 'XX'
+                flagCountryCode: 'XX', // Default to unknown country code
+                isTeamPrincipal: false
             };
 
             // Find the corresponding team data to get team-specific colors and car image
             const driverTeam = teamData.find(team => team.name === driver.team);
             const profileBgColor = driverTeam ? driverTeam.bgColor : '#FFFFFF'; 
             const profileBorderColor = driverTeam ? driverTeam.borderColor : '#A0A0A0'; 
+            
+            // For both drivers and team principals, use the team's car image
             const profileCarImage = driverTeam ? driverTeam.carImageUrl : `https://placehold.co/400x400/CCCCCC/000000?text=CAR+IMAGE`; 
             const profileTextColor = driverTeam ? driverTeam.textColor : 'text-gray-900';
 
@@ -890,7 +1059,7 @@
             const podiumPercentage = driver.podiums > 0 && driver.stats.racesStarted > 0 ? ((driver.podiums / driver.stats.racesStarted) * 100).toFixed(1) : '0.0';
 
             // Determine tier tag background color (not directly used here, but kept for consistency if needed elsewhere)
-            const tierBgColor = driver.tier === 'TIER 1' ? '#e64747' : '#4dbad8';
+            const tierBgColor = driver.tier === 'TIER 1' ? '#e64747' : (driver.tier === 'TIER 2' ? '#4dbad8' : '#6b7280'); // Grey for TP
 
             // Generate championship icon HTML conditionally
             const championshipIconHtml = driver.championships > 0 ? 
@@ -926,9 +1095,9 @@
                     <div class="w-full md:w-1/3 flex justify-center items-center p-4">
                         <img
                             src="${profileCarImage}"
-                            alt="${driver.name}'s TEAM CAR"
+                            alt="${driver.name}'s ${driver.isTeamPrincipal ? 'Team Principal' : 'Driver'} Image"
                             class="max-w-full h-auto object-contain"
-                            onerror="this.onerror=null;this.src='https://placehold.co/400x400/CCCCCC/000000?text=CAR+IMAGE+NOT+FOUND';"
+                            onerror="this.onerror=null;this.src='https://placehold.co/400x400/CCCCCC/000000?text=IMAGE+NOT+FOUND';"
                         />
                     </div>
 
@@ -940,11 +1109,11 @@
                         <p class="text-xl font-semibold mb-2 flex items-center justify-center md:justify-start">
                             <img src="${teamLogoForProfile}" alt="${driver.team} LOGO" class="team-logo mr-2" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/000000?text=LOGO';">
                             <span class="${profileTextColor}">${driver.team.toUpperCase()}</span>
-                            <!-- Tier tag in profile is still individual, as per previous request -->
-                            <span class="ml-4 px-3 py-1 rounded-full text-sm font-semibold text-white" style="background-color: ${tierBgColor};">${driver.tier}</span>
+                            <!-- Tier tag in profile: only show for drivers, not team principals -->
+                            ${!driver.isTeamPrincipal ? `<span class="ml-4 px-3 py-1 rounded-full text-sm font-semibold text-white" style="background-color: ${tierBgColor};">${driver.tier}</span>` : ''}
                         </p>
                         <p class="text-lg mb-4 flex items-center justify-center md:justify-start">
-                            ${driverFlagHtml} <span class="font-medium ml-2">${driver.nationality}</span>
+                            ${driverFlagHtml} <span class="font-medium ml-2">${driver.country}</span>
                         </p>
 
                         ${driver.bio ? `<div class="mb-6">
@@ -1019,8 +1188,10 @@
 
 
         window.onload = function() {
-            // Initialize allDriversData with tiers and full country names before rendering anything
+            // Initialize allDriversData with tiers and flag country codes
             initializeAllDriversDataWithTiersAndFlags();
+            // Add team principals to allDriversData
+            addTeamPrincipalsToAllDriversData();
             renderTeams(teamData);
 
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -1060,7 +1231,7 @@
 
             function parseRaceDate(dateStr) {
                 const monthStr = dateStr.split(' ')[0];
-                let dayStr = dateStr.split(' ')[1].split('-')[0];
+                let dayStr = dateStr.SPlit(' ')[1].split('-')[0];
                 if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
                     dayStr = dayStr.substring(0, dayStr.length - 2);
                 }
