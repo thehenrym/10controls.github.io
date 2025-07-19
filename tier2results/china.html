@@ -396,8 +396,8 @@
                     "Visa Cash App Racing Bulls": "RACING BULLS PEUGEOT SPORT" // Mapped based on existing Racing Bulls entry
                 };
                 
-                // MotoGP points system
-                const motogpPoints = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]; // Updated to reflect common F1 points for top 10
+                // MotoGP points system: 25, 20, 16, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 for top 15 positions.
+                const motogpPoints = [25, 20, 16, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
                 // --- Updated Race Data from image {DED252D1-51A8-481C-B089-36A1E1099837}.jpg ---
                 let raceResults = [
@@ -420,7 +420,8 @@
                     ...r,
                     driver: r.driver.toUpperCase(),
                     team: (teamNameMapping[r.team] || r.team).toUpperCase(),
-                    pts: motogpPoints[index] || 0 // Apply points based on position
+                    // Assign points based on position using the MotoGP points system
+                    pts: motogpPoints[r.pos - 1] !== undefined ? motogpPoints[r.pos - 1] : 0 
                 }));
 
                 // --- Updated Qualifying Data from image {98B4DF5C-D87C-4F7B-828F-44AF03D6E3E9}.jpg ---
