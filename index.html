@@ -202,7 +202,8 @@
     <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 text-gray-900">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             <!-- Featured Story Section (Left/Top) -->
-            <div id="featured-story-container" class="lg:col-span-2 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in transform transition-transform duration-300 hover:-translate-y-2">
+            <!-- Removed hover:-translate-y-2 -->
+            <div id="featured-story-container" class="lg:col-span-2 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in transform transition-transform duration-300">
                 <div class="relative w-full h-full">
                     <img src="images/10.png" alt="F1 Featured Story" class="w-full h-full object-cover rounded-t-lg object-bottom">
                     <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#2d2d2d]/80 to-transparent">
@@ -216,8 +217,12 @@
             <div id="standings-column" class="lg:col-span-1 space-y-8 flex flex-col justify-between">
                 <!-- DRIVERS STANDINGS -->
                 <div class="space-y-4">
-                    <h3 class="text-xl font-bold text-white">DRIVERS STANDINGS</h3>
-                    <div id="drivers-standings-table" class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-100 w-full transform transition-transform duration-300 hover:-translate-y-2">
+                    <!-- Wrapped the h3 with an anchor tag -->
+                    <a href="standings.html" class="block">
+                        <h3 class="text-xl font-bold text-white hover:text-gray-300 transition-colors">DRIVERS STANDINGS</h3>
+                    </a>
+                    <!-- Removed hover:-translate-y-2 -->
+                    <div id="drivers-standings-table" class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-100 w-full transform transition-transform duration-300">
                         <!-- Driver 1: MAXFAN (Polish) -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
@@ -268,8 +273,12 @@
 
                 <!-- TEAMS STANDINGS -->
                 <div class="space-y-4">
-                    <h3 class="text-xl font-bold text-white">TEAMS STANDINGS</h3>
-                    <div id="teams-standings-table" class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-200 w-full transform transition-transform duration-300 hover:-translate-y-2">
+                    <!-- Wrapped the h3 with an anchor tag for Teams Standings -->
+                    <a href="standings.html#teams" class="block">
+                        <h3 class="text-xl font-bold text-white hover:text-gray-300 transition-colors">TEAMS STANDINGS</h3>
+                    </a>
+                    <!-- Removed hover:-translate-y-2 -->
+                    <div id="teams-standings-table" class="bg-[#2a171d] rounded-lg shadow-lg p-4 space-y-3 content-fade-in delay-200 w-full transform transition-transform duration-300">
                         <!-- Team 1: HOT WHEELS MCLAREN -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-2">
@@ -307,38 +316,44 @@
             <h3 class="text-xl font-bold text-white mb-6">POSTS</h3>
             <div id="posts-carousel" class="flex overflow-x-auto no-scrollbar snap-x snap-mandatory space-x-4 pb-4">
                 <!-- Post Card 1 -->
-                <a href="https://www.instagram.com/10controls/p/DKczIchtL3c/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-200 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                <!-- Removed hover:scale-115 -->
+                <a href="https://www.instagram.com/10controls/p/DKczIchtL3c/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-200 snap-center relative transform transition-transform duration-300">
                     <!-- Changed bg-pink-600 to bg-[#ffc0cb] and text-white to text-black -->
                     <span class="absolute top-2 left-2 bg-[#ffc0cb] text-black text-xs font-bold px-2 py-1 rounded-md z-10">NEW</span>
                     <img src="images/post1.jpg" alt="Instagram Post 1" class="w-full h-full object-cover">
                     <!-- Removed caption -->
                 </a>
                 <!-- Post Card 2 -->
-                <a href="https://www.instagram.com/10controls/p/DKNnYnWNVez/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-300 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                <!-- Removed hover:scale-115 -->
+                <a href="https://www.instagram.com/10controls/p/DKNnYnWNVez/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-300 snap-center relative transform transition-transform duration-300">
                     <!-- Removed NEW tag -->
                     <img src="images/pos2.jpg" alt="Instagram Post 2" class="w-full h-full object-cover">
                     <!-- Removed caption -->
                 </a>
                 <!-- Post Card 3 -->
-                <a href="https://www.instagram.com/10controls/p/C6jHrqron25/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-400 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                <!-- Removed hover:scale-115 -->
+                <a href="https://www.instagram.com/10controls/p/C6jHrqron25/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-400 snap-center relative transform transition-transform duration-300">
                     <!-- Removed NEW tag -->
                     <img src="images/post3.jpg" alt="Instagram Post 3" class="w-full h-full object-cover">
                     <!-- Removed caption -->
                 </a>
                 <!-- Post Card 4 -->
-                <a href="https://www.instagram.com/10controls/p/C5G5D89tChN/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-500 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                <!-- Removed hover:scale-115 -->
+                <a href="https://www.instagram.com/10controls/p/C5G5D89tChN/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-500 snap-center relative transform transition-transform duration-300">
                     <!-- Removed NEW tag -->
                     <img src="images/post4.jpg" alt="Instagram Post 4" class="w-full h-full object-cover">
                     <!-- Removed caption -->
                 </a>
                 <!-- Post Card 5 -->
-                <a href="https://www.instagram.com/10controls/p/C4lOAXIoVHM/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-600 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                <!-- Removed hover:scale-115 -->
+                <a href="https://www.instagram.com/10controls/p/C4lOAXIoVHM/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-600 snap-center relative transform transition-transform duration-300">
                     <!-- Removed NEW tag -->
                     <img src="images/post5.jpg" alt="Instagram Post 5" class="w-full h-full object-cover">
                     <!-- Removed caption -->
                 </a>
                 <!-- Post Card 6 -->
-                <a href="https://www.instagram.com/10controls/p/C4YrxNGow-O/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-700 snap-center relative transform transition-transform duration-300 hover:scale-115">
+                <!-- Removed hover:scale-115 -->
+                <a href="https://www.instagram.com/10controls/p/C4YrxNGow-O/" target="_blank" rel="noopener noreferrer" class="flex-none w-[100px] sm:w-[125px] md:w-[150px] lg:w-48 h-64 bg-white rounded-lg shadow-lg overflow-hidden content-fade-in delay-700 snap-center relative transform transition-transform duration-300">
                     <!-- Removed NEW tag -->
                     <img src="images/post6.jpg" alt="Instagram Post 6" class="w-full h-full object-cover">
                 </a>
@@ -355,7 +370,8 @@
         <!-- RECENT STREAM Section -->
         <div>
             <h3 class="text-xl font-bold text-white mb-6">RECENT BROADCAST</h3>
-            <div class="bg-[#2d2d2d] rounded-lg shadow-lg p-6 content-fade-in delay-800 transform transition-transform duration-300 hover:-translate-y-2">
+            <!-- Removed hover:-translate-y-2 -->
+            <div class="bg-[#2d2d2d] rounded-lg shadow-lg p-6 content-fade-in delay-800 transform transition-transform duration-300">
                 <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
                     <!-- Twitch VOD thumbnail updated -->
                     <img src="images/mqdefault_6s.webp" alt="Twitch Stream Thumbnail" class="w-full sm:w-auto h-32 sm:h-auto object-cover rounded-md">
