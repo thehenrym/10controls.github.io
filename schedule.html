@@ -169,7 +169,8 @@
         <div class="absolute inset-0 bg-black opacity-50"></div>
     </div>
 
-    <div class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+    <!-- Increased max-width for larger screens and adjusted padding -->
+    <div class="relative max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <!-- Search and Filter Controls -->
         <div class="mb-8 flex flex-col md:flex-row justify-start items-center gap-4">
             <input type="text" id="schedule-search" placeholder="SEARCH RACE OR VENUE..." 
@@ -191,7 +192,8 @@
             </select>
         </div>
 
-        <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+        <!-- Grid columns set to 3 on large screens, and adjusted gap and top padding -->
+        <div id="schedule-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
         </div>
     </div>
     <footer class="bg-black text-white text-center py-5 px-2 mt-8">
@@ -210,11 +212,11 @@
             { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'MARCH 21-23', winner: 'MAXFAN', winnerFlag: 'PL', country: 'AU', tier: 'tier1' },
             { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'JUNE 27TH', winner: 'MAXFAN', winnerFlag: 'PL', country: 'IT', tier: 'tier1' },
             { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'JULY 4TH', winner: 'MAXFAN', winnerFlag: 'PL', country: 'BE', tier: 'tier1' },
-            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'JULY 11TH', winner: 'ANTON CHEBOTAROV', winnerFlag: 'UA', country: 'ES', tier: 'tier1' }, 
+            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'JULY 11TH', winner: 'ANTON CHEBOTAROV', winnerFlag: 'UA', country: 'ES', tier: 'tier1' },
             { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'JULY 18TH', winner: 'ANTON CHEBOTAROV', winnerFlag: 'UA', country: 'CN', tier: 'tier1' },
             { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'JULY 25TH', winner: '', country: 'JP', tier: 'tier1' },
-            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'AUGUST 1ST', winner: '', country: 'US', tier: 'tier1' }, 
-            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'AUGUST 8TH', winner: '', country: 'MC', tier: 'tier1' }, 
+            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'AUGUST 1ST', winner: '', country: 'US', tier: 'tier1' },
+            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'AUGUST 8TH', winner: '', country: 'MC', tier: 'tier1' },
             { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'AUGUST 15TH', winner: '', country: 'BR', tier: 'tier1' }
         ];
 
@@ -223,11 +225,11 @@
             { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'MARCH 21-23', winner: 'JAY AZIER', winnerFlag: 'NL', country: 'AU', tier: 'tier2' },
             { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'JUNE 27TH', winner: 'SANDRO', winnerFlag: 'NL', country: 'IT', tier: 'tier2' },
             { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'JULY 4TH', winner: 'SANDRO', winnerFlag: 'NL', country: 'BE', tier: 'tier2' },
-            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'JULY 11TH', winner: 'SANDRO', winnerFlag: 'NL', country: 'ES', tier: 'tier2' }, 
+            { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'JULY 11TH', winner: 'SANDRO', winnerFlag: 'NL', country: 'ES', tier: 'tier2' },
             { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'JULY 18TH', winner: 'ASPEC', winnerFlag: 'GB', country: 'CN', tier: 'tier2' },
             { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'JULY 25TH', winner: '', country: 'JP', tier: 'tier2' },
-            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'AUGUST 1ST', winner: '', country: 'US', tier: 'tier2' }, 
-            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'AUGUST 8TH', winner: '', country: 'MC', tier: 'tier2' }, 
+            { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'AUGUST 1ST', winner: '', country: 'US', tier: 'tier2' },
+            { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'AUGUST 8TH', winner: '', country: 'MC', tier: 'tier2' },
             { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'AUGUST 15TH', winner: '', country: 'BR', tier: 'tier2' }
         ];
 
@@ -294,7 +296,7 @@
                 const winnerMatch = race.winner && race.winner.toLowerCase().includes(searchTerm);
                 const searchMatches = nameMatch || venueMatch || winnerMatch;
 
-                const seasonMatches = true; 
+                const seasonMatches = true;
                 return searchMatches && seasonMatches;
             });
 
@@ -319,7 +321,7 @@
                     resultButtonHref = baseResultsPath + "imola.html";
                 } else if (race.round === 4 && race.name === 'Belgian Grand Prix') {
                     resultButtonHref = baseResultsPath + "belgium.html";
-                } else if (race.round === 5 && race.name === 'Spanish Grand Prix') { 
+                } else if (race.round === 5 && race.name === 'Spanish Grand Prix') {
                     resultButtonHref = baseResultsPath + "spain.html";
                 } else if (race.round === 6 && race.name === 'Chinese Grand Prix') { // Corrected condition
                     resultButtonHref = baseResultsPath + "china.html";
