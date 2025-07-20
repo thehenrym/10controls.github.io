@@ -281,7 +281,7 @@
                   { name: 'COUNTERFEIT', flagCountryCode: 'GB' }, 
                   { name: 'LOLER', flagCountryCode: 'PL' },  
                   { name: 'MARK', flagCountryCode: 'US' },   
-                  { name: 'LEON', flagCountryCode: 'UA' }    
+                  { name: 'LEON', flagCountryCode: 'UA' }   
               ], 
               country: 'GB', 
               bgColor: '#00A0DE', 
@@ -1065,8 +1065,8 @@
             const championshipIconHtml = driver.championships > 0 ? 
                 `<img src="https://cdn.discordapp.com/emojis/1396228433654186094.webp?size=96" alt="Championship Icon" class="championship-icon" style="filter: invert(100%);">` : ''; // Invert for black icon on gold background
 
-            // Determine championship box classes
-            const championshipBoxClasses = `flex items-center justify-between p-3 rounded-lg ${driver.championships > 0 ? 'championship-glow' : ''}`;
+            // Determine championship box classes - MODIFIED FOR MOBILE RESPONSIVENESS
+            const championshipBoxClasses = `flex flex-col items-center p-3 rounded-lg ${driver.championships > 0 ? 'championship-glow' : ''} md:flex-row md:justify-between md:items-center`;
             // Updated gold color to #D3AF37
             const championshipBoxStyle = `background-color: ${driver.championships > 0 ? '#D3AF37' : '#2d2d2d'}; color: ${driver.championships > 0 ? 'black' : 'white'};`;
 
@@ -1128,7 +1128,7 @@
                             <h3 class="text-2xl font-semibold mb-2">STATISTICS</h3>
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="${championshipBoxClasses}" style="${championshipBoxStyle}">
-                                    <div class="flex flex-col items-start">
+                                    <div class="flex flex-col items-center md:items-start"> <!-- MODIFIED -->
                                         <span class="text-xl font-bold">${driver.championships}</span>
                                         <span class="text-sm">CHAMPIONSHIPS</span>
                                     </div>
