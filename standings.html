@@ -633,6 +633,7 @@
         let currentTier = 'tier1';
         let currentType = 'drivers';
         let currentSearchTerm = '';
+        let standingsSearchInput; 
 
         function getFlagHtmlForDriver(countryCode) {
             const fallbackFlag = `https://placehold.co/32x32/cccccc/000000?text=NF`;
@@ -680,7 +681,7 @@
         }
 
         function applyFiltersAndRender() {
-            currentSearchTerm = document.getElementById('standings-search').value.toLowerCase();
+            currentSearchTerm = standingsSearchInput.value.toLowerCase(); 
             const driverNote = document.getElementById('driver-note');
             const btnTier1 = document.getElementById('btn-tier1');
             const btnTier2 = document.getElementById('btn-tier2');
@@ -689,7 +690,9 @@
             const btnTeams = document.getElementById('btn-teams');
             const btnOverall = document.getElementById('btn-overall');
             const typeSlider = document.getElementById('type-slider');
+            
 
+            // Hide all containers initially
             document.getElementById('tier1-driver-standings-container').style.opacity = '0';
             document.getElementById('tier1-driver-standings-container').style.visibility = 'hidden';
             document.getElementById('tier1-team-standings-container').style.opacity = '0';
@@ -704,7 +707,9 @@
 
             if (currentType === 'drivers') {
                 driverNote.classList.remove('hidden');
-                document.getElementById('standings-search').placeholder = "SEARCH DRIVER...";
+                standingsSearchInput.style.display = 'block'; // Show search for drivers
+                standingsSearchInput.placeholder = "SEARCH DRIVER...";
+
                 typeSlider.style.transform = 'translateX(0%)';
                 btnDrivers.classList.add('text-white');
                 btnDrivers.classList.remove('text-gray-700');
@@ -748,9 +753,11 @@
                 }
             } else if (currentType === 'teams') {
                 driverNote.classList.add('hidden');
-                document.getElementById('standings-search').value = '';  
+                standingsSearchInput.style.display = 'none'; // Hide search for teams
+                standingsSearchInput.value = '';  
                 currentSearchTerm = '';
-                document.getElementById('standings-search').placeholder = "SEARCH TEAM...";
+                standingsSearchInput.placeholder = "SEARCH TEAM...";
+
                 typeSlider.style.transform = 'translateX(100%)';  // Move slider to "TEAMS" position
                 btnTeams.classList.add('text-white');
                 btnTeams.classList.remove('text-gray-700');
@@ -788,22 +795,33 @@
                 }
             } else if (currentType === 'overall') {  
                 driverNote.classList.add('hidden');
-                document.getElementById('standings-search').value = '';  
+                standingsSearchInput.style.display = 'none'; // Hide search for overall
+                standingsSearchInput.value = '';  
                 currentSearchTerm = '';
-                document.getElementById('standings-search').placeholder = "SEARCH TEAM...";
-                typeSlider.style.transform = 'translateX(200%)';  // Move slider to "OVERALL" position
+                standingsSearchInput.placeholder = "SEARCH TEAM...";
+
+                typeSlider.style.transform = 'translateX(200%)';  
                 btnOverall.classList.add('text-white');
                 btnOverall.classList.remove('text-gray-700');
                 btnDrivers.classList.add('text-gray-700');
                 btnDrivers.classList.remove('text-white');
                 btnTeams.classList.add('text-gray-700');
                 btnTeams.classList.remove('text-white');
+                
+                // Show tier buttons for overall and highlight them both
+                btnTier1.style.display = 'flex'; 
+                btnTier2.style.display = 'flex';
+                tierSlider.style.width = '100%'; // Make slider cover both
+                tierSlider.style.transform = 'translateX(0%)'; // Position slider to cover both
+                
+                // Highlight both tier buttons
+                btnTier1.classList.add('text-white');
+                btnTier1.classList.remove('text-gray-700');
+                btnTier2.classList.add('text-white'); // Highlight TIER 2 as well
+                btnTier2.classList.remove('text-gray-700');
 
-                // Hide tier buttons and expand slider for overall
-                btnTier1.style.display = 'none';
-                btnTier2.style.display = 'none';
-                tierSlider.style.width = '100%';
-                tierSlider.style.transform = 'translateX(0%)'; // Reset tier slider position if it was moved
+                // No change to currentTier as overall is a combined view
+                // currentTier = 'tier1'; // Removed this line as it implies a selection within overall
 
                 populateTeamStandings(combinedOverallTeamStandings, document.getElementById('overall-team-standings-body'));
                 document.getElementById('overall-team-standings-container').style.opacity = '1';
@@ -816,6 +834,7 @@
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const subHeader = document.getElementById('sub-header');
+            standingsSearchInput = document.getElementById('standings-search'); // Assign to the globally declared variable
 
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('menu-open');
@@ -954,6 +973,7 @@
                 const btnTeams = document.getElementById('btn-teams');
                 const btnOverall = document.getElementById('btn-overall');  
                 const typeSlider = document.getElementById('type-slider');
+                
 
                 // Check URL hash for initial display
                 if (window.location.hash === '#teams') {
@@ -965,7 +985,8 @@
                     btnDrivers.classList.remove('text-white');
                     btnOverall.classList.add('text-gray-700');  
                     btnOverall.classList.remove('text-white');
-                    document.getElementById('standings-search').placeholder = "SEARCH TEAM...";
+                    standingsSearchInput.style.display = 'none'; // Hide search for teams on load
+                    standingsSearchInput.placeholder = "SEARCH TEAM...";
                 } else {
                     // Default to drivers if no hash or unknown hash
                     currentType = 'drivers';
@@ -976,10 +997,11 @@
                     btnTeams.classList.remove('text-white');
                     btnOverall.classList.add('text-gray-700');  
                     btnOverall.classList.remove('text-white');
-                    document.getElementById('standings-search').placeholder = "SEARCH DRIVER...";
+                    standingsSearchInput.style.display = 'block'; // Show search for drivers on load
+                    standingsSearchInput.placeholder = "SEARCH DRIVER...";
                 }
 
-                // Initial tier state for drivers/teams
+                // Initial tier state for drivers/teams/overall
                 if (currentType === 'drivers' || currentType === 'teams') {
                     btnTier1.style.display = 'flex';
                     btnTier2.style.display = 'flex';
@@ -997,11 +1019,15 @@
                         btnTier1.classList.add('text-gray-700');
                         btnTier1.classList.remove('text-white');
                     }
-                } else { // For overall
-                    btnTier1.style.display = 'none';
-                    btnTier2.style.display = 'none';
+                } else if (currentType === 'overall') {
+                    btnTier1.style.display = 'flex';
+                    btnTier2.style.display = 'flex';
                     tierSlider.style.width = '100%';
                     tierSlider.style.transform = 'translateX(0%)';
+                    btnTier1.classList.add('text-white');
+                    btnTier1.classList.remove('text-gray-700');
+                    btnTier2.classList.add('text-white');
+                    btnTier2.classList.remove('text-gray-700');
                 }
 
                 applyFiltersAndRender();
@@ -1082,15 +1108,22 @@
                     btnTeams.classList.add('text-gray-700');
                     btnTeams.classList.remove('text-white');
                     
-                    btnTier1.style.display = 'none'; // Hide tier buttons for overall
-                    btnTier2.style.display = 'none';
-                    tierSlider.style.width = '100%'; // Expand tier slider for overall
-                    tierSlider.style.transform = 'translateX(0%)'; // Reset tier slider position
+                    // Show tier buttons for overall and highlight them both
+                    btnTier1.style.display = 'flex'; 
+                    btnTier2.style.display = 'flex';
+                    tierSlider.style.width = '100%'; // Set width to allow sliding
+                    tierSlider.style.transform = 'translateX(0%)'; // Position slider to cover both
+                    
+                    // Highlight both tier buttons
+                    btnTier1.classList.add('text-white');
+                    btnTier1.classList.remove('text-gray-700');
+                    btnTier2.classList.add('text-white'); 
+                    btnTier2.classList.remove('text-gray-700');
 
                     applyFiltersAndRender();
                 });
 
-                const standingsSearchInput = document.getElementById('standings-search');
+                // Event listener for search input
                 standingsSearchInput.addEventListener('input', () => {
                     applyFiltersAndRender();
                 });
