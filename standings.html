@@ -685,7 +685,10 @@
             const btnTier1 = document.getElementById('btn-tier1');
             const btnTier2 = document.getElementById('btn-tier2');
             const tierSlider = document.getElementById('tier-slider');
-
+            const btnDrivers = document.getElementById('btn-drivers');
+            const btnTeams = document.getElementById('btn-teams');
+            const btnOverall = document.getElementById('btn-overall');
+            const typeSlider = document.getElementById('type-slider');
 
             document.getElementById('tier1-driver-standings-container').style.opacity = '0';
             document.getElementById('tier1-driver-standings-container').style.visibility = 'hidden';
@@ -695,12 +698,25 @@
             document.getElementById('tier2-driver-standings-container').style.visibility = 'hidden';
             document.getElementById('tier2-team-standings-container').style.opacity = '0';
             document.getElementById('tier2-team-standings-container').style.visibility = 'hidden';
-            document.getElementById('overall-team-standings-container').style.opacity = '0'; 
-            document.getElementById('overall-team-standings-container').style.visibility = 'hidden'; 
+            document.getElementById('overall-team-standings-container').style.opacity = '0';  
+            document.getElementById('overall-team-standings-container').style.visibility = 'hidden';  
 
 
             if (currentType === 'drivers') {
                 driverNote.classList.remove('hidden');
+                document.getElementById('standings-search').placeholder = "SEARCH DRIVER...";
+                typeSlider.style.transform = 'translateX(0%)';
+                btnDrivers.classList.add('text-white');
+                btnDrivers.classList.remove('text-gray-700');
+                btnTeams.classList.add('text-gray-700');
+                btnTeams.classList.remove('text-white');
+                btnOverall.classList.add('text-gray-700');  
+                btnOverall.classList.remove('text-white');
+                
+                // Ensure tier buttons are active and slider is correct for drivers
+                btnTier1.style.display = 'flex';
+                btnTier2.style.display = 'flex';
+                tierSlider.style.width = '50%';
                 if (currentTier === 'tier1') {
                     tierSlider.style.transform = 'translateX(0%)';
                     btnTier1.classList.add('text-white');
@@ -732,9 +748,21 @@
                 }
             } else if (currentType === 'teams') {
                 driverNote.classList.add('hidden');
-                document.getElementById('standings-search').value = ''; 
+                document.getElementById('standings-search').value = '';  
                 currentSearchTerm = '';
+                document.getElementById('standings-search').placeholder = "SEARCH TEAM...";
+                typeSlider.style.transform = 'translateX(100%)';  // Move slider to "TEAMS" position
+                btnTeams.classList.add('text-white');
+                btnTeams.classList.remove('text-gray-700');
+                btnDrivers.classList.add('text-gray-700');
+                btnDrivers.classList.remove('text-white');
+                btnOverall.classList.add('text-gray-700');  
+                btnOverall.classList.remove('text-white');
 
+                // Ensure tier buttons are active and slider is correct for teams
+                btnTier1.style.display = 'flex';
+                btnTier2.style.display = 'flex';
+                tierSlider.style.width = '50%';
                 if (currentTier === 'tier1') {
                     tierSlider.style.transform = 'translateX(0%)';
                     btnTier1.classList.add('text-white');
@@ -758,17 +786,24 @@
                     document.getElementById('tier2-team-standings-container').style.opacity = '1';
                     document.getElementById('tier2-team-standings-container').style.visibility = 'visible';
                 }
-            } else if (currentType === 'overall') { 
+            } else if (currentType === 'overall') {  
                 driverNote.classList.add('hidden');
-                document.getElementById('standings-search').value = ''; 
+                document.getElementById('standings-search').value = '';  
                 currentSearchTerm = '';
+                document.getElementById('standings-search').placeholder = "SEARCH TEAM...";
+                typeSlider.style.transform = 'translateX(200%)';  // Move slider to "OVERALL" position
+                btnOverall.classList.add('text-white');
+                btnOverall.classList.remove('text-gray-700');
+                btnDrivers.classList.add('text-gray-700');
+                btnDrivers.classList.remove('text-white');
+                btnTeams.classList.add('text-gray-700');
+                btnTeams.classList.remove('text-white');
 
-                tierSlider.style.transform = 'translateX(0%)'; 
-                tierSlider.style.width = '100%'; 
-                btnTier1.classList.add('text-white');
-                btnTier1.classList.remove('text-gray-700');
-                btnTier2.classList.add('text-white');
-                btnTier2.classList.remove('text-gray-700');
+                // Hide tier buttons and expand slider for overall
+                btnTier1.style.display = 'none';
+                btnTier2.style.display = 'none';
+                tierSlider.style.width = '100%';
+                tierSlider.style.transform = 'translateX(0%)'; // Reset tier slider position if it was moved
 
                 populateTeamStandings(combinedOverallTeamStandings, document.getElementById('overall-team-standings-body'));
                 document.getElementById('overall-team-standings-container').style.opacity = '1';
@@ -791,7 +826,7 @@
             if (menuItemsContainer) {
                 const menuLinks = menuItemsContainer.querySelectorAll('a');
                 const highlighter = document.getElementById('sliding-highlighter');
-                const activeLink = menuItemsContainer.querySelector('a[href="standings.html"]'); 
+                const activeLink = menuItemsContainer.querySelector('a[href="standings.html"]');  
                 function setHighlighterToLink(link) {
                     if (!link) return;
                     highlighter.style.left = `${link.offsetLeft}px`;
@@ -886,13 +921,13 @@
             const tier1TeamStandingsBody = document.getElementById('tier1-team-standings-body');
             const tier2DriverStandingsBody = document.getElementById('tier2-driver-standings-body');  
             const tier2TeamStandingsBody = document.getElementById('tier2-team-standings-body');  
-            const overallTeamStandingsBody = document.getElementById('overall-team-standings-body'); 
+            const overallTeamStandingsBody = document.getElementById('overall-team-standings-body');  
 
             const tier1DriverContainer = document.getElementById('tier1-driver-standings-container');
             const tier1TeamContainer = document.getElementById('tier1-team-standings-container');
             const tier2DriverContainer = document.getElementById('tier2-driver-standings-container');  
             const tier2TeamContainer = document.getElementById('tier2-team-standings-container');  
-            const overallTeamContainer = document.getElementById('overall-team-standings-container'); 
+            const overallTeamContainer = document.getElementById('overall-team-standings-container');  
 
             const tablesWrapper = document.getElementById('tables-wrapper');
 
@@ -900,15 +935,15 @@
             populateTeamStandings(updatedTier1TeamStandings, tier1TeamStandingsBody);
             populateDriverStandings(updatedTier2DriverStandings, tier2DriverStandingsBody, '');
             populateTeamStandings(updatedTier2TeamStandings, tier2TeamStandingsBody);
-            populateTeamStandings(combinedOverallTeamStandings, overallTeamStandingsBody); 
+            populateTeamStandings(combinedOverallTeamStandings, overallTeamStandingsBody);  
             
             setTimeout(() => {
                 const tier1DriverTableHeight = tier1DriverContainer.scrollHeight;
                 const tier1TeamTableHeight = tier1TeamContainer.scrollHeight;
                 const tier2DriverTableHeight = tier2DriverContainer.scrollHeight;
                 const tier2TeamTableHeight = tier2TeamContainer.scrollHeight;  
-                const overallTeamTableHeight = overallTeamContainer.scrollHeight; 
-                const maxTableHeight = Math.max(tier1DriverTableHeight, tier1TeamTableHeight, tier2DriverTableHeight, tier2TeamTableHeight, overallTeamTableHeight); 
+                const overallTeamTableHeight = overallTeamContainer.scrollHeight;  
+                const maxTableHeight = Math.max(tier1DriverTableHeight, tier1TeamTableHeight, tier2DriverTableHeight, tier2TeamTableHeight, overallTeamTableHeight);  
                 tablesWrapper.style.minHeight = `${maxTableHeight}px`;
 
                 const btnTier1 = document.getElementById('btn-tier1');
@@ -917,22 +952,57 @@
 
                 const btnDrivers = document.getElementById('btn-drivers');
                 const btnTeams = document.getElementById('btn-teams');
-                const btnOverall = document.getElementById('btn-overall'); 
+                const btnOverall = document.getElementById('btn-overall');  
                 const typeSlider = document.getElementById('type-slider');
 
-                tierSlider.style.transform = 'translateX(0%)';
-                btnTier1.classList.add('text-white');
-                btnTier1.classList.remove('text-gray-700');
-                btnTier2.classList.add('text-gray-700');
-                btnTier2.classList.remove('text-white');
+                // Check URL hash for initial display
+                if (window.location.hash === '#teams') {
+                    currentType = 'teams';
+                    typeSlider.style.transform = 'translateX(100%)'; // Move slider to "TEAMS" position
+                    btnTeams.classList.add('text-white');
+                    btnTeams.classList.remove('text-gray-700');
+                    btnDrivers.classList.add('text-gray-700');
+                    btnDrivers.classList.remove('text-white');
+                    btnOverall.classList.add('text-gray-700');  
+                    btnOverall.classList.remove('text-white');
+                    document.getElementById('standings-search').placeholder = "SEARCH TEAM...";
+                } else {
+                    // Default to drivers if no hash or unknown hash
+                    currentType = 'drivers';
+                    typeSlider.style.transform = 'translateX(0%)';
+                    btnDrivers.classList.add('text-white');
+                    btnDrivers.classList.remove('text-gray-700');
+                    btnTeams.classList.add('text-gray-700');
+                    btnTeams.classList.remove('text-white');
+                    btnOverall.classList.add('text-gray-700');  
+                    btnOverall.classList.remove('text-white');
+                    document.getElementById('standings-search').placeholder = "SEARCH DRIVER...";
+                }
 
-                typeSlider.style.transform = 'translateX(0%)';
-                btnDrivers.classList.add('text-white');
-                btnDrivers.classList.remove('text-gray-700');
-                btnTeams.classList.add('text-gray-700');
-                btnTeams.classList.remove('text-white');
-                btnOverall.classList.add('text-gray-700'); 
-                btnOverall.classList.remove('text-white');
+                // Initial tier state for drivers/teams
+                if (currentType === 'drivers' || currentType === 'teams') {
+                    btnTier1.style.display = 'flex';
+                    btnTier2.style.display = 'flex';
+                    tierSlider.style.width = '50%';
+                    if (currentTier === 'tier1') {
+                        tierSlider.style.transform = 'translateX(0%)';
+                        btnTier1.classList.add('text-white');
+                        btnTier1.classList.remove('text-gray-700');
+                        btnTier2.classList.add('text-gray-700');
+                        btnTier2.classList.remove('text-white');
+                    } else {
+                        tierSlider.style.transform = 'translateX(100%)';
+                        btnTier2.classList.add('text-white');
+                        btnTier2.classList.remove('text-gray-700');
+                        btnTier1.classList.add('text-gray-700');
+                        btnTier1.classList.remove('text-white');
+                    }
+                } else { // For overall
+                    btnTier1.style.display = 'none';
+                    btnTier2.style.display = 'none';
+                    tierSlider.style.width = '100%';
+                    tierSlider.style.transform = 'translateX(0%)';
+                }
 
                 applyFiltersAndRender();
 
@@ -963,44 +1033,60 @@
                     btnDrivers.classList.remove('text-gray-700');
                     btnTeams.classList.add('text-gray-700');
                     btnTeams.classList.remove('text-white');
-                    btnOverall.classList.add('text-gray-700'); 
+                    btnOverall.classList.add('text-gray-700');  
                     btnOverall.classList.remove('text-white');
+                    
+                    btnTier1.style.display = 'flex'; // Show tier buttons for drivers
+                    btnTier2.style.display = 'flex';
+                    tierSlider.style.width = '50%';
+                    tierSlider.style.transform = 'translateX(0%)'; // Reset tier slider position
+                    currentTier = 'tier1'; // Default to Tier 1 for drivers
                     btnTier1.classList.add('text-white');
                     btnTier1.classList.remove('text-gray-700');
                     btnTier2.classList.add('text-gray-700');
                     btnTier2.classList.remove('text-white');
-                    tierSlider.style.width = '50%'; 
-                    tierSlider.style.transform = 'translateX(0%)'; 
+
                     applyFiltersAndRender();
                 });
 
                 btnTeams.addEventListener('click', () => {
                     currentType = 'teams';
-                    typeSlider.style.transform = 'translateX(100%)'; 
+                    typeSlider.style.transform = 'translateX(100%)';  
                     btnTeams.classList.add('text-white');
                     btnTeams.classList.remove('text-gray-700');
                     btnDrivers.classList.add('text-gray-700');
                     btnDrivers.classList.remove('text-white');
-                    btnOverall.classList.add('text-gray-700'); 
+                    btnOverall.classList.add('text-gray-700');  
                     btnOverall.classList.remove('text-white');
+                    
+                    btnTier1.style.display = 'flex'; // Show tier buttons for teams
+                    btnTier2.style.display = 'flex';
+                    tierSlider.style.width = '50%';
+                    tierSlider.style.transform = 'translateX(0%)'; // Reset tier slider position
+                    currentTier = 'tier1'; // Default to Tier 1 for teams
                     btnTier1.classList.add('text-white');
                     btnTier1.classList.remove('text-gray-700');
                     btnTier2.classList.add('text-gray-700');
                     btnTier2.classList.remove('text-white');
-                    tierSlider.style.width = '50%'; 
-                    tierSlider.style.transform = 'translateX(0%)'; 
+
                     applyFiltersAndRender();
                 });
 
-                btnOverall.addEventListener('click', () => { 
+                btnOverall.addEventListener('click', () => {  
                     currentType = 'overall';
-                    typeSlider.style.transform = 'translateX(200%)'; 
+                    typeSlider.style.transform = 'translateX(200%)';  
                     btnOverall.classList.add('text-white');
                     btnOverall.classList.remove('text-gray-700');
                     btnDrivers.classList.add('text-gray-700');
                     btnDrivers.classList.remove('text-white');
                     btnTeams.classList.add('text-gray-700');
                     btnTeams.classList.remove('text-white');
+                    
+                    btnTier1.style.display = 'none'; // Hide tier buttons for overall
+                    btnTier2.style.display = 'none';
+                    tierSlider.style.width = '100%'; // Expand tier slider for overall
+                    tierSlider.style.transform = 'translateX(0%)'; // Reset tier slider position
+
                     applyFiltersAndRender();
                 });
 
