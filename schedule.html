@@ -207,7 +207,62 @@
         <p>© 2022-2025 10 Controls Limited</p>
     </footer>
     <script>
-        const scheduleDataTier1 = [
+        // Function to update and re-index the schedule data
+        function updateAndReindexSchedule(originalData) {
+            // Filter out 'Mystery Grand Prix' and 'United States Grand Prix'
+            let filteredData = originalData.filter(race => 
+                race.name !== 'Mystery Grand Prix' && race.name !== 'United States Grand Prix'
+            );
+
+            // Find 'Brazilian Grand Prix'
+            let brazilianGpIndex = filteredData.findIndex(race => race.name === 'Brazilian Grand Prix');
+            let brazilianGp = null;
+
+            if (brazilianGpIndex !== -1) {
+                // Remove Brazilian GP from its current position
+                brazilianGp = filteredData.splice(brazilianGpIndex, 1)[0];
+                // Update its round number to 8
+                brazilianGp.round = 8;
+            }
+
+            // Re-index remaining races and insert Brazilian GP at the correct position
+            let finalSchedule = [];
+            let currentRound = 1;
+
+            // Add races before round 8
+            for (let i = 0; i < filteredData.length; i++) {
+                if (currentRound === 8) {
+                    break; // Stop before inserting Brazilian GP
+                }
+                finalSchedule.push({ ...filteredData[i], round: currentRound++ });
+            }
+
+            // Insert Brazilian GP if it exists
+            if (brazilianGp) {
+                finalSchedule.push(brazilianGp);
+            }
+
+            // Add remaining races, continuing the round numbering
+            for (let i = finalSchedule.length; i < filteredData.length + (brazilianGp ? 0 : 1); i++) {
+                // Find the next race from filteredData that hasn't been added yet
+                let nextRace = filteredData.find(race => !finalSchedule.includes(race));
+                if (nextRace) {
+                    finalSchedule.push({ ...nextRace, round: currentRound++ });
+                }
+            }
+            
+            // Re-sort the final schedule by round number to ensure correct order
+            finalSchedule.sort((a, b) => a.round - b.round);
+
+            // Re-assign round numbers sequentially after sorting
+            finalSchedule.forEach((race, index) => {
+                race.round = index + 1;
+            });
+
+            return finalSchedule;
+        }
+
+        const scheduleDataTier1 = updateAndReindexSchedule([
             { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'MARCH 14-16', winner: 'ANTON CHEBOTAROV', winnerFlag: 'UA', country: 'BH', tier: 'tier1' },
             { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'MARCH 21-23', winner: 'MAXFAN', winnerFlag: 'PL', country: 'AU', tier: 'tier1' },
             { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'JUNE 27TH', winner: 'MAXFAN', winnerFlag: 'PL', country: 'IT', tier: 'tier1' },
@@ -218,9 +273,9 @@
             { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'AUGUST 1ST', winner: '', country: 'US', tier: 'tier1' },
             { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'AUGUST 8TH', winner: '', country: 'MC', tier: 'tier1' },
             { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'AUGUST 15TH', winner: '', country: 'BR', tier: 'tier1' }
-        ];
+        ]);
 
-        const scheduleDataTier2 = [
+        const scheduleDataTier2 = updateAndReindexSchedule([
             { round: 1, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'MARCH 14-16', winner: 'SANDRO', winnerFlag: 'NL', country: 'BH', tier: 'tier2' },
             { round: 2, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'MARCH 21-23', winner: 'JAY AZIER', winnerFlag: 'NL', country: 'AU', tier: 'tier2' },
             { round: 3, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'JUNE 27TH', winner: 'SANDRO', winnerFlag: 'NL', country: 'IT', tier: 'tier2' },
@@ -231,7 +286,7 @@
             { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'AUGUST 1ST', winner: '', country: 'US', tier: 'tier2' },
             { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'AUGUST 8TH', winner: '', country: 'MC', tier: 'tier2' },
             { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'AUGUST 15TH', winner: '', country: 'BR', tier: 'tier2' }
-        ];
+        ]);
 
         const timeZoneMap = {
             'Melbourne': 'Australia/Melbourne',
@@ -323,7 +378,7 @@
                     resultButtonHref = baseResultsPath + "belgium.html";
                 } else if (race.round === 5 && race.name === 'Spanish Grand Prix') {
                     resultButtonHref = baseResultsPath + "spain.html";
-                } else if (race.round === 6 && race.name === 'Chinese Grand Prix') { // Corrected condition
+                } else if (race.round === 6 && race.name === 'Chinese Grand Prix') {
                     resultButtonHref = baseResultsPath + "china.html";
                 }
 
