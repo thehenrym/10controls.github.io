@@ -380,25 +380,24 @@
         }
 
         const tier1Drivers = [
-            { driver: "MAXFAN", team: "NEWPORT ROLEX RED BULL RACING", flag: "PL", points: 115 },
-            { driver: "FOCUSER", team: "HOT WHEELS MCLAREN", flag: "ES", points: 100 },
-            { driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", flag: "UA", points: 68 },
+            { driver: "MAXFAN", team: "NEWPORT ROLEX RED BULL RACING", flag: "PL", points: 135 },
+            { driver: "FOCUSER", team: "HOT WHEELS MCLAREN", flag: "ES", points: 125 },
+            { driver: "ANTON CHEBOTAROV", team: "HOT WHEELS MCLAREN", flag: "UA", points: 106 },
+            { driver: "ALPHAROMEO", team: "PIRELLI FERRARI", flag: "NL", points: 62 },
             { driver: "TONY SEROKA", team: "NEWPORT ROLEX RED BULL RACING", flag: "PL", points: 47 },
-            { driver: "ALPHAROMEO", team: "PIRELLI FERRARI", flag: "NL", points: 46 },
+            { driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", flag: "GB", points: 45 },
             { driver: "TSAR", team: "GUINNESS MERCEDES", flag: "HU", points: 43 },
             { driver: "MAX HOUSLEY", team: "TINDER ALPINE F1 TEAM", flag: "GB", points: 38 },
-            { driver: "LUCA STEVENS", team: "LOCKHEED MARTIN ASTON MARTIN", flag: "GB", points: 36 },
             { driver: "STRA", team: "LOCKHEED MARTIN ASTON MARTIN", flag: "RS", points: 32 },
+            { driver: "TOBOB", team: "TWITCH SAUBER", flag: "DE", points: 31 },
             { driver: "MORA", team: "RACING BULLS PEUGEOT SPORT", flag: "ES", points: 30 },
             { driver: "COUNTERFEIT", team: "JOHN DEERE WILLIAMS RACING", flag: "GB", points: 19 },
-            { driver: "TOBOB", team: "TWITCH SAUBER", flag: "DE", points: 20 },
             { driver: "ANTONIO BRANCATI", team: "PIRELLI FERRARI", flag: "IT", points: 16 },
             { driver: "KRAB", team: "RACING BULLS PEUGEOT SPORT", flag: "DE", points: 15 },
             { driver: "NOJUS GEDVILAS", team: "HAAS ONLYFANS RACING", flag: "LT", points: 8 },
             { driver: "LOLER", team: "JOHN DEERE WILLIAMS RACING", flag: "PL", points: 5 },
             { driver: "ALFIE WHITE", team: "TINDER ALPINE F1 TEAM", flag: "GB", points: 5 },
-            { driver: "ASPEC", team: "GUINNESS MERCEDES", flag: "GB", points: 5 },
-            { driver: "GENERIC LEON", team: "TWITCH SAUBER", flag: "AT", points: 0 }
+            { driver: "GENERIC LEON", team: "TWITCH SAUBER", flag: "AT", points: 4 }
         ];
 
         let updatedTier1DriverStandings = [];
@@ -416,16 +415,16 @@
         updatedTier1DriverStandings.forEach((driver, index) => driver.pos = index + 1);
 
         const tier1Teams = [
-            { team: "McLaren", points: 226 },
-            { team: "Red Bull", points: 162 },
-            { team: "Mercedes", points: 88 },
-            { team: "Ferrari", points: 75 },
+            { team: "McLaren", points: 264 },
+            { team: "Red Bull", points: 190 },
+            { team: "Mercedes", points: 93 },
+            { team: "Ferrari", points: 101 },
+            { team: "Aston Martin", points: 90 },
             { team: "RB", points: 75 },
-            { team: "Aston Martin", points: 74 },
             { team: "Alpine", points: 47 },
-            { team: "KICK Sauber", points: 30 },
-            { team: "Haas", points: 26 },
-            { team: "Williams", points: 21 }
+            { team: "KICK Sauber", points: 45 },
+            { team: "Williams", points: 28 },
+            { team: "Haas", points: 26 }
         ];
 
         let updatedTier1TeamStandings = [];
@@ -465,19 +464,21 @@
 
         const tier2Drivers = [
             { driver: "SANDRO", points: 130, team: "MCLAREN", flag: "NL" },
+            { driver: "JSTN NL", points: 91, team: "FERRARI", flag: "NL" },
             { driver: "JAY AZIER", points: 90, team: "MCLAREN", flag: "NL" },
+            { driver: "ASPEC", points: 77, team: "MERCEDES", flag: "GB" },
             { driver: "JARVIS COID", points: 70, team: "RED BULL", flag: "GB" },
-            { driver: "JSTN NL", points: 66, team: "FERRARI", flag: "NL" },
-            { driver: "ASPEC", points: 61, team: "MERCEDES", flag: "GB" },
-            { driver: "MAXLINXC", points: 41, team: "HAAS", flag: "NL" },
-            { driver: "MANUEL ROTUNDO", points: 47, team: "FERRARI", flag: "IT" },
-            { driver: "TEETOE", points: 46, team: "RED BULL", flag: "NL" },
-            { driver: "SHARK", points: 30, team: "ASTON MARTIN", flag: "PK" },
-            { driver: "LEON", points: 29, team: "WILLIAMS", flag: "UA" },
+            { driver: "MANUEL ROTUNDO", points: 67, team: "FERRARI", flag: "IT" },
+            { driver: "TEETOE", points: 57, team: "RED BULL", flag: "NL" },
+            { driver: "MAXLINXC", points: 48, team: "HAAS", flag: "NL" },
+            { driver: "LEON", points: 39, team: "WILLIAMS", flag: "UA" },
+            { driver: "SHARK", points: 38, team: "ASTON MARTIN", flag: "PK" },
+            { driver: "LEON", points: 39, team: "WILLIAMS", flag: "UA" },
+            { driver: "BABY YODA", points: 39, team: "RB", flag: "GB" },
+            { driver: "MARK", points: 30, team: "WILLIAMS", flag: "US" },
             { driver: "BYRONAS", points: 23, team: "MERCEDES", flag: "GR" },
-            { driver: "MARK", points: 21, team: "WILLIAMS", flag: "US" },
+            { driver: "MARK", points: 30, team: "WILLIAMS", flag: "US" },
             { driver: "EDGE", points: 17, team: "ASTON MARTIN", flag: "GB" },
-            { driver: "BABY YODA", points: 16, team: "RB", flag: "GB" },
             { driver: "DANOTTOK", points: 15, team: "HAAS", flag: "FI" },
             { driver: "DANIELS", points: 10, team: "RB", flag: "ES" },
             { driver: "HAILEE", points: 4, team: "ALPINE", flag: "NL" },
@@ -526,13 +527,13 @@
 
         const tier2Teams = [
             { team: "McLaren", points: 220 },
-            { team: "Ferrari", points: 118 },
-            { team: "Red Bull", points: 95 },
-            { team: "Mercedes", points: 84 },
+            { team: "Ferrari", points: 163 },
+            { team: "Red Bull", points: 106 },
+            { team: "Mercedes", points: 100 },
             { team: "Haas", points: 69 },
-            { team: "RB", points: 56 },
-            { team: "Williams", points: 50 },
-            { team: "Aston Martin", points: 47 },
+            { team: "RB", points: 69 },
+            { team: "Williams", points: 69},
+            { team: "Aston Martin", points: 55 },
             { team: "Alpine", points: 40 },
             { team: "KICK Sauber", points: 23 }
         ];
