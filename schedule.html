@@ -269,7 +269,7 @@
             { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'JULY 4TH', winner: 'MAXFAN', winnerFlag: 'PL', country: 'BE', tier: 'tier1' },
             { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'JULY 11TH', winner: 'ANTON CHEBOTAROV', winnerFlag: 'UA', country: 'ES', tier: 'tier1' },
             { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'JULY 18TH', winner: 'ANTON CHEBOTAROV', winnerFlag: 'UA', country: 'CN', tier: 'tier1' },
-            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'JULY 25TH', winner: '', country: 'JP', tier: 'tier1' },
+            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'JULY 25TH', winner: 'FOCUSER', winnerFlag: 'ES', country: 'JP', tier: 'tier1' }, // Corrected winner for Japanese GP
             { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'AUGUST 1ST', winner: '', country: 'US', tier: 'tier1' },
             { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'AUGUST 8TH', winner: '', country: 'MC', tier: 'tier1' },
             { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'AUGUST 1ST', winner: '', country: 'BR', tier: 'tier1' }
@@ -282,7 +282,7 @@
             { round: 4, name: 'Belgian Grand Prix', venue: 'Spa', date: 'JULY 4TH', winner: 'SANDRO', winnerFlag: 'NL', country: 'BE', tier: 'tier2' },
             { round: 5, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'JULY 11TH', winner: 'SANDRO', winnerFlag: 'NL', country: 'ES', tier: 'tier2' },
             { round: 6, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'JULY 18TH', winner: 'ASPEC', winnerFlag: 'GB', country: 'CN', tier: 'tier2' },
-            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'JULY 25TH', winner: '', country: 'JP', tier: 'tier2' },
+            { round: 7, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'JULY 25TH', winner: 'JSTN NL', winnerFlag: 'NL', country: 'JP', tier: 'tier2' }, // Corrected winner for Japanese GP
             { round: 8, name: 'United States Grand Prix', venue: 'Austin', date: 'AUGUST 1ST', winner: '', country: 'US', tier: 'tier2' },
             { round: 9, name: 'Mystery Grand Prix', venue: 'TBD', date: 'AUGUST 8TH', winner: '', country: 'MC', tier: 'tier2' },
             { round: 10, name: 'Brazilian Grand Prix', venue: 'Sao Paulo', date: 'AUGUST 1ST', winner: '', country: 'BR', tier: 'tier2' }
@@ -380,17 +380,19 @@
                     resultButtonHref = baseResultsPath + "spain.html";
                 } else if (race.round === 6 && race.name === 'Chinese Grand Prix') {
                     resultButtonHref = baseResultsPath + "china.html";
+                } else if (race.round === 7 && race.name === 'Japanese Grand Prix') {
+                    resultButtonHref = baseResultsPath + "japan.html";
                 }
 
                 let footerHtml;
-                if (race.winner) {
-                    const winnerFlagHtml = getWinnerFlagHtml(race.winnerFlag);
+                // Display winner info only if a winner is present, but always show results button if a link exists
+                if (race.winner || resultButtonHref !== "#") {
+                    const winnerFlagHtml = race.winnerFlag ? getWinnerFlagHtml(race.winnerFlag) : '';
+                    const winnerText = race.winner ? `<span class="font-bold text-white">WINNER:</span> <span class="flex items-center">${winnerFlagHtml} ${highlightText(race.winner, searchTerm)}</span>` : '';
+                    
                     footerHtml = `
                         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
-                            <span class="text-base font-semibold text-white uppercase truncate">
-                                <span class="font-bold text-white">WINNER:</span> 
-                                <span class="flex items-center">${winnerFlagHtml} ${highlightText(race.winner, searchTerm)}</span>
-                            </span>
+                            ${winnerText}
                             <div class="flex items-center space-x-2 flex-shrink-0">
                                 <a href="${resultButtonHref}" class="bg-[#492833] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition-colors">Results</a>
                             </div>
