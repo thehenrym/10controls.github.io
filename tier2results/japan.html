@@ -162,7 +162,6 @@
                     <a href="/schedule.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Schedule</a>
                     <a href="/standings.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Standings</a>
                     <a href="/teams.html" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Teams</a>
-                    <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium relative z-10">Join Now</a>
                 </div>
 
                 <!-- Mobile menu button (hamburger icon) -->
@@ -184,27 +183,9 @@
                 <a href="/index.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Latest</a>
                 <a href="/schedule.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Schedule</a>
                 <a href="/standings.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Standings</a>
-                <a href="/teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Teams</a>
-                <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Join Now</a>
-            </div>
+                <a href="/teams.html" class="text-white block px-3 py-2 rounded-md text-base font-medium mobile-menu-link">Teams</a>            </div>
         </div>
     </header>
-
-    <!-- Sub-Header for Upcoming Race Info and Countdown. Hidden on mobile. -->
-    <div id="sub-header" class="bg-black text-white h-12 transition-opacity duration-300 hidden md:flex">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between h-full w-full">
-            <div class="flex items-center space-x-2 sm:space-x-4">
-                <div id="upcoming-race-info" class="text-xs sm:text-sm font-semibold truncate">
-                </div>
-                <div id="upcoming-race-date" class="text-xs bg-gray-700/50 px-2 py-1 rounded-md hidden sm:block">
-                </div>
-            </div>
-            <!-- Countdown Timer -->
-            <div id="countdown-display" class="flex items-center flex-shrink-0 text-right text-xs sm:text-sm">
-                <p id="countdown-timer" class="font-bold"></p>
-            </div>
-        </div>
-    </div>
 
     <!-- Main Content Area - Race Result Page Layout -->
     <main class="relative max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
@@ -244,7 +225,6 @@
             <a href="https://www.twitch.tv/10controls" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Twitch"><i class="fab fa-twitch fa-lg"></i></a>
             <a href="https://www.instagram.com/10controls/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
             <a href="https://www.youtube.com/@10controls24" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="YouTube"><i class="fab fa-youtube fa-lg"></i></a>
-            <a href="https://discord.gg/khYF6xE5rq" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-300 transition-colors" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
         </div>
     </footer>
     
@@ -298,105 +278,11 @@
                     });
                 }
 
-                // --- Sub-header and Countdown Logic ---
-                const scheduleData = [
-                    { round: 1, name: 'Australian Grand Prix', venue: 'Melbourne', date: 'March 14-16', winner: 'Lando Norris', country: 'AU' },
-                    { round: 2, name: 'Chinese Grand Prix', venue: 'Shanghai', date: 'March 21-23', winner: 'Oscar Piastri', country: 'CN' },
-                    { round: 3, name: 'Japanese Grand Prix', venue: 'Suzuka', date: 'April 4-6', winner: 'Max Verstappen', country: 'JP' },
-                    { round: 4, name: 'Bahrain Grand Prix', venue: 'Sakhir', date: 'April 11-13', winner: 'Oscar Piastri', country: 'BH' },
-                    { round: 5, name: 'Saudi Arabian Grand Prix', venue: 'Jeddah', date: 'April 18-20', winner: 'Oscar Piastri', country: 'SA' },
-                    { round: 6, name: 'Miami Grand Prix', venue: 'Miami', date: 'May 2-4', winner: 'Oscar Piastri', country: 'USA' },
-                    { round: 7, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'May 16-18', winner: 'Max Verstappen', country: 'IT' },
-                    { round: 8, name: 'Monaco Grand Prix', venue: 'Monaco', date: 'May 23-25', winner: 'Lando Norris', country: 'MC' },
-                    { round: 9, name: 'Spanish Grand Prix', venue: 'Barcelona', date: 'May 30 - June 1', winner: 'Oscar Piastri', country: 'ES' },
-                    { round: 10, name: 'Canadian Grand Prix', venue: 'Montreal', date: 'June 13-15', winner: 'George Russell', country: 'CA' },
-                    { round: 11, name: 'Emilia Romagna Grand Prix', venue: 'Imola', date: 'June 27th', country: 'IT' },
-                    { round: 12, name: 'Belgian Grand Prix', venue: 'Spa', date: 'July 4th', country: 'BE' },
-                    { round: 13, name: 'Hungarian Grand Prix', venue: 'Budapest', date: 'August 1-3', country: 'HU' },
-                    { round: 14, name: 'Dutch Grand Prix', venue: 'Zandvoort', date: 'August 29-31', country: 'NL' },
-                    { round: 15, name: 'Italian Grand Prix', venue: 'Monza', date: 'September 5-7', country: 'IT' },
-                    { round: 16, name: 'Azerbaijan Grand Prix', venue: 'Baku', date: 'September 19-21', country: 'AZ' },
-                    { pos: 17, name: 'Singapore Grand Prix', venue: 'Singapore', date: 'October 3-5', country: 'SG' },
-                    { pos: 18, name: 'United States Grand Prix', venue: 'Austin', date: 'October 17-19', country: 'USA' },
-                    { pos: 19, name: 'Mexican Grand Prix', venue: 'Mexico City', date: 'October 24-26', country: 'MX' },
-                    { pos: 20, name: 'Brazilian Grand Prix', date: 'November 7-9', country: 'BR' },
-                    { pos: 21, name: 'Las Vegas Grand Prix', venue: 'Las Vegas', date: 'November 20-22', country: 'USA' },
-                    { pos: 22, name: 'Qatar Grand Prix', venue: 'Lusail', date: 'November 28-30', country: 'QAT' },
-                    { pos: 23, name: 'Abu Dhabi Grand Prix', venue: 'Yas Marina', date: 'December 5-7', country: 'AE' }
-                ];
-
-                const upcomingRaceInfoEl = document.getElementById('upcoming-race-info');
-                const upcomingRaceDateEl = document.getElementById('upcoming-race-date');
-                const countdownDisplayEl = document.getElementById('countdown-display');
-
-                function parseRaceDate(dateStr) {
-                    const monthStr = dateStr.split(' ')[0];
-                    let dayStr = dateStr.split(' ')[1].split('-')[0];
-                    if (dayStr.endsWith('st') || dayStr.endsWith('nd') || dayStr.endsWith('rd') || dayStr.endsWith('th')) {
-                        dayStr = dayStr.substring(0, dayStr.length - 2);
-                    }
-                    return new Date(`${monthStr} ${dayStr}, 2025`);
-                }
-
-                const now = new Date();
-                let upcomingRace = null;
-                for (const race of scheduleData) {
-                    const raceDate = parseRaceDate(race.date);
-                    if (raceDate > now) {
-                        upcomingRace = race;
-                        break;
-                    }
-                }
-
-                if (upcomingRace) {
-                    if (upcomingRaceInfoEl) upcomingRaceInfoEl.textContent = `UPCOMING: ${upcomingRace.name.toUpperCase()}`;
-                    if (upcomingRaceDateEl) upcomingRaceDateEl.textContent = upcomingRace.date.toUpperCase();
-                } else {
-                    if (upcomingRaceInfoEl) upcomingRaceInfoEl.textContent = "SEASON HAS CONCLUDED";
-                    if (countdownDisplayEl) countdownDisplayEl.style.display = 'none';
-                }
-
-                function getNextFriday2PMET() {
-                    const now = new Date();
-                    let target = new Date(now);
-                    target.setUTCHours(18, 0, 0, 0);
-                    let daysUntilFriday = (5 - target.getUTCDay() + 7) % 7;
-                    if (daysUntilFriday === 0 && now.getUTCHours() >= 18) {
-                        daysUntilFriday = 7;
-                    }
-                    target.setUTCDate(target.getUTCDate() + daysUntilFriday);
-                    return target;
-                }
-
-                let countdownTargetDate = getNextFriday2PMET();
-
-                function updateCountdown() {
-                    const now = new Date();
-                    let difference = countdownTargetDate.getTime() - now.getTime();
-
-                    if (difference < 0) {
-                        countdownTargetDate = getNextFriday2PMET();
-                        difference = countdownTargetDate.getTime() - now.getTime();
-                    }
-                    
-                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                    const countdownEl = document.getElementById('countdown-timer');
-                    if (countdownEl) {
-                        if (difference <= 0) {
-                            countdownEl.textContent = "RACE STARTING SOON!";
-                        } else if (days > 0) {
-                            countdownEl.textContent = `NEXT RACE IN ${days}D ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
-                        } else {
-                            countdownEl.textContent = `NEXT RACE IN ${String(hours).padStart(2, '0')}H ${String(minutes).padStart(2, '0')}M ${String(seconds).padStart(2, '0')}S`;
-                        }
-                    }
-                }
-                updateCountdown();
-                setInterval(updateCountdown, 1000);
+                // The sub-header and countdown logic has been removed as per your request.
+                // The following variables and functions related to it are no longer needed:
+                // scheduleData, upcomingRaceInfoEl, upcomingRaceDateEl, countdownDisplayEl,
+                // parseRaceDate, now, upcomingRace, getNextFriday2PMET, countdownTargetDate,
+                // updateCountdown.
 
                 // --- Team Name Mapping ---
                 const teamNameMapping = {
@@ -408,7 +294,8 @@
                     "Williams": "JOHN DEERE WILLIAMS RACING",
                     "Scuderia Ferrari HP": "SCUDERIA FERRARI",
                     "KICK Sauber": "TWITCH SAUBER",
-                    "Alpine": "TINDER ALPINE F1 TEAM"
+                    "Alpine": "TINDER ALPINE F1 TEAM",
+                    "Visa Cash App Racing Bulls": "RACING BULLS PEUGEOT SPORT" // Added this mapping
                 };
                 
                 // MotoGP points system
