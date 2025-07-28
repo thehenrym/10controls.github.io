@@ -314,7 +314,7 @@
   { pos: 9, driver: "EDGE", team: "Aston Martin", grid: 11, stops: 1, bestLap: "1:31.540", time: "+1:05.777", pts: 2, flag: "GB" },
   { pos: 10, driver: "LEON", team: "Williams", grid: 8, stops: 2, bestLap: "1:31.495", time: "+1:07.751", pts: 1, flag: "UA" },
   { pos: 11, driver: "Teetoe", team: "Mercedes-AMG Petronas", grid: 1, stops: 1, bestLap: "1:31.333", time: "+1 Lap", pts: 0, flag: "NL" },
-  { pos: 12, driver: "FormulaLeon", team: "KICK Sauber", grid: 12, stops: 1, bestLap: "1:32.434", time: "DNF", pts: 0, flag: "AT" }
+  { pos: 12, driver: "GENERIC LEON", team: "KICK Sauber", grid: 12, stops: 1, bestLap: "1:32.434", time: "DNF", pts: 0, flag: "AT" }
                 ];
 
                 raceResults = raceResults.map((r, index) => ({
@@ -338,7 +338,7 @@
                     { pos: 9, driver: "LUCA STEVENS", team: "Aston Martin", best: "1:28.624", gap: "+2.083", flag: "GB" },
                     { pos: 10, driver: "TEETOE", team: "Mercedes-AMG Petronas", best: "1:28.702", gap: "+2.161", flag: "NL" },
                     { pos: 11, driver: "EDGE", team: "Aston Martin", best: "1:28.817", gap: "+2.276", flag: "GB" },
-                    { pos: 12, driver: "FORMULA LEON", team: "KICK Sauber", best: "1:29.804", gap: "+3.263", flag: "AT" },
+                    { pos: 12, driver: "GENERIC LEON", team: "KICK Sauber", best: "1:29.804", gap: "+3.263", flag: "AT" },
                 ].map(r => ({...r, driver: r.driver.toUpperCase(), team: (teamNameMapping[r.team] || r.team).toUpperCase() }));
                 
                 const raceHeaders = [
